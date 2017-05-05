@@ -4,6 +4,11 @@ title: 'Wireshark with Openflow-Plugin in Fedora 14'
 date: 2013-08-18 05:14
 comments: true
 categories: [Openflow, WireShark]
+tags:
+	- SDN
+	- Openflow
+	- Network
+	- Wireshark
 ---
 參考這篇文章
 [http://networkstatic.net/installing-wireshark-on-linux-for-openflow-packet-captures/](http://networkstatic.net/installing-wireshark-on-linux-for-openflow-packet-captures/)

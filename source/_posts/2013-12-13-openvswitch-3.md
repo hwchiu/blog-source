@@ -4,6 +4,10 @@ title: 'OpenvSwitch source code(2)'
 date: 2013-12-13 09:18
 comments: true
 categories: 
+tags:
+	- SDN
+	- Network
+	- OpenvSwitch
 ---
 ##Brief###
 當使用 **ovs-vsctl add-port br0 eth1**的時候，實際上會做什麼事情，這邊分成兩個層面來看

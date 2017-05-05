@@ -4,10 +4,14 @@ title: 'TCP使用sendto'
 date: 2013-03-31 00:13
 comments: true
 categories: [System, C, Network]
+tags:
+	- System
+	- C
+	- Network
 ---
 
 
-OS:Linux  
+OS:Linux
 
 以前在寫Socket Programming的時候，對於TCP跟UDP在使用上會有一些區別
 TCP要先建立連線，接者透過該連線把資料送出去，而UDP因為沒有連線，每次送出資料時都要指定對方的位置

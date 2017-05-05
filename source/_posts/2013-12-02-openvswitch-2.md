@@ -4,6 +4,10 @@ title: 'Openvswitch source code(1)'
 date: 2013-12-02 09:17
 comments: true
 categories: 
+tags:
+	- SDN
+	- Network
+	- OpenvSwitch
 ---
 Openvswitch support two modes for user to config, user mode and kernel mode.
 we will discuss the kernel mode in this article.

@@ -4,6 +4,8 @@ title: '淺談auto_ptr'
 date: 2013-03-29 14:18
 comments: true
 categories: [C]
+tags:
+   - C
 ---
 
 

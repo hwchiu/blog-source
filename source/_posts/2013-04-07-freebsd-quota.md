@@ -4,6 +4,8 @@ title: 'Freebsd_Quota'
 date: 2013-04-07 17:56
 comments: true
 categories: [System]
+tags:
+	- System
 ---
 
 在系統管理時，由於是一個檔案系統給眾多使用者使用，所以為了避免有使用者獨佔整個系統空間，便會對每個使用者設定空間限制。

@@ -4,6 +4,8 @@ title: 'Adapter Pattern'
 date: 2013-11-24 03:53
 comments: true
 categories: 
+tags:
+	- DesignPattern
 ---
 ##Introduction##
 

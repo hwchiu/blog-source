@@ -4,6 +4,12 @@ title: 'Floodlight Dijkstra'
 date: 2013-11-03 09:52
 comments: true
 categories: [Floodlight, java, Openflow]
+tags:
+	- Floodlight
+	- SDN
+	- Java
+	- Network
+	- Algorithm
 ---
 再 **Floodlight** 中，會定期送出 **LLDP** 的封包去學習當前拓樸的情況
 一旦發線拓樸情況有所改變，就會產生一個新的TopologyInstance物件

@@ -4,6 +4,10 @@ title: 'Binomial Heap'
 date: 2014-01-03 12:56
 comments: true
 categories: 
+tags:
+	- SDN
+	- Network
+	- OpenvSwitch
 ---
 **Binomial Heap**是由一群 **Binomail Tree**所組成的
 **Binomial Tree(BT)**含有下列特性

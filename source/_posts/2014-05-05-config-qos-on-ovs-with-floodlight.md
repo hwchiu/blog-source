@@ -4,6 +4,13 @@ title: 'Config Qos on Ovs with Floodlight'
 date: 2014-05-05 09:35
 comments: true
 categories: [Floodlight, Openflow]
+tags:
+	- SDN
+	- Openflow
+	- Jave
+	- Floodlight
+	- OpenvSwitch
+	- System
 ---
 這邊簡單紀錄一下一種QoS的使用方法，實驗流程如下
 

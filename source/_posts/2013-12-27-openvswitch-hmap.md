@@ -4,6 +4,10 @@ title: 'OpenvSwitch - hmap'
 date: 2013-12-27 04:18
 comments: true
 categories: 
+tags:
+	- SDN
+	- Network
+	- OpenvSwitch
 ---
 **hmap** 是一種hash bucket的資料結構，在OVS中到處都有弄到，譬如 **kernel space**中的flow_key就是透過這種結構來存放的。
 

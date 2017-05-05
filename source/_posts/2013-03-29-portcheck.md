@@ -4,6 +4,12 @@ title: '檢查port使用情況'
 date: 2013-03-29 12:33
 comments: true
 categories: [System, Network]
+tags:
+	- System
+	- Network
+	- FreeBSD
+	- Windows
+	- Linux
 ---
 
 有時候根據應用需求，會需要針對去檢查目前系統上有哪些port正在被使用
@@ -29,6 +35,14 @@ categories: [System, Network]
 
 <!--more-->
 
+#**[Linux]**
+可以使用 netstat 這個工具來檢視，搭配一些參數還可以看到該 port 被那些 process 使用
+```
+netstat -anptn
+tcp        1      0 127.0.0.1:40147         127.0.0.1:36524         CLOSE_WAIT  7147/vim
+tcp        1      0 127.0.0.1:58289         127.0.0.1:52849         CLOSE_WAIT  19421/vi
+...
+```
 
 #**[Windows]**
 

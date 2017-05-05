@@ -4,6 +4,11 @@ title: 'Switchdev II'
 date: 2016-04-04 07:01
 comments: true
 categories: 
+tags:
+	- System
+	- Kernel
+	- Switchdev
+	- Network
 ---
 Introduction
 ------------  

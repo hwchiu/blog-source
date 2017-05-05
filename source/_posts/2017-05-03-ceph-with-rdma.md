@@ -4,6 +4,11 @@ title: 'How to enable Ceph with RDMA'
 date: 2017-05-03 02:47
 comments: true
 categories: 
+tags:
+	- Network
+	- Ceph
+	- RDMA
+	- ScaleOut
 ---
 Introduction
 ------------

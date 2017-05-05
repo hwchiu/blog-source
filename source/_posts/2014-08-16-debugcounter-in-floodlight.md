@@ -4,6 +4,12 @@ title: 'DebugCounter in Floodlight'
 date: 2014-08-16 02:10
 comments: true
 categories: 
+tags:
+	- SDN
+	- Openflow
+	- Floodlight
+	- Java
+	- Network
 ---
 Introduction
 -------------

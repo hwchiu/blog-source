@@ -4,6 +4,10 @@ title: 'OpenvSwitch - 2'
 date: 2013-12-09 10:03
 comments: true
 categories: 
+tags:
+	- SDN
+	- Network
+	- OpenvSwitch
 ---
 ovs-vsctl add-port br eth1
 (netlink)

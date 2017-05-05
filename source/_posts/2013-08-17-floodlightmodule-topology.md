@@ -4,6 +4,11 @@ title: 'FloodlightModule-Topology module'
 date: 2013-08-17 13:17
 comments: true
 categories: [Floodlight, Openflow]
+tags:
+	- SDN
+	- Floodlight
+	- Openflow
+	- Network
 ---
 Floodlight中，Topology是一個很大的module，牽扯到整個網路拓樸的運算、維護
 同時也會維護routing路徑以及broadcast tree的ㄧ些資訊。

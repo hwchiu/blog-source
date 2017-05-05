@@ -4,6 +4,12 @@ title: 'REST API services in Floodlight (Device)'
 date: 2014-08-20 17:13
 comments: true
 categories: 
+tags:
+	- SDN
+	- Openflow
+	- Floodlight
+	- Java
+	- Network
 ---
 Introduction
 ---------

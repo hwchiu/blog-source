@@ -4,6 +4,10 @@ title: 'OpenvSwitch - overview'
 date: 2013-12-17 15:13
 comments: true
 categories: 
+tags:
+	- SDN
+	- Network
+	- OpenvSwitch
 ---
 This article show what the system do when we install the OpenvSwitch
 

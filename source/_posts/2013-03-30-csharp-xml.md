@@ -4,6 +4,8 @@ title: 'xml初體驗'
 date: 2013-03-30 12:43
 comments: true
 categories: [C#]
+tags:
+	- C#
 ---
 
 雖然現在已經有JSON的出現，更輕量級的資料表達方式

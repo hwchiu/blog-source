@@ -4,6 +4,9 @@ title: 'news-system'
 date: 2013-06-15 09:25
 comments: true
 categories: [System]
+tags:
+	- System
+	- FreeBSD
 ---
 
 用來紀錄2013/06/12日 news系統發生的問題

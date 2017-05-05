@@ -4,6 +4,8 @@ title: 'json初體驗'
 date: 2013-04-06 22:49
 comments: true
 categories: [C#]
+tags:
+	- C#
 ---
 
 JSON相對於XML來說較為簡單，沒有繁瑣的標籤，取而代之的就是一對<key,value>

@@ -4,6 +4,10 @@ title: 'OpenvSwitch source code(3)'
 date: 2013-12-22 14:20
 comments: true
 categories: 
+tags:
+	- SDN
+	- Network
+	- OpenvSwitch
 ---
 這邊要探討的是當網卡收到封包後，在 **KERNEL** 中由下往上的流程
 

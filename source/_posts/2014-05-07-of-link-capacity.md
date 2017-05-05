@@ -4,6 +4,11 @@ title: 'OF link capacity '
 date: 2014-05-07 06:05
 comments: true
 categories: 
+tags:
+	- Openflow
+	- SDN
+	- Floodlight
+	- Java
 ---
 在 Openflow的協定中，有時候會想要知道每條`link`的`capacity`,然後就可以藉由當前的rate來判斷這個Link是否壅塞.  
 在 [Openflow 1.0](http://archive.openflow.org/documents/openflow-spec-v1.0.0.pdf)中，對於每個Port的定義如下

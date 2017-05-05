@@ -3,7 +3,11 @@ layout: post
 title: 'Mininet 運作原理'
 date: 2014-08-19 12:54
 comments: true
-categories: 
+tags:
+	- SDN
+	- Openflow
+	- Mininet
+	- Network
 ---
 Introduction
 ------------

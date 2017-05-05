@@ -4,6 +4,9 @@ title: 'windows_vpn'
 date: 2013-03-29 15:02
 comments: true
 categories: [System]
+tags:
+	- System
+	- Windows
 ---
 
 最近因為某個教授的要求，希望windows開機就可以自動vpn連線，所以這部份花了一些時間去研究，雖然我認為每次開機自己動手點兩下好像也沒有多困難阿~冏
