@@ -30,7 +30,7 @@ copyright: true
 # See: https://support.google.com/webmasters/answer/139066
 # Tips: Before you open this tag, remember set up your URL in hexo _config.yml ( ex. url: http://yourdomain.com )
 canonical: true
-
+url: http://hwchiu.github.io
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
 seo: false
 
@@ -49,7 +49,7 @@ menu:
 #  about: /about
   archives: /archives
   tags: /tags
-#  sitemap: /sitemap.xml
+  sitemap: /sitemap.xml
 #  commonweal: /404.html
 
 
@@ -67,7 +67,7 @@ menu_icons:
   #schedule: calendar
   tags: tags
   archives: archive
-  #sitemap: sitemap
+  sitemap: sitemap
   #commonweal: heartbeat
 
 
@@ -583,7 +583,10 @@ vendors:
   # https://github.com/ethantw/Han
   han:
 
-
+sitemap: 
+	path: sitemap.xml
+baidusitemap:
+	path: baidusitemap.xml
 
 # Assets
 css: css
