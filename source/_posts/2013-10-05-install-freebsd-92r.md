@@ -6,7 +6,7 @@ comments: true
 categories: [System, freebsd]
 tags:
 	- System
-	- Freebsd
+	- FreeBSD
 ---
 假設你今天在VM上安裝FreeBSD，然後因為硬碟空間不夠，變透過VM的設定去擴充硬碟空間
 那使用 `gpart show`你會得到下列資訊 
