@@ -5,6 +5,8 @@ tags:
 	- System
 	- LXR
 	- Ubuntu
+	- DRBD
+	- Ceph
 ---
 
 Install LXR on Ubuntu 16.04
