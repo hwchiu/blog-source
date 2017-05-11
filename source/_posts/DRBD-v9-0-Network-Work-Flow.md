@@ -25,7 +25,7 @@ Environment
 configuration
 =============
 本文使用以下的設定檔，並且著重於當 DRBD 啟動後，整體的網路部分是如何處理的。
-```
+```c
 resource r0 {
   on hw1 {
     device /dev/drbd0;
@@ -50,7 +50,7 @@ Steps
 ### post_parse
 
 首先，當 `drbdadm` 這隻程式起來後，內部會先執行 `post_parse` 對設定檔進行一番解析，並且將解析到的資料給存到一個 **d_resource** 的物件中
-```
+```c
 1063 void post_parse(struct resources *resources, enum pp_flags flags)
 1064 {
 1065     struct d_resource *res;
@@ -151,7 +151,7 @@ Steps
 ### set_host_info_in_host_address_pairs
 在 `post_parse` 中，當我們都準備好 connection 後，接下來會透過 `set_host_info_in_host_address_pairs `要處理一些 host 相關的資訊，如 **node_id**。
 可以從程式碼內看到，會掃過所有的 path，然後對所有的 path 再進行一次 `_set_host_info_in_host_address_pairs` 的呼叫，在本文的範例中，因為 PATH 只有一條，所以只會被呼叫一次。
-```
+``` c
 0255 static void set_host_info_in_host_address_pairs(struct d_resource *res, struct connection *conn)
 0256 {
 0257     struct path *path;
@@ -198,7 +198,7 @@ Steps
 ```
 
 最後，若這條 connection 是透過 `create_implicit_connection` 產生的，則要對 connection 兩端的 host 去產生一個 node_id 來存放，這邊使用了 `generate_implicit_node_id` 來產生 node id，若剛好兩個 hash 都一樣的話，就會發生失敗，註解中有提到失敗的原因有可能兩個 host 採用了 proxy 的架構，所以 ip address 都會相同。這種情況下就重新透過`crc32c`搭配proxy的變數來重新計算一次node id。
-```
+``` c
 0224     if (conn->implicit && i == 2 && !host_info_array[0]->node_id && !host_info_array[1]->node_id) {
 0225         /* This is drbd-8.3 / drbd-8.4 compatibility, auto created node-id */
 0226         bool have_node_ids;
@@ -231,7 +231,7 @@ Steps
 ```
 
 當整個設定檔都解析完畢後，接下來就要處理真正的參數**up r0**了，根據下列程式碼
-```
+``` c
 0326 /*  */ struct adm_cmd disconnect_cmd = {"disconnect", adm_drbdsetup, &disconnect_cmd_ctx, ACF1_DISCONNECT};
 0327 static struct adm_cmd up_cmd = {"up", adm_up, ACF1_RESNAME };
 0328 /*  */ struct adm_cmd res_options_cmd = {"resource-options", adm_resource, &resource_options_ctx, ACF1_RESNAME};
@@ -255,7 +255,7 @@ Steps
 ```
 可以觀察到，這隻 function 負責超多事情，基本上就是幫你把 object/disk/network 都處理完畢。這邊我們專注於 Network 相關的處理。
 首先先呼叫 `set_peer_in_resource` 進行處理
-```
+``` c
 1988     set_peer_in_resource(ctx->res, true);
 ```
 ### set_peer_in_resource
@@ -264,7 +264,7 @@ Steps
 以本文的範例來說，該 resource **r0** 裡面包含兩台 host，分別是 **hw1** 以及 **hw2**。
 一開始兩台 host 都必須要執行 **drbdadm** 來初始相關的功能，假設今天是 **hw1** 這台在執行。則對 hw1 來說，他看到 connection 的 peer 就要指向 **hw2**，反之亦然， hw2 所看到的 connection->peer 應該要指向 **h1** 才對。
 
-```
+``` c
 0473 void set_peer_in_resource(struct d_resource* res, int peer_required)
 0474 {
 0475     struct connection *conn;
@@ -290,7 +290,7 @@ Steps
 最後用一個變數**peer_addr_set**來記住當前 resource 是否已經有設定過 peer 的 address了，因為有些 command 本身不需要 peer 的參與，所以會使用這個變數來作為一些邏輯的判斷。
 
 最後來到了整個 `adm_up` 函式的重頭戲, 在一切資訊都準備完畢後，接下來要開始在兩端 host *h1*, *h2* 建立起連線，這邊透過 **schedule_deferred_cmd** 的方式去執行三個指令，分別是 `new-peer`, `new-path` 以及 `connect`，稍後這些指令都會透過 netlink 的方式送到 kernel space 去進行真正的連線操作。
-```
+``` c
 1989     for_each_connection(conn, &ctx->res->connections) {
 1990         struct peer_device *peer_device;
 1991 
@@ -320,7 +320,7 @@ Steps
 在實際看這些指令做的事情以前，先來看看 `schedule_deferred_cmd` 怎麼處理這些指令的。
 ### schedule_deferred_cmd
 此 function 主要是將相關的參數都收集起來放到 **struct cfg_ctx** 裡面，然後將這個要執行的指令透過 `STAILQ_INSERT_TAIL` 都方式放到一個全域的 Queue **deferred_cmds** 內。
-```
+``` c
 0547 void schedule_deferred_cmd(struct adm_cmd *cmd,
 0548                const struct cfg_ctx *ctx,
 0549                enum drbd_cfg_stage stage)
@@ -354,7 +354,7 @@ Steps
 整個程式的最後面則是會依賴 `_run_deferred_cmds` 將 queue 內的指令一個一個取出，然後透過 `__call_cmd_fn` 開始執行
 
 ### _run_deferred_cmds
-```
+``` c
 0698 int _run_deferred_cmds(enum drbd_cfg_stage stage)
 0699 {
 0700     struct d_resource *last_res = NULL;
@@ -389,7 +389,7 @@ Steps
 
 這邊可以注意的是 **iterate_path** 這個變數，如果這個變數為真的則，則該指令會針對 connection內所有的 paths 都進行一次， connection 則是在當初在 **adm_up** 時就會先透過 **tmp_ctx.conn = conn** 放進去。不過由於本文的設定檔只有一條 connection，且該 connection 上只有一個 path，所以這邊實際上也只會呼叫一次。
 ### __call_cmd_fn
-``` 
+``` c
 0578 static int __call_cmd_fn(const struct cfg_ctx *ctx, enum on_error on_error)
 0579 {
 0580     struct d_volume *vol = ctx->vol;
@@ -432,7 +432,7 @@ Steps
 0617 }
 ```
 最後要來看這些指令怎麼往下運行的，不論是 **new-peer**, **new-path** 或是 **connect**，其實最後都是依靠 `drbdsetup` 這隻程式在來運行，所以這邊基本上都是收集好參數後透過 `system` 的方式將該指令叫起來去執行。
-```
+``` c
 1705 static int adm_connect(const struct cfg_ctx *ctx)
 1706 {
 1707     struct d_resource *res = ctx->res;
@@ -504,7 +504,7 @@ Steps
 1773 }
 ```
 在 `drbdsetup` 中，可以看到關於這三個指令對應的資訊，這些指令的原型是 **struct drbd_cmd**，當 **drbdsetup** 被呼叫後，對應的指令就會跑到對應的 **drbd_cmd**中去執行，最後都會執行到 **drbd_cmd** 裡面的 **function (fptr)**來處理。
-```
+``` c
 0229 struct drbd_cmd {
 0230     const char* cmd;
 0231     enum cfg_ctx_key ctx_key;
@@ -523,21 +523,21 @@ Steps
 0244     const char *summary;
 0245 };
 ```
-```
+``` c
 0397     {"connect", CTX_PEER_NODE,
 0398         DRBD_ADM_CONNECT, DRBD_NLA_CONNECT_PARMS,
 0399         F_CONFIG_CMD,
 0400      .ctx = &connect_cmd_ctx,
 0401      .summary = "Attempt to (re)establish a replication link to a peer host." },
 ```
-```
+``` c
 0403     {"new-peer", CTX_PEER_NODE,
 0404         DRBD_ADM_NEW_PEER, DRBD_NLA_NET_CONF,
 0405         F_CONFIG_CMD,
 0406      .ctx = &new_peer_cmd_ctx,
 0407      .summary = "Make a peer host known to a resource." },
 ```
-```
+``` c
 0415     {"new-path", CTX_PEER_NODE,
 0416         DRBD_ADM_NEW_PATH, DRBD_NLA_PATH_PARMS,
 0417         F_CONFIG_CMD,
@@ -553,7 +553,7 @@ Steps
 ### _generic_config_cmd
 到這一步後，就是根據先前指令中的一些資訊，組出對應的 **netlink header**，最後透過
 `genl_send` 將該命令透過 **netlink** 送到 kernel 去，然後再使用 `genl_recv_msgs` 的方式接收回來的訊息，確認事情完成後就結束。
-```
+```c
 1136 static int _generic_config_cmd(struct drbd_cmd *cm, int argc, char **argv)
 1137 {
 1138     struct drbd_argument *ad;
