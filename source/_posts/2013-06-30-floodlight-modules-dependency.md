@@ -142,7 +142,7 @@ function visit(listener)
 >  listener:Device
   visted:forwarding,Device
   ordering:empty
-  action:choose LLDP (因為DEVICE 有宣示 LLDP要在我之後)
+  action:choose LLDP (因為DEVICE 有宣示 LLDP要在我之前)
   
 --- 
 
@@ -163,7 +163,7 @@ function visit(listener)
 >  listener:forwarding
   visted:forwarding,Device,LLDP
   ordering:LLDP,Device
-  action:choose VirtualNetwork (因為 VirtualNetwork 有宣示 forwarding 要在我之前)
+  action:choose VirtualNetwork (因為 VirtualNetwork 有宣示 forwarding 要在我之後)
   
 ---
 
