@@ -5,6 +5,7 @@ tags:
 	- System
 	- DRBD
 	- Network
+keywords: DRBD
 ---
 Architecture
 ============
@@ -553,6 +554,7 @@ Steps
 ### _generic_config_cmd
 到這一步後，就是根據先前指令中的一些資訊，組出對應的 **netlink header**，最後透過
 `genl_send` 將該命令透過 **netlink** 送到 kernel 去，然後再使用 `genl_recv_msgs` 的方式接收回來的訊息，確認事情完成後就結束。
+
 ```c
 1136 static int _generic_config_cmd(struct drbd_cmd *cm, int argc, char **argv)
 1137 {
@@ -574,6 +576,7 @@ Steps
 ...
 ```
 
+
 Summary
 =======
-本文到這邊目前已經大致瞭解 user space 的流程，接下來要探討 **new-peer**, **new-path** 以及 **connect** 這三個指令在 kernel 中的流程。
+- 本文到這邊目前已經大致瞭解 user space 的流程，接下來要探討 **new-peer**, **new-path** 以及 **connect** 這三個指令在 kernel 中的流程。

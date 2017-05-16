@@ -5,6 +5,7 @@ tags:
 	- System
 	- DRBD
 	- Network
+keywords: DRBD
 ---
 Introduction
 ============
