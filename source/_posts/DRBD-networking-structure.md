@@ -1,12 +1,13 @@
 ---
 title: drbd-networking-structure
-keywords: DRBD,Kernel,DRBD9.0
 date: 2017-05-16 17:16:15
 tags:
 	- DRBD
 	- System
 	- Networking
 	- Kernel
+	- SourceCode
+keywords: DRBD,Kernel,DRBD9.0
 ---
 DRBD Networking structure
 =========================

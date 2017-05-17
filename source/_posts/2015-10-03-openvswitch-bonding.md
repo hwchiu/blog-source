@@ -10,6 +10,7 @@ tags:
 	- OpenvSwitch
 	- Network
 	- Bonding
+keywords: SDN,OpenvSwitch,OVS,Kernel
 ---
 Introduction
 ------------

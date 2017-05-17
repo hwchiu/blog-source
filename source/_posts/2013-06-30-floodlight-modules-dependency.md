@@ -9,6 +9,8 @@ tags:
 	- Openflow
 	- Network
 	- Java
+	- SourceCode
+keywords: SDN,Controller,Floodlight
 ---
 在floodlight這個openflow controller中，對於module之間的執行順序是如何決定的，這部分很重要
 

@@ -8,6 +8,7 @@ tags:
 	- SDN
 	- Network
 	- OpenvSwitch
+keywords: SDN,OpenvSwitch,OVS,Kernel
 ---
 This article show what the system do when we install the OpenvSwitch
 

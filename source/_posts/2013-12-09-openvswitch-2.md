@@ -8,6 +8,8 @@ tags:
 	- SDN
 	- Network
 	- OpenvSwitch
+	- SourceCode
+keywords: SDN,OpenvSwitch,OVS,Kernel
 ---
 ovs-vsctl add-port br eth1
 (netlink)

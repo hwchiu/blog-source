@@ -8,6 +8,7 @@ tags:
 	- SDN
 	- Network
 	- OpenvSwitch
+keywords: SDN,OpenvSwitch,OVS,Kernel
 ---
 Environment
 -----------

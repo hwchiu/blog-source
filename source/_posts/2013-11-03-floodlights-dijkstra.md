@@ -10,6 +10,8 @@ tags:
 	- Java
 	- Network
 	- Algorithm
+	- SourceCode
+keywords: SDN,Controller,Floodlight
 ---
 再 **Floodlight** 中，會定期送出 **LLDP** 的封包去學習當前拓樸的情況
 一旦發線拓樸情況有所改變，就會產生一個新的TopologyInstance物件

@@ -8,6 +8,8 @@ tags:
 	- SDN
 	- Network
 	- OpenvSwitch
+	- SourceCode
+keywords: SDN,OpenvSwitch,OVS,Kernel
 ---
 這邊要探討的是當網卡收到封包後，在 **KERNEL** 中由下往上的流程
 

@@ -9,6 +9,7 @@ tags:
 	- Openflow
 	- Network
 	- Floodlight
+keywords: SDN,Controller,Floodlight
 ---
 記錄一下執行floodlight時，有ㄧ些參數可以使用，都是用來指定設定檔的位置。
 

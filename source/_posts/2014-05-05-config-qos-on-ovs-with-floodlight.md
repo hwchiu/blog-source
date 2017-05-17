@@ -11,6 +11,7 @@ tags:
 	- Floodlight
 	- OpenvSwitch
 	- System
+keywords: SDN,Controller,Floodlight
 ---
 這邊簡單紀錄一下一種QoS的使用方法，實驗流程如下
 

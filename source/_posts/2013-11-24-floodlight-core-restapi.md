@@ -9,6 +9,8 @@ tags:
 	- Floodlight
 	- Java
 	- Network
+	- SourceCode
+keywords: SDN,Controller,Floodlight
 ---
 Floodlight Openflow Controller 預設就有Rest Server 並且提供對應的Rest API供使用者呼叫使用
 

@@ -9,6 +9,8 @@ tags:
 	- SDN
 	- Openflow
 	- Network
+	- SourceCode
+keywords: SDN,Controller,Floodlight
 ---
 Floodlight中，最基本用來轉送封包的module就是Forwarding Module,這邊稍為介紹一下心得:
 

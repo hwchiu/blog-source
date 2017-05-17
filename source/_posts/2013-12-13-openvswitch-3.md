@@ -8,6 +8,8 @@ tags:
 	- SDN
 	- Network
 	- OpenvSwitch
+	- SourceCode
+keywords: SDN,OpenvSwitch,OVS,Kernel
 ---
 ##Brief###
 當使用 **ovs-vsctl add-port br0 eth1**的時候，實際上會做什麼事情，這邊分成兩個層面來看

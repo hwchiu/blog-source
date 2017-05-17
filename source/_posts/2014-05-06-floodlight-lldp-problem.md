@@ -9,6 +9,7 @@ tags:
 	- Openflow
 	- Jave
 	- Floodlight
+keywords: SDN,Controller,Floodlight
 ---
 問題來源:
 [Floodlight LLDP problem](https://groups.google.com/a/openflowhub.org/forum/#!topic/floodlight-dev/15mTiLL0__A)

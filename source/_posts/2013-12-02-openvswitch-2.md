@@ -8,6 +8,8 @@ tags:
 	- SDN
 	- Network
 	- OpenvSwitch
+	- SourceCode
+keywords: SDN,OpenvSwitch,OVS,Kernel
 ---
 Openvswitch support two modes for user to config, user mode and kernel mode.
 we will discuss the kernel mode in this article.
