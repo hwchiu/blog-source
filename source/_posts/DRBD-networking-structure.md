@@ -1,5 +1,5 @@
 ---
-title: drbd-networking-structure
+title: Drbd Networking Structure Introduction
 date: 2017-05-16 17:16:15
 tags:
 	- DRBD
@@ -9,8 +9,6 @@ tags:
 	- SourceCode
 keywords: DRBD,Kernel,DRBD9.0
 ---
-DRBD Networking structure
-=========================
 
 ### Introduction
 本文主要分析 **drbd** 在 **kernel space** 中關於 **networking** 這一部分用到的所有資料結構，這些資料結構主要分成兩個部分，一部分是通用的，一部分則是 **TCP** 連線專用的
