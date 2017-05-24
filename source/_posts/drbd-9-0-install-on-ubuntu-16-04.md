@@ -5,7 +5,7 @@ tags:
 	- System
 	- Ubuntu
 	- DRBD
-keywords: DRBD,Ubuntu,Linus,System
+keywords: DRBD,Ubuntu,Linux,System
 ---
 
 ### Introduction

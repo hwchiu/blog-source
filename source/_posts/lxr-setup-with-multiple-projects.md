@@ -7,6 +7,8 @@ tags:
 	- Ubuntu
 	- DRBD
 	- Ceph
+	- SourceCode
+keywords: LXR,lxr,Ubuntu,Linux,System,SourceCode
 ---
 
 Install LXR on Ubuntu 16.04
