@@ -9,6 +9,7 @@ tags:
 	- Kernel
 	- Switchdev
 	- Network
+keywords: Linux,Kernel,Network,SwitchDev,HardwareSwitch
 ---
 Introduction
 ------------  

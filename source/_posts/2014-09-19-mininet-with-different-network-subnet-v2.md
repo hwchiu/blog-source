@@ -9,7 +9,7 @@ tags:
 	- Openflow
 	- Mininet
 	- Network
-keywords: SDN,Mininet
+keywords: SDN,Mininet,Network
 ---
 上一篇[mininet-and-network-subnet](http://logdown.com/account/posts/203260-mininet-and-network-subnet/edit)中提到如何在mininet中創造不同subnet的網路，並且透過手動下flow的方式讓不同subnet的hosts可以互相溝通。  
 而本篇的重點在於提供另外一種方式來創造不同subnet的網路，讓研究者不需要再手動一直輸入**ifconfig**,**route add ...**等指令，能夠更簡潔的去創造不同subtnet的網路。

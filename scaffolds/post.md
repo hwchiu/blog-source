@@ -2,5 +2,6 @@
 title: {{ title }}
 date: {{ date }}
 tags:
-keywords: SDN
+keywords: SDN,Network,Linux,Ubuntu,
+description:
 ---

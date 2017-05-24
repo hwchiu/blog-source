@@ -7,6 +7,7 @@ categories: [Openflow]
 tags:
 	- SDN
 	- Openflow
+keywords: SDN,Protocol,Openflow,Network,SoftwareDefinedNetwork
 ---
 
 

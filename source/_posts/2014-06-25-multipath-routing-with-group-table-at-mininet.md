@@ -9,7 +9,7 @@ tags:
 	- Openflow
 	- Mininet
 	- Network
-keywords: SDN,Mininet,Group Table
+keywords: SDN,Mininet,Group Table,Network
 ---
 Purpose
 -------
