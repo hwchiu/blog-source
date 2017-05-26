@@ -8,7 +8,6 @@ tags:
 	- ScaleOut
 	- SDS
 	- SourceCode
-description: Ceph,Ceph Architecture, SDS, Stduy
 keywords: Ceph,Network,SourceCode,SDS,SOS
 ---
 

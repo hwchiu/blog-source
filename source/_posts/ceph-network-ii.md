@@ -8,11 +8,10 @@ tags:
 	- ScaleOut
 	- SDS
 	- SourceCode
-description: Ceph,Ceph Architecture, SDS, Stduy
 keywords: Ceph,Network,SourceCode,SDS,SOS
 ---
 
-延續上篇文章 (Ceph Network 分析(一)[]，本文將繼續探討 **Async** 這種網路類型底層真的架構與概念，所以本文章也不會有太硬的程式碼解讀，反而會比較偏向概念性的分析。
+延續上篇文章 (Ceph Network Architecture 研究(一))[http://hwchiu.com/ceph-network-i.html#more]，本文將繼續探討 **Async** 這種網路類型底層真的架構與概念，所以本文章也不會有太硬的程式碼解讀，反而會比較偏向概念性的分析。
 
 從上一篇文章中我們可知道，底層網路實現提供了包含 **Messenger**, **Connection** 等介面供上層應用層去使用。
 接下來
