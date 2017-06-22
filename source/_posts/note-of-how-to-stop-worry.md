@@ -48,3 +48,23 @@ When you or any of your associates, are tempted to worry about a problem, write 
 - What is the cause of the problem?
 - What are all possible solutions?
 - What is the best solution?
+
+# How to Break the Worry Habit Before It Breaks You
+
+## Rule 1
+Crowd worry out of your mind by keeping busy, Plenty of actions is one the best therapies ever devised for chring "Wibber Gibbers"
+
+## Rule 2
+Don't fuss about trifles, Don't permit little things. The mere termites of lift, to ruin your happiness.
+
+## Rule 3
+Use the law of averages to outlaw your worries. Ask yourself, "waht are the odds against this things's happening at all?"
+
+## Rule 4
+Co-operate with the inevitable. If you know a circumstance is beyond your power to change or revise, say to yourself: "It is so, it cannot be otherwise".
+
+## Rule 5
+Put a "STOP-LOSS" order on your worries. Decide just how much anxiety a thing may be worth, and refust to give it anymore.
+
+## Rule 6
+Let the past bury its dead, Don't saw sawdust
