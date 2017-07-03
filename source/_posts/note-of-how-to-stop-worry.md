@@ -68,3 +68,31 @@ Put a "STOP-LOSS" order on your worries. Decide just how much anxiety a thing ma
 
 ## Rule 6
 Let the past bury its dead, Don't saw sawdust
+
+# Seven Ways to Cultivate a Mental Attitude That Will Bring You Peace and Happiness
+
+## Rule 1
+Let's fill our minds with thoughts of peace, courage, health, and hope, for "our life is what our thoughts make it"
+
+## Rule 2
+Let's never try to get even with our enemies, because if we do we will hurt ourselves far more than we hurt them.
+Let's do as General Eisenhower does: Let's never waste a minute thinkging about people we don't like.
+
+## Rule 3
+- Instead of worrying about ingratitude, let's expect it. Let's remember that Jesus healed ten lepers in one day and only one thanked him. Why should we expect more gratitude than Jesus got.
+- Let's rememberthat the only way to find happiness is not to expect gratitude, but to give for the joy of giving.
+- Let's remember that gratitude is a "cultivated" trait; so if we wawnt our children to be grateful, we must train them to be grateful.
+
+## Rule 4
+Count your blessing, not your troubles.
+
+## Rule 5
+Let's not imitate others, let's find ourselves and be ourselves, for "envy is ignorance" and "imitation is suicide"
+
+## Rule 6
+When fate hands us a lemon, let's try to make a lemonade.
+
+## Rule 7
+Let's forget our own unhappiness, by trying to c reate a little happiness for other.
+"When you are good to others, you are best to yourself."
+

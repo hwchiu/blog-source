@@ -15,3 +15,4 @@ This article is used to record books I have read in 2017.
 - [A STREET CAT NAMED BOB](https://www.amazon.com/Street-Cat-Named-Bob-Saved/dp/1250029465)
 - [The A. B. C. Murders: A Hercule Poirot Mystery](https://www.amazon.com/B-C-Murders-Hercule-Mystery/dp/0062073583)
 - [Before I Go to Sleep](https://www.amazon.com/Before-I-Go-Sleep-Novel/dp/0062060562)
+- [How to Stop Worrying and Start Living](https://www.amazon.com/How-Stop-Worrying-Start-Living/dp/0671733354)
