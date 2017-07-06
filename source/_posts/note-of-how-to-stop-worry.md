@@ -96,3 +96,39 @@ When fate hands us a lemon, let's try to make a lemonade.
 Let's forget our own unhappiness, by trying to c reate a little happiness for other.
 "When you are good to others, you are best to yourself."
 
+#How to keep from worrying about criticism
+
+## Rule 1
+Unhust criticism is often a disguised compliment. It often means that you have aroused jealousy and envy.
+Remember that nbo one ever kicks a dead dog.
+
+## Rule 2
+Do thae very best you can; and then put up your old umbrella and keep the rain of criticism from running down the back of your neck.
+
+## Rule 3
+Let's keep a record of the fool things we have done and criticize ourselves. since we can't hope to be perfect, let's do that E.H.LITTLE DID: Let's ask
+for unbiased, helpful, constructive criticism.
+
+# Six Ways to Prevent Fatigue and Worry and Keep Your Energy and Spirits High
+
+## Rule 1
+Rest before you get tired.
+
+## Rule 2
+Learn to relax at your work.
+
+## Rule 3
+Learn to relax at home.
+
+## Rule 4
+Apply These four good working habits.
+- Clear your desk of all papers except those relating to the immediate problem at hand.
+- Do things in the order of their importance.
+- When you face a problem, solve it then and there if you fave the facts necessary to make a decision.
+- Learn to organize, deputize, and supervise.
+
+## Rule 5
+To prevent worry and fatigue, put enthusiasm into your work.
+
+## Rule 6
+Remember, no one was ever killed by lack of sleep. Is is worrying about insomnia that does the damage, not the insomnia.
