@@ -17,3 +17,4 @@ This article is used to record books I have read in 2017.
 - [Before I Go to Sleep](https://www.amazon.com/Before-I-Go-Sleep-Novel/dp/0062060562)
 - [How to Stop Worrying and Start Living](https://www.amazon.com/How-Stop-Worrying-Start-Living/dp/0671733354)
 - [Born a Crime: Stories from a South African Childhood](https://www.amazon.com/Born-Crime-Stories-African-Childhood/dp/0399588175)
+- [Mr. Fiancé](https://www.amazon.com/dp/B0719N46B4)
