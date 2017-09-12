@@ -1,5 +1,5 @@
 ---
-title: [論文導讀] Maglev: A Fast and Reliable Software Network Load Balancer
+title: "[論文導讀] Maglev: A Fast and Reliable Software Network Load Balancer"
 keywords: 'SDN,Network,Linux,Ubuntu'
 date: 2017-08-29 11:36:49
 tags:
@@ -85,7 +85,7 @@ Forwarder Implementation
 ![](http://i.imgur.com/86K4rvQ.png)
 整個過程簡單來說就是
 - 從網卡(NIC)收到封包
-- 經過查詢計算後，透過 **GRE** 重寫封包標頭檔
+- 經過查詢計算後，透過 **GRE** 重新封裝該封包
 - 從網卡(NIC)送出封包
 
 複雜來看的話，整個 **Forwarder** 分為兩個大模組來處理，分別是 **Steering** 以及 **Muxing**。
@@ -170,13 +170,13 @@ Forwarder Implementation
 
 
 Operational Experience
-======================
+----------------------
 這邊大致上就是一個更細節的探討，包含 **Meaglve** 的演化史，**VIP** 怎麼設計，遇到 **IP Fragement**如何處理 以及一些 **Monitor**的設計。
 這邊有興趣的可以自行閱讀該篇文章，這邊就不多加敘述。
 
 
 Evaluation
-==========
+----------
 這邊效能評估的部分，我個人偏好 **Kernel Bypass**的部分，所以這邊只針對這邊去進行閱讀。
 
 在此實驗中，變數總共有兩個，分別是
