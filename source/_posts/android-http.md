@@ -19,6 +19,7 @@ description:
 2. 透過該 **URL** 得到對應的 **HttpURLConnection**
 3. 從該 **HttpURLConncetion** 取得回應，譬如 `Header`或是`Body`
 
+<!--more-->
 
 所以接下來看一下每個詳細步驟,這邊假設使用 **http://127.0.0.1/test** 作為檔案的測試
 
