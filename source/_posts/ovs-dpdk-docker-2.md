@@ -7,7 +7,7 @@ tags:
 	- Linux
 	- Kernel
 	- DPDK
-	- OVS
+	- OpenvSwitch
 description:
 ---
 
