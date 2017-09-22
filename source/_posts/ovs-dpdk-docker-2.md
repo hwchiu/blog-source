@@ -13,7 +13,7 @@ description:
 
 此文章主要接續前篇文章 [OVS + DPDK + Docker 共同玩耍](http://hwchiu.com/ovs-dpdk-docker.html#more) 進行後續探討。
 
-根據ㄉㄉ  [Jalen Lin](https://www.facebook.com/jalen.lin.10?fref=ufi&pnref=story) 提出的一篇文章 [Linux kernel bug delivers corrupt TCP/IP data to Mesos, Kubernetes, Docker containers](
+根據 [Jalen Lin](https://www.facebook.com/jalen.lin.10?fref=ufi&pnref=story) 提出的一篇文章 [Linux kernel bug delivers corrupt TCP/IP data to Mesos, Kubernetes, Docker containers](
 https://tech.vijayp.ca/linux-kernel-bug-delivers-corrupt-tcp-ip-data-to-mesos-kubernetes-docker-containers-4986f88f7a19)，其中的原因似乎可以用來解釋此問題。
 
 因此本篇文章會分成兩個部分，第一部份是先針對上述文章進行探討，第二部分則是將第一部分的結果與先前經驗去結合，來追出更深層的問題所在。
