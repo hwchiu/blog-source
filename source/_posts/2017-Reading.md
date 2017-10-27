@@ -18,3 +18,4 @@ This article is used to record books I have read in 2017.
 - [How to Stop Worrying and Start Living](https://www.amazon.com/How-Stop-Worrying-Start-Living/dp/0671733354)
 - [Born a Crime: Stories from a South African Childhood](https://www.amazon.com/Born-Crime-Stories-African-Childhood/dp/0399588175)
 - [Mr. Fiancé](https://www.amazon.com/dp/B0719N46B4)
+- [The Power of Habit: Why We Do What We Do in Life and Business](https://www.amazon.com/Power-Habit-What-Life-Business/dp/081298160X)
