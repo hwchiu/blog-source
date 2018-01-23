@@ -31,14 +31,14 @@ and do memory copies between them when sending/receiving data.
 
 >With large sized (up to hundreds MB) application buffers, the cost of
 such copies adds non trivial overhead to the end-to-end communication
-pipeline. p p 
+pipeline.
 
 這篇就是問題的重點，大檔案資料在複製過程中產生的負擔，也是本篇論文想要解決的問題。
 
 >In this work, we made an attempt to design a zero copy
 transport for distribute dataflow frameworks that unifies application
 and networking buffer management and completely eliminates
-unnecessary memory copies. 
+unnecessary memory copies.
 
 這裡提到，這篇論文怎麼解決上述問題，而且直接瞭當的說明其方法就是，**zero copy transport for distrubute dataflow frameworks**.
 
@@ -179,6 +179,6 @@ Tensorflow
 2. 16顆 **GPU** 與 1顆 **GPU** 的比較起來，效能提升了 **13.8**倍
 
 
-# 結論
+# Summary
 作者觀察到在 **dataflow** 中之間的傳輸大小不小，同時這些資料會在系統中有大量的資料複製行為，因此引進了 **DMA**，**RDMA** 以及 **GPU direct RDMA** 等技術來減少整體的資料複製行為，並且也將整體的程式碼完全貢獻回 **TensorFlow** 內，未來任何人想要嘗試這個機制也可以直接使用。
 
