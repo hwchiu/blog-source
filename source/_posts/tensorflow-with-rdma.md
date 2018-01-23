@@ -1,5 +1,5 @@
 ---
-title: [論文導讀] - Towards Zero Copy Dataflows using RDMA
+title: "[論文導讀] - Towards Zero Copy Dataflows using RDMA"
 keywords: 'AI,Network,Linux,Kernel,RDMA,Tensorflow'
 date: 2018-01-23 02:27:30
 tags:
