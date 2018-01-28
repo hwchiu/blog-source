@@ -130,7 +130,7 @@ Tensorflow
 分析整個 **dataflow graph** 中的資料走向，盡可能的讓相同使用的資料只要使用一份緩衝區空間即可，然後透過 **RDMA** 或是 **DMA** 等技術來傳遞資料，減少整個過程中的資料複製行為。
 
 # IMPLEMENTATION
-作者採用的 **dataflow** 是基於 **tensorflow**，因此該 **Unified Memory Alloccator** 本身也是實作在 **tensorflow** 裡面，可以直接到[下列位置](github.com/tensorflow/tensorflow/pull/11392)觀看作者與 **tenforflow** 維護者的溝通以及程式碼的修改。
+作者採用的 **dataflow** 是基於 **tensorflow**，因此該 **Unified Memory Alloccator** 本身也是實作在 **tensorflow** 裡面，可以直接到[下列位置](https://github.com/tensorflow/tensorflow/pull/11392)觀看作者與 **tenforflow** 維護者的溝通以及程式碼的修改。
 作者新增了一種 **memory allocator** 到整體的程式碼內，要使用時只要打開相關選項即可(前提是要先針對有 **RDMA** 重新編譯整個專案)。
 
 在作者的實作的記憶體分配器中，會自動的去解析 **tensorflow** 的 **computational grpah** 以及 **distributed graph partition**，所以只有滿足下列兩種條件的張量 **tensor** 才會去該記憶體分配器中被選擇使用 **RDMA**。
