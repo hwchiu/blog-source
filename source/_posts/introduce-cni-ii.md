@@ -20,7 +20,7 @@ You should read the [Introduction to Container Network Interface(I)](http://hwch
 
 Introduction
 ============
-#### Why We Need CNI
+## Why We Need CNI
 In the previous post, we have learn the procedure of the basic bridge network in the docker.
 - Create a Linux Bridge
 - Create a Network Namespace
@@ -58,7 +58,7 @@ According to the official website's report. those `container runtimes` solutions
 -   [Amazon ECS - a highly scalable, high performance container management service](https://aws.amazon.com/ecs/)
 
 
-### How CNI works
+## How CNI works
 `Container Network Interface` is a specifiction which defined what kind of the interface you should implement. 
 
 In order to make it easy for developers to deveploe its own CNI plugin. the `Container Network Interface` project also provides many library for developing and all of it is based on the `golang` language.
@@ -67,7 +67,7 @@ You can find those two libraries below
 [https://github.com/containernetworking/cni](https://github.com/containernetworking/cni)
 [https://github.com/containernetworking/plugins](https://github.com/containernetworking/plugins)
 
-### What does CNI do
+## What does CNI do
 
 In CNI specifiction, there're three method we need to implement for our own plugin.
 - ADD
