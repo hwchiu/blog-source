@@ -9,6 +9,8 @@ tags:
 	- DPDK
 	- RDMA
 	- Tensorflow
+	- Slides
+	- CNTUG
 description:
 ---
 
