@@ -24,6 +24,7 @@ The slides shows every problems you will meet, including how do you deploy your 
 
 In the last section, the author provides a simple solution for that scenario and use a simple graph to explain how to works.
 
+<!--more-->
 
 ### Slides
 <iframe src="//www.slideshare.net/slideshow/embed_code/key/2eeiuiva1AABek" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/hongweiqiu/integration-kubernetes-with-docker-private-registry" title="Integration kubernetes with docker private registry" target="_blank">Integration kubernetes with docker private registry</a> </strong> from <strong><a href="//www.slideshare.net/hongweiqiu" target="_blank">宏瑋 邱(Hung-Wei Chiu)</a></strong> </div>
