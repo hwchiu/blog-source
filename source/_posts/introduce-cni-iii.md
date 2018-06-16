@@ -352,8 +352,8 @@ func init() {
         runtime.LockOSThread()
 }```
 
-
-Now, Run the `run.sh` under the `Step3` directory and you will see the following output. 
+See the whole example program in https://github.com/hwchiu/CNI_Tutorial_2018/tree/master/tutorial/step3 and you can directly run
+the `run.sh` in your linux machine to see the following output.
 ```shell=
 Ready to call the step3 example
 {test 192.0.2.1/24}
@@ -448,7 +448,8 @@ var handler = func(hostNS ns.NetNS) error {
 
 ```
 
-Run the `run.sh` in the `step 4` directory and you will see the following output.
+See the whole example program in https://github.com/hwchiu/CNI_Tutorial_2018/tree/master/tutorial/step4 and you can directly run
+the `run.sh` in your linux machine to see the following output.
 
 ```shell
 Ready to call the step4 example
