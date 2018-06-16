@@ -42,10 +42,10 @@ The [ContainerNetworking/CNI](HTTPS://github.com/containernetworking/cni) provid
 >As well as the specification, this repository contains the Go source code of a library for integrating CNI into applications and an example command-line tool for executing CNI plugins. A separate repository contains reference plugins and a template for making new plugins.
 
 The other project [ContainerNetwokring/Plugins](HTTPS://github.com/containernetworking/plugins) provides some basic network functions for your CNI and it can be divided into two types.
-#### Basic CNI
+## Basic CNI
 It provides some basic CNI, such as `Bridge`, `MacVlan`, `Host Device`.. And so on.
 You can chain those CNI into your own CNI and combine those into a more powerful CNI.
-#### IPAM
+## IPAM
 IPAM (IP Address Management) provides some method to handle the IP/Route management. It provides `host-local`, `dhcp` and `static` three methods now.
 
 In the `host-local`, you just need to provide a configuration file to describe what subnet/gateway you want to use and it will allocate a unused IP address from that subnet for your CNI.
@@ -75,7 +75,7 @@ Step By Step
 ============
 For each step, you can find a corresponding folder in my github repo and there's all golang files for each steps.
 
-### Step1
+## Step1
 First, we need to provide two function for `ADD` and `DELETE` event which is used to allocate/recycle resource when the container has been start/terminated.
 
 We use the framework provided by the The [ContainerNetworking/CNI](HTTPS://github.com/containernetworking/cni) and it will encapsulate
@@ -141,7 +141,7 @@ Actually, we have done the basic CNI program but it does nothing.
 A good CNI should make a container network connectivity and assign a valid IP address to the container and we will do that in the foloowing tutorial.
 
 
-#### Step 2
+## Step 2
 Now, we will create a linux bridge for the container and the logical flow looks like
 1. Read the bridge information from the config.
 2. Get the bridge name we want to use.
@@ -236,7 +236,7 @@ Use the aforementioned command to call the binary again and you should see the l
 If youu don't have the `brctl` command, use the `apt-get install bridge-utils to` to install the bridge tools.
 
 
-#### Step3
+## Step3
 In the next step, we will creat a `veth` for connecting the `linux` bridge and the taget `container`.
 
 The logical flow are
@@ -381,7 +381,7 @@ lo        Link encap:Local Loopback
 We have successfully create a linux bridge and connect to the other network namespace via the veth pair and the interface in that namepsace is `eth10` which has been defiend in the config file.
 
 
-#### Step4
+## Step4
 In this step, we will setup the IP address into the target network namespace.
 To make the problem easy, we had set the target IP address in the config and we can get via the `sp.IP`
 
