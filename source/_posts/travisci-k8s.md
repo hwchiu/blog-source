@@ -1,6 +1,6 @@
 ---
 title: 使用 TravisCI 為你的 Kubernetes 應用程式打造自動化測試
-keywords: 'k8s,Kubernetes,Github,Ubuntu,CI/CD'
+keywords: 'k8s,Kubernetes,GitHub,Ubuntu,CI/CD'
 date: 2018-07-21 08:49:11
 tags:
 	- Kubernetes
@@ -42,11 +42,11 @@ description:
 在本篇文章的解決方案中，我們會使用到下列的元件來展示，當然有些元件都可以自由變化。
 只要掌握整個流程的理解，原件都可以自行替換成自己習慣使用的服務。
 
-### Github
-放置應用程式原始碼的地方，本案例中使用 `Github` 這個程式碼託管網站。
+### GitHub
+放置應用程式原始碼的地方，本案例中使用 `GitHub` 這個程式碼託管網站。
 
 ### TravisCI
-一套自動化測試的服務，與 `Github` 可以連動，當你的 `Github` 專案有收到任何程式碼合併請求(`Pull Request`) 等更動的時候，可以透過 `TravisCI`幫你的應用程式進行測試，並且將測試的結果回傳到 `Github` 讓專案管理員瞭解該次的程式碼修改是否有順利通過所有測試。
+一套自動化測試的服務，與 `GitHub` 可以連動，當你的 `GitHub` 專案有收到任何程式碼合併請求(`Pull Request`) 等更動的時候，可以透過 `TravisCI`幫你的應用程式進行測試，並且將測試的結果回傳到 `GitHub` 讓專案管理員瞭解該次的程式碼修改是否有順利通過所有測試。
 
 ### Minikube
 一套用來建置 `Kubernetres` 集群的工具，在我們的方案中我們會在 `TravisCI` 的環境中透過此工具來產生一個本地的 `kubernetes` 集群。接者我們 `TravisCI` 內的應用程式就獲得一個獨立的 `kubernetes` 集群來使用了。
@@ -61,14 +61,14 @@ description:
 接下來將使用下圖來介紹整個測試方案的運作流程。
 
 ![](https://i.imgur.com/kTmhZsb.png)
-1. 假設開發者的 `Github` 專案已經與 `TravisCI` 進行連接
-2. 開發者日以繼夜的撰寫程式碼，對 `Github` 專案發出程式碼合併更動的請求
-3. `Github` 這邊收到通知，通知 `TravisCI` 準備進行測試
+1. 假設開發者的 `GitHub` 專案已經與 `TravisCI` 進行連接
+2. 開發者日以繼夜的撰寫程式碼，對 `GitHub` 專案發出程式碼合併更動的請求
+3. `GitHub` 這邊收到通知，通知 `TravisCI` 準備進行測試
 4. `TravisCI` 根據需求創建一個全新的測試環境出來
     - 這邊則會產生一個虛擬機器出來
 5. 在上述產生的測試環境中，使用 `Minikube` 該元件來產生一個全新的 `kubernetes` 集群
-6. 確認集群創建完畢，相關服務的運行中後，便可以針對 `Github` 專案內的程式碼進行測試
-7. 測試的結果回報給 `TravisCI`，然後 `TravisCI` 會再回報給 `Github` 專案，讓開發者可以瞭解這次的修改是否有通過所有的測試。
+6. 確認集群創建完畢，相關服務的運行中後，便可以針對 `GitHub` 專案內的程式碼進行測試
+7. 測試的結果回報給 `TravisCI`，然後 `TravisCI` 會再回報給 `GitHub` 專案，讓開發者可以瞭解這次的修改是否有通過所有的測試。
 
 
 示範案例展示
@@ -106,7 +106,7 @@ description:
 > 
 
 ## TravisCI
-當應用程式準備好之後，我們就要在 `Github` 專案中描寫我們如何使用 `TravisCI` 的測試環境。
+當應用程式準備好之後，我們就要在 `GitHub` 專案中描寫我們如何使用 `TravisCI` 的測試環境。
 該環境描述檔案採用 `yaml` 的格式，名稱為 `.travis.yml`，可以在 [Travis CI Getting started](https://docs.travis-ci.com/user/getting-started/) 看到相關文件.
 
 這邊有幾件事情要注意
