@@ -1,11 +1,10 @@
 ---
-title: 2017-Reading
+title: Reading
 date: 2017-05-06 15:42:19
 tags:
 	- Reading
 	- Life
 ---
-This article is used to record books I have read in 2017.
 
 - [The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win](https://www.amazon.com/Phoenix-Project-DevOps-Helping-Business/dp/0988262592)
 <!--more-->
@@ -19,3 +18,4 @@ This article is used to record books I have read in 2017.
 - [Born a Crime: Stories from a South African Childhood](https://www.amazon.com/Born-Crime-Stories-African-Childhood/dp/0399588175)
 - [Mr. Fiancé](https://www.amazon.com/dp/B0719N46B4)
 - [The Power of Habit: Why We Do What We Do in Life and Business](https://www.amazon.com/Power-Habit-What-Life-Business/dp/081298160X)
+- [The Road Less Traveled, Timeless Edition: A New Psychology of Love, Traditional Values and Spiritual Growth ](https://www.amazon.com/Road-Less-Traveled-Timeless-Traditional/dp/0743243153)
