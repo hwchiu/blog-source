@@ -1,6 +1,6 @@
 ---
 title: Install GPU in GKE(Google Kubernetes Engine)
-keywords: 'Linux,Ubuntu,K8S,Kubernetes,GPU'
+keywords: 'Linux,Ubuntu,k8s,Kubernetes,GPU'
 date: 2018-07-14 17:41:45
 tags:
 	- GPU
