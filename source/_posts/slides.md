@@ -52,10 +52,14 @@ This post is used to record all my presentations from 2017
     - [Slides](https://goo.gl/VBvk49)
 
 - 如何用GO撰寫CNI(Container Network Interface)
-    - 2018/03/27(周二) 
+    - 2018/03/27(周二)
     - [Golang Taipei Gathering #30](https://golang.kktix.cc/events/gtg30)
     - [Slides](https://www.slideshare.net/hongweiqiu/writing-the-container-network-interfacecni-plugin-in-golang-92128553)
 
+- Introduct the basic concept of Linxu Storage
+	- 2018.04.26
+	- [Linkernetworks]
+	- [Slides](https://www.slideshare.net/hongweiqiu/the-basic-concept-of-linux-filesystem)
 
 - 從入門到放棄，原來 CNI 這麼複雜
     - 2018.04.28(六)
