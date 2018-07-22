@@ -3,7 +3,6 @@ layout: post
 title: 'Nox-Spanning_Tree'
 date: 2013-09-02 07:01
 comments: true
-categories: [Nox, Openflow]
 tags:
 	- SDN
 	- Openflow

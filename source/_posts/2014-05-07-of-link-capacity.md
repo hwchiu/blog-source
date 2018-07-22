@@ -3,7 +3,6 @@ layout: post
 title: 'OF link capacity '
 date: 2014-05-07 06:05
 comments: true
-categories: 
 tags:
 	- Openflow
 	- SDN

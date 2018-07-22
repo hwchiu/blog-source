@@ -3,7 +3,6 @@ layout: post
 title: 'windows_vpn'
 date: 2013-03-29 15:02
 comments: true
-categories: [System]
 tags:
 	- System
 	- Windows

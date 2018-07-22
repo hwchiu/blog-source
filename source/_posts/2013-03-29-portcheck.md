@@ -3,7 +3,6 @@ layout: post
 title: '檢查port使用情況'
 date: 2013-03-29 12:33
 comments: true
-categories: [System, Network]
 tags:
 	- System
 	- Network

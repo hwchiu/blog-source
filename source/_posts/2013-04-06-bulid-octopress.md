@@ -3,7 +3,6 @@ layout: post
 title: 'Build own octopress'
 date: 2013-04-06 13:00
 comments: true
-categories: [System]
 tags:
 	- System
 ---

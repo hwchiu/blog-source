@@ -3,7 +3,6 @@ layout: post
 title: 'Python 動態載入模組'
 date: 2013-04-22 11:59
 comments: true
-categories: [Python]
 tags:
 	- Python
 ---

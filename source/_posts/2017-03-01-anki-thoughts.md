@@ -3,7 +3,6 @@ layout: post
 title: 'Anki 使用感想'
 date: 2017-03-01 04:34
 comments: true
-categories: 
 tags:
 	- System
 	- Anki

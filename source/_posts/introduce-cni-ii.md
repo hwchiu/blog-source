@@ -8,6 +8,7 @@ tags:
 	- Docker
 	- Linux
 	- Ubuntu
+	- Kubernetes
 description:
 ---
 

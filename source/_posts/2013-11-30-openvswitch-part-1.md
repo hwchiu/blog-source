@@ -3,7 +3,6 @@ layout: post
 title: 'OpenVSwitch - Basic Install'
 date: 2013-11-30 17:11
 comments: true
-categories: 
 tags:
 	- SDN
 	- Network

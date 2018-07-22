@@ -3,7 +3,6 @@ layout: post
 title: 'Execution Floodlight '
 date: 2013-08-21 04:39
 comments: true
-categories: [Floodlight, Openflow]
 tags:
 	- SDN
 	- Openflow

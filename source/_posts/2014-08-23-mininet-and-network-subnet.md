@@ -3,7 +3,6 @@ layout: post
 title: 'Mininet with different network subnet'
 date: 2014-08-23 14:17
 comments: true
-categories: 
 tags:
 	- SDN
 	- Openflow

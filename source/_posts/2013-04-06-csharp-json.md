@@ -3,7 +3,6 @@ layout: post
 title: 'json初體驗'
 date: 2013-04-06 22:49
 comments: true
-categories: [C#]
 tags:
 	- C#
 ---

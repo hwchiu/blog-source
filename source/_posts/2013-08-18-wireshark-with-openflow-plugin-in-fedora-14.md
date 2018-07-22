@@ -3,7 +3,6 @@ layout: post
 title: 'Wireshark with Openflow-Plugin in Fedora 14'
 date: 2013-08-18 05:14
 comments: true
-categories: [Openflow, WireShark]
 tags:
 	- SDN
 	- Openflow

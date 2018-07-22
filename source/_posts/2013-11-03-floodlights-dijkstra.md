@@ -3,7 +3,6 @@ layout: post
 title: 'Floodlight Dijkstra'
 date: 2013-11-03 09:52
 comments: true
-categories: [Floodlight, java, Openflow]
 tags:
 	- Floodlight
 	- SDN

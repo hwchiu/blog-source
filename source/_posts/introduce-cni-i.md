@@ -9,6 +9,7 @@ tags:
 	- Linux
 	- Ubuntu
 	- Kernel
+	- Kubernetes
 description:
 ---
 

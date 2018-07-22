@@ -3,7 +3,6 @@ layout: post
 title: 'Openvswitch source code(1)'
 date: 2013-12-02 09:17
 comments: true
-categories: 
 tags:
 	- SDN
 	- Network

@@ -3,7 +3,6 @@ layout: post
 title: 'Extend freebsd-ufs system'
 date: 2013-10-05 09:07
 comments: true
-categories: [System, freebsd]
 tags:
 	- System
 	- FreeBSD

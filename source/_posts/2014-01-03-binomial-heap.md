@@ -3,7 +3,6 @@ layout: post
 title: 'Binomial Heap'
 date: 2014-01-03 12:56
 comments: true
-categories: 
 tags:
 	- SDN
 	- Network

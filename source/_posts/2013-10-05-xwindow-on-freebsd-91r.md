@@ -3,7 +3,6 @@ layout: post
 title: 'X Window  & X WM on FreeBSD 9.1R'
 date: 2013-10-05 09:04
 comments: true
-categories: [System, FeeBSD]
 tags:
 	- System
 	- FreeBSD

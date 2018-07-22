@@ -3,7 +3,6 @@ layout: post
 title: 'Python-pack_unpack'
 date: 2013-07-01 13:06
 comments: true
-categories: [Python]
 tags:
 	- Python
 ---
