@@ -10,6 +10,7 @@ tags:
 	- Ubuntu
 	- Golang
 	- Kernel
+	- Kubernetes
 description:
 ---
 
