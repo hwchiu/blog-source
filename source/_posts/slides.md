@@ -10,7 +10,7 @@ description:
 
 This post is used to record all my presentations from 2017
 
-<!--more--!>
+<!--more-->
 
 ## 2017
 
