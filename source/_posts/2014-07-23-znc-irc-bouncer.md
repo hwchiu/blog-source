@@ -3,7 +3,6 @@ layout: post
 title: 'ZNC IRC bouncer'
 date: 2014-07-23 02:22
 comments: true
-categories: [freebsd, IRC]
 tags:
 	- FreeBSD
 	- IRC

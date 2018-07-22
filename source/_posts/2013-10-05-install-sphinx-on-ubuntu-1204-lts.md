@@ -3,7 +3,6 @@ layout: post
 title: 'Install Sphinx on Ubuntu 12.04 LTS'
 date: 2013-10-05 09:01
 comments: true
-categories: [System, ubuntu, Sphinx]
 tags:
 	- System
 	- Ubuntu

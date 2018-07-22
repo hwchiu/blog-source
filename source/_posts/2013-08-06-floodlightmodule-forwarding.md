@@ -3,7 +3,6 @@ layout: post
 title: 'FloodlightModule-Forwarding'
 date: 2013-08-06 15:26
 comments: true
-categories: [Floodlight, Openflow]
 tags:
 	- Floodlight
 	- SDN

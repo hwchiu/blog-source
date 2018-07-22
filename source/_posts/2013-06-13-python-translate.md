@@ -3,7 +3,6 @@ layout: post
 title: 'Python-translate'
 date: 2013-06-13 21:30
 comments: true
-categories: [Python]
 tags:
 	- Python
 ---

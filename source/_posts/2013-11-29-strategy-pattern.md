@@ -3,7 +3,6 @@ layout: post
 title: 'Strategy Pattern'
 date: 2013-11-29 13:15
 comments: true
-categories: 
 tags:
 	- DesignPattern
 ---

@@ -3,7 +3,6 @@ layout: post
 title: 'TCP使用sendto'
 date: 2013-03-31 00:13
 comments: true
-categories: [System, C, Network]
 tags:
 	- System
 	- C

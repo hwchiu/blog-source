@@ -3,7 +3,6 @@ layout: post
 title: 'Switchdev IIII'
 date: 2016-04-04 08:38
 comments: true
-categories: 
 tags:
 	- System
 	- Kernel

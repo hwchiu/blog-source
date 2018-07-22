@@ -3,7 +3,6 @@ layout: post
 title: 'OpenvSwitch - 2'
 date: 2013-12-09 10:03
 comments: true
-categories: 
 tags:
 	- SDN
 	- Network

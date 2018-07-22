@@ -3,7 +3,6 @@ layout: post
 title: 'Floodlight LLDP problem'
 date: 2014-05-06 05:25
 comments: true
-categories: 
 tags:
 	- SDN
 	- Openflow

@@ -3,7 +3,6 @@ layout: post
 title: 'Sublime Text 3 + cscope (windows)'
 date: 2014-01-08 09:02
 comments: true
-categories: 
 tags:
 	- System
 	- Windows

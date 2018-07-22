@@ -3,7 +3,6 @@ layout: post
 title: 'N-Queen problem'
 date: 2014-09-19 09:01
 comments: true
-categories: 
 tags:
 	- Algorithm
 ---

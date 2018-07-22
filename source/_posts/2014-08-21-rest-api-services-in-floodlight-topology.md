@@ -3,7 +3,6 @@ layout: post
 title: 'REST API services in Floodlight (Topology)'
 date: 2014-08-21 04:34
 comments: true
-categories: 
 tags:
 	- SDN
 	- Openflow

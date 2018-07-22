@@ -3,7 +3,6 @@ layout: post
 title: 'SA - Shell Script  (1)'
 date: 2013-11-24 12:39
 comments: true
-categories: 
 tags:
 	- System
 	- ShellScript

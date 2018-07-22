@@ -3,7 +3,6 @@ layout: post
 title: 'FloodlightModule-Topology module'
 date: 2013-08-17 13:17
 comments: true
-categories: [Floodlight, Openflow]
 tags:
 	- SDN
 	- Floodlight

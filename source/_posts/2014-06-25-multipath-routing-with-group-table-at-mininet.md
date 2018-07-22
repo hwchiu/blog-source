@@ -3,7 +3,6 @@ layout: post
 title: 'Multipath  routing with Group table at mininet'
 date: 2014-06-25 02:29
 comments: true
-categories:
 tags:
 	- SDN
 	- Openflow

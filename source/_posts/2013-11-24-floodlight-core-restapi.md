@@ -3,7 +3,6 @@ layout: post
 title: 'Floodlight Core RestAPI - part1'
 date: 2013-11-24 05:58
 comments: true
-categories: 
 tags:
 	- SDN
 	- Floodlight

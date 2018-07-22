@@ -3,7 +3,6 @@ layout: post
 title: 'Freebsd_Quota'
 date: 2013-04-07 17:56
 comments: true
-categories: [System]
 tags:
 	- System
 ---

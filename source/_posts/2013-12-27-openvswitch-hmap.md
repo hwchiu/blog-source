@@ -3,7 +3,6 @@ layout: post
 title: 'OpenvSwitch - hmap'
 date: 2013-12-27 04:18
 comments: true
-categories: 
 tags:
 	- SDN
 	- Network

@@ -3,7 +3,6 @@ layout: post
 title: 'Ports information in Floodlight'
 date: 2014-07-26 09:29
 comments: true
-categories: [Floodlight, Openflow]
 tags:
 	- SDN
 	- Openflow

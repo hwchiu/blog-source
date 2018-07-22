@@ -3,7 +3,6 @@ layout: post
 title: 'news-system'
 date: 2013-06-15 09:25
 comments: true
-categories: [System]
 tags:
 	- System
 	- FreeBSD

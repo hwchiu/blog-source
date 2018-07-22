@@ -3,7 +3,6 @@ layout: post
 title: 'xml初體驗'
 date: 2013-03-30 12:43
 comments: true
-categories: [C#]
 tags:
 	- C#
 ---

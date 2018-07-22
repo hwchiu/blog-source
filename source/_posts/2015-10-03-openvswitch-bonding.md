@@ -3,7 +3,6 @@ layout: post
 title: 'OpenvSwitch Bonding'
 date: 2015-10-03 13:32
 comments: true
-categories: 
 tags:
 	- SDN
 	- Openflow
