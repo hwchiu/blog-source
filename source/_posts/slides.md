@@ -70,3 +70,7 @@ This post is used to record all my presentations from 2017
     - 2018.05.26(六) 13:00 - 18:00
     - [SDN x Cloud Native Meetup #5](https://www.meetup.com/Cloud-Native-User-Group-Taiwan/events/250809107/)
     - [Slides](https://goo.gl/pjnzZJ)
+
+- K8S學程 : Kubernetes 容器網路完全剖析
+	- 2018.07.28(六) 09:30 - 17:00
+	- [廣宣學堂課程](https://broadmission.kktix.cc/events/446743e4-20421a-a8b2bf-f04436-copy-6)
