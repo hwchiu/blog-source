@@ -1,13 +1,14 @@
 ---
 title: 手把手打造仿 mininet 網路
 keywords: 'SDN,Network,Linux,Ubuntu,Mininet'
-date: 2017-06-23 03:03:19
 tags:
-	- Mininet
-	- SDN
-	- Network
-	- System
-	- Ubuntu
+  - Mininet
+  - SDN
+  - Network
+  - System
+  - Ubuntu
+abbrlink: 24071
+date: 2017-06-23 03:03:19
 ---
 
 相信不少開始學習 SDN 的人一定都有聽過 [mininet](http://mininet.org/) 這套軟體，甚至大量使用過。

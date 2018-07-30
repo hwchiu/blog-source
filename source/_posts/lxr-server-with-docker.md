@@ -1,13 +1,14 @@
 ---
 title: docker image for lxr server
-keywords: LXR, Ubuntu, Docker, SourceCodeIndex
-date: 2017-06-07 01:54:30
+keywords: 'LXR, Ubuntu, Docker, SourceCodeIndex'
 tags:
-	- Docker
-	- Lxr
-	- Ubuntu
-	- SourceCode
-	- System
+  - Docker
+  - Lxr
+  - Ubuntu
+  - SourceCode
+  - System
+abbrlink: 16582
+date: 2017-06-07 01:54:30
 ---
 
 

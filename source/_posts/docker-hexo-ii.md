@@ -1,12 +1,13 @@
 ---
 title: Docker image for Hexo (二)
-date: 2017-05-27 16:17:54
 tags:
-	- Docker
-	- Container
-	- Hexo
-	- System
-keywords: Docker,Hexo,System,Container
+  - Docker
+  - Container
+  - Hexo
+  - System
+keywords: 'Docker,Hexo,System,Container'
+abbrlink: 47633
+date: 2017-05-27 16:17:54
 ---
 
 

@@ -1,14 +1,15 @@
 ---
 title: Introduction to Container Network Interface(II)
 keywords: 'Network,Linux,Ubuntu,Docker,Kernel,CNI'
-date: 2018-04-08 05:16:01
 tags:
-	- CNI
-	- Network
-	- Docker
-	- Linux
-	- Ubuntu
-	- Kubernetes
+  - CNI
+  - Network
+  - Docker
+  - Linux
+  - Ubuntu
+  - Kubernetes
+abbrlink: 26571
+date: 2018-04-08 05:16:01
 description:
 ---
 

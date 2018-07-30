@@ -1,15 +1,18 @@
 ---
-title: "[論文導讀] Re-architecting datacenter networks and stacks for low latency and high performance"
+title: >-
+  [論文導讀] Re-architecting datacenter networks and stacks for low latency and high
+  performance
 keywords: 'SDN,Network,Linux,Ubuntu,DataCenter'
-date: 2017-09-26 13:19:37
 tags:
-	- SDN
-	- Network
-	- DPDK
-	- P4
-	- System
-	- Paper
-	- DataCenter
+  - SDN
+  - Network
+  - DPDK
+  - P4
+  - System
+  - Paper
+  - DataCenter
+abbrlink: 49842
+date: 2017-09-26 13:19:37
 description:
 ---
 

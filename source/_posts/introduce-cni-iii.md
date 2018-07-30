@@ -1,16 +1,17 @@
 ---
 title: Introduction to Container Network Interface(III)
 keywords: 'Network,Linux,Ubuntu,Docker,Kernel,CNI,Golang'
-date: 2018-06-16 08:34:18
 tags:
-	- CNI
-	- Network
-	- Docker
-	- Linux
-	- Ubuntu
-	- Golang
-	- Kernel
-	- Kubernetes
+  - CNI
+  - Network
+  - Docker
+  - Linux
+  - Ubuntu
+  - Golang
+  - Kernel
+  - Kubernetes
+abbrlink: 18895
+date: 2018-06-16 08:34:18
 description:
 ---
 

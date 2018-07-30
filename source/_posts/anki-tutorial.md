@@ -1,10 +1,11 @@
 ---
 title: Anki 使用感想 (tutorial)
 keywords: 'Anki, System, AddToAnki'
-date: 2017-08-05 16:05:07
 tags:
-	- System
-	- Anki
+  - System
+  - Anki
+abbrlink: 34221
+date: 2017-08-05 16:05:07
 description:
 ---
 

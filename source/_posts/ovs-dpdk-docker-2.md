@@ -1,13 +1,14 @@
 ---
 title: OVS + DPDK + Docker 共同玩耍(二)
 keywords: 'SDN,Network,Linux,Ubuntu, OVS, DPDK, Kernel'
-date: 2017-09-21 15:26:23
 tags:
-	- SDN
-	- Linux
-	- Kernel
-	- DPDK
-	- OpenvSwitch
+  - SDN
+  - Linux
+  - Kernel
+  - DPDK
+  - OpenvSwitch
+abbrlink: 8151
+date: 2017-09-21 15:26:23
 description:
 ---
 

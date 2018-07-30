@@ -1,14 +1,15 @@
 ---
 title: Ceph Network Architecture 研究(二)
-date: 2017-05-25 10:15:21
 tags:
-	- Ceph
-	- Network
-	- SOS
-	- ScaleOut
-	- SDS
-	- SourceCode
-keywords: Ceph,Network,SourceCode,SDS,SOS
+  - Ceph
+  - Network
+  - SOS
+  - ScaleOut
+  - SDS
+  - SourceCode
+keywords: 'Ceph,Network,SourceCode,SDS,SOS'
+abbrlink: 62972
+date: 2017-05-25 10:15:21
 ---
 
 延續上篇文章 (Ceph Network Architecture 研究(一))[https://blog.hwchiu.com/ceph-network-i.html#more]，本文將繼續探討 **Async** 這種網路類型底層真的架構與概念，所以本文章也不會有太硬的程式碼解讀，反而會比較偏向概念性的分析。

@@ -1,11 +1,12 @@
 ---
 title: 11個保護你 Kubernetes 集群的技巧與觀念(上)
 keywords: 'kubernetes,security,Linux,k8s,TLS'
-date: 2018-07-24 18:04:31
 tags:
-	- Kubernetes
-	- Security
-	- Linux
+  - Kubernetes
+  - Security
+  - Linux
+abbrlink: 27871
+date: 2018-07-24 18:04:31
 description:
 ---
 
