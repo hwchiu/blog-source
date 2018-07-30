@@ -206,9 +206,20 @@ runAsUser:
 關於 `webhook` 的使用方法，可以參考官方文件的說明 [kuubernetes webhook](https://kubernetes.io/docs/reference/access-authn-authz/webhook/
 ).
 
-至於檢查 `Image` 這個行為，我們暫時稱作 IDS(Intrusion Detection System), 這邊作者提供了兩套相關的工具來提供這類型的服務，分別是 [Clair](https://github.com/coreos/clair) 以及 [Micro Scanner](https://github.com/aquasecurity/microscanner).
+~~至於檢查 `Image` 這個行為，我們暫時稱作 IDS(Intrusion Detection System), 這邊作者提供了兩套相關的工具來提供這類型的服務，分別是 [Clair](https://github.com/coreos/clair) 以及 [Micro Scanner](https://github.com/aquasecurity/microscanner).~~
 
-除了上述這種工具外，作者也提到另外一個服務的概念, [grafeas](https://grafeas.io/), 該服務會維護一個資料庫，該資料庫內會以每個 Image 的 Hash tag 作為索引資料，來記住對應的 Image 是否有任何安全性的問題。
+感謝網友`SCLin`指正，上述的說法有誤，[Clair](https://github.com/coreos/clair) 以及 [Micro Scanner](https://github.com/aquasecurity/microscanner) 這兩個服務都是包在 Image 階段執行 Vulnerability assessment 以及 static code analysis 的工具。
+
+而真正符合 IDS(Intrustion Detection System) 的工具則是[Sysdig's Falco](https://github.com/draios/falco)這個 Project.
+該 Project 的介紹就是 `Behavioral Activity Monitoring`, 該 IDS 工具能夠偵測下列的行為
+- A shell is run inside a container
+- A container is running in privileged mode, or is mounting a sensitive path like /proc from the host.
+- A server process spawns a child process of an unexpected type
+- Unexpected read of a sensitive file (like /etc/shadow)
+- A non-device file is written to /dev
+- A standard system binary (like ls) makes an outbound network connection
+
+除了上述工具外，作者也提到另外一個服務的概念, [grafeas](https://grafeas.io/), 該服務會維護一個資料庫，該資料庫內會以每個 Image 的 Hash tag 作為索引資料，來記住對應的 Image 是否有任何安全性的問題。
 所以可以藉由此工具來掃描當前所屬的 Image 是否內部繼承了任何有問題的 Image 來判斷是否有任何安全性問題。
 
 至於 `Zero Day` 這種類型的安全性問題也有相關的工具可以幫忙處理，如[twistlock](https://www.twistlock.com/),[aquasec](https://www.aquasec.com/) 以及 [Sysdig Secure](https://sysdig.com/product/secure/)
