@@ -14,11 +14,11 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://hwchiu.com
 root: /
-## permalink: :title.html
-permalink: archives/:abbrlink.html
-abbrlink:
-  alg: crc32  # 算法：crc16(default) and crc32
-  rep: hex    # 进制：dec(default) and hex
+permalink: :title.html
+#permalink: archives/:abbrlink.html
+#abbrlink:
+#  alg: crc32  # 算法：crc16(default) and crc32
+#  rep: hex    # 进制：dec(default) and hex
 
 # Directory
 source_dir: source
