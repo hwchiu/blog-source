@@ -18,7 +18,7 @@ description:
 3. The Future
 
 
-本篇文章延續 [11個保護你 Kubernetes 集群的技巧與觀念(上)](http://hwchiu.com/k8s-security-11tips-i.html#more)
+本篇文章延續 [11個保護你 Kubernetes 集群的技巧與觀念(上)](https://blog.hwchiu.com/k8s-security-11tips-i.html#more)
 
 繼續探討原文作者後半部分的概念
 

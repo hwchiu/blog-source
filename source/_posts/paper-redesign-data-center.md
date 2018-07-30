@@ -58,7 +58,7 @@ NDP架構下， **switch** 採用非常小的 **buffer**來存放封包，當 **
 最後本論文進行了一系列效能評比，於大規模的模擬中證明了NDP能夠為整個 **data center** 提供低延遲與高輸出的特性。
 
 ## Introduction
-隨者 **Data Center** 爆炸性的成長，為了滿足其內部傳輸的需求(低延遲/高輸出)，有各式各樣的新方法或是舊有技術的改進用來滿足上述需求。譬如 TCP 改進的 DCTPC、本來就存在已久的 MPTCP 甚至是 RDMA (RoCE)。 若對 **RDMA/RoCE** 想要更瞭解，可以參考下列連結。[RDMA Introduction (一)](http://hwchiu.com/rdma-introduction-i.html)
+隨者 **Data Center** 爆炸性的成長，為了滿足其內部傳輸的需求(低延遲/高輸出)，有各式各樣的新方法或是舊有技術的改進用來滿足上述需求。譬如 TCP 改進的 DCTPC、本來就存在已久的 MPTCP 甚至是 RDMA (RoCE)。 若對 **RDMA/RoCE** 想要更瞭解，可以參考下列連結。[RDMA Introduction (一)](https://blog.hwchiu.com/rdma-introduction-i.html)
 再 **RDMA** 的網路環境中，為了減少封包遺失對整體傳輸造成的傳輸，都會希望能夠將整個網路傳輸打造成 **lossless** 的環境，為了達成這個方法，可以採用 **Ethernet Flow Control**， **Explicit Congestion Notification**(ECN) 或是 **Priority Flow Control**(PFC)。然而在 ** SIGCOMM 2016** 微軟發了一篇 paper 再講 RDMA + PFC 的問題。其表明雖然 PFC 可以用來控制傳送封包的速率，藉此達到 **lossless** 的網路環境，但是一旦整體網路處於高度壅塞的情況時，資料封包與 **PFC** 控制封包的爭奪會使得整體網路沒有辦法繼續提供**低延遲**的優點，最後給出了一個結論 *“how to achieve low network latency and high network throughput at the same time for RDMA is still an open problem.“*
 
 在這篇論文內，作者提出了一個不同與以往思維的新協定 NDP 來滿足上述的要求。

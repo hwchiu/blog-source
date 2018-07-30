@@ -26,7 +26,7 @@ are often designed around socket based software stack that
 manages application buffers separately from networking buffers
 and do memory copies between them when sending/receiving data.
 
-先大概介紹了一下 RDMA 的特性與價值，想要瞭解更多關於 RDMA 的可以參考[這篇文章](http://hwchiu.com/rdma-introduction-i.html)。
+先大概介紹了一下 RDMA 的特性與價值，想要瞭解更多關於 RDMA 的可以參考[這篇文章](https://blog.hwchiu.com/rdma-introduction-i.html)。
 
 <!--more-->
 

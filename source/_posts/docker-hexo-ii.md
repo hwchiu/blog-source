@@ -12,7 +12,7 @@ keywords: Docker,Hexo,System,Container
 
 
 # Introduction
-這篇延續上一篇[Docker image for Hexo (一)](http://hwchiu.com/docker-build-image.html)，要使用上次的概念來打造一個屬於我自己的 **hexo docker image**，至於這邊為什麼是說屬於我自己的？
+這篇延續上一篇[Docker image for Hexo (一)](https://blog.hwchiu.com/docker-build-image.html)，要使用上次的概念來打造一個屬於我自己的 **hexo docker image**，至於這邊為什麼是說屬於我自己的？
 目前網路上其實也有不少關於 **hexo** 相關的 docker image，在使用上大致上可以分成兩類
 - 將 **docker image** 當成一次性的使用，可能提供了 **setup local server** 或者是 **deploy to git** 之類的服務
     - 在這種架構下，通常都是把整個 blog 的 source 放在外面的 **host** 上，再透過 **docker run** 的時候，將這些檔案透過 **volume**的方式掛載到 **container** 內，然後 **container** 內就使用已經安裝好的 **hexo** 環境幫你產生一次性的 **generate**, **deploy** 之類的指令。
