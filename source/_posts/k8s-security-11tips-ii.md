@@ -43,10 +43,10 @@ description:
 
 #### Linux Capability
 [Linux Capability](http://man7.org/linux/man-pages/man7/capabilities.7.html) 是針對 Thread 為單位的權限控管，部分跟系統底層的操作都需要特定的 `capability` 才能夠操作，譬如擁有 `NET_ADMIN` 能力的則可以透過相關指令去修改系統上的網路設定(Routing/Interface), 而擁有 `NET_RAW` 的則有能力可以去聽取 `Raw Socket` 的封包。
-在 `Kubernetes` 內也可以透拓 `SecurityContext` 對每個 `Container` 去進行相關的權限設定.
+在 `Kubernetes` 內也可以透過 `SecurityContext` 對每個 `Container` 去進行相關的權限設定.
 類似用法如下
 ```yml
-pods/security/security-context-4.yaml  
+pods/security/security-context-4.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -62,7 +62,7 @@ spec:
 ```
 
 #### AppArmor
-[AppArmor](https://kubernetes.io/docs/tutorials/clusters/apparmor/) 則是一種已 `Process` 程序為單位去限制其存取檔案及操作的一種機制。
+[AppArmor](https://kubernetes.io/docs/tutorials/clusters/apparmor/) 則是一種基於 `Process` 程序為單位去限制其存取檔案及操作的一種機制。
 針對每個 `Process` 可以去描述只能存取哪些檔案，藉此降低該程序被攻擊時所造成的傷害.
 
 對於 `Kubernetes`來說，自從 `1.4.0` 開始就有支援 `AppArmor` 相關的功能，可以事先在每個節點上安裝 `AppArmor` 並且透過 `Profile` 的方式去設定 `AppArmor` 的權限，然後每個 `Pod` 透過 `Annotation` 的方式去掛載特定的 `AppArmor` 來限制該容器的權限。
