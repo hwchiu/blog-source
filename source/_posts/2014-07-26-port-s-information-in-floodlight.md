@@ -1,16 +1,17 @@
 ---
 layout: post
-title: 'Ports information in Floodlight'
-date: 2014-07-26 09:29
+title: Ports information in Floodlight
+date: '2014-07-26 09:29'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Floodlight
-	- Network
-	- Java
-	- SourceCode
-keywords: SDN,Controller,Floodlight
+  - SDN
+  - Openflow
+  - Floodlight
+  - Network
+  - Java
+  - SourceCode
+keywords: 'SDN,Controller,Floodlight'
+abbrlink: 25937
 ---
 Question
 --------

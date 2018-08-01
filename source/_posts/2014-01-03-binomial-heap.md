@@ -1,12 +1,13 @@
 ---
 layout: post
-title: 'Binomial Heap'
-date: 2014-01-03 12:56
+title: Binomial Heap
+date: '2014-01-03 12:56'
 comments: true
 tags:
-	- SDN
-	- Network
-	- OpenvSwitch
+  - SDN
+  - Network
+  - OpenvSwitch
+abbrlink: 3965
 ---
 **Binomial Heap**是由一群 **Binomail Tree**所組成的
 **Binomial Tree(BT)**含有下列特性

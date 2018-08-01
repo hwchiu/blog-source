@@ -1,12 +1,13 @@
 ---
 title: ceph-networking-async-event
-keywords: Network,Ceph,Scale-Out,SDS,Async
-date: 2017-05-17 10:18:54
+keywords: 'Network,Ceph,Scale-Out,SDS,Async'
 tags:
-	- System
-	- SourceCode
-	- Ceph
-	- Networking
+  - System
+  - SourceCode
+  - Ceph
+  - Networking
+abbrlink: 29117
+date: 2017-05-17 10:18:54
 ---
 
 ### Introduction

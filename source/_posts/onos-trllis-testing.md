@@ -1,15 +1,16 @@
 ---
 title: ONOS Trellis Testing
 keywords: 'SDN,Network,Linux,Ubuntu,ONF,ONOS,Trellis,Mininet'
-date: 2017-12-11 14:14:56
 tags:
-	- SDN
-	- Network
-	- ONF
-	- ONOS
-	- Trellis
-	- Ubuntu
-	- Mininet
+  - SDN
+  - Network
+  - ONF
+  - ONOS
+  - Trellis
+  - Ubuntu
+  - Mininet
+abbrlink: 57907
+date: 2017-12-11 14:14:56
 description:
 ---
 CORD-Trellis Example

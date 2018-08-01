@@ -1,15 +1,16 @@
 ---
 layout: post
-title: 'Floodlight-modules-dependency'
-date: 2013-06-30 21:21
+title: Floodlight-modules-dependency
+date: '2013-06-30 21:21'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Network
-	- Java
-	- SourceCode
-keywords: SDN,Controller,Floodlight
+  - SDN
+  - Openflow
+  - Network
+  - Java
+  - SourceCode
+keywords: 'SDN,Controller,Floodlight'
+abbrlink: 9256
 ---
 在floodlight這個openflow controller中，對於module之間的執行順序是如何決定的，這部分很重要
 

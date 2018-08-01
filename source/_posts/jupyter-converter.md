@@ -1,11 +1,12 @@
 ---
 title: Translate jupyter notebook to python script
 keywords: 'Python,Jupyter'
-date: 2017-12-25 12:50:29
 tags:
-	- Python
-	- Jupyter
-	- SourceCode
+  - Python
+  - Jupyter
+  - SourceCode
+abbrlink: 5473
+date: 2017-12-25 12:50:29
 description:
 ---
 

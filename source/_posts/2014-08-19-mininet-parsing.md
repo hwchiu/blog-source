@@ -1,15 +1,16 @@
 ---
 layout: post
-title: 'Mininet 運作原理'
-date: 2014-08-19 12:54
+title: Mininet 運作原理
+date: '2014-08-19 12:54'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Mininet
-	- Network
-	- SourceCode
-keywords: SDN,Mininet,Network,Openflow
+  - SDN
+  - Openflow
+  - Mininet
+  - Network
+  - SourceCode
+keywords: 'SDN,Mininet,Network,Openflow'
+abbrlink: 5831
 ---
 Introduction
 ------------

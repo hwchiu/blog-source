@@ -1,13 +1,14 @@
 ---
 title: RDMA Introduction (一)
 keywords: 'RDMA,Network,Linux,Ceph,DRBD'
-date: 2017-07-12 03:56:02
 tags:
-	- RDMA
-	- Ceph
-	- DRBD
-	- Netowrk
-	- Linux
+  - RDMA
+  - Ceph
+  - DRBD
+  - Netowrk
+  - Linux
+abbrlink: 26225
+date: 2017-07-12 03:56:02
 description:
 ---
 

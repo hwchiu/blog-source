@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'Extend freebsd-ufs system'
-date: 2013-10-05 09:07
+title: Extend freebsd-ufs system
+date: '2013-10-05 09:07'
 comments: true
 tags:
-	- System
-	- FreeBSD
+  - System
+  - FreeBSD
+abbrlink: 58332
 ---
 假設你今天在VM上安裝FreeBSD，然後因為硬碟空間不夠，變透過VM的設定去擴充硬碟空間
 那使用 `gpart show`你會得到下列資訊 

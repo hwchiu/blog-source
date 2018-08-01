@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'Adapter Pattern'
-date: 2013-11-24 03:53
+title: Adapter Pattern
+date: '2013-11-24 03:53'
 comments: true
 tags:
-	- DesignPattern
+  - DesignPattern
+abbrlink: 62386
 ---
 ##Introduction##
 

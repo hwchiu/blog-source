@@ -1,11 +1,12 @@
 ---
 title: How to download http file in Android
 keywords: 'Android, Java, System'
-date: 2017-09-12 08:35:38
 tags:
-	- Android
-	- Java
-	- System
+  - Android
+  - Java
+  - System
+abbrlink: 24263
+date: 2017-09-12 08:35:38
 description:
 ---
 

@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'xml初體驗'
-date: 2013-03-30 12:43
+title: xml初體驗
+date: '2013-03-30 12:43'
 comments: true
 tags:
-	- C#
+  - 'C#'
+abbrlink: 3300
 ---
 
 雖然現在已經有JSON的出現，更輕量級的資料表達方式

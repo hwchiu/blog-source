@@ -1,12 +1,13 @@
 ---
-title: "[論文導讀] Maglev: A Fast and Reliable Software Network Load Balancer"
+title: '[論文導讀] Maglev: A Fast and Reliable Software Network Load Balancer'
 keywords: 'SDN,Network,Linux,Ubuntu'
-date: 2017-08-29 11:36:49
 tags:
-	- Paper
-	- Network
-	- Linux
-	- Kernel
+  - Paper
+  - Network
+  - Linux
+  - Kernel
+abbrlink: 59612
+date: 2017-08-29 11:36:49
 description:
 ---
 

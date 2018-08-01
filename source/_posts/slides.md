@@ -1,10 +1,11 @@
 ---
 title: Record of Personal Presentation
 keywords: 'Presentation,Speech,Kubernetes,SDN'
-date: 2018-07-22 12:10:45
 tags:
-	- Slides
-	- Speech
+  - Slides
+  - Speech
+abbrlink: 22353
+date: 2018-07-22 12:10:45
 description:
 ---
 

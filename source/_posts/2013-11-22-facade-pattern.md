@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'Facade Pattern'
-date: 2013-11-22 15:05
+title: Facade Pattern
+date: '2013-11-22 15:05'
 comments: true
 tags:
-	- DesignPattern
+  - DesignPattern
+abbrlink: 9003
 ---
 ##Introduction##
 

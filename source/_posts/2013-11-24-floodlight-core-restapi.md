@@ -1,15 +1,16 @@
 ---
 layout: post
-title: 'Floodlight Core RestAPI - part1'
-date: 2013-11-24 05:58
+title: Floodlight Core RestAPI - part1
+date: '2013-11-24 05:58'
 comments: true
 tags:
-	- SDN
-	- Floodlight
-	- Java
-	- Network
-	- SourceCode
-keywords: SDN,Controller,Floodlight
+  - SDN
+  - Floodlight
+  - Java
+  - Network
+  - SourceCode
+keywords: 'SDN,Controller,Floodlight'
+abbrlink: 51608
 ---
 Floodlight Openflow Controller 預設就有Rest Server 並且提供對應的Rest API供使用者呼叫使用
 

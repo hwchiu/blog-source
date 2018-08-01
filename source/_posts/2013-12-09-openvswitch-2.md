@@ -1,14 +1,15 @@
 ---
 layout: post
-title: 'OpenvSwitch - 2'
-date: 2013-12-09 10:03
+title: OpenvSwitch - 2
+date: '2013-12-09 10:03'
 comments: true
 tags:
-	- SDN
-	- Network
-	- OpenvSwitch
-	- SourceCode
-keywords: SDN,OpenvSwitch,OVS,Kernel
+  - SDN
+  - Network
+  - OpenvSwitch
+  - SourceCode
+keywords: 'SDN,OpenvSwitch,OVS,Kernel'
+abbrlink: 16391
 ---
 ovs-vsctl add-port br eth1
 (netlink)

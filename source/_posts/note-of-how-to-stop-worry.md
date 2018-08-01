@@ -1,10 +1,11 @@
 ---
 title: Note of How to Stop Worrying and Start Living
 keywords: 'Worry,Living,Book,Read,CARNEGIE'
-date: 2017-06-19 01:43:32
 tags:
-	- Reading
-	- Life
+  - Reading
+  - Life
+abbrlink: 55866
+date: 2017-06-19 01:43:32
 ---
 
 This page is used to record tips mentioned in[How to Stop Worrying and Start Living](https://www.amazon.com/How-Stop-Worrying-Start-Living/dp/0671733354)

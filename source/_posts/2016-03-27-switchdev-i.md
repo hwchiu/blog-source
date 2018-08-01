@@ -1,14 +1,15 @@
 ---
 layout: post
-title: 'Switchdev I'
-date: 2016-03-27 15:25
+title: Switchdev I
+date: '2016-03-27 15:25'
 comments: true
 tags:
-	- System
-	- Kernel
-	- Switchdev
-	- Network
-keywords: Linux,Kernel,Network,SwitchDev,HardwareSwitch
+  - System
+  - Kernel
+  - Switchdev
+  - Network
+keywords: 'Linux,Kernel,Network,SwitchDev,HardwareSwitch'
+abbrlink: 14196
 ---
 Introduction
 ------------

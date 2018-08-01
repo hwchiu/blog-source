@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'Strategy Pattern'
-date: 2013-11-29 13:15
+title: Strategy Pattern
+date: '2013-11-29 13:15'
 comments: true
 tags:
-	- DesignPattern
+  - DesignPattern
+abbrlink: 63071
 ---
 ##Introduction##
 

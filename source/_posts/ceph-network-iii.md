@@ -1,14 +1,15 @@
 ---
 title: Ceph Network Architecture 研究(三)
-date: 2017-05-25 10:15:24
 tags:
-	- Ceph
-	- Network
-	- SOS
-	- ScaleOut
-	- SDS
-	- SourceCode
-keywords: Ceph,Network,SourceCode,SDS,SOS
+  - Ceph
+  - Network
+  - SOS
+  - ScaleOut
+  - SDS
+  - SourceCode
+keywords: 'Ceph,Network,SourceCode,SDS,SOS'
+abbrlink: 25950
+date: 2017-05-25 10:15:24
 ---
 
 # Introduction

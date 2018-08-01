@@ -1,12 +1,13 @@
 ---
 layout: post
 title: 'openflow #1'
-date: 2013-04-30 21:10
+date: '2013-04-30 21:10'
 comments: true
 tags:
-	- SDN
-	- Openflow
-keywords: SDN,Protocol,Openflow,Network,SoftwareDefinedNetwork
+  - SDN
+  - Openflow
+keywords: 'SDN,Protocol,Openflow,Network,SoftwareDefinedNetwork'
+abbrlink: 12741
 ---
 
 

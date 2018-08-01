@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'SA - Shell Script(2)'
-date: 2013-11-30 17:02
+title: SA - Shell Script(2)
+date: '2013-11-30 17:02'
 comments: true
 tags:
-	- System
-	- ShellScript
+  - System
+  - ShellScript
+abbrlink: 61795
 ---
 作業二的部分是要寫一個script,真對參數變化然後使用gunplot去進行繪圖
 

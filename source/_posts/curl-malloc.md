@@ -1,8 +1,9 @@
 ---
 title: curl with fewer malloc
-date: 2017-05-05 18:22:03
 tags:
-	- System
+  - System
+abbrlink: 20597
+date: 2017-05-05 18:22:03
 ---
 不久前有一篇文章[https://daniel.haxx.se/blog/2017/04/22/fewer-mallocs-in-curl/](https://daniel.haxx.se/blog/2017/04/22/fewer-mallocs-in-curl/)指出， curl 開發者嘗試將 malloc 呼叫的次數減少，結果對整體的影響帶來的顯著的提升
 

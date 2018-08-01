@@ -1,13 +1,14 @@
 ---
 layout: post
-title: 'OpenvSwitch - overview'
-date: 2013-12-17 15:13
+title: OpenvSwitch - overview
+date: '2013-12-17 15:13'
 comments: true
 tags:
-	- SDN
-	- Network
-	- OpenvSwitch
-keywords: SDN,OpenvSwitch,OVS,Kernel
+  - SDN
+  - Network
+  - OpenvSwitch
+keywords: 'SDN,OpenvSwitch,OVS,Kernel'
+abbrlink: 48699
 ---
 This article show what the system do when we install the OpenvSwitch
 

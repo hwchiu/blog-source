@@ -1,14 +1,15 @@
 ---
 title: LXR Server With Multiple Projects
-date: 2017-05-08 17:38:04
 tags:
-	- System
-	- LXR
-	- Ubuntu
-	- DRBD
-	- Ceph
-	- SourceCode
-keywords: LXR,lxr,Ubuntu,Linux,System,SourceCode
+  - System
+  - LXR
+  - Ubuntu
+  - DRBD
+  - Ceph
+  - SourceCode
+keywords: 'LXR,lxr,Ubuntu,Linux,System,SourceCode'
+abbrlink: 53585
+date: 2017-05-08 17:38:04
 ---
 
 Install LXR on Ubuntu 16.04

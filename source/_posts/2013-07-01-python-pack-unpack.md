@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'Python-pack_unpack'
-date: 2013-07-01 13:06
+title: Python-pack_unpack
+date: '2013-07-01 13:06'
 comments: true
 tags:
-	- Python
+  - Python
+abbrlink: 51029
 ---
 pack & unpack
 

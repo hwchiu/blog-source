@@ -1,15 +1,16 @@
 ---
 layout: post
-title: 'FloodlightModule-Forwarding'
-date: 2013-08-06 15:26
+title: FloodlightModule-Forwarding
+date: '2013-08-06 15:26'
 comments: true
 tags:
-	- Floodlight
-	- SDN
-	- Openflow
-	- Network
-	- SourceCode
-keywords: SDN,Controller,Floodlight
+  - Floodlight
+  - SDN
+  - Openflow
+  - Network
+  - SourceCode
+keywords: 'SDN,Controller,Floodlight'
+abbrlink: 16408
 ---
 Floodlight中，最基本用來轉送封包的module就是Forwarding Module,這邊稍為介紹一下心得:
 

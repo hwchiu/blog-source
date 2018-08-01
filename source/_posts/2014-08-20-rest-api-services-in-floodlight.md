@@ -1,16 +1,17 @@
 ---
 layout: post
-title: 'REST API services in Floodlight (Device)'
-date: 2014-08-20 17:13
+title: REST API services in Floodlight (Device)
+date: '2014-08-20 17:13'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Floodlight
-	- Java
-	- Network
-	- SourceCode
-keywords: SDN,Controller,Floodlight
+  - SDN
+  - Openflow
+  - Floodlight
+  - Java
+  - Network
+  - SourceCode
+keywords: 'SDN,Controller,Floodlight'
+abbrlink: 35544
 ---
 Introduction
 ---------

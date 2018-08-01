@@ -1,13 +1,14 @@
 ---
 layout: post
-title: 'OpenVSwitch - Basic Install'
-date: 2013-11-30 17:11
+title: OpenVSwitch - Basic Install
+date: '2013-11-30 17:11'
 comments: true
 tags:
-	- SDN
-	- Network
-	- OpenvSwitch
-keywords: SDN,OpenvSwitch,OVS,Kernel
+  - SDN
+  - Network
+  - OpenvSwitch
+keywords: 'SDN,OpenvSwitch,OVS,Kernel'
+abbrlink: 7298
 ---
 Environment
 -----------

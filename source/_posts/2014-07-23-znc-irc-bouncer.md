@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'ZNC IRC bouncer'
-date: 2014-07-23 02:22
+title: ZNC IRC bouncer
+date: '2014-07-23 02:22'
 comments: true
 tags:
-	- FreeBSD
-	- IRC
+  - FreeBSD
+  - IRC
+abbrlink: 58768
 ---
 Environment
 -----------

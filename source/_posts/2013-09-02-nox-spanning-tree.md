@@ -1,14 +1,15 @@
 ---
 layout: post
-title: 'Nox-Spanning_Tree'
-date: 2013-09-02 07:01
+title: Nox-Spanning_Tree
+date: '2013-09-02 07:01'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Network
-	- Nox
-	- Python
+  - SDN
+  - Openflow
+  - Network
+  - Nox
+  - Python
+abbrlink: 37403
 ---
 Spanning_tree 是nox的一個module.
 

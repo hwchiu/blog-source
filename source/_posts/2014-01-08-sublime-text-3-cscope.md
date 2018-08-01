@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'Sublime Text 3 + cscope (windows)'
-date: 2014-01-08 09:02
+title: Sublime Text 3 + cscope (windows)
+date: '2014-01-08 09:02'
 comments: true
 tags:
-	- System
-	- Windows
+  - System
+  - Windows
+abbrlink: 57703
 ---
 ##Install Package Control##
 - 按下 **CTRL+`**

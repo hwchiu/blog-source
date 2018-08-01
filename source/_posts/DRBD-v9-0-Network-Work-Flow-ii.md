@@ -1,12 +1,13 @@
 ---
 title: DRBD v9.0 Network Work Flow(ii)
-date: 2017-05-12 17:22:18
 tags:
-	- System
-	- DRBD
-	- Network
-	- SourceCode
-keywords: DRBD,DRBD9.0
+  - System
+  - DRBD
+  - Network
+  - SourceCode
+keywords: 'DRBD,DRBD9.0'
+abbrlink: 38521
+date: 2017-05-12 17:22:18
 ---
 Introduction
 ============

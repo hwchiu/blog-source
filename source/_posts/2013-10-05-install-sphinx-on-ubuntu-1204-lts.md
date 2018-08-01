@@ -1,12 +1,13 @@
 ---
 layout: post
-title: 'Install Sphinx on Ubuntu 12.04 LTS'
-date: 2013-10-05 09:01
+title: Install Sphinx on Ubuntu 12.04 LTS
+date: '2013-10-05 09:01'
 comments: true
 tags:
-	- System
-	- Ubuntu
-	- Sphinx
+  - System
+  - Ubuntu
+  - Sphinx
+abbrlink: 43454
 ---
 ##Sphinx##
 

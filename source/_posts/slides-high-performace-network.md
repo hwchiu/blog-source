@@ -1,16 +1,17 @@
 ---
 title: Slides - High Performance Network
 keywords: 'Network,Linux,Ubuntu,Kernel,DPDK,RDMA,Tensorflow'
-date: 2018-05-30 17:17:48
 tags:
-	- Network
-	- Kernel
-	- Linux
-	- DPDK
-	- RDMA
-	- Tensorflow
-	- Slides
-	- CNTUG
+  - Network
+  - Kernel
+  - Linux
+  - DPDK
+  - RDMA
+  - Tensorflow
+  - Slides
+  - CNTUG
+abbrlink: 47339
+date: 2018-05-30 17:17:48
 description:
 ---
 

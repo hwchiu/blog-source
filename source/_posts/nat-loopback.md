@@ -1,11 +1,12 @@
 ---
 title: NAT Lookback Introduction
 keywords: 'Network,Linux,Ubuntu'
-date: 2017-08-17 06:46:14
 tags:
-	- Linux
-	- Network
-	- Ubuntu
+  - Linux
+  - Network
+  - Ubuntu
+abbrlink: 26123
+date: 2017-08-17 06:46:14
 description:
 ---
 

@@ -1,12 +1,13 @@
 ---
 title: 使用 TravisCI 為你的 Kubernetes 應用程式打造自動化測試
 keywords: 'k8s,Kubernetes,GitHub,Ubuntu,CI/CD'
-date: 2018-07-21 08:49:11
 tags:
-	- Kubernetes
-	- CI/CD
-	- Ubuntu
-	- Linux
+  - Kubernetes
+  - CI/CD
+  - Ubuntu
+  - Linux
+abbrlink: 9763
+date: 2018-07-21 08:49:11
 description:
 ---
 

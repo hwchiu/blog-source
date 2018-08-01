@@ -1,14 +1,15 @@
 ---
 title: Ceph Network Architecture 研究(一)
-date: 2017-05-23 08:12:45
 tags:
-	- Ceph
-	- Network
-	- SOS
-	- ScaleOut
-	- SDS
-	- SourceCode
-keywords: Ceph,Network,SourceCode,SDS,SOS
+  - Ceph
+  - Network
+  - SOS
+  - ScaleOut
+  - SDS
+  - SourceCode
+keywords: 'Ceph,Network,SourceCode,SDS,SOS'
+abbrlink: 13656
+date: 2017-05-23 08:12:45
 ---
 
 此篇文章主要研究目前很熱門的 **scale out storage** 軟體 **ceph** 的網路架構。

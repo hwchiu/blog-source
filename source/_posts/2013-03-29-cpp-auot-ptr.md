@@ -1,10 +1,11 @@
 ---
 layout: post
-title: '淺談auto_ptr'
-date: 2013-03-29 14:18
+title: 淺談auto_ptr
+date: '2013-03-29 14:18'
 comments: true
 tags:
-   - C
+  - C
+abbrlink: 12492
 ---
 
 

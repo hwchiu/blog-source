@@ -1,10 +1,11 @@
 ---
 layout: post
 title: 'MSN LOG解析以C#'
-date: 2013-04-21 20:11
+date: '2013-04-21 20:11'
 comments: true
 tags:
-	- C#
+  - 'C#'
+abbrlink: 28275
 ---
 
 

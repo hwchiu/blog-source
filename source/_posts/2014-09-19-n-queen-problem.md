@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'N-Queen problem'
-date: 2014-09-19 09:01
+title: N-Queen problem
+date: '2014-09-19 09:01'
 comments: true
 tags:
-	- Algorithm
+  - Algorithm
+abbrlink: 42732
 ---
 在成功嶺新訓得十六天，為了不讓自己的腦袋沒有運轉，上課的時候我就到處找東西想，腦中第一個想到可以動腦的題目就是Ｎ皇后
 

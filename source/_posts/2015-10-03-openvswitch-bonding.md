@@ -1,15 +1,16 @@
 ---
 layout: post
-title: 'OpenvSwitch Bonding'
-date: 2015-10-03 13:32
+title: OpenvSwitch Bonding
+date: '2015-10-03 13:32'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- OpenvSwitch
-	- Network
-	- Bonding
-keywords: SDN,OpenvSwitch,OVS,Kernel
+  - SDN
+  - Openflow
+  - OpenvSwitch
+  - Network
+  - Bonding
+keywords: 'SDN,OpenvSwitch,OVS,Kernel'
+abbrlink: 13027
 ---
 Introduction
 ------------

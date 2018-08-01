@@ -1,14 +1,15 @@
 ---
 layout: post
-title: 'Mininet with different network subnet'
-date: 2014-08-23 14:17
+title: Mininet with different network subnet
+date: '2014-08-23 14:17'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Mininet
-	- Network
-keywords: SDN,Mininet,Network
+  - SDN
+  - Openflow
+  - Mininet
+  - Network
+keywords: 'SDN,Mininet,Network'
+abbrlink: 61774
 ---
 Introduction
 ------------

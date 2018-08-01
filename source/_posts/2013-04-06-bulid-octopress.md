@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'Build own octopress'
-date: 2013-04-06 13:00
+title: Build own octopress
+date: '2013-04-06 13:00'
 comments: true
 tags:
-	- System
+  - System
+abbrlink: 48550
 ---
 
 

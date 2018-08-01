@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'Anki 使用感想'
-date: 2017-03-01 04:34
+title: Anki 使用感想
+date: '2017-03-01 04:34'
 comments: true
 tags:
-	- System
-	- Anki
+  - System
+  - Anki
+abbrlink: 35103
 ---
 還記得以前在工三讀書時，常常看到 Chun Norris 坐在我前面，然後畫面上是一張一張的卡片在不停地翻動，每張卡片上面都標記者一個日文單字， 看他快速地翻閱這些卡片，感覺就是在背頌單字，那時候也就沒有去想太多了。
 

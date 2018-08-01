@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'Install News server on FreeBSD 9.1R'
-date: 2013-10-05 09:02
+title: Install News server on FreeBSD 9.1R
+date: '2013-10-05 09:02'
 comments: true
 tags:
-	- System
-	- FreeBSD
+  - System
+  - FreeBSD
+abbrlink: 65511
 ---
 這邊整理一下安裝csnews2時遇到的一些問題，並且筆記一些操作
 

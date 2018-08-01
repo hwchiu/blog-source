@@ -1,14 +1,15 @@
 ---
 title: Slides - Kubernetes with private docker registry
 keywords: 'Linux,Ubuntu,Kubernetes,Docker,Registry'
-date: 2018-05-30 16:56:00
 tags:
-	- Kubernetes
-	- Linux
-	- Docker
-	- Registry
-	- Slides
-	- CNTUG
+  - Kubernetes
+  - Linux
+  - Docker
+  - Registry
+  - Slides
+  - CNTUG
+abbrlink: 902
+date: 2018-05-30 16:56:00
 description:
 ---
 

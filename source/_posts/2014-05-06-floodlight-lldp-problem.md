@@ -1,14 +1,15 @@
 ---
 layout: post
-title: 'Floodlight LLDP problem'
-date: 2014-05-06 05:25
+title: Floodlight LLDP problem
+date: '2014-05-06 05:25'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Jave
-	- Floodlight
-keywords: SDN,Controller,Floodlight
+  - SDN
+  - Openflow
+  - Jave
+  - Floodlight
+keywords: 'SDN,Controller,Floodlight'
+abbrlink: 29799
 ---
 問題來源:
 [Floodlight LLDP problem](https://groups.google.com/a/openflowhub.org/forum/#!topic/floodlight-dev/15mTiLL0__A)

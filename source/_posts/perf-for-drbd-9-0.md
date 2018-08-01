@@ -1,14 +1,15 @@
 ---
 title: perf_for_drbd_9.0
-date: 2017-05-19 17:57:24
 tags:
-	- DRBD
-	- Perf
-	- System
-	- Linux
-	- Kernel
-	- Fio
-keywords: DRBD,Linux,System,Kernel,Fio
+  - DRBD
+  - Perf
+  - System
+  - Linux
+  - Kernel
+  - Fio
+keywords: 'DRBD,Linux,System,Kernel,Fio'
+abbrlink: 51237
+date: 2017-05-19 17:57:24
 ---
 
 本文主要嘗試分析 drbd(9.0) 於 **kernel**運行時的效能分析，希望藉由 **perf** 這個 tool 來分析整個程式運行的狀況，藉此觀察其運行時各 function 的比例。

@@ -1,9 +1,10 @@
 ---
 title: Reading
-date: 2017-05-06 15:42:19
 tags:
-	- Reading
-	- Life
+  - Reading
+  - Life
+abbrlink: 24165
+date: 2017-05-06 15:42:19
 ---
 
 - [The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win](https://www.amazon.com/Phoenix-Project-DevOps-Helping-Business/dp/0988262592)

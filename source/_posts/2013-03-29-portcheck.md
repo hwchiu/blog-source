@@ -1,14 +1,15 @@
 ---
 layout: post
-title: '檢查port使用情況'
-date: 2013-03-29 12:33
+title: 檢查port使用情況
+date: '2013-03-29 12:33'
 comments: true
 tags:
-	- System
-	- Network
-	- FreeBSD
-	- Windows
-	- Linux
+  - System
+  - Network
+  - FreeBSD
+  - Windows
+  - Linux
+abbrlink: 33969
 ---
 
 有時候根據應用需求，會需要針對去檢查目前系統上有哪些port正在被使用

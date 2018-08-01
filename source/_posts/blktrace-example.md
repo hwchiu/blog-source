@@ -1,11 +1,12 @@
 ---
-title: Blktrace, Blkparse and Fio example
-keywords: Linux,Kernel,System,blktrace,blkparse,fio
-date: 2017-06-02 03:54:37
+title: 'Blktrace, Blkparse and Fio example'
+keywords: 'Linux,Kernel,System,blktrace,blkparse,fio'
 tags:
-	- Linux
-	- Kernel
-	- System
+  - Linux
+  - Kernel
+  - System
+abbrlink: 24047
+date: 2017-06-02 03:54:37
 ---
 
 **blktrace** is a block layer IO tracing mechanism which provide detailed information about request queue operations up to user space.

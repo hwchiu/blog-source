@@ -1,12 +1,13 @@
 ---
 title: Docker image for Hexo (一)
-date: 2017-05-24 09:46:35
 tags:
-	- Docker
-	- Container
-	- Hexo
-	- System
-keywords: Docker,Hexo,System,Container
+  - Docker
+  - Container
+  - Hexo
+  - System
+keywords: 'Docker,Hexo,System,Container'
+abbrlink: 31413
+date: 2017-05-24 09:46:35
 ---
 
 本 blog 目前是採用 **hexo** 作為主要開發，然而 **hexo** 我覺得最大的缺點就是屬於靜態網頁類型，所以只要每次換一個開發裝置，譬如桌電,筆電等，就必須要將整個環境重新建置。

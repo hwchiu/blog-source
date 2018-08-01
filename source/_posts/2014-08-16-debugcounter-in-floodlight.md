@@ -1,16 +1,17 @@
 ---
 layout: post
-title: 'DebugCounter in Floodlight'
-date: 2014-08-16 02:10
+title: DebugCounter in Floodlight
+date: '2014-08-16 02:10'
 comments: true
 tags:
-	- SDN
-	- Openflow
-	- Floodlight
-	- Java
-	- Network
-	- SourceCode
-keywords: SDN,Controller,Floodlight
+  - SDN
+  - Openflow
+  - Floodlight
+  - Java
+  - Network
+  - SourceCode
+keywords: 'SDN,Controller,Floodlight'
+abbrlink: 4612
 ---
 Introduction
 -------------

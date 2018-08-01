@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'Python-translate'
-date: 2013-06-13 21:30
+title: Python-translate
+date: '2013-06-13 21:30'
 comments: true
 tags:
-	- Python
+  - Python
+abbrlink: 46758
 ---
 
 Python中有個很強大的字串轉換工具 maketrans 跟 translate

@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'SA - Shell Script  (1)'
-date: 2013-11-24 12:39
+title: SA - Shell Script  (1)
+date: '2013-11-24 12:39'
 comments: true
 tags:
-	- System
-	- ShellScript
+  - System
+  - ShellScript
+abbrlink: 17288
 ---
 ###SA Homework###
 

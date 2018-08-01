@@ -1,12 +1,13 @@
 ---
 layout: post
-title: 'TCP使用sendto'
-date: 2013-03-31 00:13
+title: TCP使用sendto
+date: '2013-03-31 00:13'
 comments: true
 tags:
-	- System
-	- C
-	- Network
+  - System
+  - C
+  - Network
+abbrlink: 9548
 ---
 
 

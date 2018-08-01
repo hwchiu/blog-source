@@ -1,11 +1,12 @@
 ---
 title: Install DRBD v9.0 on Ubuntu 16.04
-date: 2017-05-18 13:48:48
 tags:
-	- System
-	- Ubuntu
-	- DRBD
-keywords: DRBD,Ubuntu,Linux,System
+  - System
+  - Ubuntu
+  - DRBD
+keywords: 'DRBD,Ubuntu,Linux,System'
+abbrlink: 19938
+date: 2017-05-18 13:48:48
 ---
 
 ### Introduction

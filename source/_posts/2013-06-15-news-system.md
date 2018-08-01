@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 'news-system'
-date: 2013-06-15 09:25
+title: news-system
+date: '2013-06-15 09:25'
 comments: true
 tags:
-	- System
-	- FreeBSD
+  - System
+  - FreeBSD
+abbrlink: 27654
 ---
 
 用來紀錄2013/06/12日 news系統發生的問題
