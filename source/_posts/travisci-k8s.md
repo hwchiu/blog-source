@@ -8,7 +8,7 @@ tags:
   - Linux
 abbrlink: 9763
 date: 2018-07-21 08:49:11
-description:
+description: use the travisCI to testing your kubernetes application
 ---
 
 
