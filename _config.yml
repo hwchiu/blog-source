@@ -4,15 +4,15 @@
 
 # Site
 title: Hwchiu Learning Note
-subtitle: kubernetes, k8s, sdn
-description:
+subtitle: kubernetes, sdn, linux
+description: aarticle about kubernetes, SDN and Linux
 author: Hwchiu
 language: en
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://blog.hwchiu.com
+url: https://www.hwchiu.com
 root: /
 permalink: :title.html
 #permalink: archives/:abbrlink.html

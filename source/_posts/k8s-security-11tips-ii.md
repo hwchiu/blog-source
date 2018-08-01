@@ -8,6 +8,7 @@ tags:
 abbrlink: 64734
 date: 2018-07-29 17:51:49
 description:
+  - kubernetes
 ---
 
 本篇文章的原文為 [11 Ways Not to Get Hacked](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/#11-run-a-service-mesh)
