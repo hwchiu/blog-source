@@ -10,4 +10,4 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://blog.hwchiu.com/sitemap.xml
+Sitemap: https://www.hwchiu.com/sitemap.xml

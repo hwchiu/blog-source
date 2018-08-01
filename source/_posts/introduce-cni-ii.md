@@ -16,7 +16,7 @@ description:
 In this post, I will try to introduce the concept of Container Network Interface (CNI), including why we need this, how it works and what does it do.
 
 If you have not familiar with what is `linux network namespace` and how `docker` handles the network for its containers.
-You should read the [Introduction to Container Network Interface(I)](https://blog.hwchiu.com/introduce-cni-i.html#more) to learn those concepts and that will be helpful for this tutorial.
+You should read the [Introduction to Container Network Interface(I)](https://www.hwchiu.com/introduce-cni-i.html#more) to learn those concepts and that will be helpful for this tutorial.
 
 <!--more-->
 

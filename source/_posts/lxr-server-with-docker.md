@@ -12,7 +12,7 @@ date: 2017-06-07 01:54:30
 ---
 
 
-之前曾經發過一篇文章[LXR Server With Multiple Projects](https://blog.hwchiu.com/lxr-setup-with-multiple-projects.html)，主要介紹如何在 **Ubuntu** 上面安裝 **lxr** 並且支援多個 **projects**。由於整個 **lxr** 的安裝過程複雜，除了本體外還牽扯到不少第三方程式套件，如 **perl**, **database**, **www server**，且大部份都是安裝完畢後就再也不會更動，唯一的更動應該就是更換要被 indexing 的 project而已。
+之前曾經發過一篇文章[LXR Server With Multiple Projects](https://www.hwchiu.com/lxr-setup-with-multiple-projects.html)，主要介紹如何在 **Ubuntu** 上面安裝 **lxr** 並且支援多個 **projects**。由於整個 **lxr** 的安裝過程複雜，除了本體外還牽扯到不少第三方程式套件，如 **perl**, **database**, **www server**，且大部份都是安裝完畢後就再也不會更動，唯一的更動應該就是更換要被 indexing 的 project而已。
 
 上述這種使用情境我覺得非常適合使用 **docker** 來建置一個 image， image 將所有相關的套件都全部安裝完畢，並且套用一個預設的設定檔當作基礎設定。
 

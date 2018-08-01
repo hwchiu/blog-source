@@ -18,8 +18,8 @@ description:
 In this post, I will show how to write your own CNI program.
 
 If you want to learn/review the concepts of the CNI, you can refer to my previous posts and you can find them here
-[Introduction to Container Network Interface(I)](https://blog.hwchiu.com/introduce-cni-ii.html#more)
-[Introduction to Container Network Interface(II)](https://blog.hwchiu.com/introduce-cni-i.html#more)
+[Introduction to Container Network Interface(I)](https://www.hwchiu.com/introduce-cni-ii.html#more)
+[Introduction to Container Network Interface(II)](https://www.hwchiu.com/introduce-cni-i.html#more)
 
 <!--more-->
 

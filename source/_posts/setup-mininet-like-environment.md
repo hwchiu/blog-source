@@ -12,7 +12,7 @@ date: 2017-06-23 03:03:19
 ---
 
 相信不少開始學習 SDN 的人一定都有聽過 [mininet](http://mininet.org/) 這套軟體，甚至大量使用過。
-之前於 [Mininet 運作原理](https://blog.hwchiu.com/2014-08-19-mininet-parsing.html) 有分析過 `mininet` 的原始碼，並瞭解其運作原理。
+之前於 [Mininet 運作原理](https://www.hwchiu.com/2014-08-19-mininet-parsing.html) 有分析過 `mininet` 的原始碼，並瞭解其運作原理。
 而今天這篇文章要講述的是如何透過 **ip** 指令配上 **OpenvSwitch** 在自己的系統上建造出一個類似 **mininet** 的環境。
 
 <!--more-->
