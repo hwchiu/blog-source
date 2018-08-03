@@ -2,6 +2,6 @@
 title: {{ title }}
 date: {{ date }}
 tags:
-keywords: SDN,Network,Linux,Ubuntu
+keywords: Kubernetes,Network,Linux,Ubuntu
 description:
 ---
