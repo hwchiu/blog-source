@@ -1,12 +1,12 @@
 ---
-title: [Kubernetes] DNS setting in your Pod
-keywords: 'Kubernetes,DNS,Linux'
-abbrlink: 36819
-date: 2018-08-03 10:52:35
+title: '[Kubernetes] DNS setting in your Pod'
+keywords: 'kubernetes,security,Linux,k8s,TLS'
 tags:
   - Kubernetes
   - Linux
   - DNS
+abbrlink: 36819
+date: 2018-08-03 10:52:35
 description:
 ---
 
