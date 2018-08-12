@@ -1,6 +1,6 @@
 ---
 title: '[Kubernetes] DNS Setting When DnsPolicy Is Default'
-keywords: 'Kubernetes,Network,Linux,Ubuntu'
+keywords: 'kubernetes,DNS,Linux,k8s'
 abbrlink: 48875
 date: 2018-08-12 04:31:52
 tags:
@@ -27,7 +27,10 @@ description:
 其中本篇是上篇，主軸在於介紹問題，並且透過實驗觀察結果進行歸納。
 之後會有下篇，比較硬派一點，直接透過觀察原始碼的方式來驗證本篇的觀察結果
 
-<!--more-->>
+下篇連結:
+[[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
+
+<!--more-->
 
 ## 環境版本
 - docker:
