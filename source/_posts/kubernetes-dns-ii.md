@@ -83,8 +83,6 @@ root@node-1:~$ kubectl -n kube-system exec  kube-dns-5466774c4f-r9k4w cat /etc/r
 
 首先觀察到，在所有的集群內，只要 `/etc/resolv.conf`  有資料的話，則 `dnsmasq` 的 `/etc/resolv.conf` 都會是一致的
 
-
-
 ![Imgur](https://i.imgur.com/h8cHkH2.png)
 
 但是接下來若將 `/etc/resolv.conf` 給清空，這時候不同集群表現出來的結果卻完全不同了。
