@@ -11,6 +11,15 @@ tags:
 description:
 ---
 
+此篇文章是 Kubernetes Pod-DNS 系列文章第二篇
+此系列文會從使用者的用法到一些問題的發掘，最後透過閱讀程式碼的方式去分析這些問題
+
+相關的文章連結如下
+- [[Kubernetes] DNS setting in your Pod](https://www.hwchiu.com/kubernetes-dns.html)
+- [[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
+
+##  正文
+
 在前篇文章
 [[Kubernetes] DNS setting in your Pod](https://www.hwchiu.com/kubernetes-dns.html) 中已經詳細介紹了如何針對 `Pod` 去設定自己想要的 `DNS` 規則。
 
@@ -26,9 +35,6 @@ description:
 針對這個問題接下來會分成兩篇文章來解釋
 其中本篇是上篇，主軸在於介紹問題，並且透過實驗觀察結果進行歸納。
 之後會有下篇，比較硬派一點，直接透過觀察原始碼的方式來驗證本篇的觀察結果
-
-下篇連結:
-[[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
 
 <!--more-->
 

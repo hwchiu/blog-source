@@ -9,6 +9,15 @@ abbrlink: 36819
 date: 2018-08-03 10:52:35
 description:
 ---
+此篇文章是 Kubernetes Pod-DNS 系列文章第一篇
+此系列文會從使用者的用法到一些問題的發掘，最後透過閱讀程式碼的方式去分析這些問題
+
+相關的文章連結如下
+- [[Kubernetes] DNS Setting with Dockerd](https://www.hwchiu.com/kubernetes-dns-ii.html)
+- [[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
+
+
+## 正文
 
 在`Kubernetes` 裡面看到 `DNS` 這個字眼，實際上可以想到非常多相關的元件與功能，
 譬如用來提供 `kubernetes` 集群內服務的 `kube-DNS`, 或是透過 `kubernetes service` 產生之獨一無二的 FQDN 名稱，最後就是本篇文章想要分享的一個元件， `Pod` 內的 `DNS` 設定。
@@ -407,9 +416,4 @@ options ndots:5
 - 可以提供使用節點網路但是同時又使用 `kube-dns` 提供的 `clusterIP` 作為其 `DNS` 的設定。
 
 ### DNSConfig
-
-## 延伸閱讀
-
-[[Kubernetes] DNS Setting with Dockerd](https://www.hwchiu.com/kubernetes-dns-ii.html)
-[[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
 `DNSConfig` 可以讓使用者直接輸入 `DNS` 相關的參數，該參數會擴充該 `Pod`原本的 `DNS` 設定檔案。
