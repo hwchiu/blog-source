@@ -75,3 +75,14 @@ This post is used to record all my presentations from 2017
 - K8S學程 : Kubernetes 容器網路完全剖析
 	- 2018.07.28(六) 09:30 - 17:00
 	- [廣宣學堂課程](https://broadmission.kktix.cc/events/446743e4-20421a-a8b2bf-f04436-copy-6)
+
+- Kubernetes 網路分析，搞懂所有網路功能以及 CNI 開發
+    - 2018.08.11(六) 10:00 - 16:00
+    - [COSCUP 2018 x openSUSE.Asia GNOME.Asia](https://2018.coscup.org/programs/kubernetes-cni/)
+    - [Slides](https://www.slideshare.net/hongweiqiu/overview-of-kubernetes-network-functions)
+
+- Linux iptables 的運作原理分析
+    - 2018.08.11(六) 10:00 - 16:00
+    - [COSCUP 2018 x openSUSE.Asia GNOME.Asia](https://2018.coscup.org/programs/linux-iptables/)
+    - [Slides](https://www.slideshare.net/hongweiqiu/understand-the-iptables-step-by-step-109650841)
+
