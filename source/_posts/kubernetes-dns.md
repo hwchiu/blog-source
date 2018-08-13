@@ -407,4 +407,9 @@ options ndots:5
 - 可以提供使用節點網路但是同時又使用 `kube-dns` 提供的 `clusterIP` 作為其 `DNS` 的設定。
 
 ### DNSConfig
+
+## 延伸閱讀
+
+[[Kubernetes] DNS Setting with Dockerd](https://www.hwchiu.com/kubernetes-dns-ii.html)
+[[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
 `DNSConfig` 可以讓使用者直接輸入 `DNS` 相關的參數，該參數會擴充該 `Pod`原本的 `DNS` 設定檔案。
