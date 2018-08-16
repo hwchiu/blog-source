@@ -65,7 +65,7 @@ In our previous example, the system will create two network namepsace when we ru
 Now, we will learn why we can use the `http://localhost:8080` to access the nginx container in the follwing tutorials.
 Besides, we will operates the network namespace and linux bridge to simulate what docker do when we create a docker container.
 
-#### Linux Bridge
+### Linux Bridge
 In the default behavior, the docker will create a linux bridge `docker0` when you install the docker.io/docker.ce into your system.
 and it will handle the network connectivity for every docker container (use the --net=bridge and it is docker default option) 
 You can use the following command to see the linux bridge after you install the docker package.
@@ -104,7 +104,7 @@ The default ip address of the `docker0` is `172.17.0.0/16` and it can be configu
 We won't discuss what is layer2 bridging here, the only thing we need to know is that docker will use this bridge to forward the packets between hosts and containers.
 ![](https://i.imgur.com/M3xBS32.png)
 
-#### Network Namespace
+### Network Namespace
 Now, what will happen when we create a docker container?
 ```
 $$ docker run --name some-nginx -d -p 8080:80 some-content-nginx
