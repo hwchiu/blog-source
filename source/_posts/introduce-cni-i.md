@@ -1,5 +1,5 @@
 ---
-title: Introduction to Container Network Interface(I)
+title: '[CNI] Bridge Network In Docker'
 keywords: 'Network,Linux,Ubuntu,Docker,Kernel,CNI'
 tags:
   - CNI
@@ -14,18 +14,22 @@ date: 2018-04-05 16:59:57
 description:
 ---
 
+I have write three posts about the CNI and you can found the other posts below
+[[CNI] Container Network Interface Introduction](https://www.hwchiu.com/introduce-cni-ii.html)
+[[CNI] Write A CNI Plugin By Golang](https://www.hwchiu.com/introduce-cni-iii.html)
+
+
 If you have any experience about setuping a kubernetes cluster before, you must notice that you need to choose one CNI in your kubernetes cluster, and there're many candidate that you can choose, including the `flannel`, `weave`, `calico` and so on.
 
 Most of the kubernetes users and operators don't know what is the different between those CNI plgins and the only thing they care is that the CNI can make the network works well.
 
 So, I will introduce the Container Network Interface (CNI) in the following articles.
-- First, I will try to introcude the docker and it will focus on how network works in the docker environment. Besides, I will also introduce the `Linux Network Namespace (ns)` and use the `Linux Network Namespace` as the example in the follwiing articles.
+- First, I will explain what is the bridge network in docekr and hot it works. Besides, I also introduce the `Linux Network Namespace (ns)` and use the `Linux Network Namespace` to create a simple environment.
 - Second, We have the basic knowhow about network namespace and we can start to learn what is CNI, why we need the CNI and how CNI works. we also use the simple CNI to demostrate how CNI works with network namespace.
-- Third, We have learned what is the CNI before, and we will start to implement our own CNI which is a simple CNI just like the bridge network (the default network of docker). This article will be a tutorial about how to write a CNI in `golang`
+- Third, We have learned what is the CNI before, and we will start to implement our own CNI which is a simple CNI just like the bridge network (the default network of docker). That article will be a tutorial about how to write a CNI in `golang`
 
 <!--more-->
-Introduction
-============
+## Introduction
 We all know that the docker is very easy to use and we can setup any server we want in one command `docker run`
 
 For example, I want to run a busybox, I can use the `docker run busybox` to run a busybox container in my environment.
@@ -57,7 +61,7 @@ So, when we run a docker container, the system will create a new network namespa
 In our previous example, the system will create two network namepsace when we run two nginx docker container and each container has its own `network stack`.
 
 
-### Implementation
+## Implementation
 Now, we will learn why we can use the `http://localhost:8080` to access the nginx container in the follwing tutorials.
 Besides, we will operates the network namespace and linux bridge to simulate what docker do when we create a docker container.
 
@@ -72,7 +76,7 @@ $ apt-get install bridge-utils
 ```
 
 Create our own linux bridge and assign a IP address to it.
-```
+```shell=
 $ brctl addbr br0
 $ ifconfig br0 up
 $ ifconfig br0 172.17.0.0 netmask 255.255.0.0
@@ -80,7 +84,7 @@ $ ifconfig br0 172.17.0.0 netmask 255.255.0.0
 
 If you have installed the docker package, you can see there's a interface `docker0` in the system and it's IP address is `172.17.0.0/16`. If that, you should change your `br0` IP address to other CIDR subnet.
 
-```
+```shell=
 $ brctl show
 bridge name     bridge id               STP enabled     interfaces
 docker0         8000.0242b8582904       no
@@ -194,7 +198,7 @@ It will also insert some rules into the `iptables` and those rules will do
 
 But if we don't need to access it from outside? we don't the iptables rules to do that. that why I mean it's a optional step.
 
-### Summary
+## Summary
 Accoding to the above example, we know that the docker network is based on the `linux network namespace`.
 
 What will happen when we run a `docker container`?

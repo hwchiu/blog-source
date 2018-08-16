@@ -1,5 +1,5 @@
 ---
-title: Introduction to Container Network Interface(III)
+title: '[CNI] Implement Your CNI In Golang'
 keywords: 'Network,Linux,Ubuntu,Docker,Kernel,CNI,Golang'
 tags:
   - CNI
@@ -15,11 +15,12 @@ date: 2018-06-16 08:34:18
 description:
 ---
 
-In this post, I will show how to write your own CNI program.
 
-If you want to learn/review the concepts of the CNI, you can refer to my previous posts and you can find them here
-[Introduction to Container Network Interface(I)](https://www.hwchiu.com/introduce-cni-ii.html#more)
-[Introduction to Container Network Interface(II)](https://www.hwchiu.com/introduce-cni-i.html#more)
+I have write three posts about the CNI and you can found the other posts below
+[[CNI] Bridge Network In Docker](https://www.hwchiu.com/introduce-cni-i.html)
+[[CNI] Container Network Interface Introduction](https://www.hwchiu.com/introduce-cni-ii.html)
+
+In this post, I will show how to write your own CNI program.
 
 <!--more-->
 
@@ -31,7 +32,7 @@ You just to follow the interface and your program can be used for every infrastr
 
 In this tutorial, I will use the `golang` to implement a simple CNI witch create a `Linux Bridge` in the host and connect the container and the host itself.
 
-I have create a github repo for this tutorial and you can find it on [here](HTTPS://github.com/hwchiu/CNI_Tutorial_2018)
+I have create a github repo for this tutorial and you can find it on [hwchiu CNI_Tutorial_2018](HTTPS://github.com/hwchiu/CNI_Tutorial_2018)
 
 
 Introduction
@@ -83,7 +84,7 @@ First, we need to provide two function for `ADD` and `DELETE` event which is use
 We use the framework provided by the The [ContainerNetworking/CNI](HTTPS://github.com/containernetworking/cni) and it will encapsulate
 
 
-```go
+```go=
 Package main
 
 Import (
@@ -107,7 +108,7 @@ func main() {
 
 In this framework, it encapsulates all information we need into a predefined type `skel.CmdArgs`
 
-```go
+```go=
 type CmdArgs struct {
     ContainerID string
     Netns string
@@ -151,7 +152,7 @@ Now, we will create a linux bridge for the container and the logical flow looks 
 
 Since the frametwork store the config content in the `CmdArgs` object as a `[]byte` form. we should create a `structure` to decode those `[]byte` data.
 
-```go
+```go=
 type SimpleBridge struct {
     BridgeName string `json:"bridgeName"`
     IP    string `json:"ip"`
@@ -159,7 +160,7 @@ type SimpleBridge struct {
 ```
 and decode the config content in the `CmdAdd` function.
 
-```go
+```go=
 func cmdAdd(args *skel.CmdArgs) error {
 	sb := SimpleBridge{}
 	if err := json.Unmarshal(args.StdinData, &sb); err != nil {
@@ -180,7 +181,7 @@ In the following example, we will do three things.
 2. Create the Bridge
 3. Setup the Linux Bridge.
 
-```go
+```go=
 	br := &netlink.Bridge{
 		LinkAttrs: netlink.LinkAttrs{
 			Name: sb.BridgeName,
@@ -204,7 +205,7 @@ In the following example, we will do three things.
 ```
 
 Now. The `CmdAdd` function should look like below.
-```go
+```go=
 func cmdAdd(args *skel.CmdArgs) error {
     sb := SimpleBridge{}
     if err := json.Unmarshal(args.StdinData, &sb); err != nil {
@@ -252,7 +253,7 @@ Fortunately, the `CNI` project has provided convenience function to handle the v
 
 First, we use the `netlink.LinkByName` method to lookup the `netlink` object.
 
-```go
+```go=
     l, err := netlink.LinkByName(sb.BridgeName)
     if err != nil {
         return fmt.Errorf("could not lookup %q: %v", sb.BridgeName, err)
@@ -260,7 +261,7 @@ First, we use the `netlink.LinkByName` method to lookup the `netlink` object.
 ```
 
 and the we need to make sure that object is `netlink.Bridge`, so we do the type casting.
-```go
+```go=
     newBr, ok := l.(*netlink.Bridge)
     if !ok {
         return fmt.Errorf("%q already exists but is not a bridge", sb.BridgeName)
@@ -271,7 +272,7 @@ Second, since the `CmdArgs` already provide the `network namespace ` path of the
 
 import `"github.com/containernetworking/plugins/pkg/ns"`
 
-```go
+```go=
 	netns, err := ns.GetNS(args.Netns)
 	if err != nil {
 		return err
@@ -284,7 +285,7 @@ The `do` function will switch the network namespace to `NetNS` object itself and
 
 See the following example to learn more about `do` function.
 
-```go
+```go=
 var handler = func(hostNS ns.NetNS) error {
     hostVeth, containerVeth, err := ip.SetupVeth(args.IfName, 1500, hostNS)   
 }
@@ -305,13 +306,13 @@ Which will result in that there will be a veth pair between the host's network n
 In order to store the information about that veth pair, we can use the `current.Interface{}` object to store the data.
 
 First, we need to import the library
-```go
+```go=
 import "github.com/containernetworking/cni/pkg/types/current"
 ```
 
 and then create a variable represent to host side network interface in the function handler.
 
-```go
+```go=
 hostIface := &current.Interface{}
 var handler = func(hostNs ns.Netns) error {
     hostVeth, _, err := ip.SetupVeth(args.IfName, 1500, hostNS) 
@@ -329,7 +330,7 @@ Now, we can get the interface name of veth pair in the host side by `hostIface.N
 1. Get the link object from the interface name by function call `netlink.LinkByName`
 2. Connect the link to bridge by function call `netlink.LinkSetMaster`
 
-```go
+```go=
 hostVeth, err := netlink.LinkByName(hostIface.Name)
 if err != nil {
     return err
@@ -346,7 +347,7 @@ We must make sure the OS won't switch the thread during the `namespace` operatio
 
 Use the function `runtime.LockOSThread()` in the golang predefined function `init()`.
 
-```go
+```go=
 func init() {
         // this ensures that main runs only on main thread (thread group leader).
         // since namespace ops (unshare, setns) are done for a single thread, we
@@ -387,7 +388,7 @@ We have successfully create a linux bridge and connect to the other network name
 In this step, we will setup the IP address into the target network namespace.
 To make the problem easy, we had set the target IP address in the config and we can get via the `sp.IP`
 
-```go
+```go=
 type SimpleBridge struct {
         BridgeName string `json:"bridgeName"`
         IP         string `json:"ip"`
@@ -400,7 +401,7 @@ So the workflow is
 2. Call the `nelink.AddrAdd` in the target network namespace.
 
 The parameter of `netlink.AddrAdd` is `netlink.Addr` and see its structure below.
-```go
+```go=
 type Addr struct {
         *net.IPNet
         Label       string
@@ -421,7 +422,7 @@ So, modify the previous handler to assign the IP address when we create a veth.
 
 Since the `net.IPNet` object get from the `net.ParseCIDR` is the `subnet`  not a `real IP` addrees, we should reassign the `IP` address to its IP field again. 
 
-```go
+```go=
 var handler = func(hostNS ns.NetNS) error {
     hostVeth, containerVeth, err := ip.SetupVeth(args.IfName, 1500, hostNS)
     if err != nil {
