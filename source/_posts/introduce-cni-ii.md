@@ -103,11 +103,12 @@ After we crete the `veth` pair and connect to the `network namespace`, we should
 For the IPAM (IP Adderss Management), we can get the information from the `StdinData` and calculate what IP address we should use in the CNI plugin.
 
 
-## Kubernetes
+Kubernetes
+==========
 
 Now, We will see how kubernetes use CNI to create a network function for Pods.
 
-### Configuration
+## Configuration
 In order to use the CNI, we need to config the `kubelet` to use the `CNI` method.
 There're three argurments we need to take care.
 1. cni-bin-dir: the directory of CNI binaries.
@@ -150,7 +151,7 @@ $cat /etc/cni/net.d/10-flannel.conf
 }
 ```
 
-### How To Use it.
+## How To Use it.
 When `kubelet` receives a request to create a Pod in the node.
 First, it will search the `cni-conf-dir` in the alphabet order and inspect it.
 
@@ -168,7 +169,7 @@ $cat /etc/cni/net.d/10-flannel.conf
 }
 ```
 
-### Pause Container.
+## Pause Container.
 Before `kuberlet` create the Pod, it will create a `pause` conatiner first.
 And follows the CNI steps to setup the network fot that `pause` container.(Assueme we use the network-plugin=cni)
 
