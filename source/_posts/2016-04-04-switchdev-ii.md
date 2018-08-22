@@ -1,28 +1,28 @@
 ---
-layout: post
-title: Switchdev II
+title: '[Switchdev] How Kernel Implement SwitchDev(i)'
 date: '2016-04-04 07:01'
-comments: true
 tags:
+  - Linux
   - System
   - Kernel
   - Switchdev
   - Network
 keywords: 'Linux,Kernel,Network,SwitchDev,HardwareSwitch'
 abbrlink: 53750
+description:
 ---
-Introduction
-------------  
+
+
+## Introduction
   此篇文章用來說明在當前 kernel 中, switchdev 相關的檔案有哪些，哪些是 switchdev 的核心，哪些是與原先的 linux kernel 整合，同時簡述一下各整合的用途為何。
 
 <!--more-->
 
 
-Architecture
-------------
+## Architecture
   switchdev 在 kernel 中的檔案架構如下
-##Header##
-####Linux Netowrk Function Integration####
+## Header
+### Linux Netowrk Function Integration
 - include/net/dsa.h
 	- 這個是 **Distributed Switch Architecture**, 於 2015 年此 commit(b73adef) 將 switchdev 給整合進來
   - 根據 2008 的第一筆 commit log 來看, DSA是用來控制 hardware switch chips 的協定，不過大部分的功能都是在 2014 年後才慢慢實作，目前還無法確認此協定能夠做什麼
@@ -38,16 +38,16 @@ Architecture
   	 1. 加上 switchdev_ops 來提供相關的 operation
      2. 加上 offload_fwd_mark 來避免已經被 offload 的 packet 再次被 forward.
   
-```
+```c=
 const struct switchdev_ops *switchdev_ops;  
 u32                     offload_fwd_mark;
 ```
-####SwtichDev Implemnetation####
+### SwtichDev Implemnetation####
 - include/net/switchdev.h
 	- switchdev.h 包含了所有的 struct, function, 要瞭解 switchdev 的核心就必須要看此檔案
   
-##implementation##
-####Linux Netowrk Function Integration####
+## implementation
+### Linux Netowrk Function Integration
   - net/8021q/vlan_dev.c
   	- 若底下的 bridge port 是個 vlan interface 的話，為了要能夠取得其 static FDB 以及 port 相關的狀態，在 net_device_ops 中把相關的 operation handler 都設定為 switchdev 的 function.
   - net/bridge/br.c
@@ -76,12 +76,12 @@ u32                     offload_fwd_mark;
 */
 ```
   
-####SwtichDev Implementation####
+### SwtichDev Implementation
 - net/switchdev/switchdev.c
 	- switchdev 的實作都在這邊，包含了與 hardware switch 以及 kernel 內相關 function 的互動。
   
   
-###Switch Driver Implementation###
+### Switch Driver Implementation
 - drivers/net/ethernet/rocker/
 - drivers/net/ethernet/mellanox/mlxsw/
 

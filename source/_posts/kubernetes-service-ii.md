@@ -91,7 +91,7 @@ kubectl -n kube-system describe ds kube-proxy 指令觀察一下相關的內容
 
 ### Endpoints
 在 `kubernetes` 內有一個名為 `endpoints` 的資源，其代表的是 `service` 所關注目標服務實際上真正運行`Pod`的 `IP` 地址
-```shell=
+```bash=
 vortex-dev:02:00:28 [~/go/src/github.com/hwchiu/kubeDemo](master)vagrant
 $kubectl get endpoints
 NAME                ENDPOINTS                                      AGE
@@ -100,7 +100,7 @@ k8s-nginx-node      10.244.0.88:80,10.244.0.89:80,10.244.0.90:80   9h
 kubernetes          172.17.8.100:6443                              11d
 ```
 
-可以從上述的輸出結果看到每個 `service` 都會對應到多組的 `endpoints`，所以當集群內的容器有任何 `IP` 更動的時候，這邊的數據都會自動更新，以確保 `service` 有辦法存取後端真正的服務
+可以從上述的輸出結果看到每個 `service` 都會對應到多組的 `endpoints`，所以當叢集內的容器有任何 `IP` 更動的時候，這邊的數據都會自動更新，以確保 `service` 有辦法存取後端真正的服務
 
 {% note danger %}
 有在使用 `Service` 的讀者，以後若有遇到 `service` 不通的情況，可以嘗試先看看該 `service` 是否有對應的 `endpoints`，沒有的話可能是 `selector` 寫錯或是目標服務根本沒有運行起來。
@@ -113,14 +113,14 @@ kubernetes          172.17.8.100:6443                              11d
 
 ## ClusterIP
 
-我們已經知道 `ClusterIP` 的作用範圍只有`集群內`的應用程式/節點，所以在本段落我們會著重於三個概念來理解
+我們已經知道 `ClusterIP` 的作用範圍只有`叢集內`的應用程式/節點，所以在本段落我們會著重於三個概念來理解
 
 {% note danger %}
-集群內節點是的存取比較尷尬，的確可以透過 `ClusterIP` 地址來存取，但是預設情況下是沒有辦法解析`FQDN`取得對應的 `ClusterIP` 地址。
+叢集內節點是的存取比較尷尬，的確可以透過 `ClusterIP` 地址來存取，但是預設情況下是沒有辦法解析`FQDN`取得對應的 `ClusterIP` 地址。
 {% endnote %}
 
 1. 如何透過 `FQDN` 輾轉存取到目標容器們(Endpoints)
-2. 如何做到只有`集群內`的應用程式/節點才可以存取
+2. 如何做到只有`叢集內`的應用程式/節點才可以存取
 3. 假設有多個目標容器(Endpoints), 這中間的選擇方式是怎麼處理?
 
 ### Access By FQDN
@@ -140,7 +140,7 @@ k8s-nginx-node      NodePort    10.99.157.45   <none>        80:32293/TCP   1d
 
 在此範例中，可以看到不論是 `ClusterIP` 或是 `NodePort` 實際上都會有一組 `Cluster-IP` 的 `IP` 地址。
 
-這個`Cluster-IP`最大的特性就是他是一個虛擬的`IP`地址，在整個`kubernetes`集群內是找不到任何一張網卡擁有這個`IP`地址的。
+這個`Cluster-IP`最大的特性就是他是一個虛擬的`IP`地址，在整個`kubernetes`叢集內是找不到任何一張網卡擁有這個`IP`地址的。
 
 所有針對該`Cluster-IP`發送的封包，在滿足特定的條件下，都會被透過`DNAT(Destination Network Address Translation)` 進行轉換，在`service`  其實就會是被轉換到其中一個 `EndPoints` 的真正 `IP` 地址
 
@@ -171,7 +171,7 @@ k8s-nginx-cluster   10.244.0.88:80,10.244.0.89:80,10.244.0.90:80   1d
 
 
 ### Cluster Only
-現在我們要來討論一下，到底所謂的只有`集群內`的應用程式/節點才可以存取`clusterIP`這到底是怎麼運作的。
+現在我們要來討論一下，到底所謂的只有`叢集內`的應用程式/節點才可以存取`clusterIP`這到底是怎麼運作的。
 
 我們複習一下前面的某個敘述
 {% note danger %}
@@ -180,13 +180,13 @@ k8s-nginx-cluster   10.244.0.88:80,10.244.0.89:80,10.244.0.90:80   1d
 
 這邊提到要滿足特定的情況才會走到`DNAT`轉到對應的`EndPoints`。
 所以
-**只有`集群內`的應用程式/節點才可以存取** 其實就是 **特定的情況**
+**只有`叢集內`的應用程式/節點才可以存取** 其實就是 **特定的情況**
 
 我們都知道 `iptables` 的規則可以根據封包的一些資訊來做比對，所以我們能不能做出一種規則是
-只有 **封包的來源`IP`地址是來自`集群內的應用程式/節點`**，符合這種規則的才有資格去進行 `DNAT` 進行轉發
+只有 **封包的來源`IP`地址是來自`叢集內的應用程式/節點`**，符合這種規則的才有資格去進行 `DNAT` 進行轉發
 
 實際上使用的概念是更簡單，這邊透過 `iptables build-in chain` 裡面的 `OUTPUT/PREROUTING` 兩個 `chain` 來達成
-**只有`集群內`的應用程式/節點** 
+**只有`叢集內`的應用程式/節點** 
 這個功能
 
 這邊我直接講明
@@ -230,7 +230,7 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 這邊可以看到有兩條規則，分別對應到原生的 `OUTPUT` 以及 `PREROUTING`，直接透過 `-j` 直接跳入到 `KUBE-SERVICES` 來進行後續處理。
 
 {% note danger %}
-其實夠熟悉 iptables 的朋友應該已經可以猜到，在此規則狀況下，我只要有辦法讓流向`ClusterIP`的封包透過一些網路規則的方式流向到集群內的節點，依然可以順利的存取背後的服務。
+其實夠熟悉 iptables 的朋友應該已經可以猜到，在此規則狀況下，我只要有辦法讓流向`ClusterIP`的封包透過一些網路規則的方式流向到叢集內的節點，依然可以順利的存取背後的服務。
 只是因為這些`ClusterIP`本身不存在網路之中，所以需要針對整個網路的路由表規則額外設定
 這部份就是額外有興趣的人可以自己研究，這邊就不再多敘述。
 
@@ -238,8 +238,8 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 
 我們先用下圖來幫助目前的概念做一個整理
 
-- 橘色底的代表是封包的來源，在此案例中其實就代表`集群內的節點/應用程式`
-- 綠色底代表的是`iptables build-in chain`，主要用來處理集群內應用程式/節點上的封包傳輸
+- 橘色底的代表是封包的來源，在此案例中其實就代表`叢集內的節點/應用程式`
+- 綠色底代表的是`iptables build-in chain`，主要用來處理叢集內應用程式/節點上的封包傳輸
 - 藍色的則是`kubernetes` 的 `custom chain`.
 - 紫色的則是代表 `iptables` 的描述規則
 - 紅色則是我們知道最後會在 `KUBE-SEP-XXX` 透過 `DNAT` 把封包轉換到其中一個`endpoints`之中。
@@ -249,7 +249,7 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 
 {% note info %}
 1. 每個`service`的`FQDN`都會對應到一組`ClusterIP` `IP` 地址，該地址其實是虛擬`IP`地址。
-2. 透過 `iptablse` 的 `OUTPUT/PREROUTING`，其有能力去匹配所有集群內的應用程式/節點所送出的封包
+2. 透過 `iptablse` 的 `OUTPUT/PREROUTING`，其有能力去匹配所有叢集內的應用程式/節點所送出的封包
 3. 最後透過去比對封包的目的地位址是否是 `ClusterIP` 來決定要不要往下跳到其他`custom chain` 去處理。
 4. 封包最後會透過`DNAT`的方式轉換成其中一個`endpoints`容器上的真實`IP`地址
 {% endnote %}
@@ -258,7 +258,7 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 ### Loab Balancing 
 現在我們要來看看最後一個部分了，到底要怎麼從眾多的 `Endpoints` 中挑選出一個可用的 `Pod` 來使用。
 
-根據前面的分析，當我們的封包符合集群內使用的規則後，會跳到一個`KUBE-SVC-3FL7SSXCKTCXAYCR` 的 `custom chain`.
+根據前面的分析，當我們的封包符合叢集內使用的規則後，會跳到一個`KUBE-SVC-3FL7SSXCKTCXAYCR` 的 `custom chain`.
 實際上 `KUBE-SVC-XXXX` 的 `custom chain` 就是用來處理挑選 `Endpoints` 用的，會根據每個 `kubernetes service` 創造一條屬於其的 `chain`.
 
 我們先重新認真看一下這條規則
@@ -266,7 +266,7 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 -A KUBE-SERVICES -d 10.98.51.150/32 -p tcp -m comment --comment "default/k8s-nginx-cluster: cluster IP" -m tcp --dport 80 -j KUBE-SVC-3FL7SSXCKTCXAYCR
 ```
 
-當封包滿足集群內的條件時，就會跳到一個名為`KUBE-SVC-3FL7SSXCKTCXAYCR`的 `custom chain`.
+當封包滿足叢集內的條件時，就會跳到一個名為`KUBE-SVC-3FL7SSXCKTCXAYCR`的 `custom chain`.
 
 這時候來仔細檢視其內容
 

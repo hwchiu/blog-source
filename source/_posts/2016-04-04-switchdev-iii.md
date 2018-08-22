@@ -1,29 +1,27 @@
 ---
-layout: post
-title: Switchdev IIII
+title: '[Switchdev] How Kernel Implement SwitchDev(ii)'
 date: '2016-04-04 08:38'
-comments: true
 tags:
   - System
+  - Linux
   - Kernel
   - Switchdev
   - Network
 keywords: 'Linux,Kernel,Network,SwitchDev,HardwareSwitch'
 abbrlink: 39537
+description:
 ---
-Introduction
-------------
+
+
+## Introduction
 本篇文章主要會專注於 switchdev 本身的實作上，包含了其結構以及提供的 API 等。
   
 
 <!--more-->
 
-
-  
-Structure
----------
-###Transaction###
-```
+## Structure
+### Transaction
+```c=
 struct switchdev_trans_item {
         struct list_head list;
         void *data;
@@ -49,8 +47,8 @@ static inline bool switchdev_trans_ph_commit(struct switchdev_trans *trans)
 - 一開始會先將 **ph_prepare** 給設定為 `true`，然後寫入的資料傳給 driver，讓 driver 知道這次的寫入只是用來確認可行性而已，如果 driver 確定可以寫入後，會將 **ph_prepare** 變為 `false` 後，再次要求 driver 將真正的資料給寫入。
 
 
-###Attribute###
-```
+### Attribute
+```c=
 enum switchdev_attr_id {
         SWITCHDEV_ATTR_ID_UNDEFINED,
         SWITCHDEV_ATTR_ID_PORT_PARENT_ID,
@@ -63,7 +61,7 @@ enum switchdev_attr_id {
 
   此 enum 用來定義 switch attribute 的種類，當 switch driver 收到一些如 get 的指令時，會根據該 attribute的種類回傳特定資料
 
-```
+```c=
 struct switchdev_attr {
         struct net_device *orig_dev;
         enum switchdev_attr_id id;
@@ -81,14 +79,14 @@ struct switchdev_attr {
 - **net_device** 來記錄是哪個目標 device
 - id 如前述所說的種類
 - flags 目前有三種值
-```
+```c=
 #define SWITCHDEV_F_NO_RECURSE          BIT(0)
 #define SWITCHDEV_F_SKIP_EOPNOTSUPP     BIT(1)
 #define SWITCHDEV_F_DEFER               BIT(2)
 ```
 - u 則是用來存放該 id 所代表的值
 
-###Object###
+### Object
 ```
 enum switchdev_obj_id {
         SWITCHDEV_OBJ_ID_UNDEFINED,
@@ -137,8 +135,9 @@ struct switchdev_obj_port_mdb {
 };
 ```
 由上面可以觀察到，目前已經實作了四種的 switchdev obj，分別是 vlan 的設定， L2 的 FDB/MDB 以及 L3 的 FIB.
-###Operation###
-```
+
+### Operation
+```c=
 /**
  * struct switchdev_ops - switchdev operations
  *
@@ -170,12 +169,13 @@ struct switchdev_ops {
 ```
 
 此結構被加入到 **struct net_device**內，所以 hardware switch driver 在創建 net_divce 時，要順便對該結構進行初始化，這樣對應的 function pointer 才有辦法在適當的時機被執行，這部分可以參考 rocker driver。
-```
+
+```c=
 dev->switchdev_ops = &rocker_port_switchdev_ops;
 ```
 
-###Notifier###
-```
+### Notifier
+```c=
 enum switchdev_notifier_type {
         SWITCHDEV_FDB_ADD = 1,
         SWITCHDEV_FDB_DEL,
@@ -195,10 +195,9 @@ Notifier 是用來讓 hardware switch 通知 linux kernel 用的，目前只有�
 當 hardware switch 的 FDB offload 有變化時(ADD/DEL)，要透過這個方式一路通知道 linux kernel 去，這樣的話使用 `brctl show` 指令去看的時候，就可以看到即時的狀態變化。
 
 
-Implementation
---------------
-###SwitchDev Port Attribute###
-```
+## Implementation
+### SwitchDev Port Attribute
+```c=
 int switchdev_port_attr_get(struct net_device *dev,
                             struct switchdev_attr *attr);
 int switchdev_port_attr_set(struct net_device *dev,
@@ -206,7 +205,7 @@ int switchdev_port_attr_set(struct net_device *dev,
 ```
 這兩個 function 是用來處理 attribute 的，其處理邏輯類似，基本上都按照下列走法
 
-```
+```c=
 const struct switchdev_ops *ops = dev->switchdev_ops;
 
 if (ops && ops->switchdev_port_attr_get)
@@ -219,9 +218,11 @@ netdev_for_each_lower_dev(dev, lower_dev, iter) {
 	/* do something */
 }
 ```
+
 1. 先判斷該 device 是否有實作 switchdev_ops,若有的話則直接呼叫 fptr 來處理.
 	- 參考 rocker driver.
-```
+
+```c=
 static const struct switchdev_ops rocker_port_switchdev_ops = {
 	.switchdev_port_attr_get        = rocker_port_attr_get,
 	.switchdev_port_attr_set        = rocker_port_attr_set,
@@ -230,12 +231,13 @@ static const struct switchdev_ops rocker_port_switchdev_ops = {
 dev->switchdev_ops = &rocker_port_switchdev_ops;
 ...
 ```
+
 2. 判斷該 device 是否有被設定不需要遞迴往下尋找，若有的話則直接結束
 3. 因為 switch port 可能是屬於 bond/team/vlan 等 device 底下，所以若直接操作上層的 device 是沒有辦法碰到 switch port 的，這邊會使用 [netdev_for_each_lower_dev](https://lists.ubuntu.com/archives/kernel-team/2014-June/043300.html) 來嘗試抓取到底下所有的 device。
 	- 對於 get/set 來說，會針對底下每個 device 嘗試去 get/set 其 attribute.
 
-###SwitchDev Port Object operation###
-```
+### SwitchDev Port Object operation
+```c=
 int switchdev_port_obj_add(struct net_device *dev,
                            const struct switchdev_obj *obj);                    
 int switchdev_port_obj_del(struct net_device *dev,
@@ -244,7 +246,7 @@ int switchdev_port_obj_dump(struct net_device *dev, struct switchdev_obj *obj,
                             switchdev_obj_dump_cb_t *cb);
 ```
 這三個 function 都是用來處理 object 的，其運作邏輯也類似
-```
+```c=
 const struct switchdev_ops *ops = dev->switchdev_ops;
 
 if (ops && ops->switchdev_port_obj_add)
@@ -253,14 +255,15 @@ netdev_for_each_lower_dev(dev, lower_dev, iter) {
 	/* do something */
 }
 ```
+
 1. 先檢查該 device 是否有實作 switchdev_ops,若有就呼叫對應的 function 來處理
 2. 遞迴存取底下所有的 device (bond/team/vlan), 針對每個 device 都跑一次對應的結果。
 3. obj_dump 的部分還會傳入一個 **call back** function, 目前看到的只有兩個實作，分別是 **switchdev_port_obj_dump** 以及 **switchdev_port_vlan_dump_cb**。 兩者都要搭配另外一個 `switchdev_port_xxx_dump** 的結構來使用，目前感覺用途不是很 general.
 	- fdb 的 dump 與 **rfnetlink** 有關係，要搭配 **ndo_fdb_dump** 使用。user space tool 透過 netlink 來問 fdb 的資料時，會透過此 cb 將對應的內容填入到 netlink header 中，最後再一路送回 user space 去檢查。
   - vlan 的部分則是 **rfnetlink** 在使用的，會先呼叫到 **ndo_bridge_getlink**, 最後跑到 **ndo_dflt_bridge_getlink** 才會使用，ndo (network device operation) 的 netlink 操作有必要再多花一些時間去瞭解了。
 
-### Port Bridge###
-```
+### Port Bridge
+```c=
 int switchdev_port_bridge_getlink(struct sk_buff *skb, u32 pid, u32 seq,
                                   struct net_device *dev, u32 filter_mask,
                                   int nlflags);
@@ -274,8 +277,8 @@ int switchdev_port_bridge_dellink(struct net_device *dev,
 詳細說明可以參考此 [link](http://comments.gmane.org/gmane.linux.network/232104)
 
 
-###FDB Operations###
-```
+### FDB Operations
+```c=
 int switchdev_port_fdb_add(struct ndmsg *ndm, struct nlattr *tb[],
                            struct net_device *dev, const unsigned char *addr,
                            u16 vid, u16 nlm_flags);
@@ -296,7 +299,7 @@ int switchdev_port_fdb_dump(struct sk_buff *skb, struct netlink_callback *cb,
 - 基本上 MDB 的操作則簡單很多，與 FIB 比較類似。
 
 
-###FIB Operations###
+### FIB Operations
 ```
 int switchdev_fib_ipv4_add(u32 dst, int dst_len, struct fib_info *fi,
                            u8 tos, u8 type, u32 nlflags, u32 tb_id);
@@ -306,7 +309,7 @@ void switchdev_fib_ipv4_abort(struct fib_info *fi);
 ```
 - 這三個 function 是用來操作 IPv4 FIB offload 的，不同於 FDB，此 offload rule 本身的學習只能靠 linux kernl 來管理，當 kernel 決定要針對特定 FIB route 處理時，會呼叫上述的 add/del 將相關的 FIB router 給加入到 hardware switch 中。
 
-```
+```c=
 err = switchdev_fib_ipv4_add(key, plen, fi,
       new_fa->fa_tos,
       cfg->fc_type,
@@ -321,7 +324,7 @@ if (err) {
 - 當執行失敗的時候，會呼叫 abort 將 rules 給全部清空，並且將 IPv4 offload 給關閉
 	- 這部分還有待加強，由註解也可以看出來
   
-``` 
+```c= 
  /* There was a problem installing this route to the offload
  * device.  For now, until we come up with more refined
  * policy handling, abruptly end IPv4 fib offloading for
@@ -346,7 +349,7 @@ if (err) {
 - 相對於 FDB，非常的簡單，只有 kernel 主動去加入 Rocker 而已
 - 目前 ndo_xxx_ooo 系列的操作中，還沒有看到 FIB 相關的，大部分都是 bridge/vlan/macvlan 等。
 
-###Notifier###
+### Notifier
 ```
 int register_switchdev_notifier(struct notifier_block *nb);
 int unregister_switchdev_notifier(struct notifier_block *nb);
