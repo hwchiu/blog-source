@@ -13,6 +13,9 @@ description:
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
 2. `Kubernetes Service` 是怎麼實現的?， 讓我們用 Iptables 來徹徹底底的理解他
 
+相關文章:
+[[Kubernetes] How To Implement Kubernetes Service(i)](https://www.hwchiu.com/kubernetes-service-ii.html)
+
 
 本篇文章偏向介紹，要跟大家討論為什麼在 `kubernetes` 集群內需要有 `service` 的服務，這個服務能夠解決什麼問題
 以及最後透過實際範例跟大家介紹如何使用
