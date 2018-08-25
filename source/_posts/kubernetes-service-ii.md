@@ -1,6 +1,6 @@
 ---
-title: '[Kubernetes] How To Implement Kubernetes Service(i)'
-keywords: 'Kubernetes,Service,Linux,k8s,iptables'
+title: '[Kubernetes] How To Implemete Kubernetes Service - ClusterIP'
+keywords: 'Kubernetes,Service,Linux,k8s,iptables,ClusterIP'
 abbrlink: 3141
 date: 2018-08-22 00:56:15
 tags:
@@ -16,6 +16,7 @@ description:
 
 相關文章:
 [[Kubernetes] What is Service](https://www.hwchiu.com/kubernetes-service-i.html)
+[[Kubernetes] How To Implement Kubernetes Service - NodePort](https://www.hwchiu.com/kubernetes-service-iii.html)
 
 
 本篇文章著重於後者，透過對系統上的分析來探討 `kubernetes service` 實作的原理。
@@ -34,7 +35,7 @@ description:
 
 ## Introduction
 
-在前篇文章 [[Kubernetes] What is Service](https://www.hwchiu.com/kubernetes-service-i.htmlvvv) 我們已經學習到關於 `Kubernetes Service` 的基本概念與用法
+在前篇文章 [[Kubernetes] What is Service](https://www.hwchiu.com/kubernetes-service-i.html) 我們已經學習到關於 `Kubernetes Service` 的基本概念與用法
 而本篇文章則是想要探討在預設安裝情況下， `kubernetes` 是如何實現 `service` 的功能。
 
 <!--more-->

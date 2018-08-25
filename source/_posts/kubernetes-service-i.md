@@ -14,7 +14,8 @@ description:
 2. `Kubernetes Service` 是怎麼實現的?， 讓我們用 Iptables 來徹徹底底的理解他
 
 相關文章:
-[[Kubernetes] How To Implement Kubernetes Service(i)](https://www.hwchiu.com/kubernetes-service-ii.html)
+[[Kubernetes] How To Implement Kubernetes Service - ClusterIP](https://www.hwchiu.com/kubernetes-service-ii.html)
+[[Kubernetes] How To Implement Kubernetes Service - NodePort](https://www.hwchiu.com/kubernetes-service-iii.html)
 
 
 本篇文章偏向介紹，要跟大家討論為什麼在 `kubernetes` 叢集內需要有 `service` 的服務，這個服務能夠解決什麼問題
