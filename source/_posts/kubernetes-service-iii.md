@@ -10,13 +10,14 @@ tags:
 description:
 ---
 
-本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下量兩個觀念
+本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下列兩個觀念
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
 2. `Kubernetes Service` 是怎麼實現的?， 讓我們用 iptables 來徹徹底底的理解他
 
 相關文章:
 [[Kubernetes] What is Service](https://www.hwchiu.com/kubernetes-service-i.htmlvvv)
 [[Kubernetes] How To Implement Kubernetes Service - ClusterIP](https://www.hwchiu.com/kubernetes-service-ii.html)
+[[Kubernetes] How To Implement Kubernetes Service - SessionAffinity](https://www.hwchiu.com/kubernetes-service-iiii.html)
 
 
 本文銜接上篇文章，繼續透過對 `iptables` 的分析來研究 `kubernetes service` 中 `NodePort` 的實作原理。
@@ -24,7 +25,7 @@ description:
 <!--more-->
 `NodePort` 的功能就如同字面上的意思一樣,`Node Port`, 提供了一種透過存取叢集節點上事先定義好的`Port Number` 就可以輾轉存取到後端的真正服務。
 
-作為一個靠腦力生存的人，每次遇到全概念的時候，都要問問自己幾個問題
+作為一個靠腦力生存的人，每次遇到全新概念的時候，都要問問自己幾個問題
 1. 這個概念是想要解決什麼問題?
 2. 什麼時候會用到?
 3. 如果是我，我會怎麼實作?

@@ -10,13 +10,14 @@ tags:
 description:
 ---
 
-本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下量兩個觀念
+本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下列兩個觀念
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
 2. `Kubernetes Service` 是怎麼實現的?， 讓我們用 iptables 來徹徹底底的理解他
 
 相關文章:
 [[Kubernetes] What is Service](https://www.hwchiu.com/kubernetes-service-i.html)
 [[Kubernetes] How To Implement Kubernetes Service - NodePort](https://www.hwchiu.com/kubernetes-service-iii.html)
+[[Kubernetes] How To Implement Kubernetes Service - SessionAffinity](https://www.hwchiu.com/kubernetes-service-iiii.html)
 
 
 本篇文章著重於後者，透過對系統上的分析來探討 `kubernetes service` 實作的原理。
