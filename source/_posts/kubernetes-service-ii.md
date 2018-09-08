@@ -129,7 +129,7 @@ kubernetes          172.17.8.100:6443                              11d
 我們都知道 `Service` 本身會提供一組對應的 `FQDN` 供應用程式使用
 實際上這組`FQDN` 只有 `kube-dns` 能夠理解，而且其對應的 `IP` 地址其實就是每個 `Service` 提供的 `ClusterIP` 
 {% note dnager  %}
-這邊的ClusterIP剛好跟 `Type` 的ClusterIP 名稱，但是這邊要表示的真的是個`IP`地址
+這邊的ClusterIP剛好跟 `Type` 的ClusterIP 名稱一樣，但是這邊要表示的真的是個`IP`地址
 {% endnote %}
 
 ```bash=

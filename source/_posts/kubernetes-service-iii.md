@@ -172,7 +172,7 @@ https://elixir.bootlin.com/linux/v4.7.8/source/include/uapi/linux/rtnetlink.h#L2
 
 到這邊我們整理一下所有的思路。
 1. NodePort 也是倚賴 `KUBE-SERVICES`，當封包目標是本地端的 `IP` 位置的時候，就會跳到 `KUBE-NODEPORT` 裡面去比對 `protocol/port` 來進行後續跟 `ClusterIP` 相同的處理
-2. 所有的 `kubernetes NodePort service` 都會共用同一個 `KUBE-NODEPORT`, 引此所有的 `NodePort` 使用的 `Port` 都不能一樣
+2. 所有的 `kubernetes NodePort service` 都會共用同一個 `KUBE-NODEPORT`, 因此所有的 `NodePort` 使用的 `Port` 都不能一樣
 
 我們用下列這張圖來總結 `NodePort` 的運作
 
