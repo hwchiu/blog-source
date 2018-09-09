@@ -86,3 +86,8 @@ This post is used to record all my presentations from 2017
     - [COSCUP 2018 x openSUSE.Asia GNOME.Asia](https://2018.coscup.org/programs/linux-iptables/)
     - [Slides](https://www.slideshare.net/hongweiqiu/understand-the-iptables-step-by-step-109650841)
 
+- Linux 101
+    - 2018.09.08(六) 09:30 - 17:00
+    - [SDN x Cloud Native Meetup #8](https://cntug.kktix.cc/events/sdn-cntug-8)
+    - [Slides](https://www.slideshare.net/hongweiqiu/iptables-101-bottomup)
+
