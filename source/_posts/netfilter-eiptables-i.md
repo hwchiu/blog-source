@@ -8,8 +8,11 @@ tags:
   - Netfilter
   - Linux
   - Kernel
-description:
+description: 本文是 iptables/ebtables 系列分享文的第一篇，會先著重於 iptables/ebtables 本身的架構，更準確的是 netfilter 的架構介紹，從 User-Space 到 Kernel-Space 的組成元件，並且簡單敘述一下整體的運作流程。最後開始介紹 ebtables 這個存在但是較少人知道的工具，不同於 iptables, ebtables 更專注於基於 MAC 地址的 Layer2 轉發。 文章最後介紹了 ebtables 的規則組成，並且將 ebtables 規則的處理順序以圖表的方式呈現，讓大家更容易理解在 Layer2 轉發時，該怎麼透過 `ebtables` 去設定相關的規則來處理封包。
+
 ---
+
+## Preface
 
 再之前的 `kubernetes server` 系列文中有稍微介紹過 `iptables` 的一些用法，以及如何透過 `iptables` 來完成 `kubernetes service`. 若有任何不熟悉的概念可以重新閱讀一次該系列文章.  
 - [[Kubernetes] How To Implement Kubernetes Service - ClusterIP](https://www.hwchiu.com/kubernetes-service-ii.html)
@@ -32,7 +35,6 @@ description:
 相關系列文章
 - [[netfilter] Introduction to iptables](https://www.hwchiu.com/netfilter-eiptables-ii.html)
 
-<!--more-->
 
 ## Introduction
 一般我們常常在講的 `iptables`，其實背後真正的專案以及相關技術都跟 `netfilter` 密切相關。

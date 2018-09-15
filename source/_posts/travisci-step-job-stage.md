@@ -6,15 +6,11 @@ date: 2018-09-01 09:09:13
 tags:
   - CI/CD
   - Linux
-description:
+description: 這次要跟大家分享的是一些關於 TravisCI 的使用心得，相信有在 Github 上面維護專案的人應該都對各式各樣的 CI 系統不陌生，不論是 公有服務的 TravisCI 或是 CircleCI 或是自己透過 Jenkins 來處理。本篇想要跟大家分享的重點是在 TravisCI 上關於 Build Stage 的概念，透過 Build Stage，我們可以更有架構的去設計該專案的 CI/CD 流程。
+
 ---
 
-
-這次要跟大家分享的是一些關於 `TravisCI` 的使用心得
-
-相信有在 `Github` 上面維護專案的人應該都對各式各樣的 `CI` 系統不陌生，不論是 公有服務的 `TravisCI` 或是 `CircleCi` 或是自己透過 `Jenkins` 來處理。
-
-本篇想要跟大家分享的重點是在 `TravisCI` 上關於 `Build Stage` 的概念，透過 `Build Stage`，我們可以更有架構的去設計該專案的 `CI/CD` 流程。
+## Preface
 
 舉例來說，假設我的 `Github` 專案會希望每次`Release`時會有下列的行為
 1. 進行 單元測試/整合測試 等各種確保程式碼正常運作的測試
@@ -24,7 +20,6 @@ description:
 接下來會跟大家分享一下，在 `TravisCI` 的設定中，我們有什麼辦法可以滿足上述的需求
 
 本文最後用到的 `travisCI` 設定檔可以在 [TravisCI Example](https://github.com/hwchiu/Travis-MultisStage/blob/master/.travis.yml) 找到
-
 
 <!--more-->
 

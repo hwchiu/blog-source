@@ -8,9 +8,11 @@ tags:
   - Netfilter
   - Linux
   - Kernel
-description:
+description: 透過瞭解 iptables 規則的四大組成 Table/Chian/Match/Target 來學習 iptables 的規則含義，同時透過圖表的方式來釐清封包在 Linux Kernel 傳輸過程中受到 iptables 規則的處理順序。最後會將 iptables 以及 ebtables 兩者的流程圖整合在一起，構建出一個更全面的封包轉送流程圖，於此流程圖中可以觀察到封包在 Routing/Bridging 不同過程中，是如何通過不同的 ebtables/iptables 規則的處理。 擁有這些資訊能夠讓你對系統上的 iptables/ebtables 有更全面性的理解其功用以及發生時機
+
 ---
 
+## Preface
 這次想要跟大家慢慢介紹的就是 `iptables` 這個常見也常用的工具。
 網路上其實已經可以搜尋到非常多關於 `iptables` 相關的文章。
 不論是基本介紹，或是一些相關用法，其實都有滿多的資源可以學習，不過我認為這些文章都散落各地，所以想要整理一下這些資訊並且統整起來做一個一系列的`iptables` 文章。
@@ -28,7 +30,6 @@ description:
 相關系列文章
 - [[netfilter] Introduction to ebtables](https://www.hwchiu.com/netfilter-eiptables-i.html)
 
-<!--more-->
 
 ## Introduction
 為了能夠更充分理解本文所描式的各個觀念，強烈建議先閱讀[前篇文章](https://www.hwchiu.com/netfilter-eiptables-i.html) 來理解整個規則裡面的四大部分，`Table/Chain/Match/Target`
