@@ -91,7 +91,7 @@ class Node( object ):
         ...
 ```
 這邊可以觀察到，`mininet`是透過一隻叫做`mnexec`的程式來執行，
-###mnexec###
+### mnexec
 - 透過參數-n來將此process給轉換到**network namespaces**中
 - 程式內會透過**execvp**去執行參數中的指令，在此範例中該指令就是**"-ms mininet:"+self.name**。
 	- 這邊可以透過執行mininet後，在執行**ps auxww | grep mininet**，應該會看到類似下面的結果
@@ -277,7 +277,7 @@ def moveIntfNoRetry( intf, dstNode, srcNode=None, printError=False ):
 此時，我們的系統如下
 ![](https://lh5.googleusercontent.com/xn1vz7MvkXaGuCw3Dd_DYiHJ1nSZ992W_cZ6i-s7rmE=w804-h419-no)
 
-##最後##
+## 最後
 - 透過`ovs-vsctl add-port`將**Switch**上面的**Interface**都給OVS控管
 ``` python
     def attach( self, intf ):

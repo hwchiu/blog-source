@@ -1,15 +1,16 @@
 ---
-layout: post
 title: How to enable Ceph with RDMA
+keywords: 'RDMA,Ceph'
 date: '2017-05-03 02:47'
 comments: true
 tags:
   - Network
   - Ceph
   - RDMA
-  - ScaleOut
 abbrlink: 46014
+description:
 ---
+
 Introduction
 ------------
 - RDMA (Remote Direct Memory Access) is a mechanism which allow the host to accessing(read, write) memory on a remote host without interrupting CPU.
@@ -27,7 +28,7 @@ Install
 -------
 - I introduce two ways to install the ceph with RDMA, one is use widly used tool `ceph-deploy` and the other is manually build the ceph.
 
-###ceph-deploy####
+### ceph-deploy
 - If you use the `ceph-deploy` to install the ceph, you must make sure the source package  you installed is configure with `-DWITH_RDMA=ON`.
 - You can use the argument **--dev** and **-dev--commit** to select the source packet form the official ceph build phase.
 	- you can find those avaliabe repos in the [ceph site](https://shaman.ceph.com/repos/ceph/)
@@ -39,7 +40,7 @@ Install
 ```
 
 
-###Manually build####
+### Manually build
 - Refer to followings step to build the ceph with RDMA.
 ```
 cd ceph
@@ -60,16 +61,16 @@ Enable RDMA
 - Before we enable the RDMA, we must setup the RDMA environment, you should install the NIC driver and validate RDMA functionalities
 
 
-#### RDMA environment
+### RDMA environment
 - I use the mellanox **ConnectX-3 Pro** in my environment and you can refer to [HowTo Enable, Verify and Troubleshoot RDMA](https://community.mellanox.com/docs/DOC-2086)
 - Use rdma tools to make sure your RDMA work well.
 
-#### Systemd config
+### Systemd config
 - If you want to use the **systemd** to manage the ceph daemons, you should modify the systemd config to make it support RDMA because of the default config will fail for some access permission problem.
 	- You can wait the official [PR](https://github.com/ceph/ceph/pull/14107/files) and use the next version.
   - Refer to this [PR](https://github.com/ceph/ceph/pull/13305) to modfiy the systemd config by yourself, and you can use `systemctl` reload the systemd config if you need.
 
-#### ceph.conf
+### ceph.conf
 - Modify the **ms_type** to **async+rdma**, which tell the ceph use the **AsyncMessenger + RDMA** as your message type.
 - You can use **ms_cluster_type** and **ms_public_type** to indicate the message type for your cluster network or public network.
 - Use the command `ibdev2netdev` to get your device name and use it for **ms_async_rdma_device_name**

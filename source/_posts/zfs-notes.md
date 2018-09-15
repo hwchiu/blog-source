@@ -1,6 +1,6 @@
 ---
-layout: post
 title: ZFS 筆記
+keywords: 'FreeBSD, ZFS'
 date: '2013-10-12 17:53'
 comments: true
 tags:
@@ -8,6 +8,7 @@ tags:
   - System
   - ZFS
 abbrlink: 61488
+description:
 ---
 之前機器因為ZFS空間滿了，因為平常有再作snapshot的緣故，導致東西都刪除不了
 因為刪除的時候都會有一些metadata的寫入，導致整個zfs動彈不得，這時候就花了很多時間再研就怎麼處理
@@ -16,12 +17,11 @@ ZPOOL的來源可以是device也可以是files,這邊就用兩個檔案當作來
 
 <!--more-->
 
-###Files###
+## Files
 - `sudo dd if=/dev/zero of=/zfs1 bs=1M count=256`
 - `sudo dd if=/dev/zero of=/zfs2 bs=1M count=256`
 
-
-###Zpool###
+## Zpool
 - create a mirror pool
 	- `zpool create ftphome mirror /zfs1 /zfs2`	
 - destroy a pool
@@ -41,7 +41,7 @@ ZPOOL的來源可以是device也可以是files,這邊就用兩個檔案當作來
 還有`offline`,`online`,`remove`...，剩下的就要用的時候去man zpool,還滿詳細說明的。  
   
   
-###ZFS database###
+## ZFS database
 - set attributes `zfs set key=value <filesystem|volume|snapshot> `
   - `zfs get compression ftphome`
   - `zfs set mountpoint=/home/ftp ftphome`
@@ -51,10 +51,10 @@ ZPOOL的來源可以是device也可以是files,這邊就用兩個檔案當作來
 	- `zfs snapshot ftphome@today `
   - `zfs list -t snapshot`
 
-###其他###
+## 其他
 - 假如你的ZFS有使用snapshot同時空間又滿的話，這時候會發現所有檔案都會刪除失敗，都會得到空間不足的訊息,這邊稍微模擬一下該情況，並且想辦法解決此問題。
 
-####模擬情況####
+### 模擬情況
 
 **snatshot 該zfs**
 - `zfs snapshot ftphome@today`
@@ -66,7 +66,7 @@ ZPOOL的來源可以是device也可以是files,這邊就用兩個檔案當作來
 - `cd /home/ftp`
 - `rm file`  => 應該會得到 ` No space left on device `空間不足的訊息。
 
-####解決問題####
+### 解決問題
 ZFS 變大容易(多塞個硬碟即可)，變小困難(幾乎無法)，因此當ZFS的硬碟滿的時候，有兩種做法
 1. 再加入兩個新的硬碟，然後合併到目前的zpool,可是這樣就會變成有兩份mirror。 
 2. 準備兩個更大的硬碟，把原本的zpool內的data全都複製過去。 

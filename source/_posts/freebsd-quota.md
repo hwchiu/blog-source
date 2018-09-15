@@ -1,11 +1,12 @@
 ---
-layout: post
 title: Freebsd_Quota
+keywords: 'FreeBSD, Quota"
 date: '2013-04-07 17:56'
 comments: true
 tags:
   - System
 abbrlink: 53853
+description:
 ---
 
 在系統管理時，由於是一個檔案系統給眾多使用者使用，所以為了避免有使用者獨佔整個系統空間，便會對每個使用者設定空間限制。
@@ -20,21 +21,21 @@ abbrlink: 53853
 
 接下來就來實際在FREEBSD中操作看看。
 
-###Setup Disk Quota in FreeBSD###
-####Build Kernel####
+## Setup Disk Quota in FreeBSD
+### Build Kernel
 因為預設的kernel中並沒有支援這個功能，所以要自己重編kernel,加入
 options QUOTA
 
 關於build kernel，參考[這裡](http://www.freebsd.org/doc/handbook/kernelconfig-building.html)
 
-####Edit /etc/fstab####
+### Edit /etc/fstab
 修改/etc/fstab,對想要進行quota控制的FS進行參數調整
 
 	Device  MountPoint FSType Options Dump Pass  
 	/dev/da0p2     /  UFS rw,userquota,groupquota 1 1
 
 接者重新開機，或是remount FS，使其重新讀取設定
-####對使用者或是群組 調整其上限####
+### 對使用者或是群組 調整其上限
 這邊使用**edquota**這個指令來調整
  
 
@@ -49,7 +50,7 @@ options QUOTA
 
 這邊就可以去調整軟硬限制，根據FILE SIZE或是INODES的數量
 
-####**啟動quotacheck**####
+#### **啟動quotacheck**
 使用quotacheck來掃描使用者的使用狀況  
 -a : 掃描/ect/fstab底下所有FS中檔案的使用情況  
 -v : 詳細過程  
@@ -58,10 +59,10 @@ options QUOTA
  
 就給他執行 **quotacheck -avug**
 
-####**啟動quota**####
+#### **啟動quota**
 執行quotaon -a，執行quota限制的功能，沒有開啟的話，一切的設定就只是擺好看的
 
-####**觀看**####
+#### **觀看**
 使用**quota**這個指令來觀看  
 quota:
 -u:使用者名稱  
@@ -73,5 +74,5 @@ quota:
 >/amd/gcs           305M     390M    410M           6414   40000  42000
 >/amd/mail           41M      97M    117M              1       2      3
 
-###Reference###
+### Reference
 [FreeBSD Handbook](http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/quotas.html)

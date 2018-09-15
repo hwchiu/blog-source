@@ -1,6 +1,6 @@
 ---
-layout: post
 title: 'Execution Floodlight '
+keywords: 'Floodlight, Arguments'
 date: '2013-08-21 04:39'
 comments: true
 tags:
@@ -10,15 +10,16 @@ tags:
   - Floodlight
 keywords: 'SDN,Controller,Floodlight'
 abbrlink: 33059
+description:
 ---
 記錄一下執行floodlight時，有ㄧ些參數可以使用，都是用來指定設定檔的位置。
 
-###Floodlight configuraion:###
+### Floodlight configuraion:
 **--configFile ${configuration path}**
 
-###Log configuraion:###
+### Log configuraion:
 **-Dlogback.configurationFile=${FL_LOGBACK}**
 
-##範例##
+## 範例
 
 `java -Dlogback.configurationFile=logback.xml floodlight.jar --configFile floodlightdefault.properties`

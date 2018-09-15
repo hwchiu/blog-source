@@ -4,7 +4,7 @@ title: Vim & Nerdtree
 date: '2013-10-11 07:48'
 comments: true
 tags:
-  - vim
+  - Vim
   - System
 abbrlink: 10479
 ---
@@ -15,7 +15,7 @@ abbrlink: 10479
 
 <!--more-->
 
-###vimrc 設定###
+### vimrc 設定
 ```
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,big5,latin1
@@ -72,27 +72,27 @@ nnoremap <Esc>8 gt8
 
 
 
-###NERDTree###
+### NERDTree
 
 
-####更改呼叫方式，使用F5####
+### 更改呼叫方式，使用F5
 nnoremap <silent> <F5> :NERDTree<CR>
 
 
-####在各界面中移動####  
+### 在各界面中移動
 
 - 按照順序往下移動 (crtl+w+w)
 - 上一個view (ctrl+w+h)
 - 下一個view (ctrl+w+l)
 
-####切割視窗####
+### 切割視窗
 
 - 水平切割 (在該檔案前按i)
 - 垂直切割 (在該檔案前按s)
 i :水平
 	s :垂直
 
-####tab使用####
+### tab使用
 
 - 開新tab並且切換過去 (t)
 - 開新tab但不切換過去 (T)
