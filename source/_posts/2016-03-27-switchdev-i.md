@@ -7,7 +7,7 @@ tags:
   - Kernel
   - Switchdev
   - Network
-keywords: 'Linux,Kernel,Network,SwitchDev,HardwareSwitch'
+keywords: 'switchdev,linux,kernel'
 abbrlink: 14196
 description:
 ---
