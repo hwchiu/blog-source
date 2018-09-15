@@ -230,7 +230,7 @@ tcp, udp, udplite, icmp, esp, ah, sctp。
 
 {% note info %}
 其實比較正確的比對方式應該是該網卡本身會怎麼處理封包，在 `Linux Kernel` 裡面會針對每個網卡**net device**去設定相關的收送函式，當有封包要從該網卡送出去時就會呼叫對應的函式，這時候裡面就會決定應該要怎麼處理封包，進而去呼叫對應的 `iptables/ebtalbes` 相關的處理。
-所以一些特別的網卡，不論是 `IPSec/VXlan/Tun/Tap` 等實際上怎麼運行都還是要看 `kernel` 內真正的實作來決定到底封包會怎麼走。
+所以一些特別的網卡，不論是 `IPSec/VXLan/Tun/Tap` 等實際上怎麼運行都還是要看 `kernel` 內真正的實作來決定到底封包會怎麼走。
 {% endnote %}
 
 到這邊已經將 `iptables` 以及 `ebtables` 兩者的關係給結合起來，可以觀察到實際上會經過的規則是非常的多。
