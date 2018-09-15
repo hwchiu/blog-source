@@ -1,5 +1,5 @@
 ---
-title: 'Execution Floodlight '
+title: 'Execution Floodlight'
 keywords: 'Floodlight, Arguments'
 date: '2013-08-21 04:39'
 comments: true
@@ -8,7 +8,6 @@ tags:
   - Openflow
   - Network
   - Floodlight
-keywords: 'SDN,Controller,Floodlight'
 abbrlink: 33059
 description:
 ---

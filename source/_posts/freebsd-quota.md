@@ -1,6 +1,6 @@
 ---
 title: Freebsd_Quota
-keywords: 'FreeBSD, Quota"
+keywords: 'FreeBSD,Quota'
 date: '2013-04-07 17:56'
 comments: true
 tags:
