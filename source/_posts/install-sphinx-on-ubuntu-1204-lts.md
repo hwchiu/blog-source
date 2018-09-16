@@ -1,6 +1,6 @@
 ---
-layout: post
 title: Install Sphinx on Ubuntu 12.04 LTS
+keywords: 'Sphinx,Install,Ubuntu,Linux'
 date: '2013-10-05 09:01'
 comments: true
 tags:
@@ -8,24 +8,18 @@ tags:
   - Ubuntu
   - Sphinx
 abbrlink: 43454
+description: Sphinx是一套建置說明文建的軟體，本身是用python寫成的,目前使用Sphinx這套軟體來當作會議紀錄
+
 ---
-##Sphinx##
 
-Sphinx是一套建置說明文建的軟體，本身是用python寫成的
-目前使用Sphinx這套軟體來當作會議紀錄
-
-http://nslab.cs.nctu.edu.tw/sphinx/NSLMeeting/
-
-<!--more-->
-
-###Install###
+## Install
 
 直接透過atp-get 安裝即可
 
 `sudo apt-get install sphinx`
 
 
-###Config###
+## Config
 
 安裝完畢後，執行
 
@@ -43,7 +37,8 @@ http://nslab.cs.nctu.edu.tw/sphinx/NSLMeeting/
 	-. 檔案的結構
   -. toctree
 
-###index.rst###
+## index.rsta
+
 ```
 Lab Meetgins
 =============
@@ -79,14 +74,14 @@ Lab Meetgins
 - titlesonly : 在首頁面只顯示子類的標題
 
 
-###Write###
+## Write
 
 Sphinx採用的`reStructuredText`
 格式跟markdown很類似，但是複雜了一些
 官方網站有滿詳細的介紹，有需要時再去參考即可
 
 
-###Build###
+## Build
 
 如果想要轉成html網頁，有兩種方法可以執行
 

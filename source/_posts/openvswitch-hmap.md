@@ -1,6 +1,6 @@
 ---
-layout: post
 title: OpenvSwitch - hmap
+keywords: 'ovs,OpenvSwitchm,hmap,map,flow'
 date: '2013-12-27 04:18'
 comments: true
 tags:
@@ -8,10 +8,10 @@ tags:
   - Network
   - OpenvSwitch
   - SourceCode
-keywords: 'SDN,OpenvSwitch,OVS,Kernel'
 abbrlink: 28715
+description: hmap 是一種hash bucket的資料結構，在 OpenvSwitch 中到處都可以看到其身影，，譬如 kernel space 中的 flow_key 就是透過這種結構來存放的。本文會檢視一下該 hamp 的結構，並且稍微看一下關於插入這個動作的原始碼
+
 ---
-**hmap** 是一種hash bucket的資料結構，在OVS中到處都有弄到，譬如 **kernel space**中的flow_key就是透過這種結構來存放的。
 
 示意圖如下
 
@@ -53,7 +53,7 @@ struct hmap {
 關於hmap的操作大部分都定義在這兩個檔案內，有function也有marco.這邊節錄幾個來看
 
 
-##insert##
+## insert
 ``` c
 static inline void
 hmap_insert_fast(struct hmap *hmap, struct hmap_node *node, size_t hash)

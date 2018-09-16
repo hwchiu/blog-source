@@ -1,20 +1,14 @@
 ---
-layout: post
 title: Strategy Pattern
+keywords: 'Design Pattern, Strategy pattern'
 date: '2013-11-29 13:15'
 comments: true
 tags:
   - DesignPattern
 abbrlink: 63071
+description: Strategy Pattern 定義一系列的演算法，ㄧ個個封裝起來，根據使用要求不同而採用不同的演算法。最基本且直觀的方式就是採用程式語言本身提供的多型來完成。一個簡單的範例就是假設有一個壓縮軟體，其提供各種不同的壓縮演算法，在這個範例中，壓縮程式本身只會有一個對應的壓縮函式呼叫，我們將不同的演算法都採取不同的實現，這樣可以避免在壓縮的函式中，要大量的透過 if/else 的方式來判斷要怎麼執行
+
 ---
-##Introduction##
-
-Strategy Pattern 定義一系列的演算法，ㄧ個個封裝起來，根據使用要求不同而採用不同的演算法。
-
-- 藉由多型的使用來完成
-- 概念上是相同的演算法，不同的實作
-
-<!--more-->
 
 舉個例子，今天我寫了一個壓縮軟體，這個軟體會針對不同的輸入來採用不同的壓縮方法處理。
 

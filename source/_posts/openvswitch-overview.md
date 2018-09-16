@@ -1,18 +1,18 @@
 ---
-layout: post
 title: OpenvSwitch - overview
+keywords: 'OpenvSwitch, Architecture, Overview, Introduction, OVS'
 date: '2013-12-17 15:13'
 comments: true
 tags:
   - SDN
   - Network
   - OpenvSwitch
-keywords: 'SDN,OpenvSwitch,OVS,Kernel'
 abbrlink: 48699
----
-This article show what the system do when we install the OpenvSwitch
+description: This post shoes about what the system do when we install the OpenvSwitch in your system. The architecture of OpenvSwitch covers both user-space and kernel-space and we can see functions of each part in this porsts.
 
-####Environment####
+---
+
+# Environment
 - Three PCs.
 - One for openvswitch (with a 4-port ethernet card).
 - Two for hosts.
@@ -22,7 +22,7 @@ This article show what the system do when we install the OpenvSwitch
 
 ![test.png](http://user-image.logdown.io/user/415/blog/415/post/167510/x1arC8nSTiOAQ0AoLtjj_test.png)
 
-####kernel module####
+# kernel module
 `insmod datapath/linux/openvswitch.ko`
 
 When we load the **openvswitch**'s kernel module, it will register four **generic netlink** event including
@@ -40,7 +40,7 @@ If we want the kernel to create a new port, we can send the **vport** type **net
 
 ![擷取.PNG](http://user-image.logdown.io/user/415/blog/415/post/167510/eHZ7vqScSjCAaFJMDiIn_%E6%93%B7%E5%8F%96.PNG)
 
-####ovs-vswitchd####
+# ovs-vswitchd
 ` ovsdb-server ...`
 ` ovs-vswitchd --pidfile --detach `
 
@@ -56,7 +56,7 @@ ovs-vswitchd:
 
 ![擷取3.PNG](http://user-image.logdown.io/user/415/blog/415/post/167510/A5R1wlMlQMGHHmAMjURg_%E6%93%B7%E5%8F%963.PNG)
 
-####Adding bridge####
+# Adding bridge
 `ovs-vsctl add-br br0`
 
 When we excute the `ovs-vsctl`, it will send a command to **ovsdb** and the DB will store this information.
@@ -71,7 +71,7 @@ datapath:
 
 ![擷取3.PNG](http://user-image.logdown.io/user/415/blog/415/post/167510/22cYSkNQQwmksjbBcDPq_%E6%93%B7%E5%8F%963.PNG)
 
-####Adding vports####
+# Adding vports
 `ovs-vsctl add-port br0 eth1`
 
 Like the above discussion about **datapath**, **ovs-vswitchd** send the **netlink** to the kernel.
@@ -82,7 +82,7 @@ In the command handler **ovs_vport_cmd_new**.
 
 ![擷取3.PNG](http://user-image.logdown.io/user/415/blog/415/post/167510/jdtSnR6SbCZRX2QcwTqQ_%E6%93%B7%E5%8F%963.PNG)
 
-####Set-Controller####
+# Set-Controller
 `ovs-vsctl set-controller br0 tcp:xxx.xxx.xxx.xxx:6633`
 
 - Set the controller setting and it will be done in **ovs-vswitchd**.
@@ -92,7 +92,7 @@ In the command handler **ovs_vport_cmd_new**.
 ##In the following example, we use a simple case to explain how the ping works
 
 
-####Target command####
+# Target command
 `hostA ping hostB`
 
 We devide the picture into two parts by the red line.

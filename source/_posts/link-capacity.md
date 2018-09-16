@@ -1,6 +1,6 @@
 ---
-layout: post
-title: 'OF link capacity '
+title: 'OpenFlow link capacity '
+keywords: 'Openflow,Link,Capacity,Controller'
 date: '2014-05-07 06:05'
 comments: true
 tags:
@@ -9,8 +9,9 @@ tags:
   - Floodlight
   - Java
 abbrlink: 5740
+description:  在Openflow的協定中，有時候會想要知道每條`link`的`capacity`,然後就可以藉由當前的rate來判斷這個Link是否壅塞。 本文嘗試使用 `Floodlight` Controller 作為範例來展示如何使用透過預設的 API 來取得每個 Port 的資訊，並且從中計算出當前這條 Link 是否屬於壅塞或是閒置。 這類型的機制與資訊對於想要完成 Traffic Engineering 的開發者來說非常重要，畢竟這是其中一種可以幫每條連線加上權重的一種方式
+
 ---
-在 Openflow的協定中，有時候會想要知道每條`link`的`capacity`,然後就可以藉由當前的rate來判斷這個Link是否壅塞.  
 在 [Openflow 1.0](http://archive.openflow.org/documents/openflow-spec-v1.0.0.pdf)中，對於每個Port的定義如下
 ```
 /* Description of a physical port */
@@ -54,11 +55,11 @@ struct ofp_phy_port {
 
 這樣看起來我們可以透過`features request`的方式來取得switch上每一個port的capacity，因此做了下列實驗
 
-###環境建置
+### 環境建置
 -	Controller: **Floodlight**
 -	Network environment: **mininet** or **OVS on PC**
 
-####Expr 1
+#### Expr 1
 - mn --controller=remote,ip=127.0.0.1, --topo tree,1 
 - curl http://127.0.0.1:8080/wm/core/switch/all/features/json
 ```
@@ -113,7 +114,7 @@ struct ofp_phy_port {
 ```
 - 從回傳的訊息中可以看到，除了lo以外的`currentFeatures`都是192，192就是2^7+2^6,所以對應到`ofp_port_features`就是`OFPPF_10GB_FD`以及`OFPPF_COPPER`
 
-####Expr 2
+#### Expr 2
 - 這次使用了`traffic control link`可調整頻寬的link來使用，看看是否會有所變化
 - mn --controller=remote,ip=140.113.214.95,port=6633 --topo tree,1 --link tc,bw=100.0
 - curl http://127.0.0.1:8080/wm/core/switch/all/features/json
@@ -170,7 +171,7 @@ struct ofp_phy_port {
 - 可以看到完全沒有變化，不管有沒有設定`tc link`,這個`currentFeatures`的值依然是固定在10G，因此就很好奇會不會是這個featureRequest本身並沒有實作出來，因此換一個網路環境再試試看
 
 
-####Expr 3
+#### Expr 3
 - 這次就不使用`mininet`而是直接用一台實體PC配上`OVS`來跑跑看
 - curl http://127.0.0.1:8080/wm/core/switch/all/features/json
 ```
@@ -249,7 +250,7 @@ struct ofp_phy_port {
 -	採用真正的網卡後，就會發現`currentFeatures`的值是有變化的，這代表`OVS`的確有實作這個功能，於是我就開始好奇，為什麼Mininet中得到的數值都是10G,tc link到底是什麼
 
 
-####Mininet
+#### Mininet
 -	在仔細研究mininet的source code後，大致瞭解了整個運作流程
 - 當`mininet`要在兩個switch間創造一條link的時候，是透過下列手段達成的
 	-	`ip link add name s1-eth1 type veth peer name s2-eth1` 這種系統指令創造一個特殊的裝置`veth`，這兩個裝置的封包會彼此互通，因此就達成了`link`的功用

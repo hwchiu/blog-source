@@ -1,15 +1,17 @@
 ---
-layout: post
 title: Adapter Pattern
+keywords: 'DesignPattern, Adapter Pattern'
 date: '2013-11-24 03:53'
 comments: true
 tags:
   - DesignPattern
 abbrlink: 62386
----
-##Introduction##
+description: Adapter Pattern這個模式是用來讓兩個已經存在但是不相容的介面能夠相容的一種方式。如果資源允許且有辦法，通常都可以直接修改這些已經存在的介面原始碼，擴充讓他能夠支援全新的功能，然而在部分的情況下，其實舊有的介面並不能這樣重新修改。因此這時候可以採用 Adapter Pattern 的方式重新打造一個接口，上承新接口，下承舊接口，藉由這個方式讓舊有的城市不用修改也能夠正常運作。
 
-Adapter Pattern這個模式是用來讓兩個已經存在但是不相容的介面能夠相容的一種方式
+---
+
+## Introduction
+
 
 舉例來說，今天有一家廠商開發數位電視A，並有且對應的API可以讓使用者去操縱
 
@@ -44,7 +46,7 @@ Adapter Pattern這個模式是用來讓兩個已經存在但是不相容的介�
 
 
 
-##Example##
+## Example
 
 
 ``` java

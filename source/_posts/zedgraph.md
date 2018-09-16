@@ -1,19 +1,17 @@
 ---
-layout: post
 title: 'C#中以ZedGraph畫統計圖'
+keywords: 'C#, sharp, zedgraph, graph'
 date: '2013-04-14 17:01'
 comments: true
 tags:
   - 'C#'
 abbrlink: 19231
+description: 在C#中繪製統計圖表，如折線圖、圓餅圖、長條圖 ,除了可以使用內建的Graphics物件外，還可以使用第三方的套件來畫圖,這邊就介紹第三方套件 ZedGraph，下次再介紹以內建的方法來繪圖
+
 ---
 
-在C#中繪製統計圖表，如折線圖、圓餅圖、長條圖
-除了可以使用內建的Graphics物件外，還可以使用第三方的套件來畫圖  。
-這邊就介紹第三方套件 ZedGraph，下次再介紹以內建的方法來繪圖
-<!--more-->
 
-###INSTALL###
+# INSTALL
 目前最新的版本是 [5.16](http://nuget.org/packages/ZedGraph)
 安裝方法請使用 [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)來安裝，
 
@@ -22,7 +20,7 @@ abbrlink: 19231
 之後就會幫你安裝完成，此時你的資料夾底下會有個packages的資料夾，裡面就放有此套件的dll。
 
 
-###USAGE###
+# USAGE
 ZedGraph本身有提供自定義的使用者元件，所有的繪圖都是在該元件上運作，所以必須要先加載該元件  
 元件=>選擇項目=>瀏覽=>pkakage/zedgraph.dll
 
