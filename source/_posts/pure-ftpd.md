@@ -1,12 +1,15 @@
 ---
-layout: post
-title: 'Pure-ftpd '
+title: 'Install the FTP server on FreeBSD'
+keywords: 'FreeBSD,pure-ftpd,ftpd,ftpserver'
 date: '2013-10-12 09:03'
 comments: true
 tags:
   - System
   - FTP
+  - FreeBSD
 abbrlink: 28373
+description: 這邊要跟大家分享的是自架 FTP Server 的一些設定與心得，以往在 Windows 時可以很快速的使用 FilwZilla 來架設 FTP Server, 然而在 FreeBSD 的系統中，我們有哪些相關的選擇可以使用? 本篇文章會採用 Pure-Ftpd 作為一個 FTP Server 並且記錄 FTP 常見的相關用法要如何透過 Pure-Ftpd 來設定
+
 ---
 
 在`Windows`上安裝Ftp-server時，通常都是選擇[Filezilla](https://filezilla-project.org/)這套軟體來使用。
@@ -44,14 +47,14 @@ Other:
 系統:   **FreeBSD 9.2**
 Port:  **Pure-ftpd**
 
-###前置###
+# 前置
 
 - install ports `portmaster ftp/pure-ftpd` (TLS 打勾)
 - `echo 'pureftpd_enable="YES"' >> /etc/rc.conf`
 - create directory 
 	- `mkdir -p /home/ftp/public /home/ftp/upload /home/hidden`
   
-###匿名###
+# 匿名
 - config   `/usr/local/etc/pure-ftpd.conf`
 	- NoAnonymous                 no
 	- AntiWarez                  yes  (上傳檔案owner是'ftp'的不能刪除)
@@ -61,7 +64,7 @@ Port:  **Pure-ftpd**
 	- `pw groupadd ftpuser`
 	- `pw useradd ftp -g ftpuser -d /home/ftp`
 
-###Virtual user###
+# Virtual user 
 - config `/usr/local/etc/pure-ftpd.conf`
 	- PureDB     /usr/local/etc/pureftpd.pdb
 - Add a real account 
@@ -72,15 +75,15 @@ Port:  **Pure-ftpd**
 - IP limitation.
 	- pure-pw usermod ftp-vip -r [IP/mask]   (-r means  allow client's ip)
 
-###Directory permission###
-####public####
+# Directory permission 
+## public
 pulbic中，讓匿名帳號變成other的權限，然後把w權限給拔掉，這樣對於目錄中有任何異動的行為(刪除、移動、改名)都無法使用。
 讓virtualgroup的人也有完整的權限去處理，這樣ftp-vip就有完整權限。
 
 - `chown root:virtualgroup /home/ftp/public`
 - `chmod 775 /home/ftp/public`
 
-####upload####
+## upload
 upload中，匿名帳號要可以下載跟創立資料夾，以及下載非`ftp`擁有的檔案。
 由於先前有設定`AntiWarez`，因此檔案擁有者是`ftp`的就會無法下載，
 ftp-vip是group的權限，因此什麼都可以做。
@@ -89,7 +92,7 @@ ftp-vip是group的權限，因此什麼都可以做。
 - `chmod 775 /home/ftp/upload`
 
 
-####hidden####
+## hidden
 由於目錄的`r`代表的能否看到這些檔案即ls指令，而`x`代表可否進入該資料夾即cd。
 因此我們把r拔掉即可達成。
 
@@ -97,7 +100,7 @@ ftp-vip是group的權限，因此什麼都可以做。
 - `chmod 775 /home/ftp/hidden`
 
 
-###TLS###
+# TLS
 詳細參考 `/usr/local/share/doc/pure-ftpd/README.TLS`
 - 安裝的時候要勾選`TLS`
 - config `/usr/local/etc/pure-ftpd.conf`
@@ -113,5 +116,5 @@ ftp-vip是group的權限，因此什麼都可以做。
   - `openssl req -x509 -nodes -newkey rsa:1024 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem`
   - `chmod 600 /etc/ssl/private/*.pem`
 
-###Restart pure-ftpd###
+# Restart pure-ftpd
 - /usr/local/etc/rc.d/pure-ftpd restart

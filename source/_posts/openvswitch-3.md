@@ -1,6 +1,6 @@
 ---
-layout: post
 title: OpenvSwitch source code(2)
+keywords: 'Openvswitch,OVS,Implementation,code'
 date: '2013-12-13 09:18'
 comments: true
 tags:
@@ -8,10 +8,12 @@ tags:
   - Network
   - OpenvSwitch
   - SourceCode
-keywords: 'SDN,OpenvSwitch,OVS,Kernel'
 abbrlink: 27903
+description: 這篇文章中，我們決定透過閱讀原始碼的方式，來瞭解 OpenvSwitch 操作上最常使用的指令，也就是 add-port 這個指令每次運行時，整個系統到底怎麼運行的。藉由閱讀原始碼的方式來釐清整個 OpenvSwitch 的架構，從 User-space 的程序到 Kerenel Space 的 Module, 這中間到底是怎麼處理的。
+
 ---
-##Brief###
+
+# Preface
 當使用 **ovs-vsctl add-port br0 eth1**的時候，實際上會做什麼事情，這邊分成兩個層面來看
 
 - User space
@@ -19,9 +21,7 @@ abbrlink: 27903
 
 而這之中則會透過 **generic netlink**來溝通
 
-<!--more-->
-
-#### Uer space####
+## User space
 
 這部分還有點卡住，對 **ovsdb** 有更瞭解後再補充
 bridge_reconfigure
@@ -208,7 +208,7 @@ dpif_linux_port_add__(struct dpif *dpif_, struct netdev *netdev,
 - 這邊會設定request的cmd為 **OVS_VPORT_CMD_NEW**
 - 使用 **dpif_linux_vport_transact** 把這個request透過netlink的方式送到kernel端，kernel端會再根據這個request的cmd來執行特定的function.
 
-#### Gereric netlink ####
+## Gereric netlink 
 
 ``` c
 static int dp_register_genl(void)
@@ -298,7 +298,7 @@ static struct genl_ops dp_vport_genl_ops[] = {
 - 當 cmd 是 **OVS_VPORT_CMD_NEW**的時候，就會執行對應的 function handler **ovs_vport_cmd_new**
 
 
-#### Kernel space ####
+## Kernel space
 
 
 ``` c

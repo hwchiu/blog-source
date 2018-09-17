@@ -1,6 +1,6 @@
 ---
-layout: post
 title: FloodlightModule-Topology module
+keywords: 'Floodlight, Topology, Module, SDN'
 date: '2013-08-17 13:17'
 comments: true
 tags:
@@ -9,14 +9,18 @@ tags:
   - Openflow
   - Network
   - SourceCode
-keywords: 'SDN,Controller,Floodlight'
 abbrlink: 62631
+description: 本文基於 SDN Controller Floodlight 的原始碼進行了一次簡單的分析，藉由分析這些原始碼更可以學習到其內部關於網路拓樸的處理，這些拓樸除了影響 Controller 怎麼看待整個網路之外，也會間接的影響該 Controoler 要如何去正確的轉送封包。相對於文件的更新，程式碼本身的迭代速度更為敏捷，因此常常會發生文件跟不上實際運行功能的案例。藉由學習閱讀原始碼，我們可以更快也更清楚的掌握當前這些開源軟體的發展狀態，甚至也能夠貢獻社群幫忙補齊文件。
+
 ---
+
+# Preface
+
 Floodlight中，Topology是一個很大的module，牽扯到整個網路拓樸的運算、維護
 同時也會維護routing路徑以及broadcast tree的ㄧ些資訊。
 
 
-##Architecture##
+# Architecture
 
 - Cluster.java
 - ITopologyListener.java
@@ -28,9 +32,7 @@ Floodlight中，Topology是一個很大的module，牽扯到整個網路拓樸�
 - TopologyManager.java
 - web
 
-<!--more-->
-
-###Cluster###
+## Cluster
 
 *Cluster*
 再controller的觀點中，ㄧ個cluster就是一個SCC( strongly connective component)，cluster中的switch都有辦法到達彼此，因此不同cluster間的switch基本上不能互相傳送資料，除非中間經過ㄧ些傳統的switch( controller不知道有傳統switch的存在)
@@ -47,7 +49,7 @@ Floodlight中，Topology是一個很大的module，牽扯到整個網路拓樸�
   - destination switch dpid
   - destination switch port
 
-###ITopologyListener###
+## ITopologyListener
 Topology提供的callBack function.
 
 ```
@@ -55,7 +57,7 @@ void topologyChanged(List<LDUpdate> linkUpdates);
 ```
 當有拓樸發生變化的時候，就會呼叫此function,並且把所有變動的Link (LLDP)都當作參數傳入。
 
-###ITopologyService###
+## ITopologyService
 Topology提供的主動API,主要可以讓其他的module來獲取topology上的相關資訊
 
 - **isAttachmentPointPort**  
@@ -104,14 +106,14 @@ Topology提供的主動API,主要可以讓其他的module來獲取topology上的
 - **getPorts**    
   取得該switch上所有未被隔離且可以使用的port。
 
-###NodePair###
+## NodePair
 **(此class目前沒有被使用)**
 
-###OrderdNodePair###
+## OrderdNodePair
 **(此class目前沒有被使用)**
 
 
-###NodePortTuple###
+## NodePortTuple
 定義了一個Tuple,包含了一個swtich dpid以及對應的port
 
 ``` java
@@ -122,7 +124,7 @@ Topology提供的主動API,主要可以讓其他的module來獲取topology上的
 - **nodeId** :switch dpid
 - **portId** :switch port id
 
-###TopologyInstance###
+## TopologyInstance
 網路拓璞真正的物件，每次同時只會有一個Instance存在，當網路拓樸改變時，就會創造一個新的TopologyInstance，大部分的service都是在這邊真正實作。
 
 TopologyInstance主要分成兩個部分
@@ -164,6 +166,6 @@ for cluster in clusters
 經過這四個步驟後，整個拓樸中 兩兩swtich間的路徑就決定好了，同時broadcast tree也建立完成，所以也不會有broadcast storm的問題。
 
 
-###TopologyManager###
+## TopologyManager
 網路拓樸的管理者
 **待續**

@@ -1,6 +1,6 @@
 ---
-layout: post
 title: OpenvSwitch source code(3)
+keywords: 'OpenvSwitch,OVS,SourceCOde,netlink,queue,implementation'
 date: '2013-12-22 14:20'
 comments: true
 tags:
@@ -8,9 +8,12 @@ tags:
   - Network
   - OpenvSwitch
   - SourceCode
-keywords: 'SDN,OpenvSwitch,OVS,Kernel'
 abbrlink: 64766
+description: 這篇文章帶領大家透過閱讀原始碼的方來學習如何 OpenvSwitch 是如何處理封包的，當底層的 Kernel Switch(datapath) 沒有辦法轉發封包時，要如何將該封包送到上層的 User Space Table 進行 Openflow 規則的查詢。這部份牽扯到資料如何橫跨於 User-Space 以及 Kernel-Space.
+
 ---
+
+# Preface
 這邊要探討的是當網卡收到封包後，在 **KERNEL** 中由下往上的流程
 
 ![test.png](http://user-image.logdown.io/user/415/blog/415/post/168532/USgXG7XQxy3ZF5Qh1RY7_test.png)
@@ -18,7 +21,7 @@ abbrlink: 64766
 <!--more-->
 
 
-####netdev_frame_hook####
+## netdev_frame_hook
 ``` c
 static rx_handler_result_t netdev_frame_hook(struct sk_buff **pskb)
 {
@@ -46,7 +49,7 @@ static rx_handler_result_t netdev_frame_hook(struct sk_buff **pskb)
 - 呼叫 **netdev_port_receive**來處理這個封包
 
 
-####netdev_port_receive####
+## netdev_port_receive
 
 ``` c
 static void netdev_port_receive(struct vport *vport, struct sk_buff *skb)
@@ -79,7 +82,7 @@ error:
 - ovs_skb_postpush_rcsum 處理ip checksum。
 - 呼叫 **ovs_vport_receive**繼續處理
 
-####ovs_vport_receive####
+## ovs_vport_receive
 
 ``` c
 void ovs_vport_receive(struct vport *vport, struct sk_buff *skb,
@@ -103,7 +106,7 @@ void ovs_vport_receive(struct vport *vport, struct sk_buff *skb,
 - Update counters (packets,bytes)
 - 透過 **ovs_dp_process_received_packet**繼續處理
 
-####ovs_dp_process_received_packet####
+## ovs_dp_process_received_packet
 
 - 這個function的目的就是
 	1. 由skb內取出封包各欄位的資訊(L2,L3,L4)
@@ -170,7 +173,7 @@ out:
 - 如果有找到，先透過 **ovs_flow_used**更新該flow的一些資訊(usedtime,packet,byte,tcp_flag),接者在呼叫 **ovs_execute_actions** 執行這個flow 對應的actions
 
 
-####ovs_flow_extract####
+## ovs_flow_extract
 ```c
 int ovs_flow_extract(struct sk_buff *skb, u16 in_port, struct sw_flow_key *key)
 {
@@ -305,12 +308,12 @@ void ovs_flow_key_mask(struct sw_flow_key *dst, const struct sw_flow_key *src,
 - 把 **src**用 **mask**去處理，結果放到 **dst**上
 - 這邊可以看到做mask的方法就是不停地用 &來取結果而已。
 
-###Found###
+## Found
 尋找到flow後
 1. 更新該flow的一些統計資訊 ( **ovs_flow_used**)
 2. 執行該flow entry上的actions (**ovs_execute_actions**)
 
-####ovs_flow_used####
+### ovs_flow_used
 ``` c
 void ovs_flow_used(struct sw_flow *flow, struct sk_buff *skb)
 {
@@ -339,7 +342,7 @@ void ovs_flow_used(struct sw_flow *flow, struct sk_buff *skb)
 - used(上次使用時間),單位是 **jiffies**
 - counter.
 
-####ovs_execute_actions####
+### ovs_execute_actions
 ```c
 /* Execute a list of actions against 'skb'. */
 int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb)
@@ -380,7 +383,7 @@ out_loop:
 - 這邊會限制執行 **do_execute_actions**的次數，設計理念尚未明瞭。
 - 呼叫 **do_execute_actions**來做後續的處理
 
-####do_execute_actions####
+### do_execute_actions
 ``` c
 static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
                         const struct nlattr *attr, int len, bool keep_skb)
@@ -451,7 +454,7 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 - flow的action都是透過**nlattr**來儲存，這是netlink相關的資料結構，因為 **user space**也會透過netlink的方式要求kernel直接處理封包，所以action都用 **nlattr**來處理
 - 因為可以 output到多個port去，每次都會需要複製 **skb**，所以這邊使用 **prev_port**來處理只有一次 output的情況(不用複製)
 
-###Not found###
+## Not found
 如果沒有找到該flow，kernel就會透過netlink的方式，把這個封包送到 **ovs-vswitched**去處理。
 
 ``` c
@@ -521,7 +524,7 @@ err:
  - 如果發生error，意味者這個封包就不會有人處理了，因此把lost的值增加
   
  
-####queue_userspace_packet####
+### queue_userspace_packet
   
 ``` c
  

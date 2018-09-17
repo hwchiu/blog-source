@@ -1,18 +1,18 @@
 ---
-layout: post
-title: 'openflow #1'
+title: 'Openflow Introduction, Port Types'
+keywords: 'openflow,port,type,introduction'
 date: '2013-04-30 21:10'
 comments: true
 tags:
   - SDN
   - Openflow
-keywords: 'SDN,Protocol,Openflow,Network,SoftwareDefinedNetwork'
 abbrlink: 12741
+description: 本文基於 Openflow 1.0 的規則書，跟大家分享一下在 Openflow 的規範裡到底什麼叫做 Port, 以及有多少種相關的 Port，在使用上要注意些什麼。
+
 ---
 
 
-##Components##
-
+# Components
 
 	|----------|    
 	|Controller|   
@@ -28,8 +28,6 @@ abbrlink: 12741
 	|----------------------
    		(openflow switch)
 
-<!--more-->
-
 
 Component是由controller跟openflow switch所組成的
 
@@ -41,8 +39,7 @@ Component是由controller跟openflow switch所組成的
 
 而action buckets則收集了各種action 以及相對應的參數。
 
-##OpenFlow Ports##
-
+## OpenFlow Ports
 - openflow ports 是openflow switch彼此交換使用的port.
 - 與 openflow switch 上真實的port不會完全對應.
 - 封包進來的稱做為ingress port.
@@ -51,20 +48,21 @@ Component是由controller跟openflow switch所組成的
 	- physical ports
 	- logical ports
 	- reserved ports
-###Standard Ports###
+
+### Standard Ports
 - 定義為physical ports,logical ports and LOCAL reserved port(不包含其他的reserved port)
-###Physical Ports###
+### Physical Ports
 - 由openflow switch定義
 - 跟硬體上真實的port有關，對於一般的switch來說，是 one-to-one的關係
 - 在openflow switch中，有些會使用virtualised的方式來管理ports,此時的physical ports就代表virtual slice
-###Logical Ports###
+### Logical Ports
 - 由openflow switch定義
 - 跟硬體教無關，比physical port更高一階.
 - 被用來使用一些 non-openflow methods(e.g. link aggregation groups, tunnels, loopback interfaces)
 - 可封裝封包.
 - 可對應到不同的physical ports.
 - metadata中會含有Tunnel-ID.
-###Reserved Ports### 
+### Reserved Ports
 - 由specification 1.3定義
 - 做一些通用的forwarding action (e.g. sending to controller,flooding, forwarding using non-OpenFlow methos)
 - openflow switch 沒有要求要支援所有的reserved ports
@@ -77,6 +75,3 @@ Component是由controller跟openflow switch所組成的
 - Optional (openFlow-only switch 不支援)
 	- NORMAL:傳統的switch處理方式
 	- FLOOD:使用normal pipeline 來flooding.
-
-##OpenFlow Tables##
-

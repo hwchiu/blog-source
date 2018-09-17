@@ -1,6 +1,6 @@
 ---
-layout: post
 title: FloodlightModule-Forwarding
+keywords: 'Floodlight, Forwarding, Module, SDN'
 date: '2013-08-06 15:26'
 comments: true
 tags:
@@ -9,19 +9,22 @@ tags:
   - Openflow
   - Network
   - SourceCode
-keywords: 'SDN,Controller,Floodlight'
 abbrlink: 16408
+description: 本文基於 SDN Controller Floodlight 的原始碼進行了一次簡單的分析，藉由分析這些原始碼更可以學習到其內部是如何轉送封包的，藉由 Topology 模組提供的 Global Topology 資訊, Floodlight 可以從該資訊中對於任何一個點到點的之間的連線找到一條傳送路徑。接者針對這傳送路徑上所有的交換機輸入對應的 Openflow 規則來幫忙轉送封包。相對於文件的更新，程式碼本身的迭代速度更為敏捷，因此常常會發生文件跟不上實際運行功能的案例。藉由學習閱讀原始碼，我們可以更快也更清楚的掌握當前這些開源軟體的發展狀態，甚至也能夠貢獻社群幫忙補齊文件。
+
 ---
+
+# Preface 
 Floodlight中，最基本用來轉送封包的module就是Forwarding Module,這邊稍為介紹一下心得:
 
 
-##Architecture##
+# Architecture
 Forwarding 擴充了 *ForwardingBase*,
 ForwardingBase位於/routing/底下，之後會再詳細介紹這個module.
 其主要功能就是幫忙把一個route給送到對應的switches，透過flow-modify的封包來寫入flow-entry到每個路徑上的switch。
 當有封包近來的時候就會呼叫`processPacketInMessage`此function
 ForwardingBase本身並沒有實作該function，把這判斷的部分交給其他的module處理，這邊就是由forwarding modules來處理。
-##Hight-Level Overview##
+# Hight-Level Overview
 當有一個PacketIn event送到controller時，Forwarding中會根據ㄧ些已經決定的decision (如firewall)來決定如何處理
 如果沒有決定的話，就採用預設的行為處理
 
@@ -32,8 +35,8 @@ ForwardingBase本身並沒有實作該function，把這判斷的部分交給其�
 2. Flood (default for broadcast or multicast in Ethernet header)
 3. Forward (default)
 
-##Low-Level implementation##
-###Drop###
+# Low-Level implementation
+## Drop
 
 - Create Openflow Flow-Modify Packet with no action ( no action means drop)
 - Send Flow-Modify Packet to switch.
@@ -48,7 +51,7 @@ ForwardingBase本身並沒有實作該function，把這判斷的部分交給其�
 
 
 **設定Flow-Modify Packet的ㄧ些欄位，譬如HardTimeout,IdleTimeout...,這邊沒有設定Command預設就是flow_add**
-``` java
+``` java=
 fm.setCookie(cookie)
   .setHardTimeout((short) 0)
   .setIdleTimeout((short) 5)
@@ -61,7 +64,7 @@ fm.setCookie(cookie)
 **把訊息藉由messageDamper送給switch**
 `messageDamper.write(sw, fm, cntx);`
 
-###Flood###
+## Flood
 
 - Check the ingress port is allowed broadcast ( according broadcast tree)
 - Create Packout packet with Flood action
@@ -69,7 +72,7 @@ fm.setCookie(cookie)
 
 
 **根據BroadCast Tree判斷發送PacketIn Event的{swtich,port}是否能夠廣播，避免造成broadcast storm**
-````
+```java=
 if (topology.isIncomingBroadcastAllowed(sw.getId(),
     pi.getInPort()) == false) {
     return;
@@ -79,7 +82,7 @@ if (topology.isIncomingBroadcastAllowed(sw.getId(),
 `OFPacketOut po =(OFPacketOut) floodlightProvider.getOFMessageFactory().getMessage(OFType.PACKET_OUT)`
 
 **創造actions,放入一個flood的action,根據ㄧ些property來決定要送到哪個logical port**
-```
+```java=
 List<OFAction> actions = new ArrayList<OFAction>();
 if (sw.hasAttribute(IOFSwitch.PROP_SUPPORTS_OFPP_FLOOD)) {
     actions.add(new OFActionOutput(OFPort.OFPP_FLOOD.getValue(),
@@ -96,7 +99,6 @@ po.setActionsLength((short) OFActionOutput.MINIMUM_LENGTH);
 **如果PacketIn是送bufferID而不是packetData的話，這邊是否要額外判斷???**
 
 ```
-
 byte[] packetData = pi.getPacketData();
 poLength += packetData.length;
 po.setPacketData(packetData);
@@ -105,7 +107,7 @@ po.setPacketData(packetData);
 `messageDamper.write(sw, po, cntx);`
 
 
-###Forward###
+## Forward
 
 - check we know the desination device
 - check source device and destination device are same cluseter
@@ -125,7 +127,7 @@ po.setPacketData(packetData);
 **去探訪destination device所連接到的switch,看看是否有跟發生PacketIn的switch是在同一個Cluster,
 是的話才有辦法轉送，否則就Flood出去**
 
-```
+```java=
 for (SwitchPort dstDap : dstDevice.getAttachmentPoints()) {
     Long dstSwDpid = dstDap.getSwitchDPID();
     Long dstIsland = topology.getL2DomainId(dstSwDpid);`
@@ -155,9 +157,6 @@ on_same_island = true;
 `iSrcDaps++;`
 `iDstDaps++;`
 
-##結論##
+# 結論
 Forwarding是個很基本的module,原始的情況下就是把封包給forward或是flood的而已，
 目前裡面的設計是希望能夠取得多個attach points,但是我目前嘗試各種拓樸，都沒有辦法讓一個device連接到多個switch,不知道是否要使用hub之類的東西來完成，這部分要再嘗試看看。
-
-
-

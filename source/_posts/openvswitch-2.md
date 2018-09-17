@@ -1,6 +1,6 @@
 ---
-layout: post
 title: Openvswitch source code(1)
+keywords: 'OpenvSwitch,OVS,Kernel,Kernel Module,Datapath'
 date: '2013-12-02 09:17'
 comments: true
 tags:
@@ -8,9 +8,12 @@ tags:
   - Network
   - OpenvSwitch
   - SourceCode
-keywords: 'SDN,OpenvSwitch,OVS,Kernel'
 abbrlink: 65240
+description: In this post, I try to study the soruce code of openvswitch to learn how does the openvswitch kernel module works.
+
 ---
+
+# Preface 
 Openvswitch support two modes for user to config, user mode and kernel mode.
 we will discuss the kernel mode in this article.
 
@@ -19,7 +22,8 @@ Software version: openvswitch v.20
 <!--more-->
 
 
-##datapath.c##
+# SourceCode
+## datapath.c
 
 This file is the main part of the kernel module and it will be compiled to the datapath.ko.
 ```
@@ -43,7 +47,7 @@ The following is the work flow of the `dp_init`.
 - dp_register_genl();
 - schedule_delayed_work(&rehash_flow_wq, REHASH_FLOW_INTERVAL);  
 
-###ovs_workqueues_init###
+### ovs_workqueues_init
 **workqueue.c**
 
 ``` c
@@ -111,7 +115,7 @@ static void run_workqueue(void)
 
 - Get the work from the workq list and call the fucntion.
 
-###ovs_flow_init###
+### ovs_flow_init
 **flow.c**
 
 ``` c
@@ -154,7 +158,7 @@ struct sw_flow {
 ```
 - This struct store the info of each flow, including count, flow_key and flow_mask.
 
-###ovs_vport_init###
+### ovs_vport_init
 **vport.c"**
 ``` c
 /**
@@ -175,7 +179,7 @@ int ovs_vport_init(void)
 - Use `kzalloc` malloc the memory from kernel.
  
  
-###register_pernet_device(&ovs_net_ops)###
+### register_pernet_device(&ovs_net_ops)
 ``` c
 	register_pernet_device(&ovs_net_ops);
 ```
@@ -254,7 +258,7 @@ void ovs_dp_notify_wq(struct work_struct *work)
 - Delete the vport if its status is `UNREGISTERED` of `UNREGISTERING`.
 
 
-###register_netdevice_notifier###
+### register_netdevice_notifier
 
 ``` c
  register_netdevice_notifier(&ovs_dp_device_notifier);
@@ -299,7 +303,7 @@ static int dp_device_event(struct notifier_block *unused, unsigned long event,
 
 - Need to study.
 
-###dp_register_genl###
+### dp_register_genl
 **datapath.c**
 
 ```  c
@@ -410,10 +414,10 @@ static struct genl_ops dp_datapath_genl_ops[] = {
 - Take **dp_datapath_genl_ops** for example. when the event is **OVS_DP_CMD_NEW** it will call it function handler **ovs_dp_cmd_new**.
 
 
-###schedule_delayed_work###
+### schedule_delayed_work
 
 - Need to study
 
-###other###
+### other
 
 - pr_info is printk(KERN_INFO,pr_fmt(fmt), ##__VA_ARGS__)  

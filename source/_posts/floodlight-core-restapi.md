@@ -1,6 +1,6 @@
 ---
-layout: post
 title: Floodlight Core RestAPI - part1
+keywords: 'Floodlight, API, Restful'
 date: '2013-11-24 05:58'
 comments: true
 tags:
@@ -9,9 +9,13 @@ tags:
   - Java
   - Network
   - SourceCode
-keywords: 'SDN,Controller,Floodlight'
 abbrlink: 51608
+description: 本文基於 SDN Controller Floodlight 的原始碼進行了一次簡單的分析，藉由分析這些原始碼更可以瞭解每個開放出來的 Restful API 該怎麼使用。相對於文件的更新速度，程式碼本身的迭代速度更為敏捷，因此常常會發生文件跟不上實際運行功能的案例。藉由學習閱讀原始碼，我們可以更快也更清楚的掌握當前這些開源軟體的發展狀態，甚至也能夠貢獻社群幫忙補齊文件。
+
 ---
+
+# Preface
+
 Floodlight Openflow Controller 預設就有Rest Server 並且提供對應的Rest API供使用者呼叫使用
 
 再core module這邊，目前提供了8種restAPI使用
@@ -28,9 +32,7 @@ Floodlight Openflow Controller 預設就有Rest Server 並且提供對應的Rest
 第一篇主要講前面兩個，關於switch information方面。
 
 
-<!--more-->
-
-##Usage##
+# Usage
 這兩個RestAPI做的事情就是對switch 發送 Openflow status request的封包去詢問相關的訊息
 發送的種類就是 **statType**。以下是目前的類型
 
@@ -48,7 +50,7 @@ Floodlight Openflow Controller 預設就有Rest Server 並且提供對應的Rest
 
 
 
-##Implement##
+# Implement
 
 1. `core/web/CoreWebRoutable.java` 裡面可以發現core像IRestApiService註冊了下列事件
 ```
@@ -59,7 +61,7 @@ router.attach("/switch/{switchId}/{statType}/json", SwitchStatisticsResource.cla
 當使用者透過  `/wm/core/switch/all/{statType}/json`時最後會透過`AllSwitchStatisticsResource`去處理  
 如果透過的指定swtich id的方式，則會透過 `SwitchStatisticsResource`這個物件來處理。
 
-####特定switch id####
+## 特定switch id
 
 2. `core/web/SwitchStatisticsResource.java` 可以看到下列的程式碼
 ``` java
@@ -181,7 +183,7 @@ router.attach("/switch/{switchId}/{statType}/json", SwitchStatisticsResource.cla
 - 最後把結果給回傳回去。
 
 
-####所有switch####
+## 所有switch
 
 - `core/web/AllSwitchStatisticsResource.java` 中可以觀察倒整個code
 
