@@ -7,7 +7,8 @@ tags:
   - Linux
 abbrlink: 27871
 date: 2018-07-24 18:04:31
-description:
+description: 在管理 Kubernetes 集群方面，大部分的玩家及管理者一開始最在意的一定會是自己的服務能不能夠順利運行起來，同時能不能藉由 kubernetes 的諸多特性，如 service/configmap/deployment/daemonset 等各式各樣的資源來加強自身的服務能力。然而對於一個真正運行產品的集群來說是完全不夠的，除了服務的功能以及穩定外，還有諸多相關的議題都需要一併考慮並且處理。在此議題下特別重要的就是 Security 的處理， Security 處理的不當，可能會造成使用者的資料被竊取，更嚴重甚至整個集權的管理權限都被外人取得。因此這次特別分享一篇 "11 Ways Not to Get Hacked" 的文章，針對裡面提出的 11 個保護好你 kubernetes 集群的方向進行研究，並且配上自己的心得與整理。
+
 ---
 
 本篇文章的原文為 [11 Ways Not to Get Hacked](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/#11-run-a-service-mesh)
@@ -23,7 +24,6 @@ description:
 
 本篇文章後續 [11個保護你 Kubernetes 集群的技巧與觀念(下)](https://www.hwchiu.com/k8s-security-11tips-ii.html#more)
 
-<!--more-->
 
 ## The Control Plane
 `The Control Plane` 所代表的就是 `Kubernetes` 的控制面，其擁有的權力跟能力非常的巨大，從最基本資源的創建與監控 (Pod/Deployment/Service)，資源的調度(Pod Schedule) 以及包括所有 Kubernetes 上資源的存取 (Secret/ConfigMap)。

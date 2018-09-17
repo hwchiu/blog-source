@@ -4,20 +4,17 @@ keywords: 'golang,mongo,aggregate,mgo'
 abbrlink: 58018
 date: 2018-08-31 14:09:05
 tags:
-  - golang
-  - mongo
-description:
----
+  - Golang
+  - Mongo
+description: 本篇文章首先跟大家分享一個常見的 Schema 設計，在此情境下，為了讀取一連串的資料，我們有不同種方式可以辦到。其中一種就是本文的主角, Aggregate 的概念。為了解釋 Aggregate 如何運作以及如何實現，本文採用 Golang 作為基本的程式語言，並且使用 mgo 作為與 mongo 進行處理的第三方函式庫。此外也採用了最原始的讀取方式，並且將此方式從撰寫方式以及效能兩方面直接與 Aggregate 進行比較。
 
-本篇文章主要在探討在 mgo 裡面要如何實現 Aggregate 功能，並且將其與自己使用 `Find`  的方式進行了些許比較
+---
 
 在探討整個主題之前，我們先設計一個簡單的 `schema` 來符合這次
 假設今天在資料庫內有主要結構，分別是 `User` 跟 `Pod`
 `User` 非常簡單，就是描述一個使用者
 `Pod` 這邊不用在意他是什麼東西，他是一個資源，然後透過 `User` 創立的，所以每個 `Pod` 裡面都會有一個欄位去記錄是哪個 `User` 創立的。
 
-
-<!--more-->
 有了前述的假設之後，接下來想像一個實際需求
 1. 有一個 `UserA` 創造了數百個 `Pod` 資源。
 2. 想要 Query 該 `UserA` 並且列出該`User`創造的所有`Pod`資源的細部資料
