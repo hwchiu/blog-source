@@ -1,17 +1,20 @@
 ---
-layout: post
 title: Build own octopress
+keywords: 'octopress, build, setup'
 date: '2013-04-06 13:00'
 comments: true
 tags:
   - System
 abbrlink: 48550
+description: 本文用來記錄在安裝 octopress 發生的問題以及如何解決
+
 ---
 
+# Basic install
+參考下列文章來進行基本的安裝
+[setup octopress on windoes from zero to 100](http://tech.marsw.tw/blog/2012/11/23/setup-octopress-on-windows-from-zero-to-100)
 
-##Basic install##
-Reference [this](http://tech.marsw.tw/blog/2012/11/23/setup-octopress-on-windows-from-zero-to-100)
-##Problem solved##
+# Problem Solved
 1.下指令 rake setup_github_pages ，噴出錯誤訊息  
 	rake aborted!
 	You have already activated rake 10.0.2, but your Gemfile requires rake 0.9.2.2.
@@ -26,7 +29,7 @@ Reference [this](http://tech.marsw.tw/blog/2012/11/23/setup-octopress-on-windows
 >先把git的路徑加入倒環境變數PATH中，在使用windows內建的shell來執行相關指令  
 >reference [this](http://www.v2ex.com/t/32542)  
 
-##Upload##
+# Upload
 因為文章中若含有中文，必須要設定環境變數，加上每次上傳都要先產生文章，在更新上去，懶惰的我就寫了一個batch來使用  
 batch.bat  
 	set LANG=zh_TW.UTF-8
@@ -35,11 +38,10 @@ batch.bat
 
 
 ***
-<!-- more -->
 
-#Category#
+# Category
 
-###Install ####
+## Install
 
 
 增加一個category_list 外掛,新增 plugins/category_list_tag.rb   
@@ -83,14 +85,14 @@ batch.bat
 
 	default_asides: [asides/category_list.html, asides/recent_posts.html]
 
-###Use###
+## Usage
 寫新文章的時候，底下會出現categories的標籤，在後面增加其類別即可  
 	categories: [System]
 如果想要同時增加到多個類別，就用逗號隔開
 	categories: [System ， Life]
 
 ***
-#Comments#
+# Comments
 
 1. 先到[Disqus](http://www.disqus.com/)註冊帳號,其中會有個short_name,這個名稱記住下來，等等會用到
   
@@ -105,7 +107,7 @@ batch.bat
 3. 上傳重新整理看看
 
 ***
-#Backup Octopress source #
+# Backup Octopress source
 ```
 	git add *  
 	git commit -m "message"  
@@ -114,7 +116,7 @@ batch.bat
 ```   
 
 
-##[Reference]##
+# [Reference]
 [Setup Octopress on Windows From Zero to 100](http://tech.marsw.tw/blog/2012/11/23/setup-octopress-on-windows-from-zero-to-100/ "Setup Octopress on Windows From Zero to 100")  
 
 [为octopress添加分类(category)列表](http://codemacro.com/2012/07/18/add-category-list-to-octopress/)

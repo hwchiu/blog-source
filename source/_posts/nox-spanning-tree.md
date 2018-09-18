@@ -1,6 +1,6 @@
 ---
-layout: post
 title: Nox-Spanning_Tree
+keywords: 'NOX,SDN,Topology,Tree'
 date: '2013-09-02 07:01'
 comments: true
 tags:
@@ -10,22 +10,25 @@ tags:
   - Nox
   - Python
 abbrlink: 37403
----
-Spanning_tree 是nox的一個module.
+description: 對於 SDN Controller 來說，最基本的功能就是要可以傳輸封包，然而在這種集中式管理的情況下，傳統的 Spanning Tree Protocol 不會運行。因此 Controller 本身要有辦法判斷當前的網路拓墣中是否有迴圈以避免產生廣播風暴。本文會透過觀察原始碼的方式來研究在 NOX Conroller 是如何實現的。
 
+---
+
+# Preface
+Spanning_tree 是nox的一個module.
 nox會藉由此moudle來維護spanning tree,避免封包在廣播的時候會產生broadcast storm.
 
-###__init__###
+# Introduction
+## __init__
 這邊做的是一些成員的初始化，包括一些set的初始。
 
-###install###
+## install
 首先會呼叫```update_lldp_send_period```更新一次lldp發送的頻率
 
 會根據port的數量去決定LLDP發送的頻率,目前FLOO_D_WAIT_TIME 預設是10秒，代表10秒內要把平均的送出LLDP出去。
-<!--more-->
 
 接者會去註冊一些相關事件
-```python
+```python=
 self.register_for_datapath_join ( self.dp_join )
 self.register_for_datapath_leave( self.dp_leave )
 self.register_for_port_status( self.handle_port_status )
@@ -38,7 +41,7 @@ self.register_for_packet_in( self.handle_packet_in)
 意思就是這行結束一秒後，就會自己執行update_spanning_tree.
 `self.post_callback(1, self.update_spanning_tree)`
 
-###dp_join###
+## dp_join
 當有switch 與controller連線之後，便會呼叫此function來做處理。
 
 如果Nox本身不認得該switch的話，就會去紀錄該switch有哪些port
@@ -69,11 +72,11 @@ self.update_lldp_send_period()
     
 ```
 
-###dp_leave###
+## dp_leave
 當有swtich離開的時候，先檢查該switch是否存在
 然後把整體的port_count給調整。
 
-###update_spanning_tree###
+## update_spanning_tree
 先利用bindings去取得所有的link，然後把本身的一個callback function傳進去。
 接者在FLOOD_PORT_UPDATE_INTERVAL(5 sec)的時間後，呼叫update_spanning_tree.
 ```python
@@ -81,14 +84,14 @@ self.bindings.get_all_links(self.update_spanning_tree_callback)
 self.post_callback(FLOOD_PORT_UPDATE_INTERVAL, self.update_spanning_tree)
 ```
 
-###update_spanning_tree_llback###
+## update_spanning_tree_llback
 
 
 
-###handle_port_status###
+## handle_port_status
 
 
-###handle_packet_in###
+## handle_packet_in
 
 
 port是flood port或是該封包是LLDP 這兩種情況就直接把該封包傳給下一個module去處理。
@@ -131,7 +134,7 @@ try:
             return STOP
 ```
 
-###update_lldp_send_period###
+## update_lldp_send_period
 
 在nox中LLDP的發送情況是要在 FLOOW_WAIT_TIME的時間內 把所有的LLDP都送出去
 

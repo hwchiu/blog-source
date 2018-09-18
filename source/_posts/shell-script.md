@@ -1,17 +1,20 @@
 ---
-layout: post
-title: SA - Shell Script  (1)
+title: Shell Script 筆記
+keywords: 'Linux,Shell Script, pipe'
 date: '2013-11-24 12:39'
 comments: true
 tags:
   - System
   - ShellScript
 abbrlink: 17288
----
-###SA Homework###
+description: 記錄一些之前寫 Shell Script 作業的心得與筆記
 
-##Part 1##
-####Introduction####
+---
+
+# Preface
+本篇文章是用來記錄以前修課關於 Shell Script 的作業
+
+# Introduction
 用Unix的指令，透過pipe的方式完成下列要求
 - 計算當前目錄底下資料夾的總數
 - 計算當前目錄底下檔案總數
@@ -20,7 +23,7 @@ abbrlink: 17288
 - 顯示前五大的檔案名稱
 - 只能使用PIPE，不能使用 `$$` `;` `||` `&` `>` `>>` `<`
 
-####Implement####
+# Implement
 - 使用`ls`來取得所有資料夾跟檔案的資訊
 	* -l  可以顯示詳細資訊，這邊我們要取得的是 檔案大小
   * -R  遞迴的往每個資料夾繼續往下找
