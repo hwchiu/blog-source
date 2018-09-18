@@ -187,8 +187,7 @@ tcp, udp, udplite, icmp, esp, ah, sctp。
 前述我們已經看到了 `iptables` 的運作流程，而前篇文章我們也看過了 `ebtables` 的運作流程。
 現在我們需要將這兩者的邏輯給結合，構造出一個更複雜的網路系統。
 
-
-![Imgur](https://i.imgur.com/q7hUk0X.png)
+![Imgur](https://i.imgur.com/9KA6I1W.png)
 
 這張圖裡面我們依然分成三個部分來看待，分別是 `User-Application`, `Kernel-Space/Layer3` 以及 `Kernel-Space/Layer2`.
 
