@@ -1,6 +1,6 @@
 ---
-layout: post
 title: mpd5 on FreeBSD 10.0
+keywords: 'freebsd, vpnserver, mpd5,vpn'
 date: '2014-07-26 14:29'
 comments: true
 tags:
@@ -9,29 +9,27 @@ tags:
   - Network
   - System
 abbrlink: 44759
+description: VPN server is a very useful tool for your network connectivity, although there're many online VPN service around the world, it's slow speed and money cost and you can't sure they won't collect your connection data. That's why sometimes we want to build the VPN server by ourself and this porst introduce a way to setup a VPN server in your FreeBSD server.
+
 ---
-Goal
-----
+
+# Preface
 Install a VPN server on FreeBSD 10.0-Release on Amazon EC2.
 
-<!--more-->
-
-Install
--------
-####Pkg
+# Install
+## Pkg
 - pkg install mpd5  
 
-####Ports
+## Ports
 - portmaster net/mpd5
 
-Config
-------
-####VPN Configuraion
+# Config
+## VPN Configuraion
 - **cp /usr/local/etc/mpd5/mpd.conf.sample /usr/local/etc/mpd5/mpd.conf**
 - `set user hwchiu 123456` used to config the admin's accoutn and password of the web page.
 - `set web self 0.0.0.0 5006` is the listen ip address and port of the web page.
 
-``` sh
+```bash=
 startup:
         # configure mpd users
         set user hwchiu 123456  
@@ -97,7 +95,7 @@ default:
         set link enable incoming
 ```
 
-####User configuration
+## Use configuration
 - **cp /usr/local/etc/mpd5/mpd.secret.sample  /usr/local/etc/mpd5/mpd.secret**
 The format of mpd.secret is `username password ip_address` per line.  
 - **Example**
@@ -107,10 +105,10 @@ fred            "fred-pw"
 joe             "foobar"        192.168.1.1
 ```
 
-####System configuration
+## System configuration
 - **sysctl net.inet.ip.forwarding=1**
 - **Pf configuraion**
-	1. use NAT for internal private network.
+  1. use NAT for internal private network.
   2. skip the lo interface.
   3. block adll traffic adn log all packet by default.
   4. pass in tcp for port 1723 (PPTP)
@@ -133,7 +131,7 @@ pass in from $internal_net to any
 pass out proto { gre, tcp, udp, icmp } all keep state
 ```
 
-####Log configuration.
+## Log configuration.
 - Edit /etc/syslog.conf
 ```
 !mpd
@@ -142,6 +140,5 @@ pass out proto { gre, tcp, udp, icmp } all keep state
 - Touch /var/log/mpd.log
 - Restart syslog
 
-Usage
------
+# Usage
 - **/usr/local/etc/rc.d/mpd5 start**

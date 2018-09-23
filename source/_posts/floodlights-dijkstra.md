@@ -1,6 +1,6 @@
 ---
-layout: post
 title: Floodlight Dijkstra
+keywords: 'Linux,Route,Dijkstra,Tree'
 date: '2013-11-03 09:52'
 comments: true
 tags:
@@ -10,10 +10,13 @@ tags:
   - Network
   - Algorithm
   - SourceCode
-keywords: 'SDN,Controller,Floodlight'
 abbrlink: 53424
+description: 這篇文章用來介紹在 Fllodlight 中是如何去完成下列事情, 1)不使用 Spanning Tree Protocol 的方式也能夠正確的在有迴圈的網路拓樸中來傳輸封包，2) 針對任意兩個點對點的網路節點，能夠找到一條最短的路徑用來傳輸封。 這些事情在該控制器中，其實是透過計算一個 Tree 的方式來完成所謂的 Broadcast Tree, 藉此避免廣播風暴的問題，同時透過 Djikstra 的演算法來在拓樸中找到一個最短路徑來傳輸封包。
+
 ---
-再 **Floodlight** 中，會定期送出 **LLDP** 的封包去學習當前拓樸的情況
+
+# Preface
+再**Floodlight** 中，會定期送出 **LLDP** 的封包去學習當前拓樸的情況
 一旦發線拓樸情況有所改變，就會產生一個新的TopologyInstance物件
 在這個物件之中就會重新去計算 **broadcast tree** 以及拓樸中每個switch的 **shortest path tree**。
 
@@ -21,9 +24,8 @@ abbrlink: 53424
 
 再 `calculateShortestPathTreeInClusters`裡面
 會針對每個cluster中的每個node都去跑一次dijkstra,來建立這個node再該cluster中的shortest path tree.
-<!--more-->
 
-####Function####
+# Function
 
 `protected BroadcastTree dijkstra(Cluster c, Long root,Map<Link, Integer> linkCost,boolean isDstRooted)`
 
@@ -32,7 +34,7 @@ abbrlink: 53424
 - **Map<Link, Integer> linkCost**: 這個cluster中所有link的cost,預設中是空的，只有tunnal port對應的link才有cost
 - **boolean isDstRooted**: 用來指示 一條link要看其src switch還是dst switch,目前是用true,但是我覺得改成false也不影響結果。
 
-####Member####
+# Memember
 
 -  HashMap<Long, Link> nexthoplinks   
    用來記錄其shortest path tree的結構，key是switch node, value是連接到該switch node是透過哪條link。
@@ -57,10 +59,10 @@ abbrlink: 53424
 ```
    
 
-###Algorithm###
+# Algorithm
 
 
-####Step1####
+## Step1
 - 初始化相關容器
 - 由cluster取得所有的link，先設定所有switch node的cost都是無限大
 - root該switch node的cost是0
@@ -85,7 +87,7 @@ cost.put(root, 0);
 
 ```
 
-####Step 2 ####
+## Step 2
 - 從queue裡面拿出cost最小的node
 - 取得到達該node的cost
 - 做個錯誤檢查
@@ -103,7 +105,7 @@ cost.put(root, 0);
             seen.put(cnode, true);
 ```
 
-####Step 3####
+## Step 3
 -  取得該node連接的所有link **每條link都會存放兩次，src跟destnation會相反**
 -  根據 `isDstRooted`，每條link都只取src or dest (因為每條link會出現兩次，所以switch一定不會漏掉)
 -  檢查該node是否已經看過了
@@ -144,7 +146,7 @@ cost.put(root, 0);
             }
         }
 ```
-####Step 4####
+## Step 4
 - 利用`nexthoplinks`去創見一個broadcast tree.並且把該tree回傳做為該node的shortest path tree.
 
 ``` java

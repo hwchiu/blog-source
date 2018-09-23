@@ -1,16 +1,19 @@
 ---
-layout: post
-title: json初體驗
+title: 'Json in C-Sharp(C#)'
+keywords: "csharp,json,example"
 date: '2013-04-06 22:49'
 comments: true
 tags:
-  - 'C#'
+  - CSharp
 abbrlink: 3890
+description: 這篇文章用來介紹在 C# 中如果想要針對 json 的種格式的資料進行處理的話，可以使用那些函式庫來幫忙處理。同時也針對不同種的使用方法給予相對應的範例程式碼，讓大家可以更快速且方便地用 C# 來操作 json 的格式資料。
+
 ---
 
+# Preface
 JSON相對於XML來說較為簡單，沒有繁瑣的標籤，取而代之的就是一對<key,value>
 如
-``` json
+```json=
 {
 	"name":
 	{
@@ -27,21 +30,15 @@ JSON相對於XML來說較為簡單，沒有繁瑣的標籤，取而代之的就�
 
 }
 ```
-<!--more-->
 
-如何以C#來處理JSON格式的物件    
+# CSharp
+本文將介紹如何以C#來處理JSON格式的物件，
+所以這邊推薦使用**JSON.NET**這個被廣泛使用的函式庫
 
-- 直覺做法  
-用字串慢慢拼湊起來
-String str = "firstName:"+........  
-**怎看都知道絕對不可能這樣做，完全不直覺+沒效率!!!!**    
-  
-- 所以這邊推薦使用**JSON.NET**這個被廣泛使用的函式庫
-
-##安裝##
+# 安裝
 請參考官方網站說明 [JSON.NET](http://json.codeplex.com//)
 
-##JSON.NET使用##
+# JSON.NET使用
 JSON.NET中，對於JSON的操作，主要分成兩大類  
 
 - Serializing and Deserializing JSON  
@@ -53,10 +50,10 @@ JSON.NET中，對於JSON的操作，主要分成兩大類
 以下就針對使用這兩種方法來實際操作json
 同時就以上述的範例作為json data
  
-###Create JSON Format Data###
+## Create JSON Format Data
 
-####Serializing####
-``` c#
+## Serializing
+``` c#=
 	public class Student
 	{ 
 	    public Dictionary<string,string> name {get;set;}
@@ -84,6 +81,8 @@ JSON.NET中，對於JSON的操作，主要分成兩大類
     string a = JsonConvert.SerializeObject(student, Newtonsoft.Json.Formatting.Indented);
     Console.WriteLine(a);
 ```
+
+```json=
 	Output
 		{
 		  "name": {
@@ -97,8 +96,9 @@ JSON.NET中，對於JSON的操作，主要分成兩大類
 		    "hwchiu@cs.nctu.edu.tw"
 		  ]
 		}
+```
 
-####LINQ TO JSON####
+## LINQ TO JSON
 這種類型下，有非常多的方法可以使用  
 
 - JTokenWriter  
@@ -139,8 +139,8 @@ JSON.NET中，對於JSON的操作，主要分成兩大類
 		    "hwchiu@cs.nctu.edu.tw"
 		  ]
 		}
-###Read JSON Format Data###
-####Serializing####
+### Read JSON Format Data
+### Serializing
 
 ``` c#
 	string json = @"	{
@@ -172,7 +172,7 @@ JSON.NET中，對於JSON的操作，主要分成兩大類
 		sppsorrg@gmail.com
 		hwchiu@cs.nctu.edu.tw
 
-###LINQ TO JSON###
+### LINQ TO JSON
 在讀取方面，使用JObect.Parse來解析JSON字串，接下來在讀取資料方面，有很多種用法   
 
 - LINQ Query  
@@ -210,11 +210,11 @@ JSON.NET中，對於JSON的操作，主要分成兩大類
 		0156521
 		sppsorrg@gmail.com
 		hwchiu@cs.nctu.edu.tw
-###Modify JSON Format Data###
-####Serializing####
+### Modify JSON Format Data
+### Serializing
 這邊我沒有找到好的辦法，目前可能是要先deserialize給寫到物件，再對該物件進行操作，最後在serialize給寫回JSON去。
 
-####LINQ TO JSON ####
+### LINQ TO JSON
 這部分直接對JObject去進行修改就可以了
 
 ```c#

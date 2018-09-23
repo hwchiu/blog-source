@@ -1,12 +1,16 @@
 ---
-layout: post
-title: xml初體驗
+title: 'XML in C-Sharp(C#)'
+keywords: "csharp,xml,example"
 date: '2013-03-30 12:43'
 comments: true
 tags:
-  - 'C#'
+  - CSharp
 abbrlink: 3300
+description: 這篇文章用來介紹在 C# 中如果想要針對 xml 的種格式的資料進行處理的話，可以使用那些函式庫來幫忙處理。同時也針對不同種的使用方法給予相對應的範例程式碼，讓大家可以更快速且方便地用 C# 來操作 xml 的格式資料。
+
 ---
+
+# Preface
 
 雖然現在已經有JSON的出現，更輕量級的資料表達方式
 但不少系統依然使用者XML做為資料格式，譬如MSN的歷史訊息
@@ -28,16 +32,13 @@ abbrlink: 3300
 ```
 
 
-<!--more-->
-
-
 Studnets就是所謂的root,底下有兩個node，都是student,然後每個node本身有自己的屬性(ID)，同時底下又有其他的node,這些node又有自己的屬性與對應的值。
 
-	簡單介紹XML後，就來用用看C#中如何使用XML
+簡單介紹XML後，就來用用看C#中如何使用XML
 
 C#中，關於XML有關的函式都在System.Xml中
 
-##創立一個XML檔案
+# Create XML file
 XmlDocument 是 XML的文件類別，要存取一個XML文件，就要透過這個類別
 XmlDeclaration 是XML文件類別的開頭宣告，可以利用此函式為XML文件寫下其聲明
 XmlElement 是XML文件中重要的一個物件，代表每一個節點，所有資料的搬移讀寫都靠操作節點完成
@@ -100,8 +101,8 @@ XmlElement 是XML文件中重要的一個物件，代表每一個節點，所有
 	    <email>sppsorrg11.cs97@nctu.edu.tw</email>
 	  </Student>
 	</Students>
-##讀取XML
-###XMLReader  
+# Read the XML
+## XMLReader  
 使用XmlReader來逐步讀取XML，對於過大的XML檔案時，不會一口氣全部讀進memory
 由於有實作IDisposable,所以使用using來自動釋放資源
 reader會逐步讀取，每個tag分成 Element,Text,EndElement，以上述為例
@@ -163,7 +164,7 @@ Output
 	</Student>
 	</Students>
 
-###XMLDocument
+## XMLDocument
 XMLDocument載入xml檔案時，會一次讀完，所以可以直接使用其方法來訪問各個節點
 一樣以剛剛的student.xml為範例
 先利用GetElementsByTagName取得所有node的list 集合
@@ -202,7 +203,7 @@ Output
 	<name> sppsorrg
 	<age> 18
 	<email> sppsorrg11.cs97@nctu.edu.tw
-###LINQ
+# LINQ
 這邊使用LINQ來搜尋XML文件，所以必須要先使用  
 **using system.xml.Linq** 
 
