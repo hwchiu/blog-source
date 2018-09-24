@@ -9,9 +9,11 @@ tags:
   - DNS
   - SourceCode
   - Docker
-description:
+description: 在前篇文章有跟大家分享過實際部屬上遇到的 DNS 問題，並且透過實驗佐證去觀察結果, 本篇文章則是透過另外一種觀點來觀察結果,透過閱讀原始碼的方式來觀察到底 kubernetes 再創建相關的 Pod 時會如何去處理 DNS 相關的設定，由於整個過程牽扯到 kubernetes 以及 CRI(Container Runtime Interface)的操作，而我們預設使用的則是 Docker 作為底層容器的操作. 本篇文章會針對後半部分，也就是所謂的 docker(dockerd) 本身再創建容器的時候，會如何處理其 DNS 相關的設定，透過閱讀 docker-ce 以及 libnetwork 相關的原始碼，不但能夠更清楚的釐清全部的運作原理，也能夠學習到 docker 底層實踐的過程與精神
+
 ---
 
+# Preface
 此篇文章是 Kubernetes Pod-DNS 系列文章最後一篇
 此系列文會從使用者的用法到一些問題的發掘，最後透過閱讀程式碼的方式去分析這些問題
 
@@ -20,7 +22,7 @@ description:
 - [[Kubernetes] DNS Setting with Dockerd](https://www.hwchiu.com/kubernetes-dns-ii.html)
 - [[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
 
-## 正文
+# 正文
 
 再上篇文章 - [[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html) 中，我們透過閱讀 `kubernetes` 原始碼的方式已經理解到 `kubernetes` 本身是怎麼去處理 `DNS` 的設定。 但是卻留下了一個謎團就是 `dockerd` 到底如何處理每個容器本身的 `DNS` 設定?
 
@@ -46,7 +48,7 @@ description:
 
 <!--more-->
 
-## dockerd
+# dockerd
 
 如同前篇文章所說，要透過閱讀原始碼找尋問題的最大困難點就是起點，要先想辦法找到與目標問題有關的進入點，然後從該進入點開始挖掘跟目標有關的程式碼。
 
@@ -71,9 +73,9 @@ description:
 
 我們接下來就直接從整個創造容器的起點 `ContaienrStart` 來開始看吧!
 
-## 程式碼研究
+# 程式碼研究
 
-### ContainerStart
+## ContainerStart
 ```go ContaienrStart https://github.com/docker/docker-ce/blob/da1e08d48493406ce290a1b99269e52879af5b0e/components/engine/daemon/start.go#L18 start.go
 
 func (daemon *Daemon) ContainerStart(name string, hostConfig *containertypes.HostConfig, checkpoint string, checkpointDir string) error {
@@ -96,7 +98,7 @@ func (daemon *Daemon) ContainerStart(name string, hostConfig *containertypes.Hos
 
 這邊的邏輯基本上就是處理一些 `Container` 相關設定，最後直接呼叫一個私有函式 `containerStart` 來進行更進一步的處理
 
-### containerStart
+## containerStart
 
 
 
@@ -154,7 +156,7 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 再這個函式內會創建好相關的容器，並且會將該容器用到的相關資源(儲存/網路)等都準備好
 ，由於我們要觀察的是 `DNS` 相關的資訊，所以我們要繼續往 `initializeNetworking` 的方向往下追。
 
-### initializeNetworking
+## initializeNetworking
 
 ```go initializeNetworking https://github.com/docker/docker-ce/blob/6e92e5909666b3b9c2aecebf582e8af85f228899/components/engine/daemon/container_operations.go#L916 container_operations.go
 
@@ -182,7 +184,7 @@ func (daemon *Daemon) initializeNetworking(container *container.Container) error
 
 因為這些情境跟我們的 `Kubernetes` 的使用方法不同，我們不會走到這邊的判斷，而是直接會走到下面的 `allocateNetwork` 來開始準備網路相關的資訊。
 
-### allocateNetwork
+## allocateNetwork
 
 ```go allocateNetwork https://github.com/docker/docker-ce/blob/6e92e5909666b3b9c2aecebf582e8af85f228899/components/engine/daemon/container_operations.go#L501 container_operations.go
 func (daemon *Daemon) allocateNetwork(container *container.Container) error {
@@ -208,7 +210,7 @@ func (daemon *Daemon) allocateNetwork(container *container.Container) error {
 所以接下來就很直覺的去呼叫 `connectToNetwork` 來進行下一階段的處理
 
 
-### connectToNetwork 
+## connectToNetwork 
 ```go connectToNetwork https://github.com/docker/docker-ce/blob/6e92e5909666b3b9c2aecebf582e8af85f228899/components/engine/daemon/container_operations.go#L690 container_operations.go
 func (daemon *Daemon) connectToNetwork(container *container.Container, idOrName string, endpointConfig *networktypes.EndpointSettings, updateSettings bool) (err error) {
 	start := time.Now()
@@ -250,7 +252,7 @@ func (daemon *Daemon) connectToNetwork(container *container.Container, idOrName 
 值得注意的是，這邊有一個 `buildSandboxOptions` 會把其他用到的參數都重新整理一次，然後傳入到 `controller.NewSandbox` 這邊去處理。
 
 
-### NewSandbox
+## NewSandbox
 ```go    NewSandbox https://github.com/docker/libnetwork/blob/f30a35b091cc2a431ef9856c75c343f75bb5f2e2/controller.go#L1126 controller.go
 func (c *controller) NewSandbox(containerID string, options ...SandboxOption) (Sandbox, error) {
 	if containerID == "" {
@@ -312,7 +314,7 @@ func (sb *sandbox) setupResolutionFiles() error {
 `setupDNS` 意思就如同名稱一樣直接，就是設定該沙盒內`DNS`的設定。
 
 
-### setupDNS
+## setupDNS
 ```go setupDNS https://github.com/docker/libnetwork/blob/c3a682c10b554b2ff2fac8ca134ddb9047ffdd93/sandbox_dns_unix.go#L181 sandbox_dns_unix.go
 func (sb *sandbox) setupDNS() error {
 	var newRC *resolvconf.File
@@ -400,7 +402,7 @@ func (sb *sandbox) setupDNS() error {
 
 這樣就來看一下 `FilterResolveDNS` 怎麼處理 `DNS`
 
-### FilterResolveDNS
+## FilterResolveDNS
 ``` FilterResolveDNS https://github.com/docker/libnetwork/blob/c3a682c10b554b2ff2fac8ca134ddb9047ffdd93/resolvconf/resolvconf.go resolvconf.go
 
 // FilterResolvDNS cleans up the config in resolvConf.  It has two main jobs:
@@ -439,7 +441,7 @@ func FilterResolvDNS(resolvConf []byte, ipv6Enabled bool) (*File, error) {
 - 清空之後，若發現這時候沒有 `DNS` 的話，直接透過 `dns := defaultIPv4Dns` 補上預設的 `DNS` (8.8.8.8/8.8.4.4)
 
 
-## summary
+# summary
 當每次創建新容器時，最後會依賴到 `libnetwork` 內跟 `DNS` 相關的參數來設定
 1. 如果使用者有自行設定 `DNS` 的參數，就會全面使用這邊的設定，完全忽略(1)載入的設定
     - 這邊最後會呼叫 `resolvconf.Build` 將參數的設定直接覆寫到容器內的 `/etc/resolv.conf`

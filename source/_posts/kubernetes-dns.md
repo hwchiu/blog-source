@@ -7,8 +7,11 @@ tags:
   - DNS
 abbrlink: 36819
 date: 2018-08-03 10:52:35
-description:
+description: DNS 在傳統的網路架構中一直扮演很重要的角色，可以讓用戶端透過 FQDN 的方式去存取目標的伺服器端，不需要去寫死對方的 IP 地址。然而在 kubernetes 的架構中, kubernetes 預設就會建立一套 DNS server 讓所有創建的 Pod 來使用。對於一般的使用者來說，只要能夠存取外面網路以及 Kubernetes Service 相關即可,然而在某些特殊的應用情境下，譬如目前喊行之有年的 NFV 架構中，我們的服務(Pod)本身可能會需要更複雜的網路架構，譬如同時存在 Data Network/Control Network. 這情況下，我們的 Pod 會需要特別去處理自己裡面服務所使用的 DNS Server 。 本文主要針對 Pod 裡面關於 DNS 相關的設定進行介紹，並且透過實際部屬 Yaml 的方式來看看到底如何使用。
+
 ---
+
+# Preface
 此篇文章是 Kubernetes Pod-DNS 系列文章第一篇
 此系列文會從使用者的用法到一些問題的發掘，最後透過閱讀程式碼的方式去分析這些問題
 
@@ -16,8 +19,6 @@ description:
 - [[Kubernetes] DNS Setting with Dockerd](https://www.hwchiu.com/kubernetes-dns-ii.html)
 - [[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
 - [[Kubernetes] DNS Setting with Dockerd(原始碼分析下)](https://www.hwchiu.com/kubernetes-dns-iiii.html)
-
-## 正文
 
 在`Kubernetes` 裡面看到 `DNS` 這個字眼，實際上可以想到非常多相關的元件與功能，
 譬如用來提供 `kubernetes` 集群內服務的 `kube-DNS`, 或是透過 `kubernetes service` 產生之獨一無二的 FQDN 名稱，最後就是本篇文章想要分享的一個元件， `Pod` 內的 `DNS` 設定。
@@ -27,10 +28,9 @@ description:
 
 接下來我們使用下面這張架構圖來說明可能的使用情境
 ![NFV Case](https://i.imgur.com/DcFCnLw.png)
-<!--more-->
 
-## Introduction
-### The Reason Why We Need This
+# Introduction
+## The Reason Why We Need This
 一般的使用情境下，我們的`kubernetes` 的集群使用方式就如同圖片中紫色/粉紅色(Pod3)區塊一樣，所有的 `Pod` 如果有任何要存取`DNS`的需求，都會透過集群內`K8S-DNS`來處理對應的請求與回覆。
 
 然而在 NFV 的使用情境下，網路變成一個很重要的區塊，整體的效能都取決於該應用程式的設計與整個及集群的網路架構設計。
@@ -48,7 +48,7 @@ description:
 此外，這些應用程式可能會在外部有自己的 `DNS Server` 來使用，所以在這種類型下，我們會希望這些應用程式 (Pod2/Pod3) 能夠使用自定義的 `DNS Server` 來使用，而
 並非集群內建的 `DNS Server` 。
 
-### Pod
+# Pod
 
 透過上述的介紹，已經可以大概了解我們的需求，希望能夠針對 `Pod` 內去進行 `DNS` 客製化的設定。
 
@@ -269,7 +269,7 @@ vagrant@vortex-dev:~/kubeDemo/dns/dnsSetting$
 
 此外，`ClusterFirst` 有一個衝突，如果你的 `Pod` 有設定 `HostNetwork=true` 的話，則 `ClusterFirst` 就會變成 `Default` 來使用。
 
-#### HostNetwork
+### HostNetwork
 使用[下列 Yaml](https://github.com/hwchiu/kubeDemo/blob/master/dns/hostnetwork/ubuntu-default.yml) 來觀察測試一下
 ```yam=
 apiVersion: v1
@@ -349,7 +349,7 @@ func getPodDNSType(pod *v1.Pod) (podDNSType, error) {
 
 為了解決上述的問題，所以引進了一個新的型態 `ClusterFirstHostNet`
 
-### ClusterFirstHostNet
+## ClusterFirstHostNet
 `ClusterFirstHostNet` 用途非常簡單，我希望滿足使用 `HostNetwork` 同時使用 `kube-dns` 作為我 `Pod` 預設 `DNS` 的設定。
 
 根據上面的程式碼也可以觀察到
@@ -392,13 +392,13 @@ options ndots:5
 可以發現這時候的 `DNS` 設定就會使用的是 `ClusterIP` 的設定了。
 
 
-## Summary
+# Summary
 目前 Pod 有提供兩種設定 `DNS` 的參數來使用者來管理 `DNS` 相關的參數。
 
 - DNSPolicy
 - DNSConfig
 
-### DNSPolicy
+## DNSPolicy
 代表的是該 `Pod` 預設的 `DNS`  設定，目前總共有四種類型可以使用
 
 **Default**
@@ -415,5 +415,5 @@ options ndots:5
 - 這個選項就是特別針對 `HostNetwork=true` 創立的
 - 可以提供使用節點網路但是同時又使用 `kube-dns` 提供的 `clusterIP` 作為其 `DNS` 的設定。
 
-### DNSConfig
+## DNSConfig
 `DNSConfig` 可以讓使用者直接輸入 `DNS` 相關的參數，該參數會擴充該 `Pod`原本的 `DNS` 設定檔案。

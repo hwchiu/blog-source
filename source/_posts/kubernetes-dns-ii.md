@@ -8,9 +8,11 @@ tags:
   - Linux
   - DNS
   - Docker
-description:
+description: 本文跟大家分享一個在實際部屬上遇到的問題，在不同的環境下，採用 dnsPolicy:Default 設定的 Kubernetes Pod 裡面所設定的 DNS Server 卻是完全不同的. 根據實際研究與觀察後，發現這個數字並不是單單的依靠 kubernetes 去處理，實際上也跟 Docker 本身如何去設定容器的 dns 也有關係，這部分就包含了宿主機的 /etc/resolv.conf 以及宿主機上 Docker 運行時的參數. 本文會先介紹這個問題，並且分享解決問題的思路以致於最後可以得到這個結論。
+
 ---
 
+# Preface
 此篇文章是 Kubernetes Pod-DNS 系列文章第二篇
 此系列文會從使用者的用法到一些問題的發掘，最後透過閱讀程式碼的方式去分析這些問題
 
@@ -19,7 +21,7 @@ description:
 - [[Kubernetes] DNS Setting with Dockerd(原始碼分析上)](https://www.hwchiu.com/kubernetes-dns-iii.html)
 - [[Kubernetes] DNS Setting with Dockerd(原始碼分析下)](https://www.hwchiu.com/kubernetes-dns-iiii.html)
 
-##  正文
+# 正文
 
 在前篇文章
 [[Kubernetes] DNS setting in your Pod](https://www.hwchiu.com/kubernetes-dns.html) 中已經詳細介紹了如何針對 `Pod` 去設定自己想要的 `DNS` 規則。
@@ -37,9 +39,8 @@ description:
 其中本篇是上篇，主軸在於介紹問題，並且透過實驗觀察結果進行歸納。
 之後會有下篇，比較硬派一點，直接透過觀察原始碼的方式來驗證本篇的觀察結果
 
-<!--more-->
 
-## 環境版本
+# 環境版本
 - docker:
     - 17.06.2-ce, build cec0b72
 - kubernetes: 
@@ -47,7 +48,7 @@ description:
 - os: 
     - Ubuntu 16.04, Linux 4.4.0-128-generic
 
-## 問題描述
+# 問題描述
 
 首先，我觀察到這個問題主要是在不同的`Kubernetes` 集群中，我發現我自己部署的 `Deployment/Pod` 某些情況下卻沒有辦法解析外部的 DNS 名稱，譬如 `google.com`.
 > 這些 `kubernetes` 集群可能是採用不同方式安裝的，如 kubespray, kubeadm
@@ -78,15 +79,15 @@ root@node-1:~$ kubectl -n kube-system exec  kube-dns-5466774c4f-r9k4w cat /etc/r
 10.5.23.1
 ```
 
-## 思路
+# 思路
 首先 `dnsmasq` 這個容器本身採用的是 `dnsPolicy:default` 這個選項來操作, 所以我認為這個部分應該會跟該節點本身的 `/etc/resolv.conf` 有關
 
 所以進行了下列兩個實驗
 1. /etc/resolv.conf 裡面有資料
 2. /etc/resolv.conf 裡面沒有資料
 
-### 觀察結果
-#### 維持 /etc/resolv.conf
+# 觀察結果
+## 維持 /etc/resolv.conf
 
 首先觀察到，在所有的集群內，只要 `/etc/resolv.conf`  有資料的話，則 `dnsmasq` 的 `/etc/resolv.conf` 都會是一致的
 
@@ -95,7 +96,7 @@ root@node-1:~$ kubectl -n kube-system exec  kube-dns-5466774c4f-r9k4w cat /etc/r
 但是接下來若將 `/etc/resolv.conf` 給清空，這時候不同集群表現出來的結果卻完全不同了。
 
 
-#### 清空 /etc/resolv.conf
+## 清空 /etc/resolv.conf
 第一種案例如下，`dnsmasq` 內的則是自動的被捕上了 `8.8.8.8` 以及  `8.8.4.4`
 
 ![Imgur](https://i.imgur.com/Ms0wDUs.png)
@@ -104,14 +105,14 @@ root@node-1:~$ kubectl -n kube-system exec  kube-dns-5466774c4f-r9k4w cat /etc/r
 
 ![Imgur](https://i.imgur.com/owfBHyw.png)
 
-### 歸納結果
+# 歸納結果
 
 總和以上原因，目前可以至少知道，只要 `/etc/resolv.conf` 有資料的話， `dnsmasq` 內的 `/etc/resolv.conf` 就會與該資料一致。
 
 但是若 `/etc/resolv.conf` 沒有資料的話， 則 `dnsmasq` 內的 `/etc/resolv.conf` 目前卻出現兩種可能性。
 
 
-## 思路(二)
+# 思路(二)
 
 接下來為了釐清這個問題，就開始認真的翻文件以及相關的程式碼，最後終於找到了影響的原因
 > 相關的程式碼會在下篇文章解釋一切的來龍去脈
@@ -130,7 +131,7 @@ root@node-1:~$ kubectl -n kube-system exec  kube-dns-5466774c4f-r9k4w cat /etc/r
 ![Imgur](https://i.imgur.com/owfBHyw.png)
 
 
-## 歸納結果
+# 歸納結果
 
 目前觀察的結果，當 `kubernetes` 創見 `Pod` 且 `dnsPolicy=default` 時，其內部容器 `/etc/resolv.conf` 的數值會受到兩個參數影響
 
