@@ -1,5 +1,4 @@
 ---
-layout: post
 title: OpenvSwitch - 2
 date: '2013-12-09 10:03'
 comments: true
@@ -282,7 +281,5 @@ error:
 - 這邊會調用 ** dev_get_by_name ** 用該name取得對應的device.
 - 調用 ** netdev_rx_handler_register ** 註冊 rx handler.
 - 
-
-
 
 userspace side:
