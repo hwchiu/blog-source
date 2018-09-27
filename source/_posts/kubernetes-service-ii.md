@@ -1,5 +1,5 @@
 ---
-title: '[Kubernetes] How To Implemete Kubernetes Service - ClusterIP'
+title: '[Kubernetes] How to Implement Kubernetes Service - ClusterIP'
 keywords: 'Kubernetes,Service,Linux,k8s,iptables,ClusterIP'
 abbrlink: 3141
 date: 2018-08-22 00:56:15
@@ -7,8 +7,11 @@ tags:
   - Kubernetes
   - Linux
   - Iptables
-description:
+description: 在前述中我們已經學過了什麼是 kubernetes service, 一般情況下都會採用 ClusterIP 的形態幫特定的容器應用程式提供 Service 的服務. 本文會針對 ClusterIP 的概念進行更深入的探討,並且嘗試從系統層面的設計與應用來研究到底 ClusterIP 底層是怎麼實作的,這部分的實作包含了1) ClusterIP 到底在那裡？ 2) 如果有多個 Endpoints 的話, 是如何選擇當前連線的最終目標. 這些研究的內容包含了常見了網路概念，如 NAT(Network Address Translation) 以及 iptables 本身的設計及使用，如 table/chian 等概念有初步的認知,這樣對於本文的探討會更明白與瞭解.
+
 ---
+
+# Preface
 
 本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下列兩個觀念
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
@@ -34,14 +37,14 @@ description:
 
 
 
-## Introduction
+# Introduction
 
 在前篇文章 [[Kubernetes] What is Service](https://www.hwchiu.com/kubernetes-service-i.html) 我們已經學習到關於 `Kubernetes Service` 的基本概念與用法
 而本篇文章則是想要探討在預設安裝情況下， `kubernetes` 是如何實現 `service` 的功能。
 
 <!--more-->
 
-## Kube-Proxy Mode
+# Kube-Proxy Mode
 目前的 `Kubernetes` 裡面總共有三種方法去實現 `Service`，分別是
 1. kube-Proxy (old)
 2. iptables (default)
@@ -62,7 +65,7 @@ kubectl -n kube-system describe ds kube-proxy 指令觀察一下相關的內容
 
 回歸正題，本文主要探討的對象是 `iptables`，看看這個歷史悠久且功能強大的 `iptables` 框架是如何完成 `kubernetes service` 所需要的各種功能
 
-## Iptables
+# Iptables
 `iptables` 本身真正講起來，其實是透過 `user-space` 的管理工具`iptables` 搭配 `kernel-space` 的 `netfilter` 網路子系統兩者組合來提供各式各樣的功能。
 
 想要更加瞭解 `iptables` 的介紹可以參閱我在 [COSCUP x GNOME.Asia x openSUSE.Asia 2018](https://www.slideshare.net/hongweiqiu/understand-the-iptables-step-by-step-109650841) 所講授的透過閱讀原始碼的方式來更加瞭解 `iptables`.
@@ -84,14 +87,14 @@ kubectl -n kube-system describe ds kube-proxy 指令觀察一下相關的內容
 {% endnote %}
 
 
-## Kubernetes Service
+# Kubernetes Service
 在我們開始前，我們要先定義幾個相關的名詞，方便之後閱讀的時候可以順利的理解前後文的關係與概念。
 
 這邊先借用 [[Kubernetes] What is Service](https://www.hwchiu.com/kubernetes-service-i.htmlvvv) 內最後展示範例使用的概念圖
 ![Imgur](https://i.imgur.com/osNqxlw.png)
 
 
-### Endpoints
+## Endpoints
 在 `kubernetes` 內有一個名為 `endpoints` 的資源，其代表的是 `service` 所關注目標服務實際上真正運行`Pod`的 `IP` 地址
 ```bash=
 vortex-dev:02:00:28 [~/go/src/github.com/hwchiu/kubeDemo](master)vagrant
@@ -108,12 +111,12 @@ kubernetes          172.17.8.100:6443                              11d
 有在使用 `Service` 的讀者，以後若有遇到 `service` 不通的情況，可以嘗試先看看該 `service` 是否有對應的 `endpoints`，沒有的話可能是 `selector` 寫錯或是目標服務根本沒有運行起來。
 {% endnote %}
 
-### Custom Chain
+## Custom Chain
 `kubenetes` 使用 iptables 時為了更有效管理不同的功能與規則的歸屬，建立的大量的 `custom chain`
-### iptables-save
+## iptables-save
 這是一個 `iptables` 相關的指令，我個人很喜歡用它來觀察 `iptables` 的規則，本文的所有範例都會是使用該指令進行展示
 
-## ClusterIP
+# ClusterIP
 
 我們已經知道 `ClusterIP` 的作用範圍只有`叢集內`的應用程式/節點，所以在本段落我們會著重於三個概念來理解
 
@@ -125,7 +128,7 @@ kubernetes          172.17.8.100:6443                              11d
 2. 如何做到只有`叢集內`的應用程式/節點才可以存取
 3. 假設有多個目標容器(Endpoints), 這中間的選擇方式是怎麼處理?
 
-### Access By FQDN
+## Access By FQDN
 我們都知道 `Service` 本身會提供一組對應的 `FQDN` 供應用程式使用
 實際上這組`FQDN` 只有 `kube-dns` 能夠理解，而且其對應的 `IP` 地址其實就是每個 `Service` 提供的 `ClusterIP` 
 {% note dnager  %}
@@ -172,7 +175,7 @@ k8s-nginx-cluster   10.244.0.88:80,10.244.0.89:80,10.244.0.90:80   1d
 {% endnote %}
 
 
-### Cluster Only
+## Cluster Only
 現在我們要來討論一下，到底所謂的只有`叢集內`的應用程式/節點才可以存取`clusterIP`這到底是怎麼運作的。
 
 我們複習一下前面的某個敘述
@@ -257,7 +260,7 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 {% endnote %}
 
 
-### Loab Balancing 
+## Loab Balancing 
 現在我們要來看看最後一個部分了，到底要怎麼從眾多的 `Endpoints` 中挑選出一個可用的 `Pod` 來使用。
 
 根據前面的分析，當我們的封包符合叢集內使用的規則後，會跳到一個`KUBE-SVC-3FL7SSXCKTCXAYCR` 的 `custom chain`.
@@ -304,7 +307,7 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 當找到要使用的 **Endpoints** 的時候，就會跳到對應的 **KUBE-SEP-XXXX** 去進行 **DNAT** 的轉換。
 
 
-## Summary
+# Summary
 
 最後一塊拼圖也已經完成了，到這邊已經可以大概知道是如何透過 `iptables` 來完成 `clusterIP` 的轉發。
 在這種實作架構中，每個節點的 `iptables` 都會自行去負責尋找 `endpoints` 來處理，而`ClusterIP` 這個不存在的`IP`地址只是幫助我們讓`iptables`有個好依據來處理。

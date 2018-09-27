@@ -6,8 +6,11 @@ date: 2018-08-18 17:08:45
 tags:
   - Kubernetes
   - Linux
-description:
+description: 於 kubernetes 叢集中，我們會部屬大量的容器應用程式,而這些應用程式有些是面向使用者,也有些是彼此容器間互相溝通使用的.舉例來說,管理人員可能會在叢集中佈署了相關的資料庫容器服務,而其他的應用服務就必須要透過網路連線的方式來存取該資料庫.為了要透過網路的方式存取,就意味要使用 IP 地址的方式來存取對應的容器服務,然而在 kubernetes 的叢集中,這些 Pod 重啟後預設情況下都會拿到不相同的 IP 地址， 這意味我們的客戶端應用程式就沒有辦法寫死這些 IP 地址來存取,必須要有更動態的方式讓客戶端應用程式可以取得當前目標容器(資料庫)的最新 IP 地址. 為了解決這個問題, 我們可以透過 kubernetes service 的架構來達成上述的目的。本文會跟大家介紹什麼是 kubernetes service 以及透過實際範例介紹該如何使用
+
 ---
+
+# Preface 
 
 本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下列兩個觀念
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
@@ -22,9 +25,7 @@ description:
 本篇文章偏向介紹，要跟大家討論為什麼在 `kubernetes` 叢集內需要有 `service` 的服務，這個服務能夠解決什麼問題
 以及最後透過實際範例跟大家介紹如何使用
 
-<!--more-->
-
-## What Problems
+# What Problems
 
 我們都知道 `kubernets` 叢集擁有非常強大的功能，可以讓管理者透過 `Deployment` 很輕鬆的去部署各式各樣的服務，譬如 `Web Server`, `database`,`monitor` 等各式各樣的服務。
 
@@ -46,7 +47,7 @@ description:
 在這種情況下，我們的應用程式要怎麼知道這些 `IP` 已經改變? 如何應因這些改變而修正我們應用程式連線的對象?
 ![Imgur](https://i.imgur.com/lhICs7Q.png)
 
-## How To Solve
+# How To Solve
 以前撰寫應用程式的時候，針對目標的`IP`地址根據情境會有不同的處理方式，可能會寫死在應用程式裡面，也有可能會透過設定檔案來讀取，也有可能會透過 `DNS` 解析的方式來處理這個問題。
 然後不是每個人都會架設 `DNS` 伺服器來處理。
 
@@ -77,14 +78,14 @@ description:
 本篇文章著重在特性與概念的介紹，背後的實作原理會等到下篇文章在來介紹與分析。
 {% endnote %}
 
-### ClusterIP
+## ClusterIP
 `ClusterIP` 的意思就是只有叢集內的應用程式/節點可以透過該組 `FQDN` 去存取背後的服務。
 在此情況下，除了透過`kubernetes`去部屬的應用程式外，預設情況下都沒有辦法透過該`FQDN`去存取，即使你直接使用了`kubernetes dns`來問到對應的`IP`地址也沒有辦法。
 {% note danger %}
 這邊指的是預設情況下，如果夠懂網路以及背後原理，當然還是有辦法可以從外面存取到這些服務的
 {% endnote %}
 
-### NodePort
+## NodePort
 `NodePort` 本身包含了 `ClusterIP` 的能力，此外多提供了一種能力讓`非叢集`的應用程式/節點也有辦法存取叢集內的應用程式。
 舉例來說，我們可以部屬多個網頁伺服器，然後透過 `NodePort` 的方式讓外部的電腦(瀏覽器）來存取這些在 `kubernetes` 叢集內的網頁伺服器。
 
@@ -105,7 +106,7 @@ description:
 - NodePort: 紫色跟紅色的應用程式都可以存取，只是存取的方式些許不同。注意的是該非叢集內的應用程式可以運行在任何節點上，只要有辦法透過網路與`kubernetes`叢集內集點相連即可。
 
 
-## How To Use It
+# How To Use It
 
 接下來使用[kubeDemo](https://github.com/hwchiu/kubeDemo)專案內的內容來展示一下如何使用 `ClusterIP` 以及 對應的 `NodePort` 服務。
 
@@ -126,7 +127,7 @@ pod/ubuntu created
 ```
 
 部屬完畢後，接下來我們要來部屬相關的 `Cluster-IP` 以及 `NodePort` 兩個服務
-### Deploy ClusterIP
+## Deploy ClusterIP
 ```bash=
 vortex-dev:04:29:45 [~/go/src/github.com/hwchiu/kubeDemo](master)vagrant
 $kubectl apply -f services/service/nginx-cluster.yml
@@ -221,7 +222,7 @@ curl: (6) Could not resolve host: k8s-nginx-cluster.default
 只是一般人不會想要直接使用該 `IP`，而是更依賴使用 `FQDN` 的方式。
 {% endnote %}
 
-### Deploy NodePort
+## Deploy NodePort
 接下來我們嘗試部屬看看 `NodePort` 的 `service`
 
 ```bash=
@@ -305,7 +306,7 @@ Commercial support is available at
 ```
 
 
-## Summary
+# Summary
 本章節中，我們介紹了 `Kubernetes Serive`, 為什麼需要 `Service` 以及 `Service` 如何解決我們的問題
 同時介紹了常用的 `ClusterIP` 以及 `NodePort` 這兩種類型的差異以及概念
 最後透過幾個簡單的範例展示下如何使用 `ClusterIP`/`NodePort` 讓我們能夠更方便的透過 `service` 去存取我們的後端服務
