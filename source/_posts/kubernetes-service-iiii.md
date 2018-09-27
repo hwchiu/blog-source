@@ -1,5 +1,5 @@
 ---
-title: '[Kubernetes] How Implemete Kubernetes Service - SessionAffinity'
+title: '[Kubernetes] How to Implement Kubernetes Service - SessionAffinity'
 keywords: 'Kubernetes,Service,Linux,k8s,iptables,sessionaffinity,session'
 abbrlink: 60380
 date: 2018-08-27 13:46:47
@@ -7,8 +7,11 @@ tags:
   - Kubernetes
   - Linux
   - Iptables
-description:
+description: 在前述中我們已經學過了什麼是 kubernetes service 以及如何實現 ClusterIP/NodePort 等 service 類型. 透過對 iptables 的探討與研究. 接下來要研究的則是 Service 裡面的一個參數, 叫做 SessionAffinity, 所謂的連線親和力, 透過該參數的設定,希望能夠讓符合特定條件的連線最後都會選用到相同的後端應用程式,目前有支援的選項是 ClinetIP, 這意味者只要連線的來源 IP 地址是相同的,最後都會被導向到相同的容器應用程式. 然而這部分到底是如何實現的, 本文會先介紹什麼叫做 Connection. 並且介紹 SessionAffinity 的使用方式以及使用後的結果. 最後一樣透過相同的思路, 藉由研究 iptables 的規則來學習到 SessionAffinity 要如何完成, 同時也可以學習到 iptables 衆多靈活的使用方式.
+
 ---
+
+# Preface
 
 本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下量兩個觀念
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
@@ -22,8 +25,7 @@ description:
 
 本文銜接前續文章，繼續透過對 `iptables` 的分析來研究 `kubernetes service` 中 `SessionAffinity` 的實作原理。
 
-<!--more-->
-## What Is Connection
+# What Is Connection
 在我們開始討論 `SessionAffinity` 之前，我們要先來討論一下，什麼叫做 `Connection`, 並且透過對 `Connection` 的瞭解，我們會更容易的理解到底 `SessionAffinity`  想要解決的問題。
 
 這邊我們使用下列的圖示來說明到底什麼是 `Connection`
@@ -52,7 +54,7 @@ description:
 3. DNAT/SNAT
 {% endnote %}
 
-## What Is SessionAffinity
+# What Is SessionAffinity
 假如相同 `Connection` 內的封包都已經可以保證連接到相同的 `Endpoints` 了，那到底什麼是 `SessionAffinity`?
 
 換個角度來說，我們有沒有辦法讓建立的新 `Connection` 都連接到相同的 `Endpoints` ?
@@ -61,7 +63,7 @@ description:
 
 以上圖的範例來說，有沒有可能讓 `Connection A,B,C` 都連接到相同的 `EndPoints`?
 
-## Configuration
+# Configuration
 首先，我們先來看一下 `Kubernetes` 裡面定義的 `SessionAffinity` 要怎麼使用
 目前總共有兩種類型可以選擇
 1. None
@@ -82,9 +84,9 @@ description:
 這邊假設這些 Host 都有自己的公開 `IP` 地址，不考慮任何 `SNAT` 的效果。
 {% endnote %}
 
-## How It Works
+# How It Works
 
-### Setup
+## Setup
 接下來，我們繼續使用[kubeDemo](https://github.com/hwchiu/kubeDemo)來進行相關的服務部屬以及`iptables`規則研究。
 
 ```bash=
@@ -103,7 +105,7 @@ $kubectl get service k8s-nginx-affinity -o jsonpath='{.spec.sessionAffinity}'
 ClientIP
 ```
 
-### IPTABLES
+## IPTABLES
 按照慣例，最簡單的觀察方式就是直接觀察 `iptables` 的規則，這邊直接透過 `k8s-ngins-affinity` 這個關鍵字來查詢所有相關的規則
 
 ```bash=
@@ -151,7 +153,7 @@ $sudo iptables-save | grep k8s-nginx-affinity
 
 上述的流程看起來滿直觀且合理的，但是這些流程在 `iptables` 的規則中到底要怎麼完成?
 
-### recent modules
+## recent modules
 
 我們將前面6條新規則縮減到兩條來單獨觀察就好**(因為每個EndPoints會有兩條)**
 ```bash=
@@ -164,7 +166,7 @@ $sudo iptables-save | grep k8s-nginx-affinity
 ![Imgur](https://i.imgur.com/9amwybH.png)
 
 
-#### Save
+### Save
 首先我們觀察第一條規則，其位於 `KUBE-SEP` 這個位置，這個其實就是真正執行 `DNAT` 的 `custom  chain`.
 這邊做的事情與我們假想的流程完全一致, 當選出欲使用的 `Endoints` 並進行 `DNAT` 轉換之時，順便將該結果記錄到 `Cache` 內。
 {% note info %}
@@ -205,7 +207,7 @@ $sudo iptables-save | grep k8s-nginx-affinity
 所以其實 `recent` 模組內關於 `Set/Write` 相關的操作永遠都是回傳`符合`，讓上層的規則可以繼續往下執行。
 畢竟針對 `Set/Write` 這類型操作本身就沒有要比對任何東西，只是被拿來進行其他的操作而已。
 
-#### Read
+### Read
 
 看完了第一題規則後，接下來來看一下最後一條，其實也就是第二條規則
 
@@ -237,7 +239,7 @@ $sudo iptables-save | grep k8s-nginx-affinity
 
 ![Imgur](https://i.imgur.com/bKvZgw4.png)
 
-## Summary
+# Summary
 看到這邊，我們大概瞭解如何透過 `iptables` 的功能來達成 `SessionAffinity:ClientIP` 的功能，透過 `iptables` 的擴充模組 `recent` 提供類似 `key/value` 的 `cache` 機制來紀錄 `來源IP地址` 與 `Endpoints` 的關係。
 
 如果對於 `iptables` 擴充模組有興趣的讀者，之後我會撰寫一些文章介紹 `iptables` 的架構以及如何自己撰寫一個 `iptables` 的擴充模組。

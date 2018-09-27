@@ -1,5 +1,5 @@
 ---
-title: '[Kubernetes] How To Implemete Kubernetes Service - NodePort'
+title: '[Kubernetes] How to Implement Kubernetes Service - NodePort'
 keywords: 'Kubernetes,Service,Linux,k8s,iptables,NodePort'
 abbrlink: 56589
 date: 2018-08-25 01:17:08
@@ -7,9 +7,11 @@ tags:
   - Kubernetes
   - Linux
   - Iptables
-description:
+description: 在前述中我們已經學過了什麼是 kubernetes service 以及如何實現 ClusterIP 這種類型的 service. 透過對 iptables 的探討與研究, 我們可以理解到 ClusterIP 本身會提供一個虛擬的 IP 地址,接下來只要跟這個地址有關的封包,都會透過 DNAT 的方式進行轉換找到最後的 Endpoint IP. 至於如何選擇的部分,則是透過機率的方式去尋找. 接下來我們要來探討另外一個也是很常使用的 kubernetes service 類型, 也就是 NodePort. NodePort 本身包含了 ClusterIP 的所有功能, 此外也額外開啟了一個新的存取方式. 透過直接存取節點的 IP 地址配上一個設定好的 Port, 也可以將該封包直接送到最後面的容器應用程式. 因此本文也要延續上一篇的思路,繼續研究 iptables 的規則來探討 NodePort 到底是如何實現的
+
 ---
 
+# Preface 
 本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下列兩個觀念
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
 2. `Kubernetes Service` 是怎麼實現的?， 讓我們用 iptables 來徹徹底底的理解他
@@ -30,7 +32,7 @@ description:
 2. 什麼時候會用到?
 3. 如果是我，我會怎麼實作?
 
-## Why We Need NortPort
+# Why We Need NortPort
 `NodePort` 本身是屬於 `kubernetes service`的一環，自然就是要提供一個方式可以讓外部來存取集群內的服務，而且可以不用去理會後面這些容器們的真實`IP`地址。
 
 既然已經有前面的 `ClusterIP` 提供了一種叢集內存取的方式，什麼情況下我們會需要 `NodePort` 這種透過存取節點的方式?
@@ -53,7 +55,7 @@ description:
 這種情況下，我們就可以在任何地方，透過直接存取該節點的對外`IP`地址，然後間接透過`NodePort`的功能存取到集群內的`nginx`服務。
 
 
-## How It Works
+# How It Works
 已經有了前述關於 `ClusterIP` 運作的概念後，其實要探討 `NodePort` 是如何實現的就非常簡單了。
 
 我們先快速複習一下 `ClusterIP` 的運作流程
@@ -117,7 +119,7 @@ $sudo iptables-save  | grep default/k8s-nginx-node
 NodePort 的功能基於 ClusterIP 之上再添加新功能，所以本來 Cluster 該有的規則對於 NodePort 來說都不會少 
 {% endnote %}
 
-## KUBE-NODEPORTS
+# KUBE-NODEPORTS
 我們仔細觀察 `KUBE-NODEPORTS` 相關的兩條規則
 ```bash=
 -A KUBE-NODEPORTS -p tcp -m comment --comment "default/k8s-nginx-node:" -m tcp --dport 30136 -j KUBE-MARK-MASQ
@@ -179,7 +181,7 @@ https://elixir.bootlin.com/linux/v4.7.8/source/include/uapi/linux/rtnetlink.h#L2
 ![Imgur](https://i.imgur.com/9amwybH.png)
 
 
-## PortBinding
+# PortBinding
 由於 `NodePort` 會使用到節點上面的 `Port` 來提供服務
 但從 `iptables` 的規則觀察下，其實 `NodePort` 所用到的 `Port` 就是一個虛擬的 `Port`，譬如上述範例的 `30136`。
 為了避免有任何應用程式之後將 `NodePort` 要用到的 `Port` 給拿去使用，導致整個有任何非預期的行為出現
@@ -206,7 +208,7 @@ $ps axuw  | grep docker-p
 root     21499  0.0  0.0  59068  2852 ?        Sl   01:08   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5566 -container-ip 172.18.0.2 -container-port 80
 ```
  
-## Summary
+# Summary
 本章節我們仔細的討論了 `NodePort` 各種面向的概念，最後發現其實 `NodePort` 的規則非常簡單，建立於 `ClusterIP` 之上。
 只要能夠掌握 `ClusterIP` 是如何運作的，回過頭來看 `NodePort` 就不難理解這整個過程。
 
