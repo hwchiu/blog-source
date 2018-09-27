@@ -66,7 +66,7 @@ description: 本文是 iptables/ebtables 系列分享文的第一篇，會先著
 
 這邊值得注意的是，因為 `kernel` 每次重新開機後，上次存在記憶體內的資訊都會消失，這意味者所有`iptables`所傳達的命令都會消失，因此才會有所謂的 `iptables save/restore` 等相關的指令然後搭配上 `systemd/upstart` 等機制來確保每次重新開機後相關的規則都會重新部屬上去。
 
-### NetworkI nterface Card
+### Network Interface Card
 大家會使用 `iptables` 一定都是想要針對特定的網路封包進行一些處理，而這些網路封包必然伴隨網路設備 `Network Interface Card` 一同出現。
 這些設備可以是實體的網路卡，也可以是系統上虛擬出來的，譬如`loopback`,`docker0(bridge0)`,`tuntap`,`veth` 等各式各樣的虛擬網卡。
 
@@ -75,7 +75,7 @@ description: 本文是 iptables/ebtables 系列分享文的第一篇，會先著
 
 ### Workflow
 1. 網卡與系統掛勾，此時 `kernel` 知道有哪些網卡**Physical/Virtaul** 正在系統上
-2. 使用者透過 `iptables/ebtables` 等工具將相關的規則寫入到 `kernel` 裡面，此時 `kernel netfilter sussystem` 內就會有對應的規則。
+2. 使用者透過 `iptables/ebtables` 等工具將相關的規則寫入到 `kernel` 裡面，此時 `kernel netfilter subsystem` 內就會有對應的規則。
 3. 當有任何封包從任何網卡內`進/出`時，這些封包就會被上述已經創立的規則進行比對，並且進行對應的動作。
 
 
