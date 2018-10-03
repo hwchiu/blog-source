@@ -1,11 +1,11 @@
 ---
-title: 'Automatically Renew Your Certificaed in kubernetes by Cert-Manager'
-keywords: 'Kubernetes,https,tls,let's encrypt, certificated, cert-manager, k8s'
-abbrlink: 772
-date: 2018-10-03 02:48:04
+title: "Automatically Renew Your Certificated in kubernetes by Cert-Manager"
+keywords: 'kubernetes,tls,ssl,certificated,lets encrypt,cert-manager'
 tags:
   - Kubernetes
   - Security
+abbrlink: 772
+date: 2018-10-03 02:48:04
 description: 在這個資訊安全意識稍微抬頭的世代，網站配有 HTTPS 可說是個基本標配。同時因為 Let's Encrypt 的出現，讓 TLS 憑證的申請變得簡單且容易上手。然而使用 Let's Encrypt 本身還是有一些限制要處理，譬如需要定期更新憑證，以及如何驗證申請者目標網域的擁有者，這部分的操作都有對應的腳本來處理。然而在 Kubernetes 叢集之中，除了手動去運行這些腳本之外，有沒有更方便的方式可以整合這一切。本文要介紹一個叫做 `Cert-Manager` 的解決方案，透過其原理的理解，以及實際操作的步驟來學習如何更方便的在 kubernetes 叢集內管理憑證
 
 ---
@@ -127,7 +127,7 @@ hwchiu➜~» helm install \
 
 {% note info %}
 想要安裝 `Helm` 可以參考[官網的教學](https://docs.helm.sh/using_helm/)
-{% endinfo %}
+{% endnote %}
 
 安裝完畢後，可以透過 `kubectl` 的指令去確認是否需要的 `deployment` 有運行起來
 ```bash=
