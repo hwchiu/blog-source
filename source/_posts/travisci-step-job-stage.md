@@ -1,6 +1,6 @@
 ---
-title: '[DevOps] TravisCI - Step/Job/Stage'
-keywords: 'GitHub,Ubuntu,CI/CD,Travis,TravisCI'
+title: '[DevOps] Travis CI - Step/Job/Stage'
+keywords: 'GitHub,CI/CD,Travis,TravisCI, Travis CI'
 abbrlink: 55114
 date: 2018-09-01 09:09:13
 tags:
@@ -10,7 +10,7 @@ description: 這次要跟大家分享的是一些關於 TravisCI 的使用心得
 
 ---
 
-## Preface
+# Preface
 
 舉例來說，假設我的 `Github` 專案會希望每次`Release`時會有下列的行為
 1. 進行 單元測試/整合測試 等各種確保程式碼正常運作的測試
@@ -21,13 +21,12 @@ description: 這次要跟大家分享的是一些關於 TravisCI 的使用心得
 
 本文最後用到的 `travisCI` 設定檔可以在 [TravisCI Example](https://github.com/hwchiu/Travis-MultisStage/blob/master/.travis.yml) 找到
 
-<!--more-->
 
-## Build Steps
+# Build Steps
 所謂的「工欲善其事，必先利其器」，在使用 `TravisCI` 來解決我們的問題之前，我們必須要先瞭解 `TravisCI` 的基本概念，然後思考如何用這些基本概念來完成我們的需求。
 
 
-### install/script
+## install/script
 整個 `TravisCI` 的生命週期是由兩個主要步驟來構成
 1. install: 用來安裝任何相依性套件的階段
 2. script: 真正用來進行 `CI` 相關測試的階段
@@ -52,7 +51,7 @@ description: 這次要跟大家分享的是一些關於 TravisCI 的使用心得
 {% endnote %}
 
 
-### Example 
+## Example 
 以下示範一個非常簡單的 `.travis.yml` 設定檔案，在此環境中，我們要求 `TravisCI` 準備一個 `golang 1.8` 版本的環境，同時對於 `install` 以及 `script` 這兩個階段我們都執行非常簡單的指令。
 
 ```yaml=
@@ -81,7 +80,7 @@ script:
 ![Imgur](https://i.imgur.com/14TXbFV.png)
 
 
-### Solution
+## Solution
 有了關於 `TravisCI` 建置週期的概念後，回過頭來探討一些下最初的需求
 
 1. 進行 單元測試/整合測試 等各種確保程式碼正常運作的測試
@@ -124,8 +123,8 @@ https://docs.travis-ci.com/user/customizing-the-build/
 
 ![Imgur](https://i.imgur.com/Mrb22oE.png)
 
-## Job
-### Definition
+# Job
+## Definition
 瞭解了基本的用法後，我們要來看看一些關於 `TravisCI` 的進階用法，看看透過這些進階用法我們能夠完成什麼樣更豐富的 `CI` 流程。
 
 首先，我們先定義什麼叫做 `Job`, `Job` 就是一個歷經 `TravisCI` 生命週期所有步驟的基本單位。
@@ -137,7 +136,7 @@ https://docs.travis-ci.com/user/customizing-the-build/
 {% endnote %}
 
 
-### Multiple Job
+## Multiple Job
 有了 `Job` 的基本概念後，我們就可以往下思考一些更進階的用法。
 
 假設專案本身是透過 `golang` 程式語言撰寫而成的，我們現在希望測試該專案在不同 `golang` 版本下是否都能夠正常運行。
@@ -176,7 +175,7 @@ script:
 最後運行的結果如下, 可以看到該次的測試同時運行了兩個 `Job`, 這兩個 `Job` 分別是不同的 `Golang` 版本。
 ![Imgur](https://i.imgur.com/sr2xvlX.png)
 
-### Custom Job
+## Custom Job
 上述我們利用個 `go` 這個由 `TravisCI` 所定義的語法來完成產生 `MultipleJob` 的功能。
 
 這時候腦筋一轉，`install`,`script` 這些建置步驟是否也都可以有類似的概念呢?
@@ -234,7 +233,7 @@ jobs:
 這邊先不討論語法，等到所有的概念都講述完畢後，再來討論語法的撰寫。
 
 
-## Build Stage
+# Build Stage
 
 有了上述的 `Multiple Job` 的概念後，我們重新審視一下最初的需求
 1. 進行 單元測試/整合測試 等各種確保程式碼正常運作的測試
@@ -273,7 +272,7 @@ jobs:
 ![Imgur](https://i.imgur.com/YkGmTQN.png)
 
 
-### Example
+## Example
 每個 `Stage` 之間彼此有依賴性，只要當其中一個 `Stage` 失敗，就不會往下執行
 
 下圖是每個 `Stage` 都順利執行的成果
@@ -321,7 +320,7 @@ jobs:
 更詳細的設定可以直接參考[官網的說明](https://docs.travis-ci.com/user/build-stages#how-do-build-stages-work)
 
 
-## Summary
+# Summary
 本文跟大家分享了關於 `TravisCI` 的使用心得，從基本的使用方法到進階的 `Multiple Job` 以及 `Stage` 
 
 透過這些概念的組合，我們能夠將 `CI/CD` 的流程拆的更細緻，讓整個架構與流程更加清楚，同時透過平行運行的方式加快整體流程的速度 **(這部份不一定，完全是看每個專案的流程)**.

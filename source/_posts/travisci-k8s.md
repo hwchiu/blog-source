@@ -1,6 +1,6 @@
 ---
-title: 使用 TravisCI 為你的 Kubernetes 應用程式打造自動化測試
-keywords: 'k8s,Kubernetes,GitHub,Ubuntu,CI/CD,Travis,TravisCI'
+title: 使用 Travis CI 為你的 Kubernetes 應用程式打造自動化測試
+keywords: 'k8s,Kubernetes,GitHub,CI/CD,Travis CI,TravisCI'
 tags:
   - Kubernetes
   - CI/CD
