@@ -1,15 +1,17 @@
 ---
 title: Install GPU in GKE(Google Kubernetes Engine)
-keywords: 'Linux,Ubuntu,k8s,Kubernetes,GPU'
+keywords: 'k8s,Kubernetes,GPU,KGE,Cloud'
 tags:
   - GPU
   - GKE
   - Kubernetes
 abbrlink: 53546
 date: 2018-07-14 17:41:45
-description:
+description: 過去所謂的 GPU 運算幾乎都是個人主機的市場，任何人都可以很輕鬆的購買顯卡回家並且安裝起來使用，不論是玩遊戲所需要，或是需要 GPU 運算，這部分的生態早就存在已久。 隨者 AI 市場的蓬勃發展， GPU 資源的需求量上升，個人家用所擁有的數量在部分應用情境下所需要的時間太長了，因此就有了公有雲與 GPU 結合的需求出現。使用者可以根據自身的需求去評估需要多少張 GPU 卡，然後在對應的公有雲上去申請對應的資源來使用。本文基於這種概念的情況下，跟大家分享一下在 Google Kubernetes Engine 上若要使用 GPU 的話，大致上有哪些步驟需要執行，並且分享一些背後的安裝原理。
+
 ---
 
+# Preface
 最近嘗試要再 GKE 上面開啟 GPU 的服務，然後實際上卻遇到了一些問題，因此用本篇文章來記錄遇到問題並且遇到問題的解決思路。
 
 一開始有個需求時，很直覺的再 Google 上面直接用 `GKE GPU` 進行搜尋，的確也可以找到不少文章在講 `GPU` 與 `Kubernetes` 相關。
@@ -22,11 +24,7 @@ description:
 3. 透過 `kubernetes DaemonSet` 的方式安裝 `NVIDIA Drivers` 到所有 GPU Node 上
 4. 接下來創造 Pod 即可正常使用 `NVIDIA` GPU 資源
 
-
-<!--more-->
-
-Install
-=======
+# Install
 
 前面兩個步驟基本上不會有什麼問題，透過網頁介面點選或是參考網頁中的指令去創造即可順利完成。
 比較困擾的則是第三個步驟，根據該篇文章顯示我們只需要部署一個 `yaml` 檔案即可完全 `NVIDIA Drives` 到所有 GPU 節點上
@@ -352,8 +350,7 @@ spec:
     name: nvidia-libraries
 ```
 
-Summary
-======
+# Summary
 
 總結一下上述的所有歷程
 1. 如果今天 GKE 的版本是 1.9 之後，我們只需要運行一個 `DaemonSet` 去安裝 `NVIDIA Driver` 即可， `Device Plugin` 會自己被運行

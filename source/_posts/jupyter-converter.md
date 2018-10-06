@@ -7,16 +7,16 @@ tags:
   - SourceCode
 abbrlink: 5473
 date: 2017-12-25 12:50:29
-description:
+description: 有在接觸 AI 領域與 Python 程式設計的人，想必都對 Jupyter Notebook 這個應用工具不陌生。在某些特殊的情境下，會有部分的需求想要透過命令列直接執行該 Jupyter Notebook，由於 Jupyter Notebook 檔案本身不是一個被認得的執行檔，所以這時候都要特殊方法將該 Jupyter Notebook 轉換成 Python(IPython) 檔案來執行。 Jupyter Notebook 本身的工具就有提供這樣的功能可以來轉換，而本文想要介紹的是如何使用程式化的方式來轉換，透過自行撰寫 Python 腳本來轉換，可以讓我們在轉換的時候進行一些中間處理，譬如過濾些特殊用法，如IPython的語法。
+
 ---
 
+# Preface
 在這邊文章前，必須要先知道什麼是 **Jupyter Notebook**，這方面網路上已經有太多的文章在介紹了，所以這邊就簡單介紹就好。
 
 Jupyter Notebook 是一個介於 IDE 與編輯器之間的工具，可以讓使用者一行一行的寫程式並且直接運行觀察其結果，除了大家都熟知的 Python/R 等直譯式語言外，現在連 C++ 這種編譯式語言都可以執行了，非常的令人驚艷，想要看更多關於 C++ 支援的可以參考這篇[文章](https://blog.jupyter.org/interactive-workflows-for-c-with-jupyter-fe9b54227d92)
 
 這篇文章的主軸在於如何透過程式化的方式將已知的 **Jupyter Notebook** 給轉換成一般常用的 **Python** 腳本。
-
-<!--more-->
 
 
 基本上去網路上搜尋如何將 **Jupyter Notebook** 轉換成 Python 腳本，你都會得到使用下列指令的答案
@@ -40,7 +40,7 @@ ipython nbconvert --to script notebook.ipynb
 
 因此下列就針對這三個步驟進行一些分析與過程的介紹
 
-#### Study Jupyter Notebook file
+# Study Jupyter Notebook file
 隨便撰寫一個簡單的 **Jupyter Notebook**，其內容如下
 ![](https://i.imgur.com/DK422kE.png)
 
@@ -271,7 +271,7 @@ self.convert_single_notebook(notebook_filename)
 4. (Maybe) postprocess the written file
 
 我們可以忽略第四個行為，專注於前面三個步驟，所以我們就要仔細研究上述三個行為對應的函式。
-#### Initialize notebook resources
+# Initialize notebook resources
 首先可以看到在 **init_single_notebook_resources** 的函式內，我們要想辦法產生一個 **map** 的物件，該物件按照說明，有三個 **key** 需要填寫，不過因為我們只是單純要進行轉移，所以其實 **config_dir** 這個 key 並不需要使用。
 ```python
     def init_single_notebook_resources(self, notebook_filename):
@@ -310,7 +310,7 @@ self.convert_single_notebook(notebook_filename)
 
         return resources
 ``` 
-#### Export the notebook to a particular format
+# Export the notebook to a particular format
 接下來就是要把來源的檔案給放到 **Exporter** 去處理格式轉換的問題，但是這邊如果我們直接傳入的是一個本來的 **.ipynb** 的檔案的話，我們會沒有辦法能夠針對 **IPython** 部份去進行修改。
 
 因此這邊我們必須要考慮 **input_buffer** 這個參數。我們要先自己讀取該檔案，將該檔案的內容解析完畢後，排除 **IPython** 相關的內容後當成 **input_buffer** 參數給丟進去處理。
@@ -346,7 +346,7 @@ self.convert_single_notebook(notebook_filename)
 
         return output, resources
 ```
-#### Write the exported notebook to file        
+# Write the exported notebook to file        
 在上述已經將內容轉換完畢後，就可以透過最後的 **writer** 將該內容(放在 **output**)內給寫入到特定的地方。
 
 ```python
