@@ -1,6 +1,6 @@
 ---
-title: '[CNI] Implement Your CNI In Golang'
-keywords: 'Network,Linux,Ubuntu,Docker,Kernel,CNI,Golang'
+title: '[Container Network Interface] Implement Your CNI In Golang'
+keywords: 'Container,Network,Interface,golang,implement,program'
 tags:
   - CNI
   - Network
@@ -12,20 +12,20 @@ tags:
   - Kubernetes
 abbrlink: 18895
 date: 2018-06-16 08:34:18
-description:
+description: As we know, the kubernetes use the CNI to provide the network connectivity for its Pod unit and the cluster administrator can choose what kind of the CNI should be installed in the cluster. For example, if the only requirement is the overlay network, you can choose the flannel CNI and choose the calico CNI if you have the requirement of the BGP. In this post, we will learn how to write your own CNI in golang language. Actually, You can implement it with any language as you like.
+
+
 ---
 
 
-I have write three posts about the CNI and you can found the other posts below
-[[CNI] Bridge Network In Docker](https://www.hwchiu.com/introduce-cni-i.html)
-[[CNI] Container Network Interface Introduction](https://www.hwchiu.com/introduce-cni-ii.html)
+# Preface
+
+It's a series post about the Container Network Interface and you can find other posts below.
+[[Container Network Interface] Bridge Network In Docker](https://www.hwchiu.com/introduce-cni-i.html)
+[[Container Network Interface] CNI Introduction ](https://www.hwchiu.com/introduce-cni-ii.html)
 
 In this post, I will show how to write your own CNI program.
 
-<!--more-->
-
-Abstraction
-===========
 Container Network Interface(CNI) can be implemented by any programming languages as you like.
 
 You just to follow the interface and your program can be used for every infrastructure using the CNI for their network connectivity.
@@ -35,8 +35,7 @@ In this tutorial, I will use the `golang` to implement a simple CNI witch create
 I have create a github repo for this tutorial and you can find it on [hwchiu CNI_Tutorial_2018](HTTPS://github.com/hwchiu/CNI_Tutorial_2018)
 
 
-Introduction
-============
+# Introduction
 In order to help the develop to develop their own CNI, the `CNCF` had setup two projects for developers.
 
 Those projects are based on the golang language and provide useful libraries for the developer to control the Linux network functions, such as `IP`, `netlink` and `network namespace`.
@@ -56,8 +55,7 @@ And the `dhcp` will runs a `DHCP` client in each container and send a `dhcp requ
 
 In this tutorial, we will implement a `bridge` CNI and explain those functions step by step.
 
-Before We Start
-===============
+# Before We Start
 Before we start to implement the CNI, we must know the `interface`/`specification` of the `CNI`.
 
 1. Your CNI will be invoked when the container is `ready to create or has been terminated`.
@@ -74,8 +72,7 @@ Before we start to implement the CNI, we must know the `interface`/`specificatio
 - PATH (The current working PATH, you should use it to execute other CNI)
 - STDIN (The configuration file of your CNI)
 
-Step By Step
-============
+# Step By Step
 For each step, you can find a corresponding folder in my github repo and there's all golang files for each steps.
 
 ## Step1
@@ -487,7 +484,7 @@ sudo ip netns exec ns1 ping 192.0.2.1
 ```
 
 
-### Summary
+# Summary
 In this tutorial, we have implemented a simple Linux Bridge CNI (only Add function) in golang.
 
 We create the linux bridge and use the veth to connect the linux bridge with the target netowrk namespace.

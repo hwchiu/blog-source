@@ -1,6 +1,6 @@
 ---
-title: '[CNI] Container Network Interface Introduction'
-keywords: 'Network,Linux,Ubuntu,Docker,Kernel,CNI'
+title: '[Container Network Interface] CNI Introduction'
+keywords: 'container,network,interface,CNI,kubernetes,introduction'
 tags:
   - CNI
   - Network
@@ -10,13 +10,15 @@ tags:
   - Kubernetes
 abbrlink: 26571
 date: 2018-04-08 05:16:01
-description:
+description: Container Network Interface (CNI) as a Network Interface between the network soluition and the container mechanism. Without the CNI, the network solution developer should implement his/her plugin for every container environment and it must be a disaster. Fortunately, with the help of the CNI, the developer can only focus on one interface and it should work for every container mechanism. In this post, we will see why we need the CNI, what is CNI and how kubernetes use the CNI to provide the network connectiviy for the computing unit,  so called Pod.
+
 ---
 
-I have write three posts about the CNI and you can found the other posts below
-[[CNI] Bridge Network In Docker](https://www.hwchiu.com/introduce-cni-i.html)
-[[CNI] Write A CNI Plugin By Golang](https://www.hwchiu.com/introduce-cni-iii.html)
 
+# Preface
+It's a series post about the Container Network Interface and you can find other posts below.
+[[Container Network Interface] Bridge Network In Docker](https://www.hwchiu.com/introduce-cni-i.html)
+[[Container Network Interface] Write a CNI Plugin By Golang](https://www.hwchiu.com/introduce-cni-iii.html)
 
 
 In this post, I will try to introduce the concept of Container Network Interface (CNI), including why we need this, how it works and what does it do.
@@ -24,10 +26,8 @@ In this post, I will try to introduce the concept of Container Network Interface
 If you have not familiar with what is `linux network namespace` and how `docker` handles the network for its containers.
 You should read the [[CNI] Bridge Network In Docker](https://www.hwchiu.com/introduce-cni-i.html#more) to learn those concepts and that will be helpful for this tutorial.
 
-<!--more-->
 
-Introduction
-============
+# Introduction
 ## Why We Need CNI
 In the previous post, we have learn the procedure of the basic bridge network in the docker.
 - Create a Linux Bridge
@@ -40,7 +40,6 @@ In the previous post, we have learn the procedure of the basic bridge network in
 However, That's the `bridge network` and it only provide the layer2 forwarding. For some use cases, it's not enough.
 More and more requirement, such as layer3 routing, overlay network, high performance
 , openvswitch and so on.
-
 
 From the docker point of view, it's impossible to implement and maintain all above requirements by them.
 
@@ -103,8 +102,7 @@ After we crete the `veth` pair and connect to the `network namespace`, we should
 For the IPAM (IP Adderss Management), we can get the information from the `StdinData` and calculate what IP address we should use in the CNI plugin.
 
 
-Kubernetes
-==========
+# Kubernetes
 
 Now, We will see how kubernetes use CNI to create a network function for Pods.
 
@@ -199,8 +197,7 @@ b0ca4ca2405d        k8s.gcr.io/pause:3.1                              "/pause"  
 9cedcb482e69        k8s.gcr.io/pause:3.1                              "/pause"                 7 hours ago         Up 7 hours
 ```
 
-Summary
-=======
+# Summary
 The `Container Network Interface` CNI made the network-service developer more easy to develop their own network plguin. They don't need to write duplicate code for different system/orchestrator.
 Just write once and run everywhere.
 
