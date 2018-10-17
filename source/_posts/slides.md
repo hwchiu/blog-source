@@ -91,3 +91,8 @@ This post is used to record all my presentations from 2017
     - [SDN x Cloud Native Meetup #8](https://cntug.kktix.cc/events/sdn-cntug-8)
     - [Slides](https://www.slideshare.net/hongweiqiu/iptables-101-bottomup)
 
+- Control Your Network ASICs, What Benefits switchdev Can Bring Us
+    - 2018.10.17(三) 09:00 - 16:40
+    - [Open Source Networking Days Taiwan](https://sched.co/Hg7R)
+    - [Slides](https://www.slideshare.net/hongweiqiu/control-your-network-asics-what-benefits-switchdev-can-bring-us)
+
