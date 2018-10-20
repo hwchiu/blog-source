@@ -1,8 +1,6 @@
 ---
-title: >-
-  [論文導讀] Re-architecting datacenter networks and stacks for low latency and high
-  performance
-keywords: 'SDN,Network,Linux,Ubuntu,DataCenter'
+title: '[論文導讀] Re-architecting datacenter networks and stacks for low latency and high performance'
+keywords: 'high performance dc, sigcomm2017, MPTCP, DCTCP, Clos Network, P4, datacenter, high-end network'
 tags:
   - SDN
   - Network
@@ -13,8 +11,11 @@ tags:
   - DataCenter
 abbrlink: 49842
 date: 2017-09-26 13:19:37
-description:
+description: 本文屬於論文導讀系列，這次針對的是SIGCOMM 2017所發表的論文中關於Data Center架構的論文。SIGCOMM這個 Conference裡面都有很多跟網路相關且高品質的論文，除了學界之外，也常常有很多業界會將相關的研究與產品設計投稿於此，因此是個滿好學習網路概念的一個資源。本篇文章針對的主題是 Re-architecting datacenter networks and stacks for low latency and high performance, 該文主旨希望重新打造一個有真正高傳輸效能的資料中心，其中涉及了非常多的面相，從交換機的實現到上層 TCP 協定的修正，從諸多面向來探討傳統的諸多協定為什麼沒有辦法達到真正的高效能傳輸，該論文非常精彩，可以學習到非常多的概念與知識，非常歡迎閱讀。
+
 ---
+
+# Preface 
 
 本次的論文發表於 **SIGCOMM 2017**, 可以在[這邊](http://dl.acm.org/citation.cfm?id=3098825)找到網路上的文章。於 **SIGCOMM 2017**中，其所屬於的 section 是 **Programmable Devices**，所以可以料想到本文內容會跟 **Programmable Devices** 有些關係。果不其然的內容中有提到 **P4**, **NetFPGA**，處此之外，本篇內容也提到了 **DPDK**, **Clos Network**, **MPTCP**, **DCTCP**, **incast** 等，必須說本篇文章包含了內容實在廣泛，所以要花不少時間去釐清每個元件，才可以了解到本篇論文的內容。
 
@@ -26,7 +27,7 @@ description:
 因此本篇一開始就先針對本文做一個簡單的介紹，直接瞭解到本論文希望做什麼，達到什麼目的，為什麼要這樣做。
 有興趣的人可以在慢慢往下翻，畢竟內容實在有夠長..XD
 
-## 簡介
+# 簡介
 
 本論文所發生的場景是在 **Data Center**內，不適用於一般的網際網路，主要是因為網際網路充滿太多未知性與無法掌控的裝置，譬如每條 Link 的頻寬, Switch 的設定等。有這些未知的情況下，無法設計一個好的運作模式來滿足 **Low Latency** 與 **High Throughut** 的需求。因此環境都只考慮 **Data Center**。
 
@@ -51,16 +52,15 @@ description:
 
 
 看到這邊如果對於上述的內容感到興趣的話，就可以開始往下看了!
-<!--more-->
 
-## Abstract
+# Abstract
 近年來 **Data Center** 蓬勃發展，為了能夠在內部提供更良好的網路效能，不論是低延遲或是高產出，網路架構從早期的三層式架構(**Fat tree**)逐漸都轉換成 [Clos Network](https://www.networkworld.com/article/2226122/cisco-subnet/clos-networks--what-s-old-is-new-again.html)，然而傳統的 **TCP** 協定在設計上並不是針對 **Data Cetner**來設計的，因此其設計原理導致其不能滿足需求。
 因此本論文提出了 NDP (new data-center transport architecture)，其能夠提供 **short transfer**接近完美的傳輸時間，同時對於廣泛的應用情況，如 **incast** 下亦能夠提供很高的傳輸效能。
 NDP架構下， **switch** 採用非常小的 **buffer**來存放封包，當 **buffer** 滿載時，不同於傳統的將封包丟掉，NDP採取的是截斷封包的內容(payload)，只保留該封包的標頭檔，並且將此封包設定為高優度優先轉送。這種作法讓收端能夠有更完整關於送端的資訊，能夠動態的調整傳送速率。
 本論文將 NDP 的概念實作於 **Software switch**, **Hardware Switch** 以及一般的 **NDP application**。這中間使用的技術與硬體分別包含了 **DPDK**、**P4** 以及 **NetFPGA**。
 最後本論文進行了一系列效能評比，於大規模的模擬中證明了NDP能夠為整個 **data center** 提供低延遲與高輸出的特性。
 
-## Introduction
+# Introduction
 隨者 **Data Center** 爆炸性的成長，為了滿足其內部傳輸的需求(低延遲/高輸出)，有各式各樣的新方法或是舊有技術的改進用來滿足上述需求。譬如 TCP 改進的 DCTPC、本來就存在已久的 MPTCP 甚至是 RDMA (RoCE)。 若對 **RDMA/RoCE** 想要更瞭解，可以參考下列連結。[RDMA Introduction (一)](https://www.hwchiu.com/rdma-introduction-i.html)
 再 **RDMA** 的網路環境中，為了減少封包遺失對整體傳輸造成的傳輸，都會希望能夠將整個網路傳輸打造成 **lossless** 的環境，為了達成這個方法，可以採用 **Ethernet Flow Control**， **Explicit Congestion Notification**(ECN) 或是 **Priority Flow Control**(PFC)。然而在 ** SIGCOMM 2016** 微軟發了一篇 paper 再講 RDMA + PFC 的問題。其表明雖然 PFC 可以用來控制傳送封包的速率，藉此達到 **lossless** 的網路環境，但是一旦整體網路處於高度壅塞的情況時，資料封包與 **PFC** 控制封包的爭奪會使得整體網路沒有辦法繼續提供**低延遲**的優點，最後給出了一個結論 *“how to achieve low network latency and high network throughput at the same time for RDMA is still an open problem.“*
 
@@ -70,57 +70,57 @@ NDP 不同於 **TCP**，不需要先透過三方交握來進行連線才可以�
 對於 **NDP switch**來說，採用了類似 **CP(Cut Payload)** 的機制，當**switch** 的緩衝區滿載的情況下，對於接下來收到的封包不會直接丟掉，而是會將其 **Payload** 給移除，並且設定高優先度的方式將其標頭檔盡可能快速的傳送到目的地，讓接收段能夠有資訊瞭解到當前網路與發送端的狀態。
 透過 **CP** 的機制可以對 **metadata** 達到近乎 **lossless** 的狀況，不過對於 **data** 來說則沒有辦法。不過因為 **NDP** 本身協定設計的方式，封包掉落所產生的影響並不會像 **TCP** 一樣有如此嚴重的影響。
 
-## Design Space
+# Design Space
 對於內部使用的 **Data center** 來說，其網路流量大部分都是屬於 **Request/Reply**,這種類似 RPC 方式的流量。這意味者以網路使用率來看其實不會一直處在滿載的狀況，但是對連線接收端的應用程式(譬如 server)來說，其所收處理的網路流量可能是大資料的傳輸，也可能是簡單資料的短暫連線。對於短暫連線來說，最大的重點就是**低延遲**，盡可能快的傳輸回去。
 為了處理這個問題，今日有滿多的應用程式決定採取 **reuse** TCP 連線來處理多個 request，藉此方式減少 **TCP** 三方交握所產生的延遲。
 然而，是否存在一種架構，不論當前整個網路系統是否處於高流量負載，該架構能夠讓應用程式不需要重複使用連線，讓每個 **request** 都是一條全新連線，同時又能夠接近完美的延遲(意味者不會像 **TCP** 都要先經過三方交握才可以開始傳資料)。
 於是乎 **NDP** 的設計發想就出現了，為了達到上述的要求，首先必須要重新思考，當前網路架構中，是什麼因素阻礙了上述要求，這些阻礙要如何克服。
 因此接下來的章節會講述這些因素。
 
-### End-to-end Service Demans
+## End-to-end Service Demans
 本文列出了四個 **data center** 內應用程式要追求的特性。
-#### Location Independence
+### Location Independence
 一個分散式的應用程式其運行於**data center**內的任一機器上都不應該要影響應用程式本身的功能。由於目前都採用 **clos network** 的方式來設計網路拓樸，所以整個網路拓樸方面應該是能夠提供足夠的流量來使用，而不會變成一個理由或是瓶頸使得應用程式必須要選擇特定的機器才可以運行。
-#### Low Latency
+### Low Latency
 雖然 **Clos Network** 的架構能夠提供足夠的頻寬給拓墣中內的服務器，對於流量的負載平衡能提供良好的效果，但是對於短暫連線來說，並沒有辦法提供低延遲的能力。
 作者認為雖然能夠提供高流量輸出是一個很重要的議題，但是能夠提供低延遲的能力則是更重要且優先度更高。
-#### Incast
+### Incast
 **Incast** 這個專有名詞的介紹可以參考[Data Centers and TCP Incast - Georgia Tech - Network Congestion](https://www.youtube.com/watch?v=-e5Rw2I3QJk)，簡單來說就是同時間有大量的**request**進到**data center**內，這些**request**都會產生對應的**reply**然後這些**reply**連線同時間一起進入到 **switch**內，這會使得 **switch** 的緩衝區立刻滿載沒辦法繼續承受封包，導致部分的 **TCP** 連線需要降速重送。
 作者認為一個好的網路架構遇到這種問題時，應該要能夠保護背後的應用程式連線，讓這些連線應該要盡可能地維持低延遲性。
-#### Priority
+### Priority
 這邊特性老實說有點難以想像，我盡力的就我所瞭解的去解釋。
 假設今天有一個應用程式，同時會發送不同的 **request** 到後端去處理，而這些 **request** 所產生的 **reply** 本身是有依賴的關係。
 所以假如這多個 **reply** 沒有依照當初發送 **request** 的順序回來的話，在應用程式端這邊就必須要特別去處理，譬如說不要同時送多個**request**，不過這樣就沒有更好的效能表現。
 因此對於應用程式來說，若本身能夠有一個優先度的機制，能夠決定那些封包要先處理，就可以解決上述的問題，而讓應用程式本身就可以更自由的去處理。
 
-### Transport Protocol
+## Transport Protocol
 目前 **data center** 內部採用的 **Transport Protocol** 雖然可以處理上述應用程式的問題，但是為了處理那些問題，反而會失去下列特性。
 而 NDP 本身在設計時，希望能夠在滿足上述應用程式的需求，同時又保有下列的特性。
 
-#### Zero-RTT connection setup
+### Zero-RTT connection setup
 目前主流的 **TCP** 協定再傳送資料前，必須要先進行一次三項交握，這意味者當 **data** 送出去前，至少要先花費 **RTT*3** 的等待時間。
 對於低延遲的應用程式來說，希望能夠達到 **RTT*0**，至少 **RTT*1** 的等待時間就能夠將資料送出，這意味者對 **NDP** 來說，在資料發送前，整個連線不需要有三方交握類似的行為，才可以一開始就直接送出資料。
 
-#### Fast start
+### Fast start
 **Data Center** 不同於網際網路的地方在於網路拓樸中的每個 **Switch/Link** 都是自己掌握的。
 所以 **TCP** 採用的 **Slow Start** 其實對於 **Data Center** 來說是沒有效率的，畢竟一開始就可以知道可用頻寬多少，不需要如同面對網際網路般的悲觀，慢慢地調整 **Window Size**，而是可以一開始就樂觀的傳送最大單位，在根據狀況進行微調。
 若採取這種機制，則應用程式可以使用更快的速度去傳送封包。
 
-#### Per-packet ECMP
+### Per-packet ECMP
 在 **Clos Network** 中，錯綜複雜的連結狀態提供了 **Per-flow** ECMP 一個很好發揮的場所，可以讓不同的連線走不同的路徑，藉此提高整體網路使用率。
 然而如果今天 **Hash** 的結果相同的話，其實是有機會讓不同連線走相同的路徑，即使其他路徑當前都是閒置的。
 若採取 **MPTCP** 這種變化型的 **TCP** 來處理的話，該協定本身的設計可以解決上述的問題，但是對於短暫流量或是延遲性來說，卻沒有很好的效果。
 為了解決這個問題，如果可以將 **Per-flow** ECMP 轉換成 **Per-Packet** ECMP。因此 NDP 本身協定的設計就是以 **Per-Packet** ECMP 為主。
 
-#### Reorder-tolerant handshake
+### Reorder-tolerant handshake
 假設我們已經擁有了 **Zero RTT** 以及 **Per-packet ECMP** 兩種特性，擇一條新連線的封包可能就會發生 **Out of order** 的情況，收送順序不同的狀況下，若對於 **TCP** 來說，就會觸發壅塞控制的機制進而導致降速。
 因此 NDP 在設計時，必須要能夠處理這種狀況，可以在不依賴封包到達先後順序下去處理。
 
-#### Optimized for Incast
+### Optimized for Incast
 即使整個 **data center** 的網路環境，如頻寬等資訊一開始就已經可以掌握， **incast** 的問題還是難以處理，畢竟網路中變化太多，也許有某些應用程式就突然同時大量產生封包，這些封包同時間到達 **switch** 就可能導致封包被丟棄。
 因此 NDP 本身在設計時，也希望能夠解決這個問題。
 
-### Switch Service Model
+## Switch Service Model
 在一個 **data center**內，除了應用程式特定，傳輸層協議(**Transport Protocol**)之外，還有一個性質也是很重要的，這個性質與上述兩個性質關係緊密，一起影響整個網路的運作，這個性質就是 **Switch Service Model**。
 作者認為這性質中，最重要的就是**當 switch port 發生阻塞時會怎麼處理**，這個性質會完全影響到傳輸層協定以及壅塞控制演算法(Congestion control algorithms)的設計，甚至是傳輸相關的概念，如 **per-packet ECMP** 都會被影響到。
 作者提到，目前有很多種預防壅塞機制，譬如 **Loss as a congestion**，**Duplicate or selective Acks**等，其中 **Duplicate or selective Acks** 會主動去觸發重送，這種技巧對於長時間連線來說是好的，但是對於需要低延遲的短暫連線來說是不好的，主要是這些重送都會經過一個 **RTO**(Retransmission timeouts)，這個時間的長短都會產生一些負面的影響，因此也不是一個萬用的解法。
@@ -143,7 +143,7 @@ NDP 不同於 **TCP**，不需要先透過三方交握來進行連線才可以�
 
 因此接下來的章節，就會講述 NDP 到底如何實作並且盡可能地有提供上述性質。
 
-## Design
+# Design
 為了滿足上述的條件，NDP 在設計時就決定整個設計要包含完整架構，包含了
 1.**switch**的行為
 2.**routing**
@@ -164,7 +164,7 @@ NDP 不同於 **TCP**，不需要先透過三方交握來進行連線才可以�
 最後，採取的 **Packet Trimming**，其設計理念與 **Cuy Payload** 極為相似，此種情況下， **switch** 採用小緩衝區，當接收端發現封包只有標頭沒有內容時，就可以判斷當前網路有壅塞發生。為了可以讓重送時間盡可能的快，對於這些被截斷內容的封包， **switch** 應該要盡可能的快讓該類型的封包送出去。
 這類型的封包到達接收端後，會讓接收端有資訊可以知道當前那些應用的封包到達，藉由這些資訊加上一個完整的封包池(receiver-pulled pool)，接收端就可以精準地控制那些封包要優先處理。
 
-### NDP Switch Service Model
+## NDP Switch Service Model
 前述有提到過 **Cut Payload** 的技術，透過把資料丟掉，單純送標頭檔給對方。
 這邊不丟掉封包的原因是希望能夠通知 **接收端** 端關於封包的訊息，讓 **接收端** 端可以要求 **送端** 重送。這整體所消耗的時間會比接收端依賴　**Retransmission Timeout** 來的還要短。
 然而。本文作者發現到，若採用最原生的 **Cut Payload** 實作其實會引發下列問題，因此要將其改良以解決這些問題。
@@ -192,7 +192,7 @@ Y 軸代表的是在當前網路下，應用程式真正收到的 **goodput** �
    
 4. 藉由上述兩種行為，作者說可以打亂網路的平衡，這點可以由圖2的虛線看到，在 NDP 的環境中，即使是效能最差 10% 應用程式的 **goodput** 跟平均也是差不多的。
 
-#### Routing
+### Routing
 前述已經提到， **NDP** 想要完成 **per-packet** ECMP而非 **per-flow** ECMP，於是作者在這邊提出了兩大類做法
 1. 讓 **switch** 本身隨機當前封包該怎傳送
 2. 讓 **送端** 決定當前封包該怎傳送
@@ -212,7 +212,7 @@ NDP 認為，由於本文的環境是在 **data center** 內，網路拓樸的�
 3. destination addresses:
     - 根據目的端的位置來選擇，假如目的端有多個 **IP** 地址，則每個地址都可能有不同的走法。
 
-### Transport Protocol
+## Transport Protocol
 接下來作者要詳細介紹整個 NDP Transport protocol 的設計。
 
 NDP 在設計 **Transport** 協定時是基於 **receiver-driven** 的理念去設計的。希望藉由這個設計能夠跟之前提過的各式各樣技術結合，如 **multipath forwarding**、 **packet trimming** 以及 **short switch queues**。藉由與這些技術結合，NDP 想要提供1)低延遲2)高產出的效能。
@@ -270,12 +270,12 @@ NDP 採用了截斷封包的方式，透過標頭檔的內容告訴**接收端**
 回過來看先前提過的問題， NDP 要如何在 **incast** 的狀況下有良好表現?
 假設一開始有很多個 **送端**，每個都用全速傳輸。可以想像得到的是會有很多封包都被截斷，接者每個對應的 **接收端** 都可以採用 **Pull** 的概念控制對應 **送端**的傳送速率，就可以讓每個**送端**的傳送速率總和能夠符合 **switch** 的處理速度，藉此能夠讓被截斷的封包數量降到最小，甚至沒有。
 
-### Coping with Reordering
+## Coping with Reordering
 根據 **Per-packet** 多重路徑路由，對於**送端/接收端**來說，資料封包，**Pull** 封包， **ACK** 以及 **NACK** 在收到的時候是非常有機率是順序錯亂的。雖然 **NDP** 一開始的設計是不用擔心這個情況的。
 不過作者提下有提了一個情境是關於 **Pull** 的問題，這邊實在講得太難讓人理解，我看了好久，思索許久，還是無法理解到底在說什麼。
 所以決定暫時放棄這個段落。
 
-### The First RTT
+## The First RTT
 NDP 為了達到能夠在第一個封包就直接送資料而不採用 **TCP** 的三項交握後送資料，必須要處理三個問題
 
 1. 避免遇到大量相通 **Source IP** 的垃圾封包影響
@@ -291,7 +291,7 @@ NDP 為了達到能夠在第一個封包就直接送資料而不採用 **TCP** �
 > 這邊也看不太懂，到底要怎麼透過這個狀態處理此問題。估計不是重點，敘述很少。
 3. 由於 **per-packet** ECMP 的關係，第一個到達**接收端**的封包往往不是第一個送出的封包，為了處理這個問題，**送端**第一次送出的封包都會帶有一個**SYN**的標誌以及該封包是第一次送出封包中的第幾個。藉由這個資訊就可以讓任何一個**第一次送出**中的任一個封包來建立連線。
 
-### Robustness Optimizations
+## Robustness Optimizations
 假如網路一切都順順利利的運行，上述 **NDP** 的實作其實運作得非常良好，然而好景不常，網路常常會出問題，譬如 **switch** 或是 **link** 會損毀。
 這種情況下， **NDP** 要怎麼處理這些問題來繼續保持其提供的低延遲與高輸出的特性。
 常見的問題有
@@ -305,7 +305,7 @@ NDP 為了達到能夠在第一個封包就直接送資料而不採用 **TCP** �
 
 
 
-### Rteurn-to-Sender
+## Rteurn-to-Sender
 前述提過，採用 **Cut Payload** 的機制能夠有效的解決 **incast** 的網路問題，然而當 **incast** 的封包過多時， **switch** 上面的兩個佇列(高/低優先度)都可能會被塞滿，在這種情況下封包就會被丟棄了。
 舉例來說，高優先度佇列可以存放**1125 * 64-byte**的封包量，而低優先度佇列只能存放 **8 * 9K-bye** 的封包量。假設 **送端**發送了一個封包過去，卻遲遲沒有等到回應，在經過 **RTO** 的時間後，就會重送封包。
 根據前述的實驗， 最大的 **RTT** 時間是 **400µs**，因此作者認為最大的 **RTO** 設定為 1ms 即可。
@@ -334,7 +334,7 @@ NDP 為了達到能夠在第一個封包就直接送資料而不採用 **TCP** �
 
 假設今天整體傳送量更大，到達了 **1350KB**，雖然第一個封包傳輸的行為會跟 **135KB** 的實驗一致，但是後續 **NDP** 的設計能夠讓整體後續的處理更為平順以及更穩，所以其平均的處理時間大概只有 **95µs**。
 
-### Congestion Control
+## Congestion Control
 作者表示， **NDP** 本身沒有任何 **Congestion Control**，因為 **Congestion Control** 本身是為了下列兩個目的而誕生的。
 1. **Avoiding congestion collapse**
 2. **fairness**
@@ -344,7 +344,7 @@ NDP 為了達到能夠在第一個封包就直接送資料而不採用 **TCP** �
 NDP 的設計下，每個連線一開始都樂觀地採用全速發送，同時因為協議設計的關係，**接收端**擁有大量關於當前連線的資訊，透過 **pull** 佇列的設計能夠讓每條連線平均的使用當前網路流量。
 不過作者也有提到，由於**接收端**可以決定**送端**傳送封包的速率，因此若有些連線被標註是高優先度的，則可以使用比一般連線更多的流量。這種情況下就是故意造成不公平的，因此也不是大問題。
 
-### Limitation of NDP
+## Limitation of NDP
 
 接下來的章節中，作者透過實驗證明了在各種流量模式中，**NDP** 提供的效果非常接近於 **Clos** 網路架構理論上的效能。
 在非對證的網路架構中，例如 **BCube**、 **Jellyfish**， **NDP** 的表現會稍微差一點，主要是當前網路壅塞時，**送端**會將封包透過不同距離的路徑來傳輸封包(就不是ECMP了)。於這種情況下，若採用 **sender-based per-path** 的多重路由就會有良好的效果。
@@ -356,8 +356,7 @@ NDP 的設計下，每個連線一開始都樂觀地採用全速發送，同時�
 
 最後的問題就是 **環境部屬問題**， 只要當哪一天 **P4** 交換機能夠廣泛的部屬在 **data center** 中的時候，要部屬 **NDP** 就是很簡單的事情。此外，如何跟現有的 **TCP** 連線共存也是一個問題，因為 **NDP** 目前會吃掉該網路的流量導致 **TCP** 幾乎沒有辦法使用，因此在 **P4** 交換機端應該要有辦法去處理相關的問題。
 
-## Summary
+# Summary
 到這邊為止，已經可以大概知道 **NDP** 的設計思維，接下來就要探討其如何實作以及其實驗效能。
 不過必須說，只有**Paper**而缺少投影片或是影片的情況下，很多敘述都要靠想像力去思考到底怎實作，花了不少時間在思考，甚至有些情境還想不出來到底是什麼，只能憑感覺去想像。當然，這個會有這些問題其實是因為自己知道的東西還不夠多，所以變成很多作者認為是基本概念的東西，對我來說都要重新思考學習，才會導致自己思考不夠完善。
 只好繼續多念書多加強自己了
-

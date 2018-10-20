@@ -1,6 +1,6 @@
 ---
 title: '[論文導讀] Maglev: A Fast and Reliable Software Network Load Balancer'
-keywords: 'SDN,Network,Linux,Ubuntu'
+keywords: 'Maglev, google, lb, load balancer'
 tags:
   - Paper
   - Network
@@ -8,14 +8,15 @@ tags:
   - Kernel
 abbrlink: 59612
 date: 2017-08-29 11:36:49
-description:
+description: 本篇文章是屬於論文導讀系列，這次的對象是Google所推出的Software Network Load Balancer, Meglev. 透過對該論文的研究後可以學習到Google對於一個 Network Load Balancer 的期許以及設計的思考脈絡，並且實際理解其架構來學習到如何設計一個通用(可運行在任意的 Linux Server上), 分散式且易於擴充的彈性架構以及高PPS(Packet Per Second)處理能力的軟體程式。最後透過論文中的實驗與效能評估來觀察實際上 Meglev 的效能以及是否有滿足Google對該軟體架構的期望。
+
 ---
 
+# Preface
 最近才看到一篇由**Google**於2016年所發佈的論文[Maglev: A Fast and Reliable Software Network Load Balancer](https://static.googleusercontent.com/media/research.google.com/zh-TW//pubs/archive/44824.pdf)，其標題看起來也頗有趣的，加上最近有些時間，就決定花點時間看一下這篇論文，順便用這篇文章記錄一下論文中的重點，當作一個紀錄。
 
 
-Abstract
---------
+# Abstract
 Google 自從 2008 年開始就在其內部的網路中設計了一套名為 **Maglev** 的網路負載平衡器。Google 對於 **Maglev** 有者下列的期許
 1. 分散式的軟體架構，能夠輕易地增加/移除其機器並且彈性的調整其服務能力
 2. 能夠運行在任意的 Linux Server上
@@ -23,29 +24,25 @@ Google 自從 2008 年開始就在其內部的網路中設計了一套名為 **M
 
 因此接下來將會講述 **Maglev** 的架構，並且敘述一下其實作的原理，最後附上該論文內的一些實驗數據來檢視其成果。
 
-<!--more-->
 
-
-Introduction
-------------
+# Introduction
 由於Google本身於全世界提供了大量的服務，這些服務無時無刻都有大量的請求在網路上流動，為了讓這些流量能夠在這些服務群集中有一個很好的分配，因此需要再網路架構中安插所謂的負載平衡器，而下圖則用來說明傳統上認知的負載平衡器與 **Maglev** 的不同。
 ![](http://i.imgur.com/bby13s6.png)
 
-## Traditional LoadBalancer
+# Traditional LoadBalancer
 傳統的負載平衡器幾乎都是由一台特定的硬體服務器來處理，著名的廠商譬如 F5。
 而這類型的負載平衡器為了達到高可用性(HA)，所以在建置上通常都會部署兩台機器，採取AP(Active-Passive)模式來運行。這樣的優勢就是當一台機器壞時，另外一台能夠接取其任務繼續服務。
 然而其缺點就是其能夠服務的能力不夠大，整個處理速率都受限於一台機器本身，同時不論後端的服務機器數量有多少，前面都只有兩台負載平衡器再處理，因此整體服務的效率低落。
 最後，其本身沒有彈性且沒有辦法透過程式去進行修改，在整個更新與變化的需求上沒有辦法滿足Google如此快速成長的環境。
 
 
-## Maglev
+# Maglev
 **Maglev** 期待中的角色就如同上圖右半邊所示，**Maglev**希望是個分散式的軟體架構，可以根據背後的需求來動態的調整**Maglev**的數量，同時所有的機器都能夠同時用來處理所有的流量需求。
 在這種架構下，Google 就可以針對本身服務的大小來調整 **Maglev** 的數量，同時可以依據各種不同的情境來客製化。
 
-System Overview
----------------
+## System Overview
 
-## Frontend Serving Architecture
+### Frontend Serving Architecture
 接下來使用下圖來說明一下整體的系統架構
 ![](http://i.imgur.com/Bb8Byvy.png)
 
@@ -77,8 +74,7 @@ Google本身的服務，譬如 Gmail, Google Search本身都含有一組或是�
 根據此架構圖，其實可以看到有些後方服務器(**IP**)是對應到多組的 **Backend Pool**，所以在 **Health Checker**的時候會特別去進行這邊的去重複化，避免相同的事情重複多次來減少額外的開銷。
 
 
-Forwarder Implementation
-------------------------
+# Forwarder Implementation
 由於 **Forwarder** 要負責接收封包並轉發，所以必須要有極高的效能且穩定，所以接下來就會介紹 **Maglev** 內部的架構以及其實作原理。
 
 ## Overrall Structure
@@ -170,14 +166,12 @@ Forwarder Implementation
 [[論文中文導讀] Maglev : A Fast and Reliable Software Network Load Balancer (using Consistent Hashing)](http://www.evanlin.com/maglev/)
 
 
-Operational Experience
-----------------------
+# Operational Experience
 這邊大致上就是一個更細節的探討，包含 **Meaglve** 的演化史，**VIP** 怎麼設計，遇到 **IP Fragement**如何處理 以及一些 **Monitor**的設計。
 這邊有興趣的可以自行閱讀該篇文章，這邊就不多加敘述。
 
 
-Evaluation
-----------
+# Evaluation
 這邊效能評估的部分，我個人偏好 **Kernel Bypass**的部分，所以這邊只針對這邊去進行閱讀。
 
 在此實驗中，變數總共有兩個，分別是
@@ -195,6 +189,6 @@ Evaluation
 ![](http://i.imgur.com/K7aeCZH.png)
 
 
-## Reference
+# Reference
 [[論文中文導讀] Maglev : A Fast and Reliable Software Network Load Balancer (using Consistent Hashing)](http://www.evanlin.com/maglev/)
 

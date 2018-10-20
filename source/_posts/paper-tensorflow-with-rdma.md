@@ -10,7 +10,7 @@ tags:
   - Paper
 abbrlink: 24428
 date: 2018-01-23 02:27:30
-description:
+description: 本文屬於論文導讀系列，這次針對的是高速網路(RDMA)的應用，來源是 SICCOM 2017 會議上。這篇文章有趣的地方在於他不是單純的介紹架構，而是透過一個實際的應用程式來闡述當該應用程式搭配上 RDMA 後獲得了 Zero Copy 的特色，在此特色加持下，原先應用程式的效能提升了多少。本文的標題是 Towards Zero Copy Dataflows using RDMA, 其內容跟 AI 的訓練過程有關，採用了由 Google 開源的訓練框架， Ternsorflow, 並且分析了在原先分散式的訓練模型中，資料不論在 CPU/GPU UserSpace/KernelSpace 甚至節點間都有大量的資料複製行為。透過 RDMA 的幫忙減少了這些行為最後證明了整體分散式訓練的時間大幅度縮短，是個非常有趣的短文.
 
 ---
 
@@ -29,7 +29,6 @@ and do memory copies between them when sending/receiving data.
 
 先大概介紹了一下 RDMA 的特性與價值，想要瞭解更多關於 RDMA 的可以參考[這篇文章](https://www.hwchiu.com/rdma-introduction-i.html)。
 
-<!--more-->
 
 >With large sized (up to hundreds MB) application buffers, the cost of
 such copies adds non trivial overhead to the end-to-end communication
