@@ -1,6 +1,6 @@
 ---
 title: '[Kubernetes] DNS Setting When DnsPolicy Is Default'
-keywords: 'kubernetes,DNS,Linux,k8s'
+keywords: 'kubernetes,DNS,k8s,pod,policy'
 abbrlink: 48875
 date: 2018-08-12 04:31:52
 tags:

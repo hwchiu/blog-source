@@ -1,6 +1,6 @@
 ---
 title: '[Kubernetes] DNS setting in your Pod'
-keywords: 'kubernetes,DNS,Linux,k8s'
+keywords: 'pod, dns,yaml,k8s,custom'
 tags:
   - Kubernetes
   - Linux

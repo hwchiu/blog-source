@@ -1,6 +1,6 @@
 ---
 title: '[論文導讀] - Towards Zero Copy Dataflows using RDMA'
-keywords: 'AI,Network,Linux,Kernel,RDMA,Tensorflow'
+keywords: 'RDMA,Tensorflow, Paper, SICCOM'
 tags:
   - AI
   - Network
@@ -11,10 +11,10 @@ tags:
 abbrlink: 24428
 date: 2018-01-23 02:27:30
 description:
+
 ---
 
-Introduction
-============
+# Preface 
 
 2017 SICCOM 上面出現了一篇令人感到有趣的論文，內容是 **Towards Zero Copy Dataflows using RDMA**，可以到 [這邊](https://dl.acm.org/citation.cfm?id=3131975) 閱讀該篇論文內容。
 

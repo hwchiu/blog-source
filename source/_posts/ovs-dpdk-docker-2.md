@@ -1,6 +1,6 @@
 ---
 title: OVS + DPDK + Docker 共同玩耍(二)
-keywords: 'SDN,Network,Linux,Ubuntu, OVS, DPDK, Kernel'
+keywords: 'OVS,dpdk, docker,container,veth'
 tags:
   - SDN
   - Linux
@@ -9,8 +9,11 @@ tags:
   - OpenvSwitch
 abbrlink: 8151
 date: 2017-09-21 15:26:23
-description:
+description: 本文延續前篇文章關於 Docker/OpenvSwitch/DPDK 整合遇到的連線問題，此文章會專注於這個連線問題，從問題發生的原因到如何解決，以及該問題為什麼會在上述的組合中發生都進行一些研究與分析，雖然最後還沒有找到真正造成封包損壞的原因，但是至少也把問題範圍給縮小到 OpenvSwitch/DPDK 上.
+
 ---
+
+# Preface
 
 此文章主要接續前篇文章 [OVS + DPDK + Docker 共同玩耍](https://www.hwchiu.com/ovs-dpdk-docker.html#more) 進行後續探討。
 
@@ -19,8 +22,7 @@ https://tech.vijayp.ca/linux-kernel-bug-delivers-corrupt-tcp-ip-data-to-mesos-ku
 
 因此本篇文章會分成兩個部分，第一部份是先針對上述文章進行探討，第二部分則是將第一部分的結果與先前經驗去結合，來追出更深層的問題所在。
 
-<!--more-->
-
+# Problems
 
 [Linux kernel bug delivers corrupt TCP/IP data to Mesos, Kubernetes, Docker containers](
 https://tech.vijayp.ca/linux-kernel-bug-delivers-corrupt-tcp-ip-data-to-mesos-kubernetes-docker-containers-4986f88f7a19) 該篇文章中提到他們使用 **docker** 配上 **veth** 一起使用時，會發現 **TCP** 的連線有機率會不通。
@@ -63,6 +65,7 @@ index 0ef4a5a..ba21d07 100644
  struct pcpu_vstats *stats = this_cpu_ptr(dev->vstats);
 ```
 
+# Study
 
 再探討完畢 **veth** 的問題後，要如何與我之前的問題給整合？
 首先, 根據上述文章的說明，該 **Patch** 只有 **backport** 回到 **Linux 3.14**, 而我的測試環境是 **Linux Kernel 3.10**，所以這意味者我的系統上並沒有上述的 **Patch**, 因此 **veth** 是有問題的。
@@ -87,5 +90,3 @@ index 0ef4a5a..ba21d07 100644
 2. **OVS** 的問題使得 TCP 封包出現錯誤
 
 基本上到這邊已經大致上找出問題點了，最後一步驟就是翻進 **OVS** 的程式碼內，找出對應的錯誤，若沒有時間找出來，就發一個 issue 到官方去詢問好了。
-
-

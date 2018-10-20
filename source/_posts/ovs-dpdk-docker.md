@@ -1,6 +1,6 @@
 ---
 title: OVS + DPDK + Docker 共同玩耍
-keywords: 'SDN,Network,Linux,Ubuntu,DPDK,OVS'
+keywords: 'OVS,dpdk, docker,container,veth'
 tags:
   - SDN
   - Ubuntu
@@ -11,17 +11,20 @@ tags:
   - OpenvSwitch
 abbrlink: 44843
 date: 2017-09-15 13:33:17
-description:
+description: 本文介紹了一種將 Contaienr 創建於 OpenvSwitch 與 DPDK 整合的網路拓墣下所遇到的連線問題。開頭先闡述了拓墣架構以及相關的軟體版本，接者介紹是如何搭建起整個測試環境，並且在測試環境中遇到了網路連線的問題，眾多的測試組合中，卻只有一種組合能夠正常的在 Container 間建立起能夠傳輸的 TCP 連線。最後透過 AB 測試的方法歸納出一些會造成問題出現的環境。
+
 ---
 
-最近與 [John Lin](https://www.facebook.com/linton.tw) 一起合作 OpenvSwitch 時遇到了一些問題，由於此問題實在過於有趣，所以決定寫下這篇文章來記錄此問題。
+# Preface
+
+最近在操作 OpenvSwitch 時遇到了一些問題，由於此問題實在過於有趣，所以決定寫下這篇文章來記錄此問題。
 
 此問題會牽扯到三個元件，分別是 `OVS`, `DPDK` 以及 `Docker`，首先來看一下網路拓墣，如下。
 
 ![](https://i.imgur.com/X8Rriqu.jpg)
 
-<!--more-->
 
+# Topology 
 首先，準備好兩台機器，其中一台機器為 **Linux Based** 機器，在其環境中安裝了
 1. OpenvSwitch 2.8
 2. Docker + ubuntu image
@@ -39,6 +42,8 @@ description:
 整個網路環境就上圖所呈現。
 
 所以目前網路中有四個元件可以用來進行操作，分別是兩台 Container， Linux Host 本體，以及外面的那台 server。
+
+# Scripts
 
 首先我們使用`ping` 指令來測試網路狀況，沒意外的任意兩台機器都能夠順利的連接到對方。然而接下來使用**TCP**作為測試時，卻發現了一些詭異的情況。
 
@@ -97,7 +102,6 @@ description:
 ```
 
 其中的 `Currently DPDK port does not make use any offload ` 其中的段話讓我滿好奇的，但是在最新 OVS 2.8 中該敘述也已經不見了, 可能此限制也已經排除。所以我們為什麼會遇到這個問題，暫時還沒有頭緒，等有時間時再來細追看看，不然就先去 **ovs-dicuss** 那邊發問一下好了。
-最後感謝 [John Lin](https://www.facebook.com/linton.tw) 大力幫忙，一起研究這個問題，讓彼此都學到了一些鬼玩意。
 
 Reference
 - [First release of netdev-dpdk](https://github.com/openvswitch/ovs/commit/8a9562d21a40c765a8ae6775a070cb279cb2147a#diff-c43dadca1fdb46e2bf2e3f928a8529fbR77)
