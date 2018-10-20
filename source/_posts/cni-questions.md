@@ -1,5 +1,5 @@
 ---
-title: CNI 常見問題整理(上)
+title: CNI 常見問題整理
 keywords: 'CNI, kubernetes, ip, pod, container network interface'
 abbrlink: 31436
 date: 2018-10-20 06:49:39
