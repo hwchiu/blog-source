@@ -25,7 +25,7 @@ description: 本篇文章紀錄了作者這陣子以來與大家討論 CNI 時�
 1. 這個問題非常容易聽到，但是基本上沒有辦法回答，因為網路的架構太過於複雜且龐大，沒有明確的需求之前沒有辦法得到一個較好的答案。
 2. 如果你只是想要 `Pod` 之間可以正常連線，沒有其他的考量的話，就選擇 `Flannel` 吧。
 3. 有其他網路使用相關的需求，甚至是 `Network Policy` 的話，就要在尋求其他的 CNI 解決方案
-4. 之後會再寫一篇文章來簡單介紹一下目前有哪些 `CNI` 解決方案，分別有什麼樣的特色
+4. 可以參閱[常見 CNI (Container Network Interface) Plugin 介紹](https://www.hwchiu.com/cni-compare.html)
 
 
 ## 聽說 CNI 可以設定 DNS, 那為什麼我在 kubernetes 環境中這些設定都沒有被採用
