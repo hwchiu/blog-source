@@ -99,7 +99,7 @@ description: 作為一個 Kubernetes 使用者，可能都有聽過 CNI/CRI/CSI 
 `Calico` 的想法很簡單，雖然 `Overlay Network` 很方便，但是實際上每次的封包封裝都會增加整體封包的複雜度，同時也會增加封包的處理時間。
 因此 `Calico` 透過 `IPTables` 以及 `Routing Table` 的方式來處理 `Layer3`路由的問題，讓不同節點之間的 `Pod` 可以透過 `Routing Table` 的方式直接互相連間而不需要再包覆一層額外的標頭檔來處理封包。
 
-這部分的原理牽扯到 `Layer3` 路由以及相關閘道的 `MAC address` 的原理，有醒去的可以參考官方說明
+這部分的原理牽扯到 `Layer3` 路由以及相關閘道的 `MAC address` 的原理，有興趣的可以參考官方說明
 [The Calico Data Path: IP Routing and iptables
 ](https://docs.projectcalico.org/v3.3/reference/architecture/data-path)
 3. Public IP Address Assignment
@@ -129,7 +129,7 @@ description: 作為一個 Kubernetes 使用者，可能都有聽過 CNI/CRI/CSI 
 
 # Ciliunm
 `Ciliunm` 最厲害也是最主打的功能並不是網路方面的連接，反而是安全性以及平衡附載特點。
-在其實作中採用了 `eBPF` 以及 `XDP` 這兩種這幾年逐漸受到重視的技術來處理封包。連線的封包能夠在網卡收到但是尚未送到 `Kernel` 前就先行處理，因此有更早期且更快速的效率來處理風包。
+在其實作中採用了 `eBPF` 以及 `XDP` 這兩種這幾年逐漸受到重視的技術來處理封包。連線的封包能夠在網卡收到但是尚未送到 `Kernel` 前就先行處理，因此有更早期且更快速的效率來處理封包。
 
 接下來就針對其各個特色功能來介紹
 
