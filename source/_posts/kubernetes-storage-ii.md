@@ -68,7 +68,9 @@ spec:
 2. 創立 `PVC`，去尋找符合需求的 `PV`
 3. 創立 `Pod`, 透過 `VolumeMounts` 的方式去掛載創立好的 `PVC`.
 
-### PV
+### PV/PVC/Pod
+
+`PV` 必須要描述跟 `NFS Server` 最直接的資訊，譬如 IP 位置以及相關的路徑
 ```=yaml
 apiVersion: v1
 kind: PersistentVolume
@@ -82,9 +84,10 @@ spec:
   nfs:
     server: 172.17.8.101
     path: "/nfsshare"
-```    
+```
 
-### PVC
+`PVC` 中直接因為這個範例很簡單，也沒有其他的 `PV` 存在，因此只要條件滿足就可以選擇到對應的 `PV` 並且連接起來
+
 ```=yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -99,7 +102,8 @@ spec:
       storage: 1Mi
 ```
 
-### Pod
+`Pod` 中透過`Volumes` 的資訊去綁定對應的 `PVC` 即可
+
 ```=yaml
 apiVersion: v1
 kind: Pod
@@ -308,7 +312,7 @@ spec:
       storage: 1Mi
 ```
 
-```=bash
+```=yaml
 apiVersion: v1                                           
 kind: Pod
 metadata:
