@@ -4,8 +4,8 @@
 
 # Site
 title: Hwchiu Learning Note
-subtitle: kubernetes, sdn, linux
-description:  kubernetes, SDN(Software Defined Networking) and any Linux problems.
+subtitle: kubernetes, sdn, linux,devops
+description:  kubernetes/SDN/DevOps
 author: Hwchiu
 language: en
 timezone:
