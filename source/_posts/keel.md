@@ -1,19 +1,18 @@
 ---
 title: '[DevOps] 基於 Kubernetes 的自動部屬流程 - Keel'
 keywords: 'Kubernetes,Keel,CI,CD,Deploy'
+abbrlink: 53127
+date: 2019-01-12 08:21:49
 tags:
   - Kubernetes
   - CI/CD
-description: >-
-  本文介紹一種基於 Kubernetes 開發的 Continuous Deployment 解決方案 keel, Keel 透過部署相關應用於
-  Kubernetes 內並且直接針對 Container Registry 中的 Container Image 去讀取相關的資訊，同時搭配
-  Semantic Versioning 2.0.0 的格式來確保印象檔的新舊，並且針對新版來進行運行資源 (Pod/Deployment..etc) 的更新
-abbrlink: 46348
+description: 本文介紹一種基於 Kubernetes 開發的 Continuous Deployment 解決方案 keel, Keel 透過部署相關應用於 Kubernetes 內並且直接針對 Container Registry 中的 Container Image 去讀取相關的資訊，同時搭配 Semantic Versioning 2.0.0 的格式來確保印象檔的新舊，並且針對新版來進行運行資源 (Pod/Deployment..etc) 的更新
+
 ---
 
 # Preface
 隨者 `Kubernetes` 的風潮崛起，愈來愈多企業/玩家/研究人員嘗試使用 `Kubernetes` 作為其應用服務的底層平台。此外隨者 `DevOps` 的意識以及工作效率改善的風氣的流行，現在 `CI/CD` 這個詞更是眾人朗朗上口。
-然而基於 `Container Image` 為軟體版本的 `Kubernetes` 平台遇到 `CD/CD(Continuous Integration/Deployment)` 流程是，是否能夠有很好的銜接方式，或是問再銜接上可能會有什麼問題? 本文要介紹的就是其中一種用來處理 `Kubernetes` 中 `CD` 流程的解決方案. `Keel`.
+然而基於 `Container Image` 為軟體版本的 `Kubernetes` 平台遇到 `CI/CD(Continuous Integration/Deployment)` 流程是，是否能夠有很好的銜接方式，或是問再銜接上可能會有什麼問題? 本文要介紹的就是其中一種用來處理 `Kubernetes` 中 `CD` 流程的解決方案. `Keel`.
 
 
 # Introduction
