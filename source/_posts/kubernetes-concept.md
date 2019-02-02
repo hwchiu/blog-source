@@ -42,9 +42,9 @@ D: 聽說 `Kubernetes` 很有名,什麼都可以做，我們取代 `Openstack` �
 Storage(儲存) 實際上一直都不是一個簡單處理的問題，從軟體面來看實際上牽扯到非常多的層級，譬如 Linux Kernel, FileSystem, Block/File-Level, Cache, Snapshot, Object Storage 等各式各樣的議題可以討論。
 以檔案系統來說，光一個 `EXT4/BTRFS` 兩個檔案系統就有不少的評比與比較，何況是加上了 Distributed FileSystem(分散式作業系統)，譬如 `Ceph`, `GlusterFS` 等相關的解決方案進來後，一切事情又變得更加複雜。
 
-此外還可以考慮到其他的軟體相關儲存技術，譬如 `RAID`, `LLVM`, 甚至是各式各樣的`Read/Write Cache` 及`DRBD` 各種不同取向的解決方案，都會因為 **使用者的需求而有不一樣的選擇**.
+此外還可以考慮到其他的軟體相關儲存技術，譬如 `RAID`, `LVM`, 甚至是各式各樣的`Read/Write Cache` 及`DRBD` 各種不同取向的解決方案，都會因為 **使用者的需求而有不一樣的選擇**.
 
-異地備援，容錯機制，快照，去重複化等超多相關的議題基本上從來沒有一個完美的解法能夠滿足所有使用情境。
+異地備援，容錯機制，快照，重複資料刪除等超多相關的議題基本上從來沒有一個完美的解法能夠滿足所有使用情境。
 
 NetApp, Nutanix, 家用/企業 NAS 等眾多廠商專注於儲存解決方案的提供，從單一機器的擴充到超融合架構(HCI)都是服務的對象之一
 
@@ -88,8 +88,8 @@ NetApp, Nutanix, 家用/企業 NAS 等眾多廠商專注於儲存解決方案的
 如同先前提到的儲存資源的概念一樣，網路概念本身也是包山包海，各式各樣的議題可以討論，包含了層級也是非常的廣，譬如
 1. 硬體交換機的設計與建制
 2. 網路架構的佈建，包含了各式各樣的拓墣 (Fat-Tree, Leaf-Spine..etc), 交換機內的連線 (LAG, MC-LAG, Bonding)
-3. 各式各樣的路由技術 (BGP,OSPF,DSR,RIP, ECMP..etc)
-4. 各式各樣的網路協定 (IPv4/IPv6,Unicast/Multicast/Broadcast,TCP,UDP,ICMP,MPTCP,QUIT)
+3. 各式各樣的路由技術或是路由議題 (BGP, OSPF, DSR, RIP, ECMP..etc)
+4. 各式各樣的網路協定 (IPv4/IPv6,Unicast/Multicast/Broadcast,TCP,UDP,ICMP,MPTCP,QUIC)
 5. 以`Linux`為範例來說，軟體上也有各式各樣的網路封包處理，譬如常用的 `iptables/tc`, `linux bridge`, `tun/tap`
 6. SDN 概念的管理與佈建 (SDN Controller, SW/HW Switch, P4, ONOS..etc)
 7. 各式各樣的邏輯網路部署 (VLAN, VXLAN, GRE, NVGRE)
@@ -176,7 +176,7 @@ kubernetes 在 Service/Ingress 中間自行實現了一個模組，大抵上稱�
 1. gVisor
 2. Kata Container
 
-對於 `kubernetes` 來說，其實本身並不在意到底底下的容易化技術實際上是怎麼實現的，你要用 `Docker`, `rkt`, `CRI-O` 都無所謂，甚至背後是一個偽裝成 `Container` 的 `Virtaul Machine` [virtlet](https://github.com/Mirantis/virtlet) 都可以。
+對於 `kubernetes` 來說，其實本身並不在意到底底下的容器化技術實際上是怎麼實現的，你要用 `Docker`, `rkt`, `CRI-O` 都無所謂，甚至背後是一個偽裝成 `Container` 的 `Virtaul Machine` [virtlet](https://github.com/Mirantis/virtlet) 都可以。
 
 ## Container
 {% note danger %}
