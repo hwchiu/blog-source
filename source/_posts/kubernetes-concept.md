@@ -73,6 +73,11 @@ NetApp, Nutanix, 家用/企業 NAS 等眾多廠商專注於儲存解決方案的
 4. 不要認為 Kubernetes 可以幫你處理一切事情，沒有這麼強大也不應該這麼強大，請認份的學習儲存方面的概念與知識，然後與 Kubernetes 整合.
 5. 遇到任何問題，可能是 Kubernetes 使用上的問題，也有可能是儲存伺服器本身的問題，這部分要仰賴管理者的經驗來處理
 
+最後用一張圖來簡單闡述一下整體概念，基本上 `Pod` 裡面每個 `Container` 會使用 `Volume` 這個物件來代表容器內的掛載點，而在外部實際上會透過 `PVC` 以及 `PV` 的方式來描述這個 `Volume` 背後的儲存方案伺服器的資訊。
+最後整體會透過 `CSI` 的元件們與最外面實際上的儲存設備連接，所有儲存相關的功能是否有實現，有支援全部都要仰賴最後面的實際提供者， `kubernetes` 只透過 `CSI` 的標準去執行。
+
+![Imgur](https://i.imgur.com/0N9YUm4.png)
+
 # Network(網路)
 網路這個議題也非常有趣，我認為談到 `Kubernetes` 與 `Networking` 的關係時，可以有兩個方向去探討
 1. 如何提供網路功能給 `Kubernetes` 內運行的容器
@@ -145,12 +150,18 @@ kubernetes 在 Service/Ingress 中間自行實現了一個模組，大抵上稱�
 而 `ACL` 則是一個完全抽象層， `Kubernetes` 本身只實現接口，不實現底層功能，因為 `kubernetes` 沒有任何頭緒你的 `CNI` 是如何讓容器有網路能力的，因此 `kubernetes` 根本沒有辦法幫你去設定相關的 `ACL`，則要依賴 `CNI` 自己去完成了。
 
 ## Summary
+
+
 1. Kubernetes 本身有定義 `CNI` 這個網路標準介面，同時也有定義網路服務的中介層
 2. `CNI` 面對的網路提供方案自行想辦法實作功能，讓容器有網路連線能力
 3. Kubernetes 本身也有定義的中介層 `Service/Ingress` 並且透過不同的模組來提供此功能 `iptables/IPVS`.
 4. `CNI` 跟 `Service/Ingress` 是會衝突的，也有可能彼此沒有配合，這中間沒有絕對的穩定整合。
 5. 遇到網路任何問題，可能是 Kubernetes 整合上的問題，也有可能是 `CNI` 本身的問題，這部分要仰賴管理者的經驗來處理，不可能也沒辦法一定概括誰的問題。
 
+接下來用這張圖做一個總結
+![Imgur](https://i.imgur.com/usK4VUg.png)
+
+圖中虛線的部分則是 `CNI` 一般會處理的部份，包含了容器內的 `網卡數量`,`網卡名稱`,`網卡IP`, 以及容器與外部節點的連接能力等，左邊就是一個基本的 `Bridge CNI` 的用法，而右邊則類似一個 `host-local CNI` 的用法, 所以連接方法百百種，一切都依賴 `CNI`的實現。
 
 若對於 `CNI` 標準有興趣的可以參閱下列文章
 - [Containernetworking CNI github](https://github.com/containernetworking/cni
