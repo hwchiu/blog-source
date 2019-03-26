@@ -9,6 +9,7 @@ tags:
   - CNI
   - Network
 description: 除了自行架設 Kubernetes 之外，採用公有雲廠商所提供的 Kubernetes Service 也是一個方便的選擇，然而這種情況下有許多的設定跟功能都會依賴該公有雲廠商自行實作，大部分的功能都會與公有雲本身的架構進行高度整合以提供更方便的使用與操作。本文針對 Container Network Interface (CNI) 於 Azure 中的實現與使用進行了討論，藉此了解公有雲的 CNI 有什麼特別的設計與使用方式
+
 ---
 
 # Preface
@@ -211,7 +212,8 @@ docker0         8000.024220b0b010       no
                                                                          "Dst": {
                                                                                  "IP": "0.0.0.0",
                                                                                  "Mask": "AAAAAA=="
-                                                                         },                                                        "Src": "",
+                                                                         },
+																		 "Src": "",
                                                                          "Gw": "10.240.0.1",
                                                                          "Protocol": 0,
                                                                          "DevName": "",
