@@ -31,4 +31,7 @@ date: 2017-05-05 12:02:08
 | 2018.10.17 | Control Your Network ASICs, What Benefits switchdev Can Bring Us | NCTU     | Open Source Networking Days Taiwan | [link](https://www.slideshare.net/hongweiqiu/control-your-network-asics-what-benefits-switchdev-can-bring-us)     |
 | 2018.11.17| Build Your Own CaaS (Container as a Service) | 國立臺灣大學博雅教學館      | GDG DevFest Taipei 2018   | [link](https://www.slideshare.net/hongweiqiu/build-your-own-caas-container-as-a-service)     |
 | 2018.11.22 | Introduction to Application-Based Routing | 天瓏資訊圖書      | SDN x Cloud Native Meetup #10  | [link](https://www.slideshare.net/hongweiqiu/applicationbased-routing)     |
+| 2010.03.09 | Kubernetes 1001 |  Monospace 共同工作空間 | 台中自由軟體愛好者社群 - TFC | [link](https://www.slideshare.net/hongweiqiu/kubernetes-1001)     |
+| 2010.04.15 | 深入淺出 Container & Kubernetes | digiBlock Taipei台北數位產業園區 | Taiwan R User Group / MLDM Monday | [link](https://www.slideshare.net/hongweiqiu/head-first-to-containerkubernetes)     |
+| 2010.04.20 | Introduction to CircleCI | 達文西會議空間 | DevOps Taiwan - CI / CD / DevOps Pipeline Tools 大亂鬥  | [link](https://www.slideshare.net/hongweiqiu/introduction-to-circleci)     |
 
