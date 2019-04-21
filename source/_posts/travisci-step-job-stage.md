@@ -5,6 +5,7 @@ abbrlink: 55114
 date: 2018-09-01 09:09:13
 tags:
   - CI/CD
+  - DevOps
   - Linux
 description: 這次要跟大家分享的是一些關於 TravisCI 的使用心得，相信有在 Github 上面維護專案的人應該都對各式各樣的 CI 系統不陌生，不論是 公有服務的 TravisCI 或是 CircleCI 或是自己透過 Jenkins 來處理。本篇想要跟大家分享的重點是在 TravisCI 上關於 Build Stage 的概念，透過 Build Stage，我們可以更有架構的去設計該專案的 CI/CD 流程。
 
