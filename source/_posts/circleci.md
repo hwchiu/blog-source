@@ -13,7 +13,7 @@ description: 隨者愈來愈多的 CI/CD 工具被開發出來，對於維運/�
 
 2019/04/20 很榮幸有機會參加 [DevOps Taiwan - CI / CD / DevOps Pipeline Tools 大亂鬥](https://devops.kktix.cc/events/pipeline-tools-battle) 並且於該大亂鬥中跟大家分享我平常自己 Side Project 使用的一套 CI 工具, `CircleCI`.
 
-本文的內容主要是基於該場大亂鬥中的[投影片]((https://www.slideshare.net/hongweiqiu/introduction-to-circleci))進行更詳細的說明與範例
+本文的內容主要是基於該場大亂鬥中的[投影片](https://www.slideshare.net/hongweiqiu/introduction-to-circleci)進行更詳細的說明與範例
 
 # Why CircleCI
 
