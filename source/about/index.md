@@ -34,4 +34,4 @@ date: 2017-05-05 12:02:08
 | 2019.03.09 | Kubernetes 1001 |  Monospace 共同工作空間 | 台中自由軟體愛好者社群 - TFC | [link](https://www.slideshare.net/hongweiqiu/kubernetes-1001)     |
 | 2019.04.15 | 深入淺出 Container & Kubernetes | digiBlock Taipei台北數位產業園區 | Taiwan R User Group / MLDM Monday | [link](https://www.slideshare.net/hongweiqiu/head-first-to-containerkubernetes)     |
 | 2019.04.20 | Introduction to CircleCI | 達文西會議空間 | DevOps Taiwan - CI / CD / DevOps Pipeline Tools 大亂鬥  | [link](https://www.slideshare.net/hongweiqiu/introduction-to-circleci)     |
-| 2019.05.27 | [Data Series] 從網路封包看待資料科學的應用 | R Basic 讀書會分享 | digiBlock Taipei台北數位產業園區 | R-Ladies Taipei  | [link](https://www.slideshare.net/hongweiqiu/how-networking-works-with-data-science)     |
+| 2019.05.27 | [Data Series] 從網路封包看待資料科學的應用 R Basic 讀書會分享 | digiBlock Taipei台北數位產業園區 | R-Ladies Taipei  | [link](https://www.slideshare.net/hongweiqiu/how-networking-works-with-data-science)     |
