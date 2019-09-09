@@ -4,7 +4,7 @@ keywords: 'Kubernetes,101, rumor, 誤解'
 abbrlink: 15679
 date: 2019-02-02 07:07:28
 tags:
-  - kubernetes 
+  - Kubernetes 
 description: Kubernetes 的蓬勃發展以及其人氣帶來廣泛地使用，然而就現實中，其實出現了不少關於 kubernetes 不太正確的想像與理解，愈來愈多的人因應 kubernetes 的發展就將 kubernetes 視為一個完美的解藥，能夠解決所有營運部署的所有困難與需求。最後發現現實與理想沒有辦法妥協時就會露出失望與無奈的表情。其實問題就出在一開始沒有理解到底 kubernetes 能夠帶來什麼樣的優勢以及本身有什麼樣的能力與限制。本文針對一些常見的三大資源，儲存/網路/運算 介紹了一下筆者自己觀察以及理解的概念去描述到底 kubernetes 能夠做什麼，不能夠做什麼
 
 ---
