@@ -35,3 +35,5 @@ date: 2017-05-05 12:02:08
 | 2019.04.15 | 深入淺出 Container & Kubernetes | digiBlock Taipei台北數位產業園區 | Taiwan R User Group / MLDM Monday | [link](https://www.slideshare.net/hongweiqiu/head-first-to-containerkubernetes)     |
 | 2019.04.20 | Introduction to CircleCI | 達文西會議空間 | DevOps Taiwan - CI / CD / DevOps Pipeline Tools 大亂鬥  | [link](https://www.slideshare.net/hongweiqiu/introduction-to-circleci)     |
 | 2019.05.27 | [Data Series] 從網路封包看待資料科學的應用 R Basic 讀書會分享 | digiBlock Taipei台北數位產業園區 | R-Ladies Taipei  | [link](https://www.slideshare.net/hongweiqiu/how-networking-works-with-data-science)     |
+| 2019.08.31 | Load-Balancing  101| 天瓏書局-電腦書專賣店 | SDN x Cloud Native Meetup #19 | [link](https://www.slideshare.net/hongweiqiu/load-balancing-101)     |
+
