@@ -5,7 +5,7 @@ tags:
   - RDMA
   - Ceph
   - DRBD
-  - Netowrk
+  - Network
   - Linux
 abbrlink: 26225
 date: 2017-07-12 03:56:02
