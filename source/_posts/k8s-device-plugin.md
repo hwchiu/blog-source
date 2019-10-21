@@ -1,5 +1,5 @@
 ---
-title: 'Device Plugin Introduction'
+title: ' Device Plugin - Introduction'
 keywords: 'Kubernetes, device, plugin, deviceplugin'
 abbrlink: 14126
 date: 2019-10-08 05:21:44
