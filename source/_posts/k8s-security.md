@@ -17,7 +17,7 @@ date: 2019-10-14 06:05:42
 
 
 # 前言
-探討了各式各樣如何擴充 **kubernetes** 功能之後，接下來想來探討一下關於 Container 安全的部分，這個部分其實也牽扯到了 **Contaeinr** 是如何實作的。
+探討了各式各樣如何擴充 **kubernetes** 功能之後，接下來想來探討一下關於 Container 安全的部分，這個部分其實也牽扯到了 **Container** 是如何實作的。
 
 而對於安全這個議題， **Kubernetes** 官網也提出了 **The 4C’s of Cloud Native Security**， 4C 的安全性問題，可參考下圖
 
@@ -45,7 +45,7 @@ date: 2019-10-14 06:05:42
 
 ## Container Security
 
-排除特定基於虛擬機器的 **CRI** 解決方案的話，**Contaioner** 是 **kubernetes** 運作的最基本單元，**container** 本身的安全性牽扯範圍不少，譬如運行環境的權限設定，避免過度提權導致該 **container** 有過大的權力。或是 **container** 內部安裝的軟體是否本身就有安全性漏洞，而這些軟體是產生 **image** 本身的時候就已經安裝好還是運行後動態安裝的？ 
+排除特定基於虛擬機器的 **CRI** 解決方案的話，**Container** 是 **kubernetes** 運作的最基本單元，**container** 本身的安全性牽扯範圍不少，譬如運行環境的權限設定，避免過度提權導致該 **container** 有過大的權力。或是 **container** 內部安裝的軟體是否本身就有安全性漏洞，而這些軟體是產生 **image** 本身的時候就已經安裝好還是運行後動態安裝的？ 
 這意味者 **container image** 本身也是有相關的安全性問題需要檢查，譬如檢查整個系統內是否有任何軟體有安全性漏洞
 
 基於上述 **container image** 產生的安全性隱憂，目前也有相關的專案再處理這一塊，譬如[CoreOS's Clair](https://github.com/coreos/clair/) 專案
@@ -64,7 +64,7 @@ date: 2019-10-14 06:05:42
 > Portieris is a Kubernetes admission controller for enforcing Content Trust. You can create image security policies for each Kubernetes namespace, or at the cluster level, and enforce different levels of trust for different images.
 
 
-最後則是關於 **Contaienr** 本身的權限控管，不論是運行的使用者身份，群組，甚至是相關 **namespace** 的共用，或是基於 **systel call** 層級來限制的功能。
+最後則是關於 **Container** 本身的權限控管，不論是運行的使用者身份，群組，甚至是相關 **namespace** 的共用，或是基於 **system call** 層級來限制的功能。
 這部分我們來仔細探討
 
 ## Container Permission
@@ -80,7 +80,7 @@ date: 2019-10-14 06:05:42
 目前 **kubernetes** 有開放下列幾種 **namespace** 來共用。
 
 - HostPID
-**Process ID** 與節點共用，這意味就可以於 **Contaienr** 內部直接觀看到節點上運行的所有 **Process**
+**Process ID** 與節點共用，這意味就可以於 **Container** 內部直接觀看到節點上運行的所有 **Process**
 - HostIPC
 **Container** 與節點共用 **Inter-Process Communications Namespace**，如果對 **IPC** 概念有興趣的可以參考這篇 [Introduction to Linux namespaces - Part 2: IPC
 ](https://blog.yadutaf.fr/2013/12/28/introduction-to-linux-namespaces-part-2-ipc/)
@@ -139,11 +139,11 @@ per-thread attribute.
 
 
 ### AppArmor
-可以參考[Kubernetes Apparmo](https://kubernetes.io/docs/tutorials/clusters/apparmor/) 的介紹
+可以參考[Kubernetes Apparmor](https://kubernetes.io/docs/tutorials/clusters/apparmor/) 的介紹
 > AppArmor is a Linux kernel security module that supplements the standard Linux user and group based permissions to confine programs to a limited set of resources. AppArmor can be configured for any application to reduce its potential attack surface and provide greater in-depth defense. It is configured through profiles tuned to whitelist the access needed by a specific program or container, such as Linux capabilities, network access, file permissions, etc. Each profile can be run in either enforcing mode, which blocks access to disallowed resources, or complain mode, which only reports violations.
 > 
 
-基本上是個非常厭煩的功能，以 **profile** 為基本單位去限制相關應用程式能夠存取的所有東西，譬如 **capabilities**, **network**, **file permkissions**。
+基本上是個非常厭煩的功能，以 **profile** 為基本單位去限制相關應用程式能夠存取的所有東西，譬如 **capabilities**, **network**, **file permissions**。
 
 譬如以下範例
 ```c++
