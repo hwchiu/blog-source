@@ -404,20 +404,21 @@ vagrant@linux-study:~/linux$ ip addr show dev docker0
 ...
 ```
 
-把上述的 MACRO 給展開後會得到下列的迴圈內容
+把上述的 MACRO 給展開後會得到下列的迴圈內容(排版過)
 
 ```c++
-{ 
-struct in_ifaddr *ifa; 
-for (ifa = (in_dev)->ifa_list; ifa && !(ifa->ifa_flags&IFA_F_SECONDARY); ifa = ifa->ifa_next)
-    if (ifa->ifa_scope > scope)
-        continue;
-    if (!dst || inet_ifa_match(dst, ifa)) {
-        addr = ifa->ifa_local;
-        break;
+{  
+    struct in_ifaddr *ifa; 
+    for (ifa = (in_dev)->ifa_list; ifa && !(ifa->ifa_flags&IFA_F_SECONDARY); ifa = ifa->ifa_next) {
+        if (ifa->ifa_scope > scope)
+            continue;
+        if (!dst || inet_ifa_match(dst, ifa)) {
+            addr = ifa->ifa_local;
+            break;
+        }
+        if (!addr)
+            addr = ifa->ifa_local;
     }
-    if (!addr)
-        addr = ifa->ifa_local;
 }
 ```
 
