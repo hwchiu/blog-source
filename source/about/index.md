@@ -37,4 +37,5 @@ date: 2017-05-05 12:02:08
 | 2019.05.27 | [Data Series] 從網路封包看待資料科學的應用 R Basic 讀書會分享 | digiBlock Taipei台北數位產業園區 | R-Ladies Taipei  | [link](https://www.slideshare.net/hongweiqiu/how-networking-works-with-data-science)     |
 | 2019.08.31 | Load-Balancing  101| 天瓏書局-電腦書專賣店 | SDN x Cloud Native Meetup #19 | [link](https://www.slideshare.net/hongweiqiu/load-balancing-101)     |
 | 2019.09.16 | 30天 kubernetes 設計探討| 第 11 屆 iT 邦幫忙鐵人賽 |  第 11 屆 iT 邦幫忙鐵人賽 | [link](https://ithelp.ithome.com.tw/users/20120317/ironman/2442?page=1)     |
+| 2020.01.06 | Open vSwitch 深入淺出 |  天瓏書局-電腦書專賣店| SDN x Cloud Native Meetup #24 | [link](https://www.slideshare.net/hongweiqiu/open-vswitch-introduction)     |
 
