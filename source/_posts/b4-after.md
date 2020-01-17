@@ -144,7 +144,7 @@ Software Defined WAN`. 這是一篇 Google 於 `2013 SIGCOMM` 所發表關於 `S
 1. 基於 `supernode-level` 的傳輸，由於跨`site`,因此本身也需要導入 `IP-in-IP` 的封裝.
 2. 這個方法有高效能，但是卻沒有辦法有好的收斂與計算時間，整體的時間卻是之前的 188倍， 同時這個方法也需要更好的硬體交換機支援(更大的傳輸規則表大小)
 
-在論文中，`google` 提到了第二個採用的方式，就是 `side-level TE` 加上 `supernode-level` 最短路徑的結合，文中提到這個方式帶來的特性
+在論文中，`google` 提到了第二個採用的方式，就是 `site-level TE` 加上 `supernode-level` 最短路徑的結合，文中提到這個方式帶來的特性
 1. 只需要一次的封包封裝就可以完成 `site to site` 的傳輸
 2. 可達成 `scalability`, 畢竟 `shortest path` 的計算成本比較低
 3. 但是 `shortest path routing` 也會帶來不少問題，譬如 `sidelink` 的權重設計可能就會導致該 `sidelink` 完全不會被用到，最後就回到最原始的 `Capacity Asymmetry` 問題。
