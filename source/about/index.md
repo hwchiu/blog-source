@@ -39,3 +39,7 @@ date: 2017-05-05 12:02:08
 | 2019.09.16 | 30天 kubernetes 設計探討| 第 11 屆 iT 邦幫忙鐵人賽 |  第 11 屆 iT 邦幫忙鐵人賽 | [link](https://ithelp.ithome.com.tw/users/20120317/ironman/2442?page=1)     |
 | 2020.01.06 | Open vSwitch 深入淺出 |  天瓏書局-電腦書專賣店| SDN x Cloud Native Meetup #24 | [link](https://www.slideshare.net/hongweiqiu/open-vswitch-introduction)     |
 
+
+## 線上課程
+
+[kubernetes - 入門篇](https://hiskio.com/courses/349)
