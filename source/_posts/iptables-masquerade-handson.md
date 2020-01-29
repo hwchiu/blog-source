@@ -166,7 +166,7 @@ pushd ~/network-study/iptables/masquerade/module/
 sudo iptables -t nat -D POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE || true
 make
 sudo rmmod ipt_MASQUERADE
-sudo insmor ipt_MASQUERADE.ko
+sudo insmod ipt_MASQUERADE.ko
 sudo iptables -t nat -A POSTROUTING -s 172.18.0.0/16 -p tcp ! -o docker0 -j MASQUERADE --to-ports 55666-55680|| true
 sudo iptables -t nat -A POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE || true
 ```
