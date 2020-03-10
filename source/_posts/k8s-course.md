@@ -37,10 +37,6 @@ description: 線上課程的相關資訊，我的第一個挑戰
 課程還在預購中，目前的有三個早鳥價格，請先確認前面的名額已經滿了再點選後續的，不然買貴就..好像不能退差價
 
 
-早鳥二 | K8S基礎入門篇 $1690TWD 
-60人
- https://hiskio.com/courses/349?promo_code=J3MZD5E
- 
 早鳥三 | K8S基礎入門篇 $1990TWD
 60人 
  https://hiskio.com/courses/349?promo_code=QE860WG
