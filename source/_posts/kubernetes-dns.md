@@ -299,9 +299,8 @@ nameserver 10.0.2.3
 
 這邊稍微來解釋一下這個設計上的原理以及流程
 1. 因為設定 `HostNetwork=true`, 會讓該 `Pod` 與該節點共用相同的網路空間(網卡/路由等功能)
-2. 預設的 `kube-dns` 是採取 `ClusterIP` 的 `kubernetes serivce`. 這種情況下，只有屬於 `Cluster` 內的 `Pod` 可以存取該 `ClusterIP`.
-3. 所以設定 `HostNetwork=true` 的 `Pod` 就沒有辦法存取該 `ClusterIP`
-4. 於是預設就會將對應的 `DNS` 設定改回 `Default` 的形式，從節點繼承其 `DNS` 設定
+2. 相關的 /etc/hosts 就不會被掛載到 Pod 裡面
+3. 這種情況下就會使用節點本身的 DNS 設定，也就是 Default 的概念
 
 在這種情況下，就會有人想要問，我如果刻意的想要這樣設定不行嘛?
 原先的設計中，是沒有辦法刻意處理的，原因是當 `Pod yaml` 檔案送出去後，在發現沒有設定 `PodPolicy` 的情況下，會自動幫你把該`PodPolicy` 補上 `ClusterFirst` 的數值。
