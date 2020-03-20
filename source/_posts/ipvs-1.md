@@ -30,7 +30,7 @@ description: 本文作為 IPVS 系列文第一篇，主要跟大家粗略的介�
 1. Director (IPVS Daemon)
 2. Real Server
 
-![](https://i.imgur.com/tb0iNdZ.png)
+![](https://i.imgur.com/na7lY3q.png)
 
 `Director` 代表的則是 **Load-Balancer** 也就是最前端接收封包處理的部份，對於 `Director` 來說，必須要有一個 **IP Address** 來給外部的應用程式連接用，之後我們都會稱其為 **VIP (Virtual IP)**.
 而 **Real Server** 則代表後端提供服務的伺服器們。
