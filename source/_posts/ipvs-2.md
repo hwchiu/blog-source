@@ -341,6 +341,11 @@ curl 1.2.3.4
 
 下篇文章就會來開始探討到底 **IPVS** 與 **IPTables** 的差異在哪裏，並且嘗試解釋上面的推論過程其背後的實作原理
 
+# 課程分享
+最後，我目前於 Hiskio 上面有開設一門 Kubernetes 入門篇的課程，裡面會探討運算/網路/儲存三個最重要的平台資源，此外對於 CRI/CNI/CSI 也都有簡單的介紹，主要會基於 **Kubernetes** 本身的設計原理及各資源的用法與情境去介紹。
+如果本身已經很熟練的使用 Kubernetes 於環境中就不太適合這門課程，主要是給想要踏入到 Kubernetes 世界中的朋友，有興趣的幫忙捧場或推廣
+https://hiskio.com/courses/349?promo_code=QE860WG
+
 # Reference
 - https://github.com/kubernetes/kubernetes/tree/master/pkg/proxy/ipvs
 - https://godoc.org/k8s.io/kube-proxy/config/v1alpha1

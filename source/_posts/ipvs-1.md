@@ -230,6 +230,10 @@ TCP  172.17.8.101:80                    46      316      210    20180    21546
 
 接下來的文章會嘗試一一解答上述的問題
 
+# 課程分享
+最後，我目前於 Hiskio 上面有開設一門 Kubernetes 入門篇的課程，裡面會探討運算/網路/儲存三個最重要的平台資源，此外對於 CRI/CNI/CSI 也都有簡單的介紹，主要會基於 **Kubernetes** 本身的設計原理及各資源的用法與情境去介紹。
+如果本身已經很熟練的使用 Kubernetes 於環境中就不太適合這門課程，主要是給想要踏入到 Kubernetes 世界中的朋友，有興趣的幫忙捧場或推廣
+https://hiskio.com/courses/349?promo_code=QE860WG
 
 ## Reference
 - http://www.linuxvirtualserver.org/Joseph.Mack/linuxexpo99/linuxexpo2.html
