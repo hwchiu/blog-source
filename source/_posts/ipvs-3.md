@@ -208,12 +208,12 @@ make -j4
 
 
 每個 **Kernel Module** 都會從 **module_init** 這邊開始，傳入的參數都會是一個 **function**，當 Module 被載入後這個 function 就會被執行，也可以想成 **modprobe ip_vs** 呼叫後，這個 function 就會先被執行
-```c++
+```c=
 module_init(ip_vs_init);
 ```
 
 根據上述語法，可以觀察到 **ip_vs_init** 這個 **function**
-```c++
+```c=
 static int __init ip_vs_init(void)
 {
 	int ret;
@@ -282,12 +282,12 @@ module_exit(ip_vs_cleanup);
 用來註冊基於 `netlink` 的 `function handler`，這也是我們透過 `ipvsadm` 這個工具用來操作整個 `kernel` 內部邏輯的入口。所有的操作指令都會透過 `netlink` 從 `userspace` 送到 `kernel space` 並且呼叫起對應的 `Function` 來處理。
 
 
-### register_pernet_subsys/device
+## register_pernet_subsys/device
 Kernel 對於 **network namespace** 的創建提供了兩個方法來註冊相關的 **handler**, 這兩個差異主要在於對背後資料結構操作的位置不同，詳細的可以參閱 [Kernel network namespace
 ](http://www.programmersought.com/article/907433913/), 這邊就單純針對 `register_pernet_subsys` 來研究。 
 
 直接看一下該函式的註解，簡單來說就是註冊一組任何 **network namespace** 被刪除與創建時都會被呼叫的函式，而要特別注意的是當註冊的瞬間，也會對所有已經存在的 **network namespace** 呼叫一次。
-```c
+```c=
  *      register_pernet_subsys - register a network namespace subsystem
  *      @ops:  pernet operations structure for the subsystem
  *
@@ -394,7 +394,7 @@ estimator_fail:
 
 該函式的註解直接標示，針對每一個 `network namespace` 去進行相關的初始化，其中為重要的則是 `ip_vs_control_net_init` 以及 `nf_register_net_hooks` 這兩個函式，後者則是與 **netfilter** 也就是 **iptables** 相關的互動，下一章節我們再來仔細看一下這個函式。
 
-### ip_vs_control_net_init
+## ip_vs_control_net_init
 根據上述的 **debug** 規則我們知道系統上會有一個路徑 **/proc/sys/net/ipv4/vs** 可以讓使用者與之互動，而這個介面的初始化其實就是透過 **ip_vs_control_net_init** 來完成的。
 
 ```c++
