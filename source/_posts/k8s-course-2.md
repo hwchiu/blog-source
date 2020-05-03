@@ -31,9 +31,11 @@ description: 2020 近況更新
 組合包
 https://hiskio.com/packages/MJyG3NyK0
 
-單堂2390 (4/30中午12點截止)
-https://hiskio.com/courses/385?promo_code=RERK0M3
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=NG1RX5G
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=QE860WG
 
 這邊是線上 Meetup 的相關連結
 https://www.meetup.com/CloudNative-Taiwan/events/269994432/
-
