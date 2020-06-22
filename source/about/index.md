@@ -40,6 +40,7 @@ date: 2017-05-05 12:02:08
 | 2020.01.06 | Open vSwitch 深入淺出 |  天瓏書局-電腦書專賣店| SDN x Cloud Native Meetup #24 | [link](https://www.slideshare.net/hongweiqiu/open-vswitch-introduction)     |
 | 2020.04.11 | IPTABES 初探篇，從 Docker 出發觀察封包流向| 線上會議 | SDN x Cloud Native Webinar 海外篇 #1  | [link](https://www.youtube.com/watch?v=y4e_B6PdX8A)     |
 | 2020.05.03 | IPTABES 與 Kubernetes 各種淵源並打造一個屬於自己的 Layer7 IPTABLES | 線上會議 | SDN x Cloud Native Webinar 海外篇 #2  | [link](https://youtu.be/10Hsr9k_0yE)     |
+| 2020.06.06 | OpenTracking 101| 線上會議 | SDN x Cloud Native Webinar 海外篇 #3  | [link](https://youtu.be/t8OCKZYcVLg)     |
 
 
 ## 線上課程
