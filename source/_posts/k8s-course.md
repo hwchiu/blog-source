@@ -34,10 +34,13 @@ description: 線上課程的相關資訊，我的第一個挑戰
 
 如果你有任何對 kubernetes 的需求都歡迎可以試試看，有任何想要聽的議題也可以跟我討論
 
-課程還在預購中，目前的有三個早鳥價格，請先確認前面的名額已經滿了再點選後續的，不然買貴就..好像不能退差價
 
+組合包
+https://hiskio.com/packages/MJyG3NyK0
 
-早鳥三 | K8S基礎入門篇 $1990TWD
-60人 
- https://hiskio.com/courses/349?promo_code=QE860WG
- 
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=7EP6DJG
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=QE860WG
+

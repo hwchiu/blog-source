@@ -153,7 +153,23 @@ Flux 的架構圖參考自其[官網](https://github.com/fluxcd/flux)
 
 # 工商時間
 
+小弟我目前有於 Hiskio 開設 Kubernetes 相關課程，目前針對主要有兩門課程，有興趣的可以參考看看
 
+1. [Kubernetes 入門](https://hiskio.com/courses/349?promo_code=QE860WG
+)
+從 Container 部署談到 Kubernetes 所欲解決的問題，並且針對 運算/儲存/網路 三大區塊來介紹 Kubernetes 的設計思維 (CRI/CSI/CNI) 以及各式各樣的部署工具。 
+2. [CI/CD 與 Kubernetes 的議題探討](https://hiskio.com/courses/385?promo_code=7EP6DJG)
+從 Manifest 的管理，自架 Kubernetes 的方式， CI pipeline 與 K8S 整合到 CD 部署的相關議題
+
+一次購買兩個課程可參考[組合包](https://hiskio.com/packages/MJyG3NyK0)
+
+# 社群資源 - CNTUG(Cloud Native Taiwan User Group)
+
+- [Youtube 議程影片紀錄](https://www.youtube.com/channel/UCoYY8K9fbfDtTY7m68UCATA)
+- [Telegram](https://t.me/cntug)
+- [Meetup](https://www.meetup.com/CloudNative-Taiwan/)
+- [每次 Meetup 投影片紀錄](https://github.com/cloud-native-taiwan/meetups)
+- [演講相關範例程式碼與相關文章](https://github.com/cloud-native-taiwan/kourse)
 
 # Reference
 - https://www.weave.works/technologies/gitops/
