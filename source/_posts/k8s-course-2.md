@@ -32,7 +32,7 @@ description: 2020 近況更新
 https://hiskio.com/packages/MJyG3NyK0
 
 單堂(CI/CD)
-https://hiskio.com/courses/385?promo_code=7EP6DJG
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
 
 基礎概念
 https://hiskio.com/courses/349?promo_code=QE860WG
