@@ -28,14 +28,15 @@ description: 2020 近況更新
 最後不免的還是要工商一下，幫我美股虧錢的荷包填飽一點
 以下是課程相關的購買連結，歡迎有興趣學習的朋友支持支持，或是幫忙分享:)
 
+
 組合包
-https://hiskio.com/packages/MJyG3NyK0
+https://hiskio.com/packages/D7RZGWrNK
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
 
 基礎概念
-https://hiskio.com/courses/349?promo_code=QE860WG
+https://hiskio.com/courses/349?promo_code=13LY5RE
 
 這邊是線上 Meetup 的相關連結
 https://www.meetup.com/CloudNative-Taiwan/events/269994432/

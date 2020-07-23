@@ -45,5 +45,11 @@ date: 2017-05-05 12:02:08
 
 
 ## 線上課程
+組合包
+https://hiskio.com/packages/D7RZGWrNK
 
-[kubernetes - 入門篇](https://hiskio.com/courses/349)
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
