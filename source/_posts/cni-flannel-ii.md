@@ -64,16 +64,16 @@ $ sudo docker ps  --no-trunc | grep $(sudo cat /var/lib/cni/networks/cbr0/10.244
 ```
 
 先根據上面的指令解釋一下每個的含義，接下來再來研究其流程
-1. 透過 **kubectl describer node** 可以觀察到每個節點上都有一個 **PodCIDR** 的欄位，代表的是該節點可以使用的網段
+1. 透過 **kubectl describe node** 可以觀察到每個節點上都有一個 **PodCIDR** 的欄位，代表的是該節點可以使用的網段
 2. 由於我的節點是對應到的 **PodCIDR** 是 **10.244.0.0/24**，接下來去觀察  **/run/flannel/subnet.env**，確認裡面的數值一致。
-3. 接下來由於我的系統上有跑過一些 **Pod**，這些 **Pod** 形成的過程中會呼叫 **flannel CNI** 來處理，而該 **CNI** 最後會再輾轉呼叫 **host-loacl IPAM CNI** 來處理，所以就會在這邊看到有 **host-local** 的產物
+3. 接下來由於我的系統上有跑過一些 **Pod**，這些 **Pod** 形成的過程中會呼叫 **flannel CNI** 來處理，而該 **CNI** 最後會再輾轉呼叫 **host-local IPAM CNI** 來處理，所以就會在這邊看到有 **host-local** 的產物
 4. 由於前篇介紹 **IPAM** 的文章有介紹過 **host-local** 的運作，該檔案的內容則是對應的 **CONTAINER_ID**，因此這邊得到的也是 **CONTAINER_ID**
-5. 最後則是透過 **docker** 指令去尋該 **CONTAINER_ID**，最後就看到對應到的不是真正運行的 **Pod**，而是先前介紹過的 **Infrastructure Contaienr: Pause**
+5. 最後則是透過 **docker** 指令去尋該 **CONTAINER_ID**，最後就看到對應到的不是真正運行的 **Pod**，而是先前介紹過的 **Infrastructure Container: Pause**
 
 接下來就是細談上述的流程
 ## kubeadm 
 
-首先是 **kubeadm** 與 **controller-manager** 兩者的關係，當我們透過 **--pod-network-cide** 去初始化 **kubeadm** 後，其創造出來的 **controller-manager** 就會自帶三個參數
+首先是 **kubeadm** 與 **controller-manager** 兩者的關係，當我們透過 **--pod-network-cidr** 去初始化 **kubeadm** 後，其創造出來的 **controller-manager** 就會自帶三個參數
 
 ```bash=
 root     20459  0.8  2.4 217504 100076 ?       Ssl  05:22   0:36 kube-controller-manager 
@@ -100,11 +100,11 @@ root     20459  0.8  2.4 217504 100076 ?       Ssl  05:22   0:36 kube-controller
 - --allocate-node-cidrs=true
 - --node-cidr-mask-size=24
 
-這邊就標明的整個 **cluster network** 會使用的網段，除了 **cidr** 大網段之外還透過 **node-cide--mask** 去標示寫網段，所以根據上述的範例，這個節點的數量不能超過255台節點，不然就沒有⻊夠的 **可用網段**去分配了。
+這邊就標明的整個 **cluster network** 會使用的網段，除了 **cidr** 大網段之外還透過 **node-cide--mask** 去標示寫網段，所以根據上述的範例，這個節點的數量不能超過255台節點，不然就沒有足夠的 **可用網段**去分配了。
 
-此外很有趣的一點是，這邊的運作邏輯再 **controller-managfer** 內被稱為 **nodeipam**，也就是今天 **kubernetes** 自己跳下來幫忙做 **IPAM** 的工作，幫忙分配 **IP/Subnet**，只是單位是以 **Node** 為基準，不是以 **Pod**。 
+此外很有趣的一點是，這邊的運作邏輯再 **controller-manager** 內被稱為 **nodeipam**，也就是今天 **kubernetes** 自己跳下來幫忙做 **IPAM** 的工作，幫忙分配 **IP/Subnet**，只是單位是以 **Node** 為基準，不是以 **Pod**。 
 
-根據 [GitHub Controoler](https://github.com/kubernetes/kubernetes/blob/103e926604de6f79161b78af3e792d0ed282bc06/pkg/controller/nodeipam/ipam/controller_legacyprovider.go#L65) 可以看到當 **Controller Manager** 物件被創造的時候會根據上述的參數去產生一個名為 **cidrset** 的物件
+根據 [GitHub Controler](https://github.com/kubernetes/kubernetes/blob/103e926604de6f79161b78af3e792d0ed282bc06/pkg/controller/nodeipam/ipam/controller_legacyprovider.go#L65) 可以看到當 **Controller Manager** 物件被創造的時候會根據上述的參數去產生一個名為 **cidrset** 的物件
 
 ```golang=
 ....
@@ -230,7 +230,7 @@ spec:
 前文有提過，預設的安裝設定檔案中會使得 **flannel** 使用 **kubernetes API** 來存取資訊，這同時也意味其 **subnet manager** 會使用 **kubernetes API** 來完成，這部分的程式碼都在[這](https://github.com/coreos/flannel/tree/master/subnet/kube)
 
 其中要特別注意的一個函式[AcquireLease](https://github.com/coreos/flannel/blob/master/subnet/kube/kube.go#L222)
-可以看到裡面嘗試針對 **node** 底下的 **sped.PodCIDR** 去存取，並且透過 **enet.ParseCIDR** 的方式去解讀。
+可以看到裡面嘗試針對 **node** 底下的 **sped.PodCIDR** 去存取，並且透過 **net.ParseCIDR** 的方式去解讀。
 
 ```golang=
 ...

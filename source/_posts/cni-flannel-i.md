@@ -35,7 +35,7 @@ description: CNI 的選擇一直以來都是個探討的議題，各式各樣的
 
 # 目標
 
-基於前述的觀察，針對 flaennl 這套 CNI 解決方案，我想要觀察並討論的重點有
+基於前述的觀察，針對 Flannel 這套 CNI 解決方案，我想要觀察並討論的重點有
 1. 理解 [官方安裝 Yaml](https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml) 實際上安裝了什麼元件到 kubernetes cluster 中，同時這些元件又各自扮演什麼角色
 2. flannel 使用的 CNI config 有什麼特色以及用到什麼功能
 3. IP 管理的問題 flannel 是怎麼解決的
@@ -312,7 +312,7 @@ Events:
 **CNI**這邊除了 **portmapping** 之外還有各式各樣的組合，譬如可以限速的 **bandwidth**，調整 **MAC** 地址的，一時之間難以講完，就有遇到再來分享吧
 
 除了 **CNI** 設定外，另外一個檔案 **net-conf.json** 則是給 **flannel** 程式使用的設定檔案。
-這邊會設定 **flannel** 的相關資訊，特別要注意的是如果使用的是 **kubeadm** 來安裝 **kubernetes** 的話，要確認 **net-conf.json** 裡面關於 **network** 的資訊需要與 **kubeadm --init --pod-network-cidr=xxxx** 一致。
+這邊會設定 **flannel** 的相關資訊，特別要注意的是如果使用的是 **kubeadm** 來安裝 **kubernetes** 的話，要確認 **net-conf.json** 裡面關於 **network** 的資訊需要與 **kubeadm init --pod-network-cidr=xxxx** 一致。
 
 如果沒有使用 **kubeadm** 的話，該參數則會被用來分配 **ip** 地址給所有的 **Pod**。
 
@@ -430,7 +430,7 @@ spec:
 
 目前官方預設的安裝檔案內只有設定兩個變數，分別是
 1. --ip-masq
-會透過 `masqueradr` 的功能幫往外送出的封包進行 SNAT，譬如下列這些規則就是 **flannel** 幫忙下的
+會透過 `masquerade` 的功能幫往外送出的封包進行 SNAT，譬如下列這些規則就是 **flannel** 幫忙下的
 ```bash=
 -A POSTROUTING -s 10.244.0.0/16 -d 10.244.0.0/16 -j RETURN
 -A POSTROUTING -s 10.244.0.0/16 ! -d 224.0.0.0/4 -j MASQUERADE
@@ -485,7 +485,7 @@ k8s-udpserver-6576555bcb-hswhn   1/1     Running   0          13m   10.244.2.6  
 
 # Summary
 
-本篇文章探討了的 **Flanel** 的安裝過程，從官方提供的 **yaml** 過程中來一一探討每個資源的用途，同時也觀察到了其利用 **DaemonSet** 配上 **init container** 來幫每個節點安裝 **CNI** 以及本身運行的設定檔案，確保未來任何新加入的節點都能夠順利的擁有這些檔案並正常運作。
+本篇文章探討了的 **Flannel** 的安裝過程，從官方提供的 **yaml** 過程中來一一探討每個資源的用途，同時也觀察到了其利用 **DaemonSet** 配上 **init container** 來幫每個節點安裝 **CNI** 以及本身運行的設定檔案，確保未來任何新加入的節點都能夠順利的擁有這些檔案並正常運作。
 
 用下圖幫本章節做個總結
 ![](https://i.imgur.com/DlbQ55O.png)

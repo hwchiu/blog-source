@@ -16,7 +16,7 @@ description: 本篇文章作為 CNI - Flannel 的最後一篇探討，藉由研�
 
 前面兩篇文章探討了 **flannel** 的相關事項，包括了
 1. 如何安裝 **flannel**，其安裝過程中到底執行了什麼步驟以及如何透過 **daemonset** 來確保設定檔案的一致與自動化安裝
-2. **flannel** 如何去分配 **IP** 地址，目前透過官方安裝文件安裝的 **flannel** 都會透過 **kubernetes API** 去取得由 **kubernetes controller manager** 裡面 **node IPAM** 所自行分配的網段，並且將該資訊寫成檔案放到本機上面 **/run/flannel/subnet.ev** 上。 最後 **FlannelCNI** 執行的時候會讀取該資訊並且再次呼叫 **host-local CNI IPAM** 來處理該網段的 **IP**分配問題，最終產生一個可用的 **IP** 地址給 **Pod** 使用。
+2. **flannel** 如何去分配 **IP** 地址，目前透過官方安裝文件安裝的 **flannel** 都會透過 **kubernetes API** 去取得由 **kubernetes controller manager** 裡面 **node IPAM** 所自行分配的網段，並且將該資訊寫成檔案放到本機上面 **/run/flannel/subnet.env** 上。 最後 **FlannelCNI** 執行的時候會讀取該資訊並且再次呼叫 **host-local CNI IPAM** 來處理該網段的 **IP**分配問題，最終產生一個可用的 **IP** 地址給 **Pod** 使用。
 
 
 本篇文章作為 **flannel** 的最後一個章節，想要跟大家來分享基於 **VXLAN** 設定的 **flannel** 本體是怎麼運作的，到底是如何讓不同節點內運行 **Pod** 可以互相溝通的。
@@ -252,7 +252,7 @@ ee:8a:1f:f7:96:c7 dev flannel.1 dst 172.17.8.103 self permanent
 
 另外每台機器上面都會被創造一個 **flannel.1** 的介面，該介面其實就會作為每個節點的 **VXLAN** 處理程式，封包收到相關的封包後，會透過 **vni** 的方式與 **mac** 比對的規則找到對應的介面去進行處理，然後解封裝後再次轉發。
 
-最後補上一個流程，這些 **flannel.1** 的介面都是由 **flannel pod (flanneld)** 這個應用程式創造的，同時當該應用程式從 **kubernetes API server** 學習到不同的節點資訊的時候，就會把上述看到的 **route**, **arp**, **bridfge fdb** 等資訊都寫一份到 **kernel** 內，藉此打通所有的傳送可能性。
+最後補上一個流程，這些 **flannel.1** 的介面都是由 **flannel pod (flanneld)** 這個應用程式創造的，同時當該應用程式從 **kubernetes API server** 學習到不同的節點資訊的時候，就會把上述看到的 **route**, **arp**, **beidge fdb** 等資訊都寫一份到 **kernel** 內，藉此打通所有的傳送可能性。
 
 
 # Summary
