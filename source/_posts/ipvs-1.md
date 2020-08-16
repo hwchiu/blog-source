@@ -17,6 +17,7 @@ description: 本文作為 IPVS 系列文第一篇，主要跟大家粗略的介�
 - [IPVS 的基本使用與概念](https://www.hwchiu.com/ipvs-1.html)
 - [IPVS 與 Kubernetes 的整合](https://www.hwchiu.com/ipvs-2.html)
 - [IPVS 除錯方式與基本 Kernel Module 概念](https://www.hwchiu.com/ipvs-3.html)
+- [IPVS Kernel 架構實現](https://www.hwchiu.com/ipvs-4.html)
 
 本文主要是從大方向出發，介紹 IPVS 的概念與用法，並且實際使透過 Docker 來建置一個測試環境。
 

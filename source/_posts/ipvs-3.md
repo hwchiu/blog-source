@@ -5,7 +5,7 @@ tags:
   - Network
   - Linux
   - Kernel
-keywords: 'Kubernetes,Network,Linux,Ubuntu'
+keywords: 'Kubernetes,IPVS,LVS,Linux'
 description: >-
   本文作為 IPVS 系列文第三篇， 會從 Kernel 作為出發點，探討一下 IPVS
   本身的模組概念，分享兩種不同的內建除錯方式，此外也會從原始碼的部分看一下 IPVS 初始化的過程做了哪些事情
@@ -19,6 +19,7 @@ date: 2020-04-06 00:03:29
 - [IPVS 的基本使用與概念](https://www.hwchiu.com/ipvs-1.html)
 - [IPVS 與 Kubernetes 的整合](https://www.hwchiu.com/ipvs-2.html)
 - [IPVS 除錯方式與基本 Kernel Module 概念](https://www.hwchiu.com/ipvs-3.html)
+- [IPVS Kernel 架構實現](https://www.hwchiu.com/ipvs-4.html)
 
 本文主要是從 Linux Kernel 出發，介紹一下對於 **IPVS** 這個模組的概念，同時也介紹了預設的兩種除錯方式。
 

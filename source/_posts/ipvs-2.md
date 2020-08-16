@@ -19,6 +19,7 @@ date: 2020-03-21 06:38:55
 - [IPVS 的基本使用與概念](https://www.hwchiu.com/ipvs-1.html)
 - [IPVS 與 Kubernetes 的整合](https://www.hwchiu.com/ipvs-2.html)
 - [IPVS 除錯方式與基本 Kernel Module 概念](https://www.hwchiu.com/ipvs-3.html)
+- [IPVS Kernel 架構實現](https://www.hwchiu.com/ipvs-4.html)
 
 
 本文主要是從 Kubernetes 出發，介紹如何在 Kubernetes 內使用 IPVS 而非原生的 IPTables，並且探討下 **Kubernetes Service** 是如何透過 **IPVS** 實踐的。
