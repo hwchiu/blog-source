@@ -146,12 +146,10 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 ```
 
 這個函式非常的重要，可以看一下該函式的註解
-{% note danger %}
 // containerStart prepares the container to run by setting up everything the
 // container needs, such as storage and networking, as well as links
 // between containers. The container is left waiting for a signal to
 // begin running.
-{% endnote %}
 
 再這個函式內會創建好相關的容器，並且會將該容器用到的相關資源(儲存/網路)等都準備好
 ，由於我們要觀察的是 `DNS` 相關的資訊，所以我們要繼續往 `initializeNetworking` 的方向往下追。
@@ -286,15 +284,11 @@ func (c *controller) NewSandbox(containerID string, options ...SandboxOption) (S
 	return sb, nil
 }
 ```
-{% note danger %}
 特別注意一下，當我們到這邊執行相關函式的時候，我們的專案已經從`docker-ce`遷移到`libnetwork`了。
-{% endnote %}
 
 這個函式非常的長，描述的創建新的 `Sandbox` 期間需要注意的所有事項，這邊首先會透過`sb.processOptions` 去設定相關變數的數值，這邊要特別注意的是其實每一個 `options` 本身是對應到一個 `function pointer`。
 
-{% note danger %}
 如果我們當初有透過 `dockerd` 去設定相關的 `DNS` 設定的話，這邊其實實際上會賦值到 `sb.config.dnsList`, `sb.config.dnsSearchList` 以及 `sb.config.dnsOptionsList`
-{% endnote %}
 
 
 ```go setupResolutionFiles https://github.com/docker/libnetwork/blob/c3a682c10b554b2ff2fac8ca134ddb9047ffdd93/sandbox_dns_unix.go#L61 sandbox_dns_unix.go

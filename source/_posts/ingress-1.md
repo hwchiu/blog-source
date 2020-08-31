@@ -61,9 +61,7 @@ spec:
 1. 如果看到的是 `note.example.com` 可以送給特定的 `service`
 2. 如果看到的是 `nginx.example.com` ，則根據後面的 `path (v1/v2)` 來決定最後要怎麼轉發。  
 
-{% note info %}
 這邊要特別注意的是，對於 `Kubernetes` 來說， `Ingress` 物件本身只有描述的功用，實際上並不會真的把使用者所描述與敘述的功能給實現完畢，這部分需要依賴剩下的元件來補足。
-{% endnote %}
 
 接下來我們使用下列這張圖示來解釋一下一個完整 `Ingress` 的架構。
 
@@ -184,9 +182,7 @@ replicaset.apps/nginx-ingress-controller-d88dbf49c   1         1         1      
 ```bash=
 172.17.8.101 nginx.example.com note.example.com
 ```
-{% note info %}
 `172.17.8.101` 是我`VM(Ubuntu)`的`Virtaul IP address`.
-{% endnote %}
 
 ## Backend Servers
 ### Jupyter

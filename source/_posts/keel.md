@@ -46,9 +46,8 @@ description: 本文介紹一種基於 Kubernetes 開發的 Continuous Deployment
     - 這部分應該會基於 `Kubernetes` 的 `Role (RBAC)` 來決定，根據應用程式的使用方式，可能會需要更強大的權限來部署相關的資源，如 `Pod/Deployment/Service/Ingress/Secret/ConfigMap` 
 
 所以對我來說最困難的反而不是這些如何串聯起來，反而是就授權方面，該如何處理才是合宜的。
-{% note info %}
+
 我認為權限控管沒有一定的答案，根據自己所在環境的政策以及需求，並且針對風險與開發流程去評估最適合自己的處理方式才對。
-{% endnote %}
 
 ## Keel
 基於上述的流程，如果今天`不希望`在 `CI` 系統擁有太多關於 `Kubernetes` 相關的權限，即不希望 `CI` 系統能夠主動的去更新 `kubernetes` 內的資源狀態。

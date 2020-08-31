@@ -47,12 +47,10 @@ description: 在前述中我們已經學過了什麼是 kubernetes service 以�
 這個原理沒有辦法一言兩語解決，我之後若有時間會寫相關的文章介紹這邊的原理與實現。
 這邊只要知道其方法是倚賴 `Linux Kernel` 裡面相關的技術去提供類似 `Cache` 的機制，確保相同的 `Connection` 內所有的來回封包都會執行相同的 `SNAT/DNAT`.
 
-{% note danger %}
 有興趣的讀者可以使用下列關鍵字去搜尋相關文章，不然就是等我哪天有時間在來仔細介紹這邊的概念lol
 1. netfilter
 2. conntrack
 3. DNAT/SNAT
-{% endnote %}
 
 # What Is SessionAffinity
 假如相同 `Connection` 內的封包都已經可以保證連接到相同的 `Endpoints` 了，那到底什麼是 `SessionAffinity`?
@@ -75,14 +73,10 @@ description: 在前述中我們已經學過了什麼是 kubernetes service 以�
 目的很簡單，對於每一條新建立的 `Connection`, 若其 `Client IP` 地址相同，就導到相同的 `Endpoints` 去使用。
 
 所以回到剛剛上述的問題
-{% note info %}
 以上圖的範例來說，有沒有可能讓 `Connection A,B,C` 都連接到相同的 `EndPoints`?
-{% endnote %}
 按照目前 `kubernetes` 的設計，上述的答案是在最簡單的網路架構下，只能夠確保 **Host2** 上面所建立的所有 **Connection** 都可以連接到相同的 **Endpoints**.
 
-{% note danger %}
 這邊假設這些 Host 都有自己的公開 `IP` 地址，不考慮任何 `SNAT` 的效果。
-{% endnote %}
 
 # How It Works
 
@@ -169,9 +163,7 @@ $sudo iptables-save | grep k8s-nginx-affinity
 ### Save
 首先我們觀察第一條規則，其位於 `KUBE-SEP` 這個位置，這個其實就是真正執行 `DNAT` 的 `custom  chain`.
 這邊做的事情與我們假想的流程完全一致, 當選出欲使用的 `Endoints` 並進行 `DNAT` 轉換之時，順便將該結果記錄到 `Cache` 內。
-{% note info %}
 **若不存在，則嘗試從 `EndPoints` 內挑選出一個目標，並且將結果記錄到 `Cache` 之中.**
-{% endnote %}
 
 我們來仔細看一下這條規則
 ```bash=

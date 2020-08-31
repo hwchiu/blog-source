@@ -66,9 +66,7 @@ description: 隨者愈來愈多的 CI/CD 工具被開發出來，對於維運/�
 接者可以觀察到原先的 Jobs 中被加入了一個新的 `Enable SSH`，點開該 `Job` 即可得到連接資訊
 ![](https://i.imgur.com/4WFNFM9.png)
 
-{% note info %}
 我本身的 `Github` 帳戶有設定 `SSH Key` 的綁定，因此將 `CircleCI` 與 `Github` 綁定整合後，創建的 `SSH` 環境會只能接受 `CircleCI` 綁定的私鑰進行登入
-{% endnote %}
 
 實際透過 `ssh指令` 登入到該環境後即可看到相關專案的內容，此時就可以在這個環境下去進行偵錯與測試。
 ![](https://i.imgur.com/lgZz9YJ.png)
@@ -290,10 +288,8 @@ orbs:
 透過這些語法與生態系，我們能夠讓整個設定檔更加的精簡與組織。
 
 
-{% note warn %}
 `CircleCI` 這部分發展的比較晚，目前提供的 `Orbs` 只有數十多個，為數不多，且目前沒有提供 `Private Orbs` 的使用。
 這意味如果你有多個 Project 想要共用這些模組，你只能公開這些模組不然就是在每個 Project 的設定內去撰寫相同的 `Commands`。
-{% endnote %}
 
 # Cache
 `CircleCI` 本身有提供 `Cache` 的機制，可以讓你在不同的 `Workflow` 中傳遞檔案與資料夾。 透過這個機制我們可以將一些中間產物給保存下來，譬如 `go build`, `npm build` 等建置後產生的檔案給共享，藉此降低下次執行相同 `Workflow` 所需要的時間。

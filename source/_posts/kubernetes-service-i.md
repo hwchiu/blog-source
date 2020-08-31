@@ -39,9 +39,7 @@ description: 於 kubernetes 叢集中，我們會部屬大量的容器應用程�
 
 但是在 `kubernetes` 叢集中，要是這些 `Mongo` 對應的容器發生錯誤或是因為其他問題而發生的容器停止然後重啟的事件
 會導致這些容器之後都會擁有一個完全不同的 `IP` 地址
-{% note danger %}
 事實上，如果夠熟悉 CNI 與 IPAM 的開發者，其實是有辦法讓Pod擁有固定 `IP` 地址的
-{% endnote %}
 
 如下圖所示。
 在這種情況下，我們的應用程式要怎麼知道這些 `IP` 已經改變? 如何應因這些改變而修正我們應用程式連線的對象?
@@ -74,16 +72,12 @@ description: 於 kubernetes 叢集中，我們會部屬大量的容器應用程�
 4. External
 
 其中目前大家最常用的就是 `ClusterIP` 以及 `NodePort`，所以下面介紹一下這兩者的差異。
-{% note danger %}
 本篇文章著重在特性與概念的介紹，背後的實作原理會等到下篇文章在來介紹與分析。
-{% endnote %}
 
 ## ClusterIP
 `ClusterIP` 的意思就是只有叢集內的應用程式/節點可以透過該組 `FQDN` 去存取背後的服務。
 在此情況下，除了透過`kubernetes`去部屬的應用程式外，預設情況下都沒有辦法透過該`FQDN`去存取，即使你直接使用了`kubernetes dns`來問到對應的`IP`地址也沒有辦法。
-{% note danger %}
 這邊指的是預設情況下，如果夠懂網路以及背後原理，當然還是有辦法可以從外面存取到這些服務的
-{% endnote %}
 
 ## NodePort
 `NodePort` 本身包含了 `ClusterIP` 的能力，此外多提供了一種能力讓`非叢集`的應用程式/節點也有辦法存取叢集內的應用程式。
@@ -93,9 +87,7 @@ description: 於 kubernetes 叢集中，我們會部屬大量的容器應用程�
 那要如何達到`非叢集`的應用程式也能夠存取叢集內的應用程式?
 這邊就如同其字面`NodePort`一樣，任何`非叢集`內的應用程式都可以透過存取`叢集`節點上的特定`Port`轉而存取到叢集內的應用服務。
 
-{% note danger %}
 詳細的運作原理留到下篇文章在好好的跟大家探討與分享
-{% endnote %}
 
 最後用一張圖片來說明 `ClusterIP` 以及 `NodePort` 兩者的關係
 ![Imgur](https://i.imgur.com/q0j2z4J.png)
@@ -215,12 +207,10 @@ curl: (6) Could not resolve host: k8s-nginx-cluster.default
 ```
 會發現根本連該 `FQDN` 的 `DNS` 解析都沒有辦法。
 
-{% note  danger %}
 實際上 ClusterIP 是因為 kube-dns 的關係沒有辦法解析該位置
 但是若嘗試直接使用解析過後的IP位置去存取
 叢集內的節點透過解析後的地址是可以存取到目標的。
 只是一般人不會想要直接使用該 `IP`，而是更依賴使用 `FQDN` 的方式。
-{% endnote %}
 
 ## Deploy NodePort
 接下來我們嘗試部屬看看 `NodePort` 的 `service`

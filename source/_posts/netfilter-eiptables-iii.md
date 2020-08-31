@@ -77,13 +77,9 @@ apt-get install -y ebtables iputils-ping
 此外，為了詳細的觀察 `iptables/ebtables` 對連線封包的傳輸，我們要使用 `Log` 相關的 `Target` 來操作這些，最後這些 `Log` 的資訊都會從 `Kernel` 打印出來，
 我們可以透過 `Dmesg` 的方式去觀察這些封包。
 
-{% note info %}
 基本上在 iptables 是採用 -j LOG 的方式來處理，然而在 ebtables 則是直接採用 --log 這種原生的方式來處理，其隱性的使用 -j CONTINUE 去繼續處理封包。
-{% endnote %}
 
-{% note info %}
 實際上我們可以用 `dmesg -c` 的方式，每次呼叫都只會顯示新出現的部分，這樣會更容易幫助我們觀察封包
-{% endnote %}
 
 在 `Log` 的指令中，透過 `--log-prefix` 的方式去列印更多的資訊，可以幫助我們更好觀察。
 
@@ -205,9 +201,7 @@ docker exec  netutils ping 172.18.0.2 -c1
 
 該輸出資料如下，我們將該資料分成兩部分，因為 `ping -c1` 實際上會牽扯到 `ICMP Request` 以及 `ICMP Reply`.
 
-{% note info %}
 如果你的環境中有看到 proto=0x0806, 這是所謂的 APR 封包，本文暫時不討論 ARP。
-{% endnote %}
 
 ```bash=
 ctc/ebtable/broute-BROUTING IN=vethd709394 OUT= MAC source = 02:42:ac:12:00:03 MAC dest = 02:42:ac:12:00:02 proto = 0x0800

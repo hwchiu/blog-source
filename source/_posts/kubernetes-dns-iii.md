@@ -74,9 +74,7 @@ description: 在前篇文章有跟大家分享過實際部屬上遇到的 DNS �
 同時 `dockershim` 這邊如何針對 `docker container` 則會是另外一個線索來追尋。
 
 針對這兩個方向，經過仔細的追尋後，我們可以得到類似下圖的流程
-{% note danger %}
 圖中藍色區域都是真實的函式名稱
-{% endnote %}
 
 ![Imgur](https://i.imgur.com/6xsRAD1.png)
 
@@ -268,9 +266,7 @@ func rewriteResolvFile(resolvFilePath string, dns []string, dnsSearch []string, 
 
 重新看一次之前的結論
 
-{% note success %}
 `kubernetes` 會先嘗試使用節點上 `/etc/resolv.conf` 的資料，但是若發現 `/etc/resolv.conf` 是空的，這時候就會去依賴 `dockerd` 幫忙產生的 `/etc/resolv.conf`
-{% endnote %}
 
 我們的推論跟我們程式碼觀察的結果是完全吻合的，再 `dnsPolicy=default` 的前提下，只要 `kubernetes` 只要能夠獲得合法的 `/etc/resolv.conf` 就會使用，否則直接使用 `docekr container` 所創造的 `/etc/resolv.conf`.
 

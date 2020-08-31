@@ -50,8 +50,7 @@ description: 作為一個 Kubernetes 使用者，可能都有聽過 CNI/CRI/CSI 
 `Flannel` 安裝非常簡單，實際上只需要部屬一個 `Yaml` 檔案即可。
 該 `Yaml` 裡面其實會牽扯到不少元件，譬如 `DaemonSet`, `InitContainer` 等許多有趣的玩法，這邊就不再贅述，有興趣的可以想想看一個問題
 
-{% note info %}
-你要如何讓任何加入到k8s的新節點都能夠自動安裝 CNI 需要的 binary 以及 config ?{% endnote %}
+你要如何讓任何加入到k8s的新節點都能夠自動安裝 CNI 需要的 binary 以及 config ?
 
 
 ## Features
@@ -222,9 +221,7 @@ spec:
 
 有興趣的可以參閱 `Intel` 所維護的 [SRIOV-CNI](https://github.com/intel/sriov-cni)
 
-{% note info %}
 SR-IOV 最早期的 Plugin 並不是 Intel 所開發的，但是 Intel 將其 Fork 回來並且加入了更多的功能，同時也在同一個 `Plugin` 之中去支援 DPDK 的功能
-{% endnote %}
 
 
 # DPDK
@@ -254,10 +251,8 @@ SR-IOV 最早期的 Plugin 並不是 Intel 所開發的，但是 Intel 將其 Fo
 # Bond-cni
 `Bonding`, 或是 `Teaming` 都是非常類似概念的一種實作，本文主要針對 `Bonding` 來介紹。
 
-{% note info %}
 歡迎參考 `Redhat` 的文件來學習 `Teaming` 以及 `Bonding` 的差異
 [If You Like Bonding, You Will Love Teaming](https://rhelblog.redhat.com/2014/06/23/team-driver/)
-{% endnote %}
 
 
 能夠將多張網卡抽象成一張網卡來使用，這種情況下該網卡能夠提供下列的功能

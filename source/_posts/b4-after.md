@@ -20,9 +20,7 @@ Software Defined WAN`. 這是一篇 Google 於 `2013 SIGCOMM` 所發表關於 `S
 1. [B4 and after: managing hierarchy, partitioning, and asymmetry for availability and scale in google's software-defined WAN](https://dl.acm.org/citation.cfm?id=3230545&fbclid=IwAR3JnZf8yk2Ku8JXutQZSsAwm8Koca2ZSlInGI7JOJb9P3rAu91EWHai2c0)
 2. [Slides](https://pdfs.semanticscholar.org/63f9/0f7482c186b778ef32b70c877c6d7ec82440.pdf?fbclid=IwAR06jKF1W8bXwga9aRzeVYMEMMXn63vzc6dm1V7OSrJfyquoAUbwNgYmKEE)
 
-{% note info %}
 強烈建議一邊閱讀的同時也閱讀該份投影片，會比較容易比較
-{% endnote %}
 
 
 # What is B4
@@ -165,9 +163,7 @@ Software Defined WAN`. 這是一篇 Google 於 `2013 SIGCOMM` 所發表關於 `S
 
 ## Efficient switch rule management
 由於每個硬體交換機本身所支持的轉發規則表格大小是有限度的，因此要如何透過這些有限度的資源來滿足之前提供對應的轉發能力來滿足一切需求就是一大挑戰
-{% note info %}
 由於先前的 `TE` 架構沒有完全說明清除，因此此章節在探討規則的時候會有部分沒有辦法釐清其原理，不過就算如此，我們還是可以學習 `Google` 針對這類型問題時思考問題的脈絡與方向
-{% endnote %}
 
 根據前述的討論，透過了 `階層式` 的 `TE` 設計雖然能夠解決不少的問題，但是其需要的轉發規則數量也急速上升，超過了硬體交換機當前的限制。
 
@@ -196,9 +192,7 @@ Size(ACL) ≥ (#Sites ✕ #PrefixesPerSite ✕ #ServiceClasses)
 如同上述所說，一旦將 `flow table(ACL)`拆成兩個部分，分別是 `VFP` 以及 `Per-VRF LPM` 兩個規則進行處理，最後達到的效果就是可以提升將近 60倍 數量的規則數.(意味者在IP跟服務種類不變的情況下，可以擴充到1900多個節點左右)
 概念如下
 1. 將 `cluster prefix` 符合相關的規則全部移動到 `LPM (Longest Prefex Match)` 表格中。 
-{% note info %}
 在交換機中，不同表格的大小不一定，根據論文顯示， `LPM` 表格的數量上限遠遠比 `ACL` 還要來得高。
-{% endnote %}
 2. 由於 `LPM` 表格中沒有辦法針對 `DSCP` 的比對(DSCP用來代表不同的服務), 但是 `LPM` 可以比對 `VRF (Virtual Routing Forwarding)` 的標籤，因此決定透過 `VRF` 與 `DSCP` 進行一個比對的關係。
 3. 一開始則使用 `VFP(Virtual Forwarding Plane)` 表格來進行比對，在這個表格中則會透過 `DSCP` 的比對並且設定特定的 `VRF` 標籤，供後續的 `LPM` 表格識別其為特定的應用服務
 

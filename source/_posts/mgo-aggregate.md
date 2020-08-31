@@ -26,9 +26,7 @@ description: 本篇文章首先跟大家分享一個常見的 Schema 設計，�
 
 本文章的所有範例程式碼都可以在[mgo Aggregate Example](https://github.com/hwchiu/GolangPratice/blob/master/mgoAggregate/main.go)找到
 
-{% note info %}
 必須要注意， mongodb 的版本至少要 > 3.0 之後才支援本文描述的 `Aggregate`
-{% endnote %}
 
 
 ## Structure
@@ -101,7 +99,6 @@ if err != nil {
 | Aggregate | 7.4| 22| 77 | 180 | NaN |
 
 
-{% note danger %}
 這邊要特別注意的是，當 `Pods` 的數量過高的時候，使用 `pipeline` 來處理就會得到下列的錯誤訊息
 
 `Total size of documents in pods matching { $match: { $and: [ { createdBy: { $eq: ObjectId('5b86dac74807c532d70bea52') } }, {} ] } } exceeds maximum document size
@@ -110,7 +107,6 @@ if err != nil {
 根據官網描述，預設的情況下，只能存放 `16MB` 的資料。
 這意味者資料過多的情況下，使用者要注意這個現象，避免資料存取失敗。
 
-{% endnote %}
 
 ## Summary
 本文假設的情境非常簡單，基本上兩種方法都可以完成，但是在資料多寡的情況下，花費的時間就有所區別。

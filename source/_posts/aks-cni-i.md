@@ -59,9 +59,7 @@ azure-vnet       bridge  flannel      host-local  loopback  portmap  sample  vla
 azure-vnet-ipam  dhcp    host-device  ipvlan      macvlan   ptp      tuning
 ```
 
-{% note info %}
 其中 `azure-vnet`, `azure-vnet-ipam` 兩個則是 `Azure-Container-Networking` 這個專案所產生的，一個用來處理網路連接，一個用來處理 `IP/Subnet` 的取得與設定
-{% endnote %}
 
 ```bash=
 azureuser@aks-agentpool-15026905-1:~$ ls /etc/cni/net.d/
@@ -90,9 +88,7 @@ azureuser@aks-agentpool-15026905-1:~$ sudo cat /etc/cni/net.d/10-azure.conflist
 }
 ```
 
-{% note info %}
 這個設定檔案的內容我們先暫時不去解讀，只要知道每一台 `AKS` 節點上都會有一個獨立的檔案來負責該節點的 `CNI` 即可。
-{% endnote %}
 
 `CNI` 的運作流程簡單來說可以分成多個步驟，分別是
 1. Kubelet 收到通知要創建對應的 Pod
@@ -400,9 +396,7 @@ Allocatable:
 這兩者的資訊可以參閱 [reserve-compute-resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/)
 
 其中可以注意到 `Pod` 的數量被設定成 `30`，這個數字跟我們先前透過 `API` 去問到的 `IP` 數目幾乎是一致的
-{% note info %}
 API 問到的 IP 還包括節點本身，所以是 30 + 1 = 31
-{% endnote %}
 
 所以這邊可以看到針對 `IP` 用光的問題， `AKS` 處理的方式除了 `CNI` 本身顯示錯誤訊息之外，最上層還先透過 `Kubernetes Node Capacity` 的方式進行了第一層的阻擋，理論上 `CNI` 本身不應該遇到 `IP` 用光的情形，因為根本不應該有超過數量的 `Pod` 被嘗試部署到該節點上。
 

@@ -58,10 +58,8 @@ description: 在前述中我們已經學過了什麼是 kubernetes service, 一�
 
 我們可以藉由設定 `kube-proxy` 裡面的 `--proxy-mode` 這個參數來決定要使用哪一種實現方式
 
-{% note danger %}
 kube-proxy 本身會透過 `daemonset` 的方式部屬到每一個節點上，有興趣的可以透過
 kubectl -n kube-system describe ds kube-proxy 指令觀察一下相關的內容
-{% endnote %}
 
 回歸正題，本文主要探討的對象是 `iptables`，看看這個歷史悠久且功能強大的 `iptables` 框架是如何完成 `kubernetes service` 所需要的各種功能
 
@@ -81,10 +79,8 @@ kubectl -n kube-system describe ds kube-proxy 指令觀察一下相關的內容
 
 有了基本概念後，我們就可以開始來探討 `kubernetes serivce` 如何實作了
 
-{% note danger %}
 若需要真正完全理解這一切，還需要搭配 `PREROTUING`,`FORWARD`,`POSTRING` 等不同 `table` 的先後關係與概念，不但對於理解有更加的幫助，對於除錯找問題也是有很大的效益。
 有興趣的讀者可自行上網尋找相關文章學習，或是等我哪天會寫出相關的文章來介紹這些資訊。
-{% endnote %}
 
 
 # Kubernetes Service
@@ -107,9 +103,7 @@ kubernetes          172.17.8.100:6443                              11d
 
 可以從上述的輸出結果看到每個 `service` 都會對應到多組的 `endpoints`，所以當叢集內的容器有任何 `IP` 更動的時候，這邊的數據都會自動更新，以確保 `service` 有辦法存取後端真正的服務
 
-{% note danger %}
 有在使用 `Service` 的讀者，以後若有遇到 `service` 不通的情況，可以嘗試先看看該 `service` 是否有對應的 `endpoints`，沒有的話可能是 `selector` 寫錯或是目標服務根本沒有運行起來。
-{% endnote %}
 
 ## Custom Chain
 `kubenetes` 使用 iptables 時為了更有效管理不同的功能與規則的歸屬，建立的大量的 `custom chain`
@@ -120,9 +114,7 @@ kubernetes          172.17.8.100:6443                              11d
 
 我們已經知道 `ClusterIP` 的作用範圍只有`叢集內`的應用程式/節點，所以在本段落我們會著重於三個概念來理解
 
-{% note danger %}
 叢集內節點是的存取比較尷尬，的確可以透過 `ClusterIP` 地址來存取，但是預設情況下是沒有辦法解析`FQDN`取得對應的 `ClusterIP` 地址。
-{% endnote %}
 
 1. 如何透過 `FQDN` 輾轉存取到目標容器們(Endpoints)
 2. 如何做到只有`叢集內`的應用程式/節點才可以存取
@@ -131,9 +123,7 @@ kubernetes          172.17.8.100:6443                              11d
 ## Access By FQDN
 我們都知道 `Service` 本身會提供一組對應的 `FQDN` 供應用程式使用
 實際上這組`FQDN` 只有 `kube-dns` 能夠理解，而且其對應的 `IP` 地址其實就是每個 `Service` 提供的 `ClusterIP` 
-{% note dnager  %}
 這邊的ClusterIP剛好跟 `Type` 的ClusterIP 名稱一樣，但是這邊要表示的真的是個`IP`地址
-{% endnote %}
 
 ```bash=
 vortex-dev:05:36:40 [~/go/src/github.com/hwchiu/kubeDemo](master)vagrant
@@ -169,19 +159,15 @@ k8s-nginx-cluster   10.244.0.88:80,10.244.0.89:80,10.244.0.90:80   1d
 
 到這邊我們還有一些疑問還沒有解開，只要先記住下面的結論就好。
 
-{% note info %}
 1. 每個`service`的`FQDN`都會對應到一組`Cluster-IP` `IP` 地址，該地址其實是虛擬`IP`地址。
 2. 送往該`Cluster-IP` 的封包在滿足特定的情況下，會透過`DNAT`的方式轉換成其中一個`endpoints`容器上的真實`IP`地址
-{% endnote %}
 
 
 ## Cluster Only
 現在我們要來討論一下，到底所謂的只有`叢集內`的應用程式/節點才可以存取`clusterIP`這到底是怎麼運作的。
 
 我們複習一下前面的某個敘述
-{% note danger %}
 送往該`Cluster-IP` 的封包在滿足特定的情況下，會透過`DNAT`的方式轉換成其中一個`endpoints`容器上的真實`IP`地址
-{% endnote %}
 
 這邊提到要滿足特定的情況才會走到`DNAT`轉到對應的`EndPoints`。
 所以
@@ -234,12 +220,10 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 
 這邊可以看到有兩條規則，分別對應到原生的 `OUTPUT` 以及 `PREROUTING`，直接透過 `-j` 直接跳入到 `KUBE-SERVICES` 來進行後續處理。
 
-{% note danger %}
 其實夠熟悉 iptables 的朋友應該已經可以猜到，在此規則狀況下，我只要有辦法讓流向`ClusterIP`的封包透過一些網路規則的方式流向到叢集內的節點，依然可以順利的存取背後的服務。
 只是因為這些`ClusterIP`本身不存在網路之中，所以需要針對整個網路的路由表規則額外設定
 這部份就是額外有興趣的人可以自己研究，這邊就不再多敘述。
 
-{% endnote %}
 
 我們先用下圖來幫助目前的概念做一個整理
 
@@ -252,12 +236,10 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 
 ![Imgur](https://i.imgur.com/74jQEiM.png)
 
-{% note info %}
 1. 每個`service`的`FQDN`都會對應到一組`ClusterIP` `IP` 地址，該地址其實是虛擬`IP`地址。
 2. 透過 `iptablse` 的 `OUTPUT/PREROUTING`，其有能力去匹配所有叢集內的應用程式/節點所送出的封包
 3. 最後透過去比對封包的目的地位址是否是 `ClusterIP` 來決定要不要往下跳到其他`custom chain` 去處理。
 4. 封包最後會透過`DNAT`的方式轉換成其中一個`endpoints`容器上的真實`IP`地址
-{% endnote %}
 
 
 ## Loab Balancing 

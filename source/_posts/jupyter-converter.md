@@ -1,4 +1,3 @@
----
 title: Translate jupyter notebook to python script
 keywords: 'Python,Jupyter'
 tags:

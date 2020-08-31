@@ -125,9 +125,7 @@ hwchiu➜~» helm install \
     stable/cert-manager
 ```
 
-{% note info %}
 想要安裝 `Helm` 可以參考[官網的教學](https://docs.helm.sh/using_helm/)
-{% endnote %}
 
 安裝完畢後，可以透過 `kubectl` 的指令去確認是否需要的 `deployment` 有運行起來
 ```bash=

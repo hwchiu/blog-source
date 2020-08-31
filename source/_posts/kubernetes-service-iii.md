@@ -39,9 +39,7 @@ description: 在前述中我們已經學過了什麼是 kubernetes service 以�
 
 這邊使用一個下列的範例來解釋可能的情況 
 
-{% note danger %}
 以下只是一種範例，但是未必是最佳解
-{% endnote %}
 
 假設今天有一個試驗環境，在`Cloud Provider(Google/Azure/AWS...etc)`中架設了一個`kubernetes`叢集，裡面透過 `nginx` 的方式部屬了一個網頁伺服器。
 與此同時，我希望該叢集能夠提供下列的特性供我使用
@@ -115,9 +113,7 @@ $sudo iptables-save  | grep default/k8s-nginx-node
 
 這邊目前只有 `KUBE-NODEPORTS` 還沒有看過，剩下的都跟 `ClusterIP` 是一樣的功能的。
 
-{% note danger %}
 NodePort 的功能基於 ClusterIP 之上再添加新功能，所以本來 Cluster 該有的規則對於 NodePort 來說都不會少 
-{% endnote %}
 
 # KUBE-NODEPORTS
 我們仔細觀察 `KUBE-NODEPORTS` 相關的兩條規則
@@ -165,12 +161,10 @@ kubernetes service nodeports; NOTE: this must be the last rule in this chain
 第一個比對條件我們從文字上來解讀，只要封包的目標`IP`地址是屬於本節點上的任何網卡`IP`。
 只要符合上述規則，就會跳到 `KUBE-NODEPORT` 裡面進行比對，然後就按照前述的去處理了。
 
-{% note danger %}
 對於 --dst-type LOCAL 有興趣的人可以嘗試閱讀下列這個檔案
 https://elixir.bootlin.com/linux/v4.7.8/source/net/netfilter/xt_addrtype.c#L119
 https://elixir.bootlin.com/linux/v4.7.8/source/include/uapi/linux/rtnetlink.h#L203
 看看 kernel 內大致上是怎麼處理這系列操作的
-{% endnote %}
 
 到這邊我們整理一下所有的思路。
 1. NodePort 也是倚賴 `KUBE-SERVICES`，當封包目標是本地端的 `IP` 位置的時候，就會跳到 `KUBE-NODEPORT` 裡面去比對 `protocol/port` 來進行後續跟 `ClusterIP` 相同的處理

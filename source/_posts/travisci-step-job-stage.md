@@ -42,14 +42,12 @@ description: 這次要跟大家分享的是一些關於 TravisCI 的使用心得
 3. after_script: 當 `script` 運行完畢後會執行的步驟，實際上還有所謂的`after_success` 以及 `after_failure` 更細部的針對測試的結果來區分的步驟。
 
 
-{% note info %}
 根據相關人員在 `Github Issue` 的回答， `before_install` 以及 `before_script` 的使用時機如下
 
 **before_install** runs before the install step, which is meant to install any required packages or dependencies. You can prepare things before you run this step, or you can e.g. run sudo apt-get update to refresh the apt indexes.
 
 **before_script** runs before the actual test/build script runs. It's commonly used to run any preparation steps required to get the build running, for instance copy database configurations, set up any additional environment configuration, and so on.
 
-{% endnote %}
 
 
 ## Example 
@@ -115,10 +113,8 @@ deploy:
 
 ```
 
-{% note info %}
 可以到官方網頁這邊學到更多不同的建置步驟以及彼此之間的先後關係
 https://docs.travis-ci.com/user/customizing-the-build/
-{% endnote %}
 
 用下列這張圖來幫這個章節做一個總結
 
@@ -132,9 +128,7 @@ https://docs.travis-ci.com/user/customizing-the-build/
 
 所以一個`Job` 簡單來說會經歷過 `Environment`, `before_install`, `install`, `before_script`, `script` 以及 `after_script` 所有步驟
 
-{% note info %}
 這邊列舉的步驟並不是`TravisCI`的所有步驟，只是舉出幾個常見的步驟
-{% endnote %}
 
 
 ## Multiple Job
