@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: hwchiu.com
+Token: f096f30f04ecd91e027c5022fc3362860fee8c8f68f48c40a6dafdb402e2a3a1

@@ -113,11 +113,12 @@ static int modprobe_ipvs(void)
 
 下圖是一個基本的 **IPTABLES/Netfilter** 流程圖，基本上就是**五個**時間點，每個時間點內都會有不同對應的 **TABLE**，而這些 **TABLE** 內也有相對應的 **Rules**
 實際上的運作流程就是封包到達這些時間點後，會依序跳到個 **TABLE** 裡面，並且依序執行 **RULES**。
-![](https://i.imgur.com/DYOjFh5.png)
+![](https://i.imgur.com/GymG1h1.png)
+
 
 下圖則是將 **IPVS** 與 **IPTABLES/Netfilter** 結合後的圖片，差異性就是**五個**時間點內中有三個時間點變動，分別是 **INPUT/OUTPUT/FORWARD**.
 **ipvs.ko** 針對這三個時間點分別去註冊三個不同的 **Function**，而這些 **Function** 的執行點都不同。
-![](https://i.imgur.com/EljMe2B.png)
+![](https://i.imgur.com/M9aIyuT.png)
 
 1. INPUT:
 註冊的 function 會在 **Filter TABLE** 後執行，而 function 完畢後則會跳去執行 **NAT TABLE**.
@@ -424,7 +425,7 @@ enum nf_ip_hook_priorities {
 ```
 
 這也是為什麼我們架構圖會於 **INPUT(LOCAL_IN)** 裡面將 **IPVS** 放到 **NAT** 前面執行
-![](https://i.imgur.com/EljMe2B.png)
+![](https://i.imgur.com/M9aIyuT.png)
 
 其他的 **FORWARD**, **OUTPUT(LOCAL_OUT)** 的概念是完全一樣的
 

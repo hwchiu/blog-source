@@ -6,7 +6,8 @@ tags:
 keywords: 'Kubernetes,Network,Linux,Ubuntu'
 abbrlink: 1535
 date: 2020-04-23 20:51:23
-description: 2020 近況更新
+top: 1000
+description: Kubernetes 線上課程分享, 從底層到應用來解決你對 Kubernetres 的各種疑惑
 ---
 
 [近況更新]
