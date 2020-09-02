@@ -569,7 +569,7 @@ comments:
   style: tabs
   # Choose a comment system to be displayed by default.
   # Available values: changyan | disqus | disqusjs | gitalk | livere | valine
-  active: disqusjs
+  active: disqus
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
@@ -578,7 +578,7 @@ comments:
   nav:
     disqus:
       text: Load Disqus
-      order: -1
+      order: 0
     #gitalk:
     #  order: -2
 
@@ -587,14 +587,14 @@ disqus:
   enable: true
   shortname: hwchiu
   count: true
-  #post_meta_order: 0
+  post_meta_order: 0
 
 # DisqusJS
 # Alternative Disqus - Render comment component using Disqus API.
 # Demo: https://suka.js.org/DisqusJS/
 # For more information: https://github.com/SukkaW/DisqusJS
 disqusjs:
-  enable: true
+  enable: false
   # API Endpoint of Disqus API (https://disqus.com/api/).
   # Leave api empty if you are able to connect to Disqus API. Otherwise you need a reverse proxy for it.
   # For example:

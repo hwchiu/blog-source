@@ -16,8 +16,8 @@
     this.page.url = {{ page.permalink | json }};
     this.page.identifier = {{ page.path | json }};
     this.page.title = {{ page.title | json }};
+    this.language = 'en';
     {% if __('disqus') !== 'disqus' -%}
-      this.language = '{{ __('disqus') }}';
     {% endif -%}
   };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
