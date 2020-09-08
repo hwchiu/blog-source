@@ -198,12 +198,13 @@ links_settings:
   layout: block
 
 links:
-  KKDAI 大大: http://www.evanlin.com/
-  凱仁大大: https://kairen.github.io/
+  KKDAI: http://www.evanlin.com/
+  Kairen: https://kairen.github.io/
   小飛機: https://blog.pichuang.com.tw/
+  Jack: https://medium.com/@yayajacky
+  David: https://chechia.net
   CNTUG: https://www.facebook.com/groups/cloudnative.tw/
   SDNDS-TW: https://www.facebook.com/groups/sdnds.tw/
-  Jack: https://medium.com/@yayajacky
 
 
 # Table of Contents in the Sidebar
