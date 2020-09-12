@@ -7,6 +7,7 @@ tags:
 	- CNI
 	- Kubernetes
 	- Golang
+    - ITHOME
 description: 本篇文章算是一個手把手實作的文章，主要會介紹如何使用 golang 開發一個基於 Linux Bridge 的 CNI 應用程式，並且介紹如何搭配設定檔來使用這個 CNI 操作 Linux Network Namespace, 藉由這篇文章的過程理解到一個 CNI 的運作及開發，對於往後研究其他 CNI 都會有一些幫助，特別是城市的框架跟概念。 最後本篇開發的 CNI 應用程式其實是可以直接套用到 Kubernetes 裡面使用，就因為都遵循 CNI 的規則
 
 ---

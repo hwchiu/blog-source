@@ -8,6 +8,7 @@ tags:
 	- Kubernetes
 	- Flannel
 	- Network
+    - ITHOME
 description: 本文作為網路分享的最後一篇，針對各式各樣的 CNI 相關議題進行討論，並且分享個人自身看法，沒有太深的技術研究與分析
 
 ---

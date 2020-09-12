@@ -7,6 +7,7 @@ tags:
 	- Kubernetes
 	- Network
 	- CNI
+    - ITHOME
 description: Container Network Interface 的標準制定後，接下來要探討 kubernetes 本身與 CNI 的整合，這部分就如同 Contaienr Runtime Interface 一樣，可以透過 kubelet 的方式告知 kubernetes cluster 該啟用什麼樣的設定來設定 cluster 的網路，同時系統上也有相關的參數用來設定 CNI 相關的檔案，譬如執行檔以及設定檔，同時要注意的是 CNI 是基於節點為單位，所以設定的時候是每台機器都要設定。
 
 

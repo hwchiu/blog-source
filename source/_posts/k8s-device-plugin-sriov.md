@@ -5,6 +5,7 @@ tags:
   - DevicePlugin
   - SRIOV
   - Network
+  - ITHOME
 keywords: 'Kubernetes,Network,Linux,Ubuntu'
 description: >-
   這篇要來跟大家介紹什麼是 Single Root Input Output Virtualization (SR-IOV)，作為一個 OpenStack

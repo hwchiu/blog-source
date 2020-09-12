@@ -4,8 +4,9 @@ keywords: 'Kubernetes, device, plugin, deviceplugin'
 abbrlink: 35475
 date: 2019-10-08 15:00:26
 tags:
-	- Kubernetes
-	- DevicePlugin
+  - Kubernetes
+  - DevicePlugin
+  - ITHOME
 description: 本篇文章會就 device plugin 本身的架構來探討如何實做一個 device plugin 的解決方案，從其溝通介面到運作流程進行探討，透過這些理解與討論會對 device plugin 有更多的了解
 
 

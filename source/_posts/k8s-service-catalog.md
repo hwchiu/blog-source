@@ -3,6 +3,7 @@ title: Service Catalog
 tags:
   - Kubernetes
   - ServiceCatalog
+  - ITHOME
 keywords: 'Kubernetes,Network,Linux,Ubuntu'
 description: >-
   Service Catalog 是一套基於 Open Service Broker API 的資源創建解決方案，這邊的資源指得是一些並非

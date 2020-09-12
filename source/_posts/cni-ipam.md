@@ -7,6 +7,7 @@ tags:
 	- CNI
 	- Network
 	- IPAM
+    - ITHOME
 description: IP Address Management 作為 CNI 本身可提供的一個重要功能之一，更是 kubernetes 本身不可或缺的能力，透過 IPAM 的管理可以讓每個 Pod 都獲得一個 IPv4 或是 IPv6 的地址，至於 Pod 本身能不能上網，那就是 CNI 本身要處理的問題，根據不同需求來建議不同的網路環境提供 Pod 上網能力。本篇文章主要是探討 IPAM 的部分，針對三個由官方維護作為參考用的 IPAM，分別介紹他們的用途以及使用方式，來深入了解 IPAM 設計需要思考的部分以及相關議題
 
 ---

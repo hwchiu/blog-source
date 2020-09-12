@@ -7,6 +7,7 @@ tags:
 	- Kubernetes
 	- CRI
 	- Container
+    - ITHOME
 description: 本文要特別介紹基於 Kubernetes 所開發的 CRI 解決方案 CRI-O, CRI-O 所有的功能都是為了 kubernetes 而設計，不多不少剛剛好，完全最佳化於 kubernetes。此外由於不需要倚賴太多第三方的元件，譬如 docker, containerd 等，使用 CRI-O 可以減少元件之間 IPC 溝通的次數進而提升整體的效率。 本文主要會介紹 CRI-O 的概念並且透過實際安裝的方式介紹如何幫 kubernetes 抽換 runtime 成 CRI-O
 
 ---

@@ -7,6 +7,7 @@ tags:
 	- Kubernetes
 	- CRI
 	- VM
+    - ITHOME
 description: 本文作為 CRI 系列文章的最後一篇文章，要來跟大家分享一個比較少見的用法，透過 kubernetes 管理 Pod 的方式來管理 Virtual Machine，底層所有運行的服務都是基於 Virtual Machine 去跑，但是對於 Kubernetes 來說完全不知情，依然認為是一個 Pod 的形式。 這部分依賴重新撰寫一個符合 CRI 標準應用程式來對接 kubelet, 並且底下所有的運作都使用 virtual machine  來操作，因此這個範例就完全不會有 OCI 的存在，因為是真正的 virtual machine, 而非 container.
 
 ---

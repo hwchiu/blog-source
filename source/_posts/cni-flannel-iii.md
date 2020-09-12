@@ -8,6 +8,7 @@ tags:
 	- Kubernetes
 	- Flannel
 	- Network
+    - ITHOME
 description: 本篇文章作為 CNI - Flannel 的最後一篇探討，藉由研究 VXLAN 的運作原理來研究到底 flannel 是如何透過 vxlan 來讓不同節點上並且擁有私有 IP 的 Pod 可以互相溝通溝通的。
 
 ---

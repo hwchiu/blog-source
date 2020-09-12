@@ -4,9 +4,10 @@ keywords: 'Kubernetes, CSI, storage'
 abbrlink: 39214
 date: 2019-10-05 07:16:04
 tags:
-	- Kubernetes
-	- CSI
-	- Storage
+  - Kubernetes
+  - CSI
+  - Storage
+  - ITHOME
 description: 本篇文章著重於 Kubernetes 本身與 CSI 的關係，一直以來 kubernetes 甚至到 1.16 來說， CSI 都不是一個必需的設定，反而是依賴大量 in-tree 的整合程式碼來處理各式各樣的儲存後端，這雖然使用方便但是對於後續的擴充性，維護性，彈性都帶來的很大的危害。也因此 CSI 才有誕生的機會，所以對於長期使用 in-tree 的管理人員來說，勢必有一天要轉移到 CSI才有機會想到新的功能以及相關功能的修復
 
 ---

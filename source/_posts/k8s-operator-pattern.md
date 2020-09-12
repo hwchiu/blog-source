@@ -3,6 +3,7 @@ title: Kubernetes - Operator Pattern 介紹
 tags:
   - Kubernetes
   - Operator
+  - ITHOME
 keywords: 'Kubernetes,Network,Linux,Ubuntu'
 description: >-
   Operator 從 2018 年開始串紅，愈來愈多的服務都宣稱支援 Operator 的運作模式，所以本篇文章就來探討到底什麼是 Operator

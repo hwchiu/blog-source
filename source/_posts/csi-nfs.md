@@ -4,9 +4,10 @@ keywords: 'Kubernetes, CSI, storage'
 abbrlink: 63494
 date: 2019-10-05 18:10:08
 tags:
-	- Kubernetes
-	- CSI
-	- Storage
+  - Kubernetes
+  - CSI
+  - Storage
+  - ITHOME
 description: 前述分享了關於不少 Container Storage Interface 的事情，接下來我們直接使用 NFS 作為範例，來看看要如何透過 CSI 的架構來掛載 NFS 到 kubernetes cluster 中供運算資源使用
 
 ---

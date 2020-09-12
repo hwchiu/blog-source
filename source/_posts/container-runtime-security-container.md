@@ -7,6 +7,7 @@ tags:
 	- Container
 	- CRI
 	- Security
+    - ITHOME
 description: 有鑒於 CRI 的標準架構，各式各樣的針對不同目標的專案都能夠整合到 Kubernetes 中，而本文要介紹的兩個專案分別是 gVisor 以及 kata-container, 這兩個專案都是基於安全性考量而開發的 OCI Runtine，與其相同地位的就是最知名的 OCI Runtime, runc。 本文會介紹這兩個專案的概念以及目標，並且討論其實作架構來比較這兩種不同的方式是如何達到安全的效果
 
 ---

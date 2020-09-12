@@ -5,6 +5,7 @@ tags:
   - DevicePlugin
   - RDMA
   - Network
+  - ITHOME
 keywords: 'Kubernetes,Network,Linux,Ubuntu'
 description: >-
   這篇要來跟大家介紹什麼是 Remote Directly Memory Access(RDMA)，從這個裝置的概念介紹來學習該裝置的使用情境，並且套用到

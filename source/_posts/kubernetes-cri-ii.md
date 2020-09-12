@@ -7,6 +7,7 @@ tags:
 	- Kubernetes
 	- CRI
 	- Container
+    - ITHOME
 description: 本文介紹了 `containerd 的概念，並且嘗試建置一個基於 containerd 的 kubernetes cluster, 讓大家體驗看看佈樁 docker 也可以運行 kubernetes 的使用方式，同時也可以學習到是如何透過設定來改變 kubernetes 這一連串的行為的。
 
 ---

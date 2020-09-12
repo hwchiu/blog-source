@@ -4,9 +4,10 @@ keywords: 'Kubernetes, CSI, storage'
 abbrlink: 563
 date: 2019-10-07 00:54:01
 tags:
-	- Kubernetes
-	- CSI
-	- Storage
+  - Kubernetes
+  - CSI
+  - Storage
+  - ITHOME
 description: 本篇文章作為 Storage 的最後一塊，就沒有特別針對主題探討，反而是聊聊閒聊一些 Storage 方面的議題，順便聊聊 Mount 這個東西除了常見的功能之外，還有什麼參數可以使用，並且有什麼樣的效果。
 
 ---

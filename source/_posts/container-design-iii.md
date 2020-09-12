@@ -6,6 +6,7 @@ date: 2019-09-19 06:19:50
 tags:
 	- Docker
 	- Container
+    - ITHOME
 	- Network
 	- Storage
 description: 本篇文章作為 Container 介紹的最後一篇，簡單的透過 namespace 的操作讓大家看看 network 以及 storage 本身的運行模式，接下來到 CNI 以及 CSI 相關的章節的時候會再仔細介紹 kubernetes 中是怎麼處理 network 與 storage 這兩大重要資源。

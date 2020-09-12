@@ -4,9 +4,10 @@ keywords: 'Kubernetes, CSI, storage'
 abbrlink: 45935
 date: 2019-10-04 07:50:37
 tags:
-	- Kubernetes
-	- CSI
-	- Storage
+  - Kubernetes
+  - CSI
+  - Storage
+  - ITHOME
 description: 本文針對 Container Storage Interface 的標準進行介紹，探討 CSI 本身標準涵蓋的範圍與流程，以及部署上的一些常見做法，包含多種服務器各自的角色與地位。
 
 ---

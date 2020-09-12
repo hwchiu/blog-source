@@ -6,6 +6,7 @@ date: 2019-09-25 08:09:58
 tags:
 	- Network
 	- CNI
+    - ITHOME
 	- Container
 description: 本文作為網路系列文章的第一篇，將從 Container Network Interface 下手，相對於 Container Runtime Interface, CNI 以是個類似的架構，但是主打網路能力為主，至於網路能力這個字眼其實很模糊，畢竟不同情境，不同需求都會有不同的實現方式，很難用一個通用的說法來函索有可能力。本文會跟大家介紹 CNI 的相關資訊，包括標準的內容，相關設定，最後也會透過一些比較跟大家介紹不同 Container 實現方式其最後底層去操作 CNI 的方式也截然不同
 

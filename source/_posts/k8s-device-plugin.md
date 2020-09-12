@@ -4,8 +4,9 @@ keywords: 'Kubernetes, device, plugin, deviceplugin'
 abbrlink: 14126
 date: 2019-10-08 05:21:44
 tags:
-	- Kubernetes
-	- DevicePlugin
+  - Kubernetes
+  - DevicePlugin
+  - ITHOME
 description: 除了三大標準 CRI, CNI, CSI 之外， kubernetes 本身也有自行時做一些方式來擴充整個叢集的功能，而本文要介紹的就是 Device Plugin 這個擴充功能，這個功能最著名的使用方式我想就是 GPU運算了，透過 Device Plugin, 可以讓不同 GPU 廠商都能夠自行實作相關的方式把 GPU 跟運算資源結合並且透過 kubernetes內建的 scheduler 等有效地使用這些資源。
 
 ---
