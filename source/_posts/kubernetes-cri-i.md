@@ -4,10 +4,10 @@ keywords: 'Kubernetes,CRI,OCI, Containerd'
 abbrlink: 32082
 date: 2019-09-20 07:23:43
 tags:
-	- Kubernetes
-	- CRI
-	- Container
-    - ITHOME
+  - Kubernetes
+  - CRI
+  - Container
+  - ITHOME
 description: 本篇文章會開始探討 kubernetes Container Runtime Interface 的概念與設計，並且討論其餘 OCI 的關係，最後介紹了 Docker/Containerd 這些不的 Container 解決方案是如何於 Kubernetes 共存的
 
 ---

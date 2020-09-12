@@ -4,11 +4,11 @@ keywords: 'Kubernetes,CNI'
 abbrlink: 8730
 date: 2019-10-02 06:52:33
 tags:
-	- CNI
-	- Kubernetes
-	- Flannel
-	- Network
-    - ITHOME
+  - CNI
+  - Kubernetes
+  - Flannel
+  - Network
+  - ITHOME
 description: 本文作為網路分享的最後一篇，針對各式各樣的 CNI 相關議題進行討論，並且分享個人自身看法，沒有太深的技術研究與分析
 
 ---

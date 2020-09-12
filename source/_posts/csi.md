@@ -4,9 +4,10 @@ keywords: 'Kubernetes, CSI, storage'
 abbrlink: 21
 date: 2019-10-03 06:47:37
 tags:
-	- Kubernetes
-	- CSI
-	- Storage
+  - Kubernetes
+  - CSI
+  - Storage
+  - ITHOME
 description: 本文開始又是嶄新的一篇，開始探討也是非常重要的儲存資源，儲存方面也有相關的標準再發展，其目的與 CRI 以及 CNI 一致，都是希望透過標準化接口能夠使得第三方的解決方案開發更加活絡且流暢，本文會開始來介紹儲存方面的基本概念以及為什麼需要 Container Storage Interface
 
 ---

@@ -4,11 +4,11 @@ keywords: 'kubernetes, k8s, cni, flannel, introduction, implementation'
 abbrlink: 40329
 date: 2019-09-30 04:44:27
 tags:
-	- CNI
-	- Kubernetes
-	- Flannel
-	- Network
-    - ITHOME
+  - CNI
+  - Kubernetes
+  - Flannel
+  - Network
+  - ITHOME
 description: 本篇文章針對 flannel 如何管理 IP 地址的事情進行探討與研究，許多人初次使用 kubeadm 安裝 flannel 的時候都曾經因為忘記加上 --pod-net-cidr 等參數導致安裝失敗，而這篇文章就會來探討這個參數的意義，為什麼需要這個參數，同時搭配前述已經分享過的 IPAM 管理，來重新仔細觀察 flannel 的運作過程
 
 ---

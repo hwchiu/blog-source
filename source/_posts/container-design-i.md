@@ -4,9 +4,9 @@ keywords: 'Docker, Container, OCI'
 abbrlink: 59486
 date: 2019-09-16 16:15:16
 tags:
-	- Docker
-	- Container
-    - ITHOME
+  - Docker
+  - Container
+  - ITHOME
 description:  本文針對 Container 的概念進行探討，特別是其相關標準 Open Container Initiative (OCI), OCI 中定義了兩項規格，分別是 Runtime specification 以及 Image specification. 本文粗略地介紹一下彼此的概念以及各自負責的功能
 
 ---

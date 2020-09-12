@@ -4,9 +4,9 @@ keywords: 'Docker, Container, OCI'
 abbrlink: 26942
 date: 2019-09-18 07:17:58
 tags:
-	- Docker
-	- Container
-    - ITHOME
+  - Docker
+  - Container
+  - ITHOME
 description:  本文延續前篇文章關於 Open Container Initiatives 的討論，前篇文章討論了關於 OCI 內的兩大標準，分別是 Runtime 以及 Image 這兩項關於 Container 的標準，而本篇文章則是會介紹如了相關的標準之外，目前有什麼相關的解決方案與工具與這兩個標準息息相關，同時對於 Docker 本身會怎麼利用這些標準來完成 COntainer 的運行
 
 ---

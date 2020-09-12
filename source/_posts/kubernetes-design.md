@@ -4,11 +4,11 @@ keywords: 'Kubernetes, design, CNI, CSI, CRI'
 abbrlink: 51275
 date: 2019-09-16 06:17:10
 tags:
-    - Kubernetes
-    - ITHOME
-    - CRI
-    - CSI
-    - CNI
+  - Kubernetes
+  - ITHOME
+  - CRI
+  - CSI
+  - CNI
 description: 為了跟大家分享 kubernetes 內部的幾個重要設計，如 CRI, CSI 以及 CNI, 本篇文章先簡單介紹了一下 kubernetes 內部相關的設計理念，透過理解這些理念更可以理解為什麼會有各式各樣的介面被設計出來。
 ---
 
