@@ -29,7 +29,7 @@ Article Translated from https://blog.container-solutions.com/gitops-the-bad-and-
 
 
 
-## 適合使用於程式化的更新
+## 不適合使用於程式化的更新
 如果今天 CI 流水線本身結束後，會需要將測試的結果送入到測試的叢集中去更新，那就意味者我們要透過修改 Git Repo 的內容來觸發 GitOps 的更新，因此需要在 CI 流水線的最後面對 Git Repo 進行修改。
 
 然而 Git 這個工具的設計本身就不是很適合太自自動化的操作，特別是遇到衝突時，需要有人為的解讀來修復。所以當有多個 CI 流水線同時運作時，就會有機會導致有部分的 CI 流水線會遇到 Git 衝突導致沒有辦法順利完成作業。
