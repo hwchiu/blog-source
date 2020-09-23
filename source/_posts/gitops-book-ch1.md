@@ -26,7 +26,7 @@ GitOps 這個新穎的部署概念近年來於網路上的討論有愈來愈多�
 # 前世
 GitOps 這個概念是來自一篇於 2017 年由 `Weaveworks` 所發表的文章 [GitOps - Operation by Pull Request](https://www.weave.works/blog/gitops-operations-by-pull-request) 。GitOps 這個詞是由 Git + Operations 一起組合的，跟 DevOps 有異曲同工之妙，都在探討跨部門合作下的軟體開發與部署流程。 GitOps 更希望能夠透過 Git 的特性來減少 Operations 團隊的負擔，讓整個軟體的維護與部署更佳流暢。
 
-# GitBook 想解決的問題
+# GitOps 想解決的問題
 首先，我們先來探討 GitOps 到底想要解決什麼問題，為了更好的呈現這個概念，我們使用 `anti-patterns` 這種想法來闡述目前遇到的問題，最後探討 GitOps 能夠如何介入來解決。
 
 ## Deplyoment By Hand
