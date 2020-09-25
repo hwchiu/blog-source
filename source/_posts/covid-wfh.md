@@ -1,10 +1,11 @@
 ---
-title: "2020 疫情下的矽谷 - 遠端工作的探討"
-keywords: 'WFH, Work from home, 遠端工作, 矽谷"
-date: 2020-09-25 08:56:55
+title: 2020 疫情下的矽谷 - 遠端工作的探討
+keywords: 'WFH, Work from home, 遠端工作, 矽谷'
 tags:
-    - life
+  - life
 description: 本篇用來分享2020疫情肆虐下的遠端工作心得
+abbrlink: 12625
+date: 2020-09-25 08:56:55
 ---
 
 2020 年是個多事之秋的一年， COVID-19 於全球肆虐，根據 [worldometer](https://www.worldometers.info/coronavirus/) 的統計，到 2020/09/25 已經造成全球三千兩百萬人感染，將近一百萬人死亡。其造成的經濟影響更是空球絕後，美國股市一波三折，一年多次熔斷已經是歷史紀錄。企業則是面臨各種收入減少的困境，申請破產與力拼轉型的新聞則是沒有停止過。
