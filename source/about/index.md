@@ -43,6 +43,7 @@ date: 2017-05-05 12:02:08
 | 2020.06.06 | OpenTracking 101| 線上會議 | SDN x Cloud Native Webinar 海外篇 #3  | [link](https://youtu.be/t8OCKZYcVLg)     |
 | 2020.07.11 | IP Virtual Server(IPVS)101| 線上會議 | SDN x Cloud Native Webinar 海外篇 #4  | [link](https://www.youtube.com/watch?v=6ZaUIRZ-SO8)     |
 | 2020.08.22 | GitOps 101| 線上會議 | SDN x Cloud Native Webinar 海外篇 #5  | [link](https://www.youtube.com/watch?v=1n2JsOIiHP8)     |
+| 2020.09.26 | CRI&OCI 介紹| 線上會議 | SDN x Cloud Native Webinar 海外篇 #6  | [link](https://youtu.be/5JhQOjSSnzQ)     |
 
 
 ## 線上課程
