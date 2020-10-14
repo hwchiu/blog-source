@@ -151,25 +151,26 @@ Flux 的架構圖參考自其[官網](https://github.com/fluxcd/flux)
 5. 如果對上述專案有興趣，根據官網的操作連結，大概 10mins 內就可以架起一個測試環境來玩耍
 6. Flux 本身還有更多功能，包含還可以針對特定版本鎖定，禁止任何更新等功能
 
-# 工商時間
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
-小弟我目前有於 Hiskio 開設 Kubernetes 相關課程，目前針對主要有兩門課程，有興趣的可以參考看看
+組合包
+https://hiskio.com/packages/D7RZGWrNK
 
-1. [Kubernetes 入門](https://hiskio.com/courses/349?promo_code=13LY5RE)
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
 
-從 Container 部署談到 Kubernetes 所欲解決的問題，並且針對 運算/儲存/網路 三大區塊來介紹 Kubernetes 的設計思維 (CRI/CSI/CNI) 以及各式各樣的部署工具。 
-2. [CI/CD 與 Kubernetes 的議題探討](https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1)
-從 Manifest 的管理，自架 Kubernetes 的方式， CI pipeline 與 K8S 整合到 CD 部署的相關議題
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
 
-一次購買兩個課程可參考[組合包](https://hiskio.com/packages/D7RZGWrNK)
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
 
-# 社群資源 - CNTUG(Cloud Native Taiwan User Group)
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://www.facebook.com/technologynoteniu
 
-- [Youtube 議程影片紀錄](https://www.youtube.com/channel/UCoYY8K9fbfDtTY7m68UCATA)
-- [Telegram](https://t.me/cntug)
-- [Meetup](https://www.meetup.com/CloudNative-Taiwan/)
-- [每次 Meetup 投影片紀錄](https://github.com/cloud-native-taiwan/meetups)
-- [演講相關範例程式碼與相關文章](https://github.com/cloud-native-taiwan/kourse)
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # Reference
 - https://www.weave.works/technologies/gitops/

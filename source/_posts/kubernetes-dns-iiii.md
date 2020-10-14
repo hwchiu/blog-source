@@ -442,3 +442,22 @@ func FilterResolvDNS(resolvConf []byte, ipv6Enabled bool) (*File, error) {
 2. 如果使用者沒有自行設定 `DNS` 的話，就會針對 (1) 載入的設定進行一次過濾
     - 針對 127.0.0.1/8 之類的進行過濾 `FilterResolveDNS`
     - 過濾後若發現是空的，則補上 8.8.8.8/8.8.4.4
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://www.facebook.com/technologynoteniu
+

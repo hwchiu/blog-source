@@ -135,6 +135,28 @@ description: 在管理 Kubernetes 集群方面，大部分的玩家及管理者�
 其實原文只有短短的敘述過去，但是其實每篇內容都有非常詳細的資訊可以繼續擴展，能的話建議讀者花點時間把文章內的連結都讀了一遍，我相信會對 `kubernetes` 內部的各種機制有更深層的瞭解，可以學到更多的東西。
 
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://www.facebook.com/technologynoteniu
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
+
+
 ## 來源參考
 - [11 Ways (Not) to Get Hacked](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/)
 - [kubeadm Cluster Creation Internals: From Self-Hosting to Upgradability and HA

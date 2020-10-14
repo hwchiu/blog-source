@@ -273,3 +273,22 @@ func rewriteResolvFile(resolvFilePath string, dns []string, dnsSearch []string, 
 但是這邊還有留下一個謎點，到底 `dockerd` 的設定是如何影響 `/etc/resolv.conf` 以及 `8.8.8.8/8.8.4.4` 是如何出現的?
 
 由於再寫下去本篇文章會愈來愈長，所以決定將 `docker container` 相關的程式碼分析再寫一篇文章來處理。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://www.facebook.com/technologynoteniu
+

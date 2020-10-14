@@ -161,6 +161,28 @@ spec:
 等於說將所有之前人為觀察操作的步驟都程式化於該 **Controller** 之中。帶來的好處不言而喻，但是其實我認為也帶了不少壞處
 1. 除錯困難，一旦所有的運作邏輯都被綁到程式內，對於叢集的管理人員來說更像是一個神秘的黑盒子，遇到問題其實幾乎不能處理，也不能客製化。一但有任何更動就是需要重新建置編譯並且產生 **Image** 最後部署。 這一連串的流程導致除錯麻煩以及變得非常依賴該專案上游的維護以及專案本身的穩定性
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://www.facebook.com/technologynoteniu
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
+
+
 
 # 參考
 - https://kubernetes.io/docs/concepts/extend-kubernetes/operator/

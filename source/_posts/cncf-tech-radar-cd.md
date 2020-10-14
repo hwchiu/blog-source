@@ -138,6 +138,30 @@ Jenkins 以及其相關生態系的相關工具 (Jenkins X, Jenkins Blue Ocean) 
 對於系統來說, Jenkins 真的是一個又愛又恨的選項，彈性高，維護麻煩，除此之外，可以看到也有滿多開源專案跟 SaaS 平台上榜，其中 Flux/ArgoCD 的排名有點出乎我意料就是了，比我想像多的公司在使用 GitOps 類似的部署流程
 
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://www.facebook.com/technologynoteniu
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
+
+
+
+
 # Reference
 1. https://radar.cncf.io/2020-06-continuous-delivery
 2. https://www.youtube.com/watch?time_continue=832&v=0792Q3l6tK8&feature=emb_logo

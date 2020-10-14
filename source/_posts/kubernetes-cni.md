@@ -347,6 +347,25 @@ int main(int argc, char **argv) {
 本篇文章跟大家討論了下 Kubernets 與 CNI 相關的設定，只要對這些資料夾有基本的理解，以後看到任何 kubernetes cluster 都能夠有辦法粗略的看一下這個 cluster 是用哪套  CNI 來提供服務的。
 特別的是如果你今天使用的是公有雲的服務，譬如 GKE, AKS, EKS 等服務，你也可以嘗試去看看這些公有雲到底是用哪套 CNI, 其設定檔案又是如何，接者可以搭配他們的文件或是原始碼去理解其其運作原理。
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://www.facebook.com/technologynoteniu
+
+
 # 參考
 - https://github.com/containernetworking/cni
 - https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/dockershim/network/cni/cni.go
