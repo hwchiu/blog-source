@@ -93,7 +93,7 @@ description: 在管理 Kubernetes 集群方面，大部分的玩家及管理者�
 ### Use Third Party Auth for API Server
 原文認為透過一個類似 `SSO(Single Sign On)` 這種集中的方式能夠有效的去控管使用者的權限，特別是當使用者有任何調度更動時。
 
-對於 `Kubernetes` 來說，如果整合第三方服務的認證，譬如 `Google/GitHub`，就可以在有大量使用者有任何異動之時不需要一直重新調整設定 `Kubernetes API server` 
+對於 `Kubernetes` 來說，如果整合第三方服務的認證，譬如 `Google/GitHub`，就可以在有大量使用者有任何異動之時不需要一直重新調整設定 `Kubernetes API server`
 
 除了上述服務外，作者還介紹了 [OIDC(OpenID Connect Identity)](https://github.com/micahhausler/k8s-oidc-helper) 與 `kubernetes` 的一些使用情境，可以在這個專案 [k8s ODIC helper](https://github.com/micahhausler/k8s-oidc-helper) 這邊看到使用方法。
 
@@ -151,7 +151,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

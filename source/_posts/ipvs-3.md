@@ -36,7 +36,7 @@ date: 2020-04-06 00:03:29
 今天要研究的是 **IPVS** 相關的功能，我們就從其[資料夾](https://github.com/torvalds/linux/tree/v4.15/net/netfilter/ipvs)內開始看起。
 
 根據先前的實驗，我們使用 **IPVS** 之前必須要先安裝對應的 **kernel module**，每個 **kernel module** 都會有相關的初始化函式可以使用。
-所以我們就先從 **[Makefile](https://github.com/torvalds/linux/blob/v4.15/net/netfilter/ipvs/Makefile)** 看起來，看一下到底這些 **kernel module** 實際上包含了哪些檔案 
+所以我們就先從 **[Makefile](https://github.com/torvalds/linux/blob/v4.15/net/netfilter/ipvs/Makefile)** 看起來，看一下到底這些 **kernel module** 實際上包含了哪些檔案
 
 
 ```makefile
@@ -138,7 +138,7 @@ echo -n 'module ip_vs +p' > /sys/kernel/debug/dynamic_debug/control
 
 ## IP_VS_DEBUG
 
-第二個則是由 **IPVS** 自己實作的除錯方式，這個除錯方式相關的功能則是在編譯期間根據參數 **IP_VS_DEBUG** 來定是否要一起編譯, 預設情況下這個功能是關閉的，這也意味各位如果都適用已經建置好的 **IPVS** 那基本上是沒有辦法打開這個功能的。 
+第二個則是由 **IPVS** 自己實作的除錯方式，這個除錯方式相關的功能則是在編譯期間根據參數 **IP_VS_DEBUG** 來定是否要一起編譯, 預設情況下這個功能是關閉的，這也意味各位如果都適用已經建置好的 **IPVS** 那基本上是沒有辦法打開這個功能的。
 為了打開這個功能，你必須要執行下列步驟
 1. 準備對應你系統版本的 kernel source code
 2. 加入相關的參數，重新建置 IP_VS 的 kernel module
@@ -158,7 +158,7 @@ sudo rmmod ip_vs_wlc
 sudo rmmod ip_vs
 sudo insmod net/netfilter/ipvs/ip_vs.ko
 sudo insmod net/netfilter/ipvs/ip_vs_wlc.ko
-make -j4 
+make -j4
 ```
 其中第二部會彈出一個灰色畫面，可以透過 `f` 進行參數的搜尋，找到對應的位置，然後將其打該設定成 **Y** 即可，畫面如下
 ![](https://i.imgur.com/TuejssF.png)
@@ -285,7 +285,7 @@ module_exit(ip_vs_cleanup);
 
 ## register_pernet_subsys/device
 Kernel 對於 **network namespace** 的創建提供了兩個方法來註冊相關的 **handler**, 這兩個差異主要在於對背後資料結構操作的位置不同，詳細的可以參閱 [Kernel network namespace
-](http://www.programmersought.com/article/907433913/), 這邊就單純針對 `register_pernet_subsys` 來研究。 
+](http://www.programmersought.com/article/907433913/), 這邊就單純針對 `register_pernet_subsys` 來研究。
 
 直接看一下該函式的註解，簡單來說就是註冊一組任何 **network namespace** 被刪除與創建時都會被呼叫的函式，而要特別注意的是當註冊的瞬間，也會對所有已經存在的 **network namespace** 呼叫一次。
 ```c=
@@ -524,10 +524,9 @@ static struct ctl_table vs_vars[] = {
 下一章節我們會主要針對 封包的流向 來進行探討，包含 **iptables/netfilter** 與之的互動，以及實際由本地端送出一個封包後，實際上背後的運作邏輯是哪些，又會呼叫到哪些 **function** 來處理。
 
 
-# 課程分享
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
-最後，我目前於 Hiskio 上面有開設一門 Kubernetes 入門篇的課程，裡面會探討運算/網路/儲存三個最重要的平台資源，此外對於 CRI/CNI/CSI 也都有簡單的介紹，主要會基於 **Kubernetes** 本身的設計原理及各資源的用法與情境去介紹。
-如果本身已經很熟練的使用 Kubernetes 於環境中就不太適合這門課程，主要是給想要踏入到 Kubernetes 世界中的朋友，有興趣的幫忙捧場或推廣
 組合包
 https://hiskio.com/packages/D7RZGWrNK
 
@@ -536,6 +535,15 @@ https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
 
 基礎概念
 https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # Reference
 http://www.programmersought.com/article/907433913/

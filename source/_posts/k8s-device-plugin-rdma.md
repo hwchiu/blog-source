@@ -152,7 +152,7 @@ ECN (Explicit Congestion Notification)
 
 
 ```yaml=
-  
+
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -215,7 +215,6 @@ spec:
 
 使用 **device plugin** 就是這樣簡單，能夠讓容器內部的應用程式看起來跟在實體機器使用上沒有差異，而最大的問題反而是使用情境以及相關的應用程式要如何搭配這些高速的網路設備來使用。
 
-
 # 個人資訊
 我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
@@ -232,11 +231,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
-
 
 
 # 參考

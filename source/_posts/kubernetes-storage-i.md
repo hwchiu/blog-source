@@ -35,7 +35,7 @@ description: Kubernetes 的架構中，對於 Network/Storage/Device/Container �
 
 設想一下，如果今天你是一個 `Kubernetes` 架構的設計者，為了解決這個問題，你會怎麼去設計怎麼儲存相關的整體架構?
 該架構中，可能會希望
-1. 可以支援不同的儲存方式，譬如 Block Devie, FileSystem, 同時 FileSystem 又可以有不同的支援，譬如 NFS,Ceph,GlusterFS。同時也希望能夠支援 Public Cloud 
+1. 可以支援不同的儲存方式，譬如 Block Devie, FileSystem, 同時 FileSystem 又可以有不同的支援，譬如 NFS,Ceph,GlusterFS。同時也希望能夠支援 Public Cloud
 2. 容器(Pod)可以去存取該儲存系統，透過某種映射方式，希望可以在相同的`key`的情況下拿到相同的資料。這樣就可以確保我們的容器 (Pod) 可以再重啟後繼續存取相同的資料，同時不同的 Pod 也可以有機會存取到相同的資料，只要大家都使用相同的 `Key`
 3. 可以根據不同的需求來使用儲存空間，譬如空間大小，存取模式，效能高低，快照等眾多特性
 
@@ -147,17 +147,17 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: gluster-default-volume 
+  name: gluster-default-volume
   annotations:
-    pv.beta.kubernetes.io/gid: "590" 
+    pv.beta.kubernetes.io/gid: "590"
 spec:
   capacity:
-    storage: 2Gi 
-  accessModes: 
+    storage: 2Gi
+  accessModes:
     - ReadWriteMany
   glusterfs:
-    endpoints: glusterfs-cluster 
-    path: myVol1 
+    endpoints: glusterfs-cluster
+    path: myVol1
     readOnly: false
   persistentVolumeReclaimPolicy: Retain
 ```
@@ -354,3 +354,24 @@ allowVolumeExpansion: true
 右邊則是套用上 `Storage Class` 這種動態創建 `PV` 的用法，將 `PV` 的創造與維護 **(PV的刪除也是依賴 Reclaim Policy)** 讓 `kubernetes` 本身幫忙維護。 而創建出來的 `PV` 所擁有的系統資源以及存取模式等都會跟 `PVC` 完全一致，確保不會有額外的系統資源浪費。
 
 下一張會跟大家分享一下 `NFS` 這個儲存設備到底在 `Kubernetes` 裡面可以怎麼使用，除了從最基本的 `PV/PVC` 一般常見的用法外，也會跟大家分享一下如何使用第三方的 `NFS Provisioner` 來透過 `StorageClass` 使用 `NFS` 做為容器的儲存空間
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

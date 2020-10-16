@@ -107,10 +107,10 @@ kubernetes 目前在網路方面提供兩者設定，再啟動 `kubelet`  的時
 我們先來觀察一下當前 kubelet 的設定
 ```bash=
 vagrant@k8s-dev:~$ ps axuw | grep kubelet | grep cni
-root      2433  2.0  2.2 1346404 90016 ?       Ssl  00:37   4:21 /usr/bin/kubelet 
---bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf 
---kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml 
---cgroup-driver=cgroupfs --network-plugin=cni 
+root      2433  2.0  2.2 1346404 90016 ?       Ssl  00:37   4:21 /usr/bin/kubelet
+--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf
+--kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml
+--cgroup-driver=cgroupfs --network-plugin=cni
 --pod-infra-container-image=k8s.gcr.io/pause:3.1 --resolv-conf=/run/systemd/resolve/resolv.conf
 ```
 
@@ -238,10 +238,10 @@ vagrant@k8s-dev:~$
 
 ```bash=
 vagrant@k8s-dev:~$ ps axuw | grep kubelet | grep cni
-root      2433  2.0  2.2 1346404 90016 ?       Ssl  00:37   4:21 /usr/bin/kubelet 
---bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf 
---kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml 
---cgroup-driver=cgroupfs --network-plugin=cni 
+root      2433  2.0  2.2 1346404 90016 ?       Ssl  00:37   4:21 /usr/bin/kubelet
+--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf
+--kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml
+--cgroup-driver=cgroupfs --network-plugin=cni
 --pod-infra-container-image=k8s.gcr.io/pause:3.1 --resolv-conf=/run/systemd/resolve/resolv.conf
 ```
 
@@ -363,8 +363,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # 參考
 - https://github.com/containernetworking/cni

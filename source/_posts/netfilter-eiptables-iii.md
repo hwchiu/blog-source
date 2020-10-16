@@ -292,7 +292,7 @@ fi
 ```
 
 ### Setup iptables
-於 `iptables` 方面，我們新增了一條 `mangle OUTPUT` 來協助觀察封包的轉送，主要原因是本機的 `ping` 應用程式送出 `ICMP Request` 會牽扯到 `OUTPUT Chain`。 
+於 `iptables` 方面，我們新增了一條 `mangle OUTPUT` 來協助觀察封包的轉送，主要原因是本機的 `ping` 應用程式送出 `ICMP Request` 會牽扯到 `OUTPUT Chain`。
 
 ```bash=
 #!/bin/bash
@@ -501,7 +501,7 @@ fi
 待一切規則都準備好後，在你外網的機器上，執行下列指令。
 這邊要注意的是，我測試機器的對外`IP` 地址是 `172.18.8.211`，而我本身主機的`IP`地址是 `172.17.8.1`. 這邊請調整成自己的環境
 ```bash=
-[18:13:20] hwchiu ➜ ~» telnet 172.17.8.211 5566 
+[18:13:20] hwchiu ➜ ~» telnet 172.17.8.211 5566
 Trying 172.17.8.211...
 Connected to 172.17.8.211.
 Escape character is '^]'.
@@ -522,7 +522,7 @@ ctc/ebtable/nat-POSTROUTE IN= OUT=veth5ead5c7 MAC source = 02:42:db:a1:f2:79 MAC
 如同前述一樣，我這邊也針對一些有趣的封包內容進行討論
 1. 因為我們是透過 `docker run -p 5566:80`, 所以我們傳輸的 `5566` 連接埠會被轉換成 `80` 連接埠。 可以觀察到第三個規則 `mangle-FORWARD` 之後，`DPT=5566` 都變成了 `DPT=80`. 主要是因為經過了 `nat-PREROUTING` 後就被更動了。
 2. 同上面的理由，可以觀察到封包的目標`IP`地址從原本的`DST=172.17.8.211` 被轉換成容器的`DST=172.18.0.2`.
-3. 因為是從`Wan To Controller`, 所以封包會先從 `iptalbes` 開始跑，最後跑道 `Linux Bridge` 後才會進入到 `ebtables` 
+3. 因為是從`Wan To Controller`, 所以封包會先從 `iptalbes` 開始跑，最後跑道 `Linux Bridge` 後才會進入到 `ebtables`
 3. 最一開始封包的 `MAC Address` 的發送是 `0a:00:27:00:00:02 ->08:00:27:ff:b2:c4`. 但是一但到了 `ebtables` 那層，也就是經過 `docker0` 之後，你可以觀察到這時候的 `MAC address` 的流向變成 `02:42:db:a1:f2:79  -> 02:42:ac:12:00:02`. 這邊原理實際上跟 `IP` 封包傳輸有關，這邊不多敘述。
 
 ```bash=
@@ -556,3 +556,24 @@ ctc/iptable/mangle-POSTROUTEIN= OUT=enp0s8 PHYSIN=veth5ead5c7 SRC=172.18.0.2 DST
 
 針對每個環境，我們都觀察封包的來回兩種狀態，除了觀察 `iptables/ebtables` 的走向之外，也順便觀察封包內容的變化。
 只有真正的瞭解整個封包的傳輸行為，以及對應低 `iptables/ebtables` 的走向，未來在管理 `iptables/ebtables` 才能夠更精準的去設定相關的規則來滿足自己的需求。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

@@ -93,9 +93,9 @@ out:
 }
 
 ```
-這邊可以看到會利用sock->file->f_flags & O_NONBLOCK來檢查是否是個nonblock的傳送。  
+這邊可以看到會利用sock->file->f_flags & O_NONBLOCK來檢查是否是個nonblock的傳送。
 回歸正題，先執行move_addr_to_kernel這個function,把對方位置給轉移到kernel space中，
-如果是TCP連線的話，傳進去的參數就會是NULL跟0，而  
+如果是TCP連線的話，傳進去的參數就會是NULL跟0，而
 
 ``` c
 int move_addr_to_kernel(void __user *uaddr, int ulen, struct sockaddr_storage *kaddr)
@@ -112,11 +112,11 @@ int move_addr_to_kernel(void __user *uaddr, int ulen, struct sockaddr_storage *k
 ```
 
 可以看到，當傳入的ulen是0的時候，就會回傳0，因此這邊對於TCP就不會回傳錯誤。
-這邊可以看到  
+這邊可以看到
 
 	msg.msg_name = (struct sockaddr *)&address;
 	msg.msg_namelen = addr_len;
-這邊可以看到會把對方位置的相關資訊給存到msg中，估計是之後UDP會用到  
+這邊可以看到會把對方位置的相關資訊給存到msg中，估計是之後UDP會用到
 接下來透過sock_sendmsg傳送資料
 sock_sendmsg ->__sock_sendmsg->__sock_sendmsg_nosec
 
@@ -140,15 +140,15 @@ static inline int __sock_sendmsg_nosec(struct kiocb *iocb, struct socket *sock,
 
 
 ```
-這邊可以看到 最後會透過sock->ops->sendmsg(iocb, sock, msg, size) 這行把資料送出去  
+這邊可以看到 最後會透過sock->ops->sendmsg(iocb, sock, msg, size) 這行把資料送出去
 根據socket的種類是TCP還是UDP，對應到不同的function pointer
-分別是tcp_sendmsg,udp_sendmsg  
+分別是tcp_sendmsg,udp_sendmsg
 
 而在udp_sendmsg中就會去使用到剛剛在sendto那邊設定的msg
-節錄自udp_sendmsg  
-這邊可以明顯看到會把msg中關於對方位置的資訊給抓出來，然後設定到daddr以及dport  
+節錄自udp_sendmsg
+這邊可以明顯看到會把msg中關於對方位置的資訊給抓出來，然後設定到daddr以及dport
 
-``` c   
+``` c
 	if(msg->msg_name) {
         struct sockaddr_in *usin = (struct sockaddr_in *)msg->msg_name;
         if (msg->msg_namelen < sizeof(*usin))
@@ -157,7 +157,7 @@ static inline int __sock_sendmsg_nosec(struct kiocb *iocb, struct socket *sock,
             if (usin->sin_family != AF_UNSPEC)
                 return -EAFNOSUPPORT;
         }
-		
+
 		daddr = usin->sin_addr.s_addr;
 		dport = usin->sin_port;
 		if (dport == 0)
@@ -177,3 +177,23 @@ static inline int __sock_sendmsg_nosec(struct kiocb *iocb, struct socket *sock,
 
 此外，recv以及recvfrom也是一樣的組合，與sent和sendto的關係差不多
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

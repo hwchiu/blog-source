@@ -14,7 +14,7 @@ description: 本文分享如何透過一些常見的方法或是別人撰寫好�
 如果有想要透過 Command Line Interface 來管理 AWS 帳號的人，應該都會有參考這篇官方的[Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 來設定相關的工具與環境。
 
 這邊簡單做個快速的概括，想要在 Shell 上面操作 AWS 帳戶的話，要執行下列的動作
-1. 下載並且安裝 awscli (可以透過 pip 安裝) 
+1. 下載並且安裝 awscli (可以透過 pip 安裝)
 2. 設定 AWS Profile
 
 
@@ -82,7 +82,7 @@ aws iam list-roles --profile Account3
 以(2)為範例的話，就是每次使用前要確保當前的環境變數是什麼，這種情況下每個指令的使用就可以盡量簡單，讓呼叫者自己去確保該指令的面對對象
 ```bash=
 export AWS_PROFILE=account1
-aws iam list-roles 
+aws iam list-roles
 AWS_PROFILE=account2 aws iam list-roles
 ```
 套入環境變數的方法滿多種的，上述的方式都可以將該環境變數傳遞到 `aws` 的指令列中
@@ -103,11 +103,11 @@ AWS_PROFILE=account2 aws iam list-roles
 使用指令 `asp` 搭配 `tab` 可以列出目前所有設定過的 `aws profile`
 ```bash=
 <aws:LFCORD>╭─hwchiu@hwchius-MBP ~
-╰─$ asp                                                          
+╰─$ asp
 Account1 Account2 Account3 Account4
 ```
 
-同時該 `aws plugin` 也會幫忙設定安裝 `aws aws_zsh_completer`, 意味你可以透過 `tab` 的方式來更方便的使用 `aws cli` 
+同時該 `aws plugin` 也會幫忙設定安裝 `aws aws_zsh_completer`, 意味你可以透過 `tab` 的方式來更方便的使用 `aws cli`
 
 ## Configuration
 基本上參考 `on-my-zsh` 的設定方式，先到 `$HONE/.zshrc` 中將 `plugin` 的選項加入 `aws` 即可，譬如
@@ -139,3 +139,23 @@ PROMPT='$(aws_prompt_info)'"$PROMPT"
 
 藉由這個套件的幫助，我平常就會使用 `asp` 來切換不同的 `AWS Account`, 同時透過 `shell PROMPT` 來知道當前使用的 `PROFILE`，避免在不同的 `Account` 執行錯誤的動作
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

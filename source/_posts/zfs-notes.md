@@ -23,7 +23,7 @@ ZPOOL的來源可以是device也可以是files,這邊就用兩個檔案當作來
 
 ## Zpool
 - create a mirror pool
-	- `zpool create ftphome mirror /zfs1 /zfs2`	
+	- `zpool create ftphome mirror /zfs1 /zfs2`
 - destroy a pool
 	- `zpool destroy ftphome`
 - check zpool status
@@ -38,9 +38,9 @@ ZPOOL的來源可以是device也可以是files,這邊就用兩個檔案當作來
 - detach ( 只能對mirror使用)
   - `zpool detach ftphome /zfs1`
 
-還有`offline`,`online`,`remove`...，剩下的就要用的時候去man zpool,還滿詳細說明的。  
-  
-  
+還有`offline`,`online`,`remove`...，剩下的就要用的時候去man zpool,還滿詳細說明的。
+
+
 ## ZFS database
 - set attributes `zfs set key=value <filesystem|volume|snapshot> `
   - `zfs get compression ftphome`
@@ -68,15 +68,15 @@ ZPOOL的來源可以是device也可以是files,這邊就用兩個檔案當作來
 
 ### 解決問題
 ZFS 變大容易(多塞個硬碟即可)，變小困難(幾乎無法)，因此當ZFS的硬碟滿的時候，有兩種做法
-1. 再加入兩個新的硬碟，然後合併到目前的zpool,可是這樣就會變成有兩份mirror。 
-2. 準備兩個更大的硬碟，把原本的zpool內的data全都複製過去。 
+1. 再加入兩個新的硬碟，然後合併到目前的zpool,可是這樣就會變成有兩份mirror。
+2. 準備兩個更大的硬碟，把原本的zpool內的data全都複製過去。
 這邊使用第二種做法
 
 **先幫本來的pool加入一個檔案，增加本來的空間，如此一來才可以做更多操作**
 - `dd if=/dev/zero of=/zfs5 bs=1M count=128`
 - `dd if=/dev/zero of=/zfs6 bs=1M count=128`
 - `zpool add ftphome mirror /zfs5 /zfs6`
-- `zfs list`  
+- `zfs list`
    (此時可以看到本來的空間變大了)
 
 **創造一個更大的zpool來取代**
@@ -98,3 +98,24 @@ ZFS 變大容易(多塞個硬碟即可)，變小困難(幾乎無法)，因此當
 
 做到這邊，就算完成了，成功的把本來的資料複製過去。
 如果想要改變zpool的名稱，可以用`export`跟`import`來改名稱。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

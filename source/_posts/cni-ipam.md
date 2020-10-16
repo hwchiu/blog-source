@@ -78,8 +78,8 @@ type (string): Refers to the filename of the IPAM plugin executable.
 
 另外一個問題就是 **DHCP** 的封包，在預設的情況下是 **Layer2** 的封包，沒有任何的 **dhcp relay** 的幫忙的話，你的 **DHCP Request** 很難送到外面的 **dhcp server** 來取得一個 IP，所以這個 **DHCP IPAM** 的官方文件有特別說明
 
-> With dhcp plugin the containers can get an IP allocated by a DHCP server already running on your network. This can be especially useful with plugin types such as macvlan. 
-> 
+> With dhcp plugin the containers can get an IP allocated by a DHCP server already running on your network. This can be especially useful with plugin types such as macvlan.
+>
 
 一種使用情境是直接透過 **macvlan** 的方式把 **host** 上的網路介面與 **network namespace** 共用，這樣從 **network namespace** 出去的封包就會直接從該網路介面出去。
 
@@ -150,7 +150,7 @@ static IPAM is very simple IPAM plugin that assigns IPv4 and IPv6 addresses stat
 }
 ```
 
-### Example 
+### Example
 **kubeadm** 本身沒有內建這個 **CNI** 執行檔，需要的要自行去官方下載或是自行編譯安裝。
 假設有這個檔案後，我們可以直接使用之前執行 **CNI** 的方式來執行該檔案，先把上述的設定存成一個名為 **static** 的檔案。
 最後可以觀察其輸出結果，這些結果理論上是呼叫他的 **CNI** 去解讀，然後根據需求去設定 **IP, Route, DNS** 這些資源。
@@ -204,7 +204,7 @@ $ sudo CNI_COMMAND=ADD CNI_CONTAINERID=ns1 CNI_NETNS=/var/run/netns/ns1 CNI_IFNA
 
 開始研究其特色之前，我們直接先直接運行一個簡單的範例
 1. 準備一個 config 給 host-local
-2. 呼叫 **host-local cni**，觀察其結果 
+2. 呼叫 **host-local cni**，觀察其結果
 3. 呼叫 **host-local cni**，觀察其結果
 4. 呼叫 **host-local cni**，觀察其結果
 
@@ -274,7 +274,7 @@ $ sudo CNI_COMMAND=ADD CNI_CONTAINERID=ns1 CNI_NETNS=/var/run/netns/ns1 CNI_IFNA
 "rangeStart": "10.10.1.20",
 "rangeEnd": "10.10.3.50",
 "gateway": "10.10.0.254"
-```                     
+```
 
 看到這邊應該心裡已經有個譜了， **host-local** 會根據參數給予的 **IP** 範圍，依序回傳一個沒有被使用過的 **IP**， 這個運作原理非常的符合我們真正的需求，每次有 **POD** 產生的時候都可以得到一個沒有被使用過的 **IP** 地址，避免重複同時又能夠使用。
 
@@ -385,3 +385,24 @@ func (a *IPAllocator) GetIter() (*RangeIter, error) {
 - https://github.com/containernetworking/plugins
 - https://github.com/containernetworking/cni
 - https://github.com/containernetworking/cni/blob/master/SPEC.md#network-configuration
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

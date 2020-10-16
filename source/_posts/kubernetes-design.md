@@ -19,7 +19,7 @@ description: 為了跟大家分享 kubernetes 內部的幾個重要設計，如 
 
 使用場景來看，各式各樣的場景都在思考與評估是否有機會將 `kubernetes` 納入其應用範圍，從架設服務器提供服務，配合 GPU 進行大量運算使用甚至將 `kubernetes` 與 5G網路產業結合。 各式各樣的需求不停的發出，而 `kubernetes` 是否能夠滿足這些所有的需求則是一個需要好好思考的問題。
 
-為了評估到底 `kubernetes` 能不能適用於各種使用情境，我們必須先知道什麼是 
+為了評估到底 `kubernetes` 能不能適用於各種使用情境，我們必須先知道什麼是
 `kubernetes` 的極限，我認為透過學習其實作原理與設計理念能夠提供一個基本的能力去評估到底 `kubernetes` 能不能滿足所需。
 
 接下來的系列文內，我會針對 `kubernetes` 內幾個最大的特點也是所有使用情境最需要考慮的幾個方向來探討，如下
@@ -30,8 +30,8 @@ description: 為了跟大家分享 kubernetes 內部的幾個重要設計，如 
 - 其他特殊裝置
 
 藉由學習這些不同面向功能的實作原理與設計開發理念，我們都能夠有更好的立足點去評估到底 `kubernetes` 是否能夠滿足目前所需，甚至說若需要進行第三方開發改善時，該怎麼下手。
-     
-     
+
+
 # 架構
 
 `Kubernetes` 作為一個開放原始碼的專案，其所有原始碼都可以在 [Github](https://github.com/kubernetes/kubernetes) 看到，同時也可以在看來自世界各地的使用者與開發者如何合作一起開發這個巨大的專案。
@@ -43,7 +43,7 @@ description: 為了跟大家分享 kubernetes 內部的幾個重要設計，如 
 
 而對於 `Kubernetes` 來說，所謂的 `容器管理平台` 其涉略的領域實在太多，對於 `kubernetes` 的眾多開發者來說，要能夠完全掌握這些不同領域的技術與概念其實也是很困難的事情。
 
-舉例來說  
+舉例來說
 今天有一個熱心的開發者想要讓 `Kubernetes` 支援 `GPU` 的運算，於是提交了相關的程式碼改動， 如果 `kubernetes` 的維護者對於 `GPU` 的運作原理不夠掌握是否有辦法幫他進行程式碼的審查?
 
 同時加上 `kubernetes` `release` 週期的規則，會使得這些由來自世界各地貢獻者的結晶沒有辦法很即時的被一般使用者與測試。
@@ -64,9 +64,9 @@ description: 為了跟大家分享 kubernetes 內部的幾個重要設計，如 
 
 接下來的29天，會帶領讀者一起探討這些介面的設計以及各種不同應用的實作。
 包含了
-- 基於運算單元的 `CRI (Container Runtime Interface)`, 
+- 基於運算單元的 `CRI (Container Runtime Interface)`,
 - 提供平台容器網路連接能力的 `CNI(Container Network Interface)`，
-- 提供儲存能力供容器使用的 `CSI (Container Storage Interface)` 
+- 提供儲存能力供容器使用的 `CSI (Container Storage Interface)`
 - 以及可以掛載各式各樣系統裝置的 `Device Plugin`.
 
 # 個人資訊
@@ -85,5 +85,7 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

@@ -13,7 +13,7 @@ description: 作為一個 Kubernetes 使用者，可能都有聽過 CNI/CRI/CSI 
 ---
 
 
-# Preface 
+# Preface
 本篇文章要來幫大家導讀一下目前常見的 `CNI Plugin` 有哪些，大致上的內容主要會含括這個 `Plugin` 的基本功能以及主打的特色，可能使用的場景與情境。
 老話一句，基本上叢集管理員還是要`明確的清楚自己的需求`,不要盲目的追求任何一套 `CNI Plugin`, 沒有存在一套世界最強的 `CNI Plugin` 可以滿足所有的使用情境與需求。
 
@@ -84,7 +84,7 @@ description: 作為一個 Kubernetes 使用者，可能都有聽過 CNI/CRI/CSI 
 ### Policy
 1. Network Policy
 實際上，`Kubernetes` 本身有定義 `Network Policy` 的介面，但是實際上卻沒有實現這種能夠用來限制 `Pod` 與 `Pod` 之間連線的功能。 官網明確的說明這部分的實現要依賴 `CNI Plugin` 來處理。
-而 `Calico` 就有實現這種介面，因此可以直接使用 `Kubernetes Network Policy` 的規範去設定相對應的 `Yaml` 來實現基本的`ACL (Access Control List)` 
+而 `Calico` 就有實現這種介面，因此可以直接使用 `Kubernetes Network Policy` 的規範去設定相對應的 `Yaml` 來實現基本的`ACL (Access Control List)`
 
 2. Application Layer Policy
 相對於基本的 `Kubernetes Network Policy` 外， `Calico` 本身透過 `Kubernetes CustomResourceDefinetion(CRD)` 提供了另外一層新的 `GlobalNetworkPolicy`.
@@ -374,3 +374,24 @@ SR-IOV 最早期的 Plugin 並不是 Intel 所開發的，但是 Intel 將其 Fo
 - [Cilium Network Policy](http://docs.cilium.io/en/stable/policy/language/#http)
 - [CNI - the Container Network Interface
 ](https://github.com/containernetworking/cni)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

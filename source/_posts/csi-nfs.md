@@ -61,7 +61,7 @@ Vagrant.configure("2") do |config|
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     sudo apt-get update
     sudo apt-get install -y docker-ce=${DOCKER_VERSION}
-    
+
     # Install Kubernetes
     export KUBE_VERSION="1.15.3"
     export NET_IF_NAME="enp0s8"
@@ -110,7 +110,7 @@ end
 ```bash=
 k8s: Error from server (Forbidden): error when creating "csi-driver-nfs/examples/kubernetes/nginx.yaml": pods "nginx" is forbidden: error looking up service account default/default: serviceaccount "default" not found
 ####
-$ kubectl apply -f csi-driver-nfs/examples/kubernetes/nginx.yaml 
+$ kubectl apply -f csi-driver-nfs/examples/kubernetes/nginx.yaml
 ```
 
 ## 安裝內容
@@ -236,7 +236,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-                - name:  
+                - name:
             - name: CSI_ENDPOINT
               value: unix://plugin/csi.sock
           imagePullPolicy: "IfNotPresent"
@@ -469,7 +469,7 @@ No resources found.
 Simplify driver discovery
 If a CSI driver creates a CSIDriver object, Kubernetes users can easily discover the CSI Drivers installed on their cluster (simply by issuing kubectl get CSIDriver)
 Customizing Kubernetes behavior
-Kubernetes has a default set of behaviors when dealing with CSI Drivers (for example, it calls the Attach/Detach operations by default). This object 
+Kubernetes has a default set of behaviors when dealing with CSI Drivers (for example, it calls the Attach/Detach operations by default). This object
 >allows CSI drivers to specify how Kubernetes should interact with it.
 
 簡單來說這個資源不一定會有，主要取決於 **CSI** 解決方案有沒有要創建，創建的話提供兩個好處
@@ -567,7 +567,7 @@ Events:      <none>
 
 譬如從 **spec** 可以看到有一個掛載的行為是
 1. 透過 Attacher **csi-nfsplugin** 於 node **k8s-dev** 上掛載一個 **volume**，而該 **volume** 的來源是名為 **data-nfsplugin** 的 **PVC** 所定義的。
- 
+
 這些資訊都可以幫忙釐清與確認當前是否 **CSI** 的儲存功能有正常運作，我覺得相對於之前單純的 **PV/PVC** 有來得清楚一些。
 
 # Summary
@@ -580,3 +580,24 @@ Events:      <none>
 - https://kubernetes-csi.github.io/docs
 - https://github.com/kubernetes-csi/node-driver-registrar
 - kubernetes.io/blog/2019/01/15/container-storage-interface-ga/
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

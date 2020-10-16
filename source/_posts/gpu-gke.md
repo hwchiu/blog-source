@@ -60,7 +60,7 @@ kubectl create -f https://raw.githubusercontent.com/kubernetes/kubernetes/releas
 這個專案的文件直接解決了我關於 `Device Plugin` 的疑惑
 
 
->In GKE, from 1.9 onwards, this DaemonSet is automatically deployed as an addon. Note that DaemonSet pods are only scheduled on 
+>In GKE, from 1.9 onwards, this DaemonSet is automatically deployed as an addon. Note that DaemonSet pods are only scheduled on
 nodes with accelerators attached, they are not scheduled on nodes that don't have any accelerators attached.
 
 根據這份文件敘述，在 GKE (1.9版本之後)，會自動部署 `Daemonset` 到集群上面的 GPU Node 來處理 `Device Plugin` 相關的事宜。
@@ -185,7 +185,7 @@ spec:
           path: /dev
       - name: nvidia-install-dir-host
         hostPath:
-          path: 
+          path:
       - name: root-mount
         hostPath:
           path: /
@@ -356,3 +356,24 @@ spec:
 1. 如果今天 GKE 的版本是 1.9 之後，我們只需要運行一個 `DaemonSet` 去安裝 `NVIDIA Driver` 即可， `Device Plugin` 會自己被運行
 2. CUDA 相關的資源都需要自己從 GPU 節點上掛載到所有運行的 `Pod` 中
 3. 記得設定 `privileged=true` 到所有使用 GPU 的節點上。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

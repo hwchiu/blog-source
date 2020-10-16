@@ -24,7 +24,7 @@ description: 隨者愈來愈多的 CI/CD 工具被開發出來，對於維運/�
 對我來說目前也沒有看到任何一套能夠滿足所有需求的工具存在，每次選擇一套工具的時候腦中往往會浮現出下列各式各樣的問題
 
 1. 預計使用該工具的人數會有多少? 有成本考量嗎?
-    - 團隊內的人會需要操作嗎? 
+    - 團隊內的人會需要操作嗎?
 3. 團隊內成員的平均素質如何，能夠接受什麼樣的使用方式?
     - 有些人喜歡有簡單明瞭的 `UI` 操作，有些人喜歡什麼都要使用指令列操作，能不離開終端機最好。
 4. 能否預估使用情境，評斷該工具的特色是否可以滿足需求?
@@ -130,7 +130,7 @@ jobs:
 
 下列的 `yaml` 則是一個簡單的範例，創建了兩個 `Commands`, 分別叫做 `setup_env` 以及 `deploy_env`.
 這兩個 `Commands` 都有設定相關的參數以及對應的型態與預設值
-最後可以透過 `CircleCI` 規範的使用方式 `<< parameters.$NAME >>` 的方式來存取。 
+最後可以透過 `CircleCI` 規範的使用方式 `<< parameters.$NAME >>` 的方式來存取。
 
 ```yaml=
 commands:
@@ -158,10 +158,10 @@ commands:
           command: |
             sleep << parameters.seconds >>
             echo  << parameters.environment >>
-```    
+```
 
 接下每個 Jobs 中就可以針對上述的 `Commands` 名稱直接使用，針對需要的部分可以傳遞參數覆蓋預設值，或是直接採用預設值即可
-   
+
 ```yaml=
   deploy:
     executor: golang-ci
@@ -180,8 +180,8 @@ commands:
       - deploy_env:
           environment: staging
           seconds: "10"
-```            
-            
+```
+
 藉由 `Commands` 的方式能夠讓你好好的思緒有沒有辦法將你的 `Pipepline` 流程給設計的更模組化，將相同的部分抽出，透過不同變數的方式來減少重複撰寫的手續，同時也提高維護的方便性。
 
 # Orbs
@@ -281,7 +281,7 @@ orbs:
       - deploy_env
       - slack/notify:
           message: Deploy dev done
-```          
+```
 
 根據 `Slack Orbs` 的文件解說，我們最需要的就是 `SLACK_WEBHOOK` 的設定，剩下都可以依據預設值來處理，這邊我針對訊息的部分進行了覆蓋。
 
@@ -321,6 +321,27 @@ orbs:
 除了上述的功能外，還有一些滿多內建功能可以使用，譬如 `store_artifacts`, `store_test_results` 等，這部分就是有需要的時候再到官方文件查詢即可。
 
 再次重申，沒有最完美的工具能夠適合各種情境，只有想清楚自己的需求與情境，在針對需求去選擇適合自己的工具。此外需求確定的情況下來尋找合適的工具也可以避免踩入一套工具最後卻很難抽身的情況。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # Reference
 - [CircleCI](https://circleci.com/docs/)

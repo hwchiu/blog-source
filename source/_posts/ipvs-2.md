@@ -346,17 +346,16 @@ curl 1.2.3.4
 ```
 
 執行完 curl 就會順利的存取到後面伺服器的網頁內容，但是要注意的是
-**這邊因為 IPVS 會根據 SyncPeriod 的設定定期去更新規則，所以上述創造的規則放一段時間就會被刪除** 
+**這邊因為 IPVS 會根據 SyncPeriod 的設定定期去更新規則，所以上述創造的規則放一段時間就會被刪除**
 
 根據這個實驗可以驗證我們的猜想，其實 **kube-ipvs0** 這個 **interface** 本身根本不需要有任何的 **IP Address**，其目的只是一開始產生的 **IP address** 能夠產生一個對應的 **Route Entry**，把封包往系統內送，當封包走到系統內後，便會與 **Netfilter** 交互作用將封包轉接給 **IPVS** 的底層實作去處理，這時候就會根據 **IPVS** 的 **Service** 來決定是否有匹配的資料並且將其轉發到後端伺服器。
 
 
 下篇文章就會來開始探討到底 **IPVS** 與 **IPTables** 的差異在哪裏，並且嘗試解釋上面的推論過程其背後的實作原理
 
-# 課程分享
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
-最後，我目前於 Hiskio 上面有開設一門 Kubernetes 入門篇的課程，裡面會探討運算/網路/儲存三個最重要的平台資源，此外對於 CRI/CNI/CSI 也都有簡單的介紹，主要會基於 **Kubernetes** 本身的設計原理及各資源的用法與情境去介紹。
-如果本身已經很熟練的使用 Kubernetes 於環境中就不太適合這門課程，主要是給想要踏入到 Kubernetes 世界中的朋友，有興趣的幫忙捧場或推廣
 組合包
 https://hiskio.com/packages/D7RZGWrNK
 
@@ -366,6 +365,14 @@ https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
 基礎概念
 https://hiskio.com/courses/349?promo_code=13LY5RE
 
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # Reference
 

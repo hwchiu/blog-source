@@ -34,11 +34,11 @@ description: 本篇文章會開始探討 kubernetes Container Runtime Interface 
 表格列出了 `kubernetes` 與 `CRI Runtime` 各自的責任
 
 | Kubernetes | CRI Runtime |
-| -------- | -------- | 
-| Kubernetes Resources/API | Pod Life Cycle (Add/Delete)     | 
-| Storage  (CSI)   | Image management| 
-| Networking (CNI)     | Status     | 
-| Dispatcher     | Container Operations (attatch/exec)     | 
+| -------- | -------- |
+| Kubernetes Resources/API | Pod Life Cycle (Add/Delete)     |
+| Storage  (CSI)   | Image management|
+| Networking (CNI)     | Status     |
+| Dispatcher     | Container Operations (attatch/exec)     |
 
 基本上 `CRI Runtime` 很類似前述的 `Containerd` 一樣，能夠根據需求產生出符合 `OCI` 標準的容器應用程式，但是基本單位不再是 `Container` 而是 `Pod`。
 而 `kubernetes` 本身建築在這些基礎之上，提供更豐富的應用與 API 供使用者使用。
@@ -47,7 +47,7 @@ description: 本篇文章會開始探討 kubernetes Container Runtime Interface 
 
 `CRI` 所謂的標準其實非常簡單，就是所謂的 `protobuf` 的 [API 介面](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/cri-api/pkg/apis/runtime/v1alpha2/api.proto)，
 
-從官方擷取該介面資訊如下，仔細觀察你可以裡面有 `Pod` 也有 `Container`，同時也涵蓋了各式各樣的操作，如 `Run`, `Stop`, `List`, `Remove`, `Start`, 
+從官方擷取該介面資訊如下，仔細觀察你可以裡面有 `Pod` 也有 `Container`，同時也涵蓋了各式各樣的操作，如 `Run`, `Stop`, `List`, `Remove`, `Start`,
 
 ```go=
 // Runtime service defines the public APIs for remote container runtimes
@@ -135,9 +135,9 @@ service RuntimeService {
 剩下的一個問題就是， 之前所探討過的 `docker` 運作流程
 
 > `docker client` -> `docker engine` -> `docker-containerd` -> `docker-containerd-shim` -> `runc` -> `container`
-> 
+>
 
-這個架構要怎麼跟 `kubernetes & CRI` 整合? 
+這個架構要怎麼跟 `kubernetes & CRI` 整合?
 
 ## Docker & Kubernetes
 
@@ -207,8 +207,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # 參考
 - https://kubernetes.io

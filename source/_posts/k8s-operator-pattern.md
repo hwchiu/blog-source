@@ -91,7 +91,7 @@ spec:
     kind: CronTab
     # shortNames allow shorter string to match your resource on the CLI
     shortNames:
-    - ct  
+    - ct
 ```
 一旦將上述的檔案加入到 **kubernetes** 中，接下來就可以使用裡面描述的 **names** 底下的各種名稱來取得。
 譬如
@@ -177,13 +177,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
-
-
-
 # 參考
 - https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 - https://coreos.com/blog/introducing-operators.html

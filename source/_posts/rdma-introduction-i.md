@@ -40,7 +40,7 @@ RDMA，全名 Remote Direct Memory Access，顧名思義就是遠端直接記憶
 而 **Zero-Copy** 強調的是能夠減少這些資料複製的行為，甚至將該次數給降低到完全不需要，這部分若有硬體的幫助，則甚至封包都不會在 **kernel** 內進行 copy.
 詳細地內容可以參考 [史丹利部落格 - 什麼是Zero-Copy?](http://stenlyho.blogspot.tw/2008/08/zero-copy.html)
 
-### Kernel bypass 
+### Kernel bypass
 
 此特性強調 **user space application** 能夠不牽扯到 **kernel** 的前提下直接處理資料，以 **RDMA** 來說，其應用程式可以直接跟網卡溝通直接取得資料，而該資料則不需要再經過 **kernel** 內一層又一層的 **network stack**，這樣也可以減少不必要的 CPU 運算。
 其他技術如 **DPDK**, **mmap** 也是有一樣的特性。
@@ -49,7 +49,7 @@ RDMA，全名 Remote Direct Memory Access，顧名思義就是遠端直接記憶
 **application** 可以在不消耗遠方機器 CPU 的前提下直接對遠方機器上的記憶體進行操作。此外，由於遠方機器根本不會知道某些記憶體已經被修改了，所以 CPU read cache 也不會有任何的修改。
 當然前提是兩方要事先有溝通過，彼此掌握一把鑰匙後，才可以這樣進行修改。
 
-### Message based transactions 
+### Message based transactions
 這部分則是比較偏向程式設計者要注意的部分， **RDMA** 的封包會以 **message** 的方式去傳遞，而不是 **stream** 的方式，意味者應用程式不需要自己去解析整個資料串流來取得每一次傳送的內容。
 
 ### Scatter/Gather entries support
@@ -58,7 +58,7 @@ RDMA，全名 Remote Direct Memory Access，顧名思義就是遠端直接記憶
 所以有了上述的特色， **RDMA** 到底能帶來什麼樣的優勢？
 1. low-latency:
 2. high-throughput:
-3. low-CPU usage: 透過 **RDMA** 減少CPU對於網路功能的消耗，讓 **CPU** 能夠處理更多其他的事情。 
+3. low-CPU usage: 透過 **RDMA** 減少CPU對於網路功能的消耗，讓 **CPU** 能夠處理更多其他的事情。
 
 不過這些 **RDMA** 並沒有保證上述的三個特性是能夠**同時**擁有的，
 可以從 [Tips and tricks to optimize your RDMA code](http://www.rdmamojo.com/2013/06/08/tips-and-tricks-to-optimize-your-rdma-code/) 這邊看到，針對不同的特性， **RDMA** 的使用方式都會有所不同，然而這些方法是互相抵觸的。
@@ -167,3 +167,24 @@ DRBD(distributed replicated block device) 也是一個知名的分散式 **block
 [resilient-roce-relaxes-rdma-requirements](http://www.mellanox.com/blog/2016/07/resilient-roce-relaxes-rdma-requirements/)
 [两种以太网 RDMA 协议： iWARP 和 RoCE](http://weibo.com/p/1001603936363903889917)
 [Linux Cluster](https://linuxcluster.wordpress.com/category/network/rdma/)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

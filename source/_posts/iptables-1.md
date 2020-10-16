@@ -85,7 +85,7 @@ network-study](https://github.com/hwchiu/network-study/tree/master/iptables/ipta
 有了上面的概念後，本文就會使用 **LOG** 概念的 **Target** 來觀察封包流向，整個規則的含義就是
 在**什麼時間點**,**針對我們想要觀察的流向封包**,**輸出相關資訊**。
 藉由這些資訊，我們可以組合出封包於 iptables/ebtalbes/arptables 內的流向
-**注意，這邊只能做到 iptables/ebtables/arptables 內的流向，其餘更細部的 network stack 處理則沒有辦法**  
+**注意，這邊只能做到 iptables/ebtables/arptables 內的流向，其餘更細部的 network stack 處理則沒有辦法**
 
 # EBTABLES
 EBTABLES 相對於 **IPTABLES** 來說比較陌生，主要是其運作的層次更低，基於 **ethernet** 來處理，一般使用情況下，大家都比較依賴 **iptables**，也是因為透過 **IP** 的描述方式會比使用 **MAC Address** 來得更佳容易記憶與管理。
@@ -94,9 +94,9 @@ EBTABLES 相對於 **IPTABLES** 來說比較陌生，主要是其運作的層次
 
 ## Chain
 EBTABLES 內總共有六條 **Chain**，也就是六個時機點
-1. INPUT: 
+1. INPUT:
 根據 **Forwarding table**, 該封包要送到 **Linux Bridge** 前
-2. FORWARD: 
+2. FORWARD:
 根據 **Forwarding table**，該封包要被轉發到其他連接埠前 (不能是 Linux Bridge 本身，否則會走 INPUT)
 3. OUTPUT:
 本地產生的封包，最後目的是 **Linux Bridge** 底下的連接埠，基本上與 **FORWARD** 非常相似，只是一個來源是其他人，一個是自己機器本身
@@ -187,7 +187,7 @@ IPTABLES 概念非常雷同，有四個 **Table**, 5個 **Chain**，此外還有
 4. PREROUTING
 5. POSTROUTING
 
-這邊的概念跟 **EBTALBE** 完全一樣，只是 **全部的 Forwarding Table** 都要換成基於 **IP** 查詢的 **Routing Table**，並且沒有了 **BROUTING** 這個點。 
+這邊的概念跟 **EBTALBE** 完全一樣，只是 **全部的 Forwarding Table** 都要換成基於 **IP** 查詢的 **Routing Table**，並且沒有了 **BROUTING** 這個點。
 
 ## Table
 除了原有了 **Filter** 以及 **NAT** 之外，多出了 **RAW** 以及 **MANGLE** 兩張 **Table**.
@@ -306,3 +306,24 @@ WAN to Container
 4. 檢查 IPTABLES/EBTABLES/ARPTABLES 等規則
 5. 檢查 Routing Table/ARP Tables/Forwarding Tables 的紀錄
 6. 相關資訊加上經驗整合，最後歸納出一套封包的走向，並且去驗證
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

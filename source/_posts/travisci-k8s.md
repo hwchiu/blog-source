@@ -102,7 +102,7 @@ description: 這篇文章的主軸其實非常簡單，目標是希望為開發�
 如果在一個沒有 `kubernetes` 集群的環境中，該測試程式碼則沒有辦法測試(因為沒有真的集群可以去進行`kubernetes`操作)
 
 > 雖然有 `Fake-client` 可以進行相關的測試，但是有部份的操作是需要真的集群去運行才可以進行的，這類型的就沒有辦法用 `Fake-client` 來測試。
-> 
+>
 
 ## TravisCI
 當應用程式準備好之後，我們就要在 `GitHub` 專案中描寫我們如何使用 `TravisCI` 的測試環境。
@@ -204,3 +204,24 @@ A: 這要依賴 `minikube` 官方的支援
 ===
 1. https://blog.travis-ci.com/2017-10-26-running-kubernetes-on-travis-ci-with-minikube
 2. https://github.com/travis-ci/travis-ci/issues/7260
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

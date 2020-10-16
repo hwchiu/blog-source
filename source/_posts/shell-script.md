@@ -37,10 +37,30 @@ description: 記錄一些之前寫 Shell Script 作業的心得與筆記
   * 接下來針對檔案是資料夾還是檔案，做全部的計數，可以由 `-rw-r--r--` 的第一個欄位來決定，如果是d就代表資料夾，否則就是檔案。 這邊我使用 regular expression來判斷 `($1 ~/^d/)? (dir=dir+1) : (file=file+1)(size=size+$5)`，此外如果是檔案得話，就順便把大小也計算一下
   * 執行過程中，因為剛剛已經排序過了，所以 前六行都把大小印出來， `if(NR<6) print NR": "$5" "$9}`
   * 最後就把所有資訊都列印出來
-  
+
 ``` sh
 
 ls -RlA | sort -rnk 5 | awk '{ if(NF>=9) ($1 ~/^d/)? (dir=dir+1) : (file=file+1)(size=size+$5); if(NR<6) print NR": "$5" "$9} END{ print "Dir = "dir"\n" "    File = " file"\n" "total = "size}'
 
 ```
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

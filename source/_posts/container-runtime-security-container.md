@@ -73,7 +73,7 @@ kata-containers/runtime - Hypervisor-based OCI runtime combining technology from
 ![](https://i.imgur.com/vMUO3a3.png)
 圖片節錄自[Architecture Guide](https://gvisor.dev/docs/architecture_guide/)
 
-`KVM` 本身基於 `host` 的主機上再創造一個全新的虛擬化環境，該環境中有一個全新的 `Kernel`, 所以名詞上就會有所謂的 `Host Kernel` 以及 `Guest Kernel`. 
+`KVM` 本身基於 `host` 的主機上再創造一個全新的虛擬化環境，該環境中有一個全新的 `Kernel`, 所以名詞上就會有所謂的 `Host Kernel` 以及 `Guest Kernel`.
 當然資訊安全本就沒有絕對，所有的服務都基於 `kvm` 的設計包含 `kvm kernel module`, 這些可能互動的過程中要是有問題也是會造成安全性漏洞。
 不過今天討論的範疇在於虛擬化環境與 `Host` 本身是否會互相影響，所以暫時就先忽略其他的因素。
 
@@ -143,7 +143,7 @@ kata-containers/runtime - Hypervisor-based OCI runtime combining technology from
 所有送到 gVisor 的 `system call` 都會被二次處理，接者才會送到真正的 `Host Kernel` 去取得需要的資訊。 官方文章特別表明這些不同的做法沒有明顯的優劣，各有擅長的領域，整句話如下，值得好好思考
 
 >Each of the above approaches may excel in distinct scenarios. For example, machine-level virtualization will face challenges achieving high density, while gVisor may provide poor performance for system call heavy workloads.
- 
+
 # Kata Container
 
 與 `gVisor` 一樣，都是基於 `OCI Runtime` 的解決方案，這時候就會覺得有個 `OCI` 的標準真的是讓世界稍微美好了一些，各式各樣的解決方案都能夠專注於自己的開發，就可以很輕鬆地與其他的應用程式結合而不需要各種客製化。
@@ -160,14 +160,14 @@ kata-containers/runtime - Hypervisor-based OCI runtime combining technology from
 
 ![](https://i.imgur.com/dII0wFL.png)
 圖片節錄自[Kata Containers Architecture
-](https://github.com/kata-containers/documentation/blob/master/design/architecture.md) 
+](https://github.com/kata-containers/documentation/blob/master/design/architecture.md)
 
 `kata-container` 的作法完全不同於 `gVisor`, 其就如同過往的 `Virtual Machine` 一樣，真正的去創造一個 `VM` 來隔離所謂的 `Host Kernel` 以及 `Guest Kernel`. 接者會在這個 `VM` 上面去運行使用者所請求的 `Container`，藉此達到一個外表看似 `Container` 實際上是一個運行在 `VM` 上的 `Container.`
 
 相關的架構可以參考下圖
 ![](https://i.imgur.com/PpzEOae.png)
 圖片節錄自[About Kata Containers
-](https://katacontainers.io/) 
+](https://katacontainers.io/)
 
 在此架構下，我們可以想像到如果今天有任何 `container CLI` 想要直接操控該 `Container`的話，問題就在於從 `OCI Runtime` 送出的指令要如何操控到該 `VM` 裡面的 `Container`. 於是你可以看到架構中有所謂的 `Proxy` 以及 `Agent`
 這兩個角色就是負責幫忙進行指令交換的，讓整個運作環境操作起來跟熟悉的 `Container` 一致，也符合最上面的專案介紹 **seamlessly plug into the containers ecosystem.**
@@ -185,12 +185,12 @@ kata-containers/runtime - Hypervisor-based OCI runtime combining technology from
 
 ![](https://i.imgur.com/19k2www.png)
 圖片節錄自[Kata Containers Architecture
-](https://github.com/kata-containers/documentation/blob/master/design/architecture.md) 
+](https://github.com/kata-containers/documentation/blob/master/design/architecture.md)
 
 
 ![](https://i.imgur.com/xF11rVU.png)
 圖片節錄自[Kata Containers Architecture
-](https://github.com/kata-containers/documentation/blob/master/design/architecture.md) 
+](https://github.com/kata-containers/documentation/blob/master/design/architecture.md)
 
 
 # Summary
@@ -209,3 +209,24 @@ kata-containers/runtime - Hypervisor-based OCI runtime combining technology from
 - https://github.com/google/gvisor
 - https://github.com/moby/moby/blob/master/profiles/seccomp/default.json
 - https://katacontainers.io/
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

@@ -26,7 +26,7 @@ description: 本篇文章透過修改 MASQUERADE Kernel Module 原始碼的方�
 
 - Ubuntu: 18.04
 - Linux Kernel: 4.15
-    
+
 ## 設定環境
 ```bash
 git clone https://github.com/hwchiu/network-study
@@ -116,7 +116,7 @@ static void show_status(struct sk_buff *skb, const struct xt_action_param *par)
 3. 編譯該 Kernel module 並且安裝
 4. 安裝 Docker 準備測試環境
 
-```bash        
+```bash
     # Install modified kernel module
     git clone https://github.com/hwchiu/network-study
     sudo apt-get install -y linux-headers-$(uname -r)
@@ -155,14 +155,14 @@ vagrant ssh
 
 ### 設定 iptables
 ```bash=
-pushd ~/network-study/iptables/masquerade/module/    
+pushd ~/network-study/iptables/masquerade/module/
 sudo iptables -t nat -D POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE || true
 sudo iptables -t nat -A POSTROUTING -s 172.18.0.0/16 -p tcp ! -o docker0 -j MASQUERADE --to-ports 55666-55680|| true
 sudo iptables -t nat -A POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE || true
 ```
 如果今天自己有任何修改 **kernel module** 需求，則需要採用下列方式
 ```bash=
-pushd ~/network-study/iptables/masquerade/module/    
+pushd ~/network-study/iptables/masquerade/module/
 sudo iptables -t nat -D POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE || true
 make
 sudo rmmod ipt_MASQUERADE
@@ -224,14 +224,14 @@ sudo dmesg -c
 
 ```bash=
 [  371.727940] before nat
-[  371.727943] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:33894, 
+[  371.727943] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:33894,
                 dst-ipv4:8.8.8.8, dst-port:53
-[  371.727944] REPLY: outgoing interface: eth0, src-ipv4:8.8.8.8, src-port:53, 
+[  371.727944] REPLY: outgoing interface: eth0, src-ipv4:8.8.8.8, src-port:53,
                 dst-ipv4:172.18.0.2, dst-port:33894
 [  371.727945] after nat
-[  371.727946] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:33894, 
+[  371.727946] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:33894,
                 dst-ipv4:8.8.8.8, dst-port:53
-[  371.727947] REPLY: outgoing interface: eth0, src-ipv4:8.8.8.8, src-port:53, 
+[  371.727947] REPLY: outgoing interface: eth0, src-ipv4:8.8.8.8, src-port:53,
                 dst-ipv4:10.0.2.15, dst-port:33894
 ```
 
@@ -274,14 +274,14 @@ sudo dmesg -c
 
 ```bash=
 [  371.754760] before nat
-[  371.754763] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:37622, 
+[  371.754763] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:37622,
                 dst-ipv4:216.58.200.46, dst-port:80
-[  371.754764] REPLY: outgoing interface: eth0, src-ipv4:216.58.200.46, src-port:80, 
+[  371.754764] REPLY: outgoing interface: eth0, src-ipv4:216.58.200.46, src-port:80,
                 dst-ipv4:172.18.0.2, dst-port:37622
 [  371.754766] after nat
-[  371.754767] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:37622, 
+[  371.754767] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:37622,
                 dst-ipv4:216.58.200.46, dst-port:80
-[  371.754768] REPLY: outgoing interface: eth0, src-ipv4:216.58.200.46, src-port:80, 
+[  371.754768] REPLY: outgoing interface: eth0, src-ipv4:216.58.200.46, src-port:80,
                 dst-ipv4:10.0.2.15, dst-port:55666
 ```
 
@@ -332,7 +332,7 @@ sudo dmesg -c
 Vagrant 的環境中，eth0 是主要的對外網卡，我們對其增加一個不同網段的 **IP**，同時也增加了一個路由規則，希望送往 **1.1.1.1** 的封包會嘗試先走到 **1.2.3.4** 去
 ```bash=
 sudo ip addr add 1.2.3.56/24 dev eth0
-sudo route add 1.1.1.1 gw 1.2.3.4 dev eth0    
+sudo route add 1.1.1.1 gw 1.2.3.4 dev eth0
 ```
 
 接者我們觀察預設的路由表與 IP 設定
@@ -386,14 +386,14 @@ Connecting to 1.1.1.1:80... failed: No route to host.
 
 接下來觀察 `1.1.1.1` 的結果並驗證猜測
 ```bash=
-[ 1879.823479] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:59734, 
+[ 1879.823479] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:59734,
                 dst-ipv4:1.1.1.1, dst-port:80
-[ 1879.823480] REPLY: outgoing interface: eth0, src-ipv4:1.1.1.1, src-port:80, 
+[ 1879.823480] REPLY: outgoing interface: eth0, src-ipv4:1.1.1.1, src-port:80,
                 dst-ipv4:172.18.0.2, dst-port:59734
 [ 1879.823482] after nat
-[ 1879.823483] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:59734, 
+[ 1879.823483] ORIGINAL: outgoing interface: eth0, src-ipv4:172.18.0.2, src-port:59734,
                 dst-ipv4:1.1.1.1, dst-port:80
-[ 1879.823484] REPLY: outgoing interface: eth0, src-ipv4:1.1.1.1, src-port:80, 
+[ 1879.823484] REPLY: outgoing interface: eth0, src-ipv4:1.1.1.1, src-port:80,
                 dst-ipv4:1.2.3.56, dst-port:55666
 ```
 
@@ -431,3 +431,23 @@ Connecting to 1.1.1.1:80... failed: No route to host.
 
 對於 **MASQUERADE(TCP/DNS)** 來說，預設的情況下不會幫你修改封包的來源連結埠，若有需要修改必須要透過之前提過的參數 **--to-ports** 以及 **--random** 來修改，本文中沒有特別提到 **--random** 的部分是因為與 **--to-ports** 大同小異，自行修改相關指令就可以進行測試。
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

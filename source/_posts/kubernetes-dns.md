@@ -65,7 +65,7 @@ description: DNS 在傳統的網路架構中一直扮演很重要的角色，可
 透過 `DNSConfig` 我們可以繼續往上疊加相關的 `DNS` 參數到 `Pod` 之中。
 目前總共支援三個參數可以設定，分別是
 
-1. nameservers: 
+1. nameservers:
 2. searches:
 3. options:
 
@@ -403,14 +403,14 @@ options ndots:5
 **Default**
 - 代表的是繼承自運行節點的 `DNS` 設定
 
-**None** 
+**None**
 - 代表的是完全不設定任何 `DNS` 的資訊，所有的 `DNS` 都依賴 `DNSConfig` 欄位來描述 (若採用 None, 一定要設定 `DNSConfig`)
 
-**ClusterFirst** 
+**ClusterFirst**
 - 代表是使用 `kube-dns` 提供的 `clusterIP` 作為預設的 `DNS` 設定
 - 同時若使用者沒有在 `Pod` 內去描述 `DNSConfig` ，則預設會使用 `ClusterFirst` 這個設定
 
-**ClusterFirstWithHostNet** 
+**ClusterFirstWithHostNet**
 - 這個選項就是特別針對 `HostNetwork=true` 創立的
 - 可以提供使用節點網路但是同時又使用 `kube-dns` 提供的 `clusterIP` 作為其 `DNS` 的設定。
 
@@ -434,5 +434,7 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

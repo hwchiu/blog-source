@@ -27,7 +27,7 @@ description: 這邊要跟大家分享的是自架 FTP Server 的一些設定與�
 - Only download from /home/ftp/public
 - Can upload & mkdir but no download or delete from /home/ftp/upload
 	- Can't download the files upload by anonymous account
-  - Can download the files upload by others 
+  - Can download the files upload by others
 - Hidden directory /home/ftp/hidden
 	- There is a directory called "treasure" inside
   - Client can't list in /home/ftp/hidden but can in /home/ftp/hidden/treasure
@@ -51,31 +51,31 @@ Port:  **Pure-ftpd**
 
 - install ports `portmaster ftp/pure-ftpd` (TLS 打勾)
 - `echo 'pureftpd_enable="YES"' >> /etc/rc.conf`
-- create directory 
+- create directory
 	- `mkdir -p /home/ftp/public /home/ftp/upload /home/hidden`
-  
+
 # 匿名
 - config   `/usr/local/etc/pure-ftpd.conf`
 	- NoAnonymous                 no
 	- AntiWarez                  yes  (上傳檔案owner是'ftp'的不能刪除)
-	- AnonymousCanCreateDirs		 yes   
+	- AnonymousCanCreateDirs		 yes
   - AnonymousCantUpload         no
 - Add a ftp account for Anonymous
 	- `pw groupadd ftpuser`
 	- `pw useradd ftp -g ftpuser -d /home/ftp`
 
-# Virtual user 
+# Virtual user
 - config `/usr/local/etc/pure-ftpd.conf`
 	- PureDB     /usr/local/etc/pureftpd.pdb
-- Add a real account 
+- Add a real account
 	- pw groupadd virtualgroup
 	- pw useradd ftpuser -g virtualgroup -c "FTP visual user" -d /home/ftp -s /sbin/nologin
 - Map a virtual account to a real account
-	- pure-pw useradd ftp-vip -u ftpuser -g virtualgroup -d /home/ftp -m   
+	- pure-pw useradd ftp-vip -u ftpuser -g virtualgroup -d /home/ftp -m
 - IP limitation.
 	- pure-pw usermod ftp-vip -r [IP/mask]   (-r means  allow client's ip)
 
-# Directory permission 
+# Directory permission
 ## public
 pulbic中，讓匿名帳號變成other的權限，然後把w權限給拔掉，這樣對於目錄中有任何異動的行為(刪除、移動、改名)都無法使用。
 讓virtualgroup的人也有完整的權限去處理，這樣ftp-vip就有完整權限。
@@ -112,9 +112,30 @@ ftp-vip是group的權限，因此什麼都可以做。
 - create a self-signed certificate
 	- 預設的憑證位置是 `/etc/ssl/private/pure-ftpd.pem`
   - 編譯的時候可以透過`make configure CERTFILE=your pem location`來修改位置
-	- `mkdir -p /etc/ssl/private` 
+	- `mkdir -p /etc/ssl/private`
   - `openssl req -x509 -nodes -newkey rsa:1024 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem`
   - `chmod 600 /etc/ssl/private/*.pem`
 
 # Restart pure-ftpd
 - /usr/local/etc/rc.d/pure-ftpd restart
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

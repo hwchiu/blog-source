@@ -72,27 +72,27 @@ $ sudo docker ps  --no-trunc | grep $(sudo cat /var/lib/cni/networks/cbr0/10.244
 5. 最後則是透過 **docker** 指令去尋該 **CONTAINER_ID**，最後就看到對應到的不是真正運行的 **Pod**，而是先前介紹過的 **Infrastructure Container: Pause**
 
 接下來就是細談上述的流程
-## kubeadm 
+## kubeadm
 
 首先是 **kubeadm** 與 **controller-manager** 兩者的關係，當我們透過 **--pod-network-cidr** 去初始化 **kubeadm** 後，其創造出來的 **controller-manager** 就會自帶三個參數
 
 ```bash=
-root     20459  0.8  2.4 217504 100076 ?       Ssl  05:22   0:36 kube-controller-manager 
---authentication-kubeconfig=/etc/kubernetes/controller-manager.conf 
+root     20459  0.8  2.4 217504 100076 ?       Ssl  05:22   0:36 kube-controller-manager
+--authentication-kubeconfig=/etc/kubernetes/controller-manager.conf
 --authorization-kubeconfig=/etc/kubernetes/controller-manager.conf
---bind-address=127.0.0.1 
---client-ca-file=/etc/kubernetes/pki/ca.crt 
---cluster-cidr=10.244.0.0/16 
---node-cidr-mask-size=24 
---allocate-node-cidrs=true 
---cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt 
---cluster-signing-key-file=/etc/kubernetes/pki/ca.key 
---controllers=*,bootstrapsigner,tokencleaner 
---kubeconfig=/etc/kubernetes/controller-manager.conf 
---leader-elect=true 
---requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt 
---root-ca-file=/etc/kubernetes/pki/ca.crt 
---service-account-private-key-file=/etc/kubernetes/pki/sa.key 
+--bind-address=127.0.0.1
+--client-ca-file=/etc/kubernetes/pki/ca.crt
+--cluster-cidr=10.244.0.0/16
+--node-cidr-mask-size=24
+--allocate-node-cidrs=true
+--cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt
+--cluster-signing-key-file=/etc/kubernetes/pki/ca.key
+--controllers=*,bootstrapsigner,tokencleaner
+--kubeconfig=/etc/kubernetes/controller-manager.conf
+--leader-elect=true
+--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
+--root-ca-file=/etc/kubernetes/pki/ca.crt
+--service-account-private-key-file=/etc/kubernetes/pki/sa.key
 --use-service-account-credentials=true
 ```
 
@@ -103,7 +103,7 @@ root     20459  0.8  2.4 217504 100076 ?       Ssl  05:22   0:36 kube-controller
 
 這邊就標明的整個 **cluster network** 會使用的網段，除了 **cidr** 大網段之外還透過 **node-cide--mask** 去標示寫網段，所以根據上述的範例，這個節點的數量不能超過255台節點，不然就沒有足夠的 **可用網段**去分配了。
 
-此外很有趣的一點是，這邊的運作邏輯再 **controller-manager** 內被稱為 **nodeipam**，也就是今天 **kubernetes** 自己跳下來幫忙做 **IPAM** 的工作，幫忙分配 **IP/Subnet**，只是單位是以 **Node** 為基準，不是以 **Pod**。 
+此外很有趣的一點是，這邊的運作邏輯再 **controller-manager** 內被稱為 **nodeipam**，也就是今天 **kubernetes** 自己跳下來幫忙做 **IPAM** 的工作，幫忙分配 **IP/Subnet**，只是單位是以 **Node** 為基準，不是以 **Pod**。
 
 根據 [GitHub Controler](https://github.com/kubernetes/kubernetes/blob/103e926604de6f79161b78af3e792d0ed282bc06/pkg/controller/nodeipam/ipam/controller_legacyprovider.go#L65) 可以看到當 **Controller Manager** 物件被創造的時候會根據上述的參數去產生一個名為 **cidrset** 的物件
 
@@ -115,7 +115,7 @@ if err != nil {
 }
 ...
 ```
-    
+
 而 [CIDRSet](https://github.com/kubernetes/kubernetes/blob/a3ccea9d8743f2ff82e41b6c2af6dc2c41dc7b10/pkg/controller/nodeipam/ipam/cidrset/cidr_set.go#L31) 的結構如下
 
 ```golang=
@@ -454,3 +454,24 @@ func doCmdAdd(args *skel.CmdArgs, n *NetConf, fenv *subnetEnv) error {
 # 參考
 - https://github.com/coreos/flannel/blob/443d773037ac0f3b8a996a6de018b903b6a58c62/Documentation/kubernetes.md
 - https://github.com/coreos/flannel
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

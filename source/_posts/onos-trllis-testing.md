@@ -49,13 +49,13 @@ export ONOS_APPS=drivers,openflow,segmentrouting,fpm,dhcprelay,netcfghostprovide
 - 運行起 ONOS Controller
 - 另外開視窗，運行 ONOS Cli 工具，透過 `apps -a -s` 檢查運行的 apps 是否與上述吻合
 - 下載 [trellis](https://github.com/opennetworkinglab/routing/blob/master/trellis/trellis.json) 相關設定檔案，並且透過下列工具將該設定檔寫入到 ONOS 中，其中 **<onos-ip>** 則是本機端的 IP address (此 IP 要讓 VM2 能夠存取得到)
-``` sh 
+``` sh
 onos-netcfg <onos-ip> routing/trellis/trellis.json
 ```
 
 #### VM2 (Mininet)
 - 安裝相關軟體
-```sh 
+```sh
 sudo apt-get update
 sudo apt-get install -y gawk texinfo python-pip build-essential iptables automake autoconf libtool
 sudo pip install -U pip
@@ -106,3 +106,23 @@ sudo killall -9 dhclient dhcpd zebra bgpd
 sudo mn -c
 ```
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

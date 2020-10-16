@@ -174,8 +174,8 @@ dd if=/dev/zero of=/nfs/ii count=40960
 
 這部分非常麻煩處理，過往可能會想要透過 `NIS(YP)` 或是修改 `/etc/nsswitch.con` 的方式來調整查詢的順序。 但是這些舉動對於 `Pod` 來說非常麻煩及極度困難。
 
-因此有想要完整的在 `Kubernetes` 提供 `NFS Clinet` 服務且也要支援外部權限系統的人，要好好的思考這些步驟該怎麼處理。 
- 
+因此有想要完整的在 `Kubernetes` 提供 `NFS Clinet` 服務且也要支援外部權限系統的人，要好好的思考這些步驟該怎麼處理。
+
 
 ### Kubernetes
 針對上述的限制，`kubernetes` 內也有一些額外的選項可以處理。
@@ -313,7 +313,7 @@ spec:
 ```
 
 ```=yaml
-apiVersion: v1                                           
+apiVersion: v1
 kind: Pod
 metadata:
   name: hwchiu
@@ -330,7 +330,7 @@ spec:
     - name: nfs-volume
       persistentVolumeClaim:
         claimName: test-claim
-```        
+```
 
 這邊可以注意的是，當對應的 `PVC` 被創建之後，我們可以在 `NFS Server` 那邊觀察到，對應的 `/nfsshare` 資料夾裡面又被創建了一個新的資料夾 `default-test-claim-pvc-e0ae384c-0c45-11e9-be59-02e1e1d1e477`
 
@@ -348,3 +348,24 @@ spec:
 舉例來說，今天可以創建多個 PVC, 譬如 `DB-Data`, `Container-Log` 等不同的需求，然後 `Provisioner` 就會創建不同的資料夾供這些應用使用，最後每個 `Pod` 可以根據自己的需要來掛載特定的資料夾，而且互相彼此不會看到彼此資料。
 
 唯一要注意的時，這邊也是有權限以及容量的問題，這部分就是 `NFS` 的基本限制。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

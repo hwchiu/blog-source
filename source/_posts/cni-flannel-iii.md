@@ -75,7 +75,7 @@ description: 本篇文章作為 CNI - Flannel 的最後一篇探討，藉由研�
 
 如果是公有雲的解決方案，有些也會希望能夠同網段，這樣可以跟公有雲其他的資源進行整合，不論是 **IP**的發放，**防火牆**的設定等都希望能夠只用公有雲一套規則滿足全部。
 
-這部分我之前有一篇文章在介紹 [Azure - AKS](https://www.hwchiu.com/aks-cni-i.html)是怎麼實現其 **CNI** 來達到上述需求的。有興趣的讀者可以再額外閱讀。 
+這部分我之前有一篇文章在介紹 [Azure - AKS](https://www.hwchiu.com/aks-cni-i.html)是怎麼實現其 **CNI** 來達到上述需求的。有興趣的讀者可以再額外閱讀。
 
 ## Overlay Network
 網路串連的方法百百種，每種方法都有其價值以及使用場景，這次要來討論的則是 **VXLAN**，這個 **flannel** 預設的網路實現方式。
@@ -107,7 +107,7 @@ k8s-udpserver-6576555bcb-v9cwz   1/1     Running   0          2m11s   10.244.0.4
 k8s-udpserver-6576555bcb-xwdbv   1/1     Running   0          2m11s   10.244.1.7   k8s-dev-1   <none>           <none>
 ```
 
-這個情況下，我們希望讓 **10.244.0.0/24** 網段可以與 **10.244.1.0/24** 網段溝通，這時候 
+這個情況下，我們希望讓 **10.244.0.0/24** 網段可以與 **10.244.1.0/24** 網段溝通，這時候
 **flannel** 會怎麼做。
 
 先假設一個情境, **10.244.0.5** 想要與 **10.244.2.7** 溝通，由於牽扯到跨網段的問題，所以會有 **gateway** 的涉入，更麻煩的是這些網段都是私有網段，一旦封包從該節點出去後，要怎麼確保外面的所有網路架構都知道該如何轉送這些封包？
@@ -266,3 +266,24 @@ ee:8a:1f:f7:96:c7 dev flannel.1 dst 172.17.8.103 self permanent
 - https://vincent.bernat.ch/en/blog/2017-vxlan-linux
 - https://www.slideshare.net/Ciscodatacenter/vxlan-introduction
 - https://support.huawei.com/enterprise/en/doc/EDOC1100004365/f95c6e68/vxlan-packet-format
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

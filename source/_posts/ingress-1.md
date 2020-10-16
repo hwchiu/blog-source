@@ -59,7 +59,7 @@ spec:
 
 `Ingress` 內我們可以針對 `Host` 或是 `Path` 不同的選項來決定該封包要怎麼轉發。以上述範例來說，我們希望達到的是
 1. 如果看到的是 `note.example.com` 可以送給特定的 `service`
-2. 如果看到的是 `nginx.example.com` ，則根據後面的 `path (v1/v2)` 來決定最後要怎麼轉發。  
+2. 如果看到的是 `nginx.example.com` ，則根據後面的 `path (v1/v2)` 來決定最後要怎麼轉發。
 
 這邊要特別注意的是，對於 `Kubernetes` 來說， `Ingress` 物件本身只有描述的功用，實際上並不會真的把使用者所描述與敘述的功能給實現完畢，這部分需要依賴剩下的元件來補足。
 
@@ -279,7 +279,7 @@ nginx-demo   nginx.example.com,note.example.com             80      15h
 接下來我們將直接進入到 `Nginx Controller` 去觀察一下是否有對應的 `nginx.conf` 被產生
 ```bash=
 $ kubectl -n ingress-nginx exec -it $(kubectl -n ingress-nginx get pods -l app.kubernetes.io/name=ingress-nginx -o jsonpath="{.items[0].metadata.name}") bash
-www-data@nginx-ingress-controller-d88dbf49c-9b6td:/etc/nginx$ 
+www-data@nginx-ingress-controller-d88dbf49c-9b6td:/etc/nginx$
 www-data@nginx-ingress-controller-d88dbf49c-9b6td:/etc/nginx$ grep  "example.com" nginx.conf
         ## start server nginx.example.com
                 server_name nginx.example.com ;
@@ -331,3 +331,23 @@ ingress-nginx   NodePort   10.111.134.97   <none>        80:32663/TCP,443:31309/
 本篇文章旨在透過簡單的介紹讓大家知道 `Kubernetes Ingress` 的基本架構與介紹，最後透過一個常用的 `Nginx Ingress` 實作來實際使用看看`Ingress` 的架構。
 不同的 `Ingress` 的後端實現功能的方法都不盡相同，同時能夠支援的功能也都會有些許的差異，這部分就仰賴各位在選擇對應的解決方案時的研究與先行測試。
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

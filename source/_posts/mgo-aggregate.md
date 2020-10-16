@@ -30,7 +30,7 @@ description: 本篇文章首先跟大家分享一個常見的 Schema 設計，�
 
 
 ## Structure
-這邊就採用 `golang` 簡單的描述一下我們的結構，這些結構會用在 `mongodb` 裡面 
+這邊就採用 `golang` 簡單的描述一下我們的結構，這些結構會用在 `mongodb` 裡面
 ```go=
 type User struct {
 	ID   bson.ObjectId `bson:"_id"`
@@ -119,3 +119,24 @@ if err != nil {
 
 ## Reference
 - https://docs.mongodb.com/manual/aggregation/
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

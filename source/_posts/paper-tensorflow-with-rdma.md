@@ -14,7 +14,7 @@ description: 本文屬於論文導讀系列，這次針對的是高速網路(RDM
 
 ---
 
-# Preface 
+# Preface
 
 2017 SICCOM 上面出現了一篇令人感到有趣的論文，內容是 **Towards Zero Copy Dataflows using RDMA**，可以到 [這邊](https://dl.acm.org/citation.cfm?id=3131975) 閱讀該篇論文內容。
 
@@ -96,7 +96,7 @@ Tensorflow
 ## System & Library
 目前現存的 **dataflow** 相關應用程式再底層傳輸資料時，大抵上分成兩種方式傳輸，一種是採用 **RPC** 的方式去設計收送的資料格式，另外一種則是基於檔案區塊(File Block)進行傳輸。
 舉例來說， **Tensorflow** 以及早期版本的 **Spark** 就是使用 **RPC** 的方式進行跨節點的資料傳輸。後期版本的 **Spark** 以及 **Hadoop (MapReduces)** 則是將檔案輸出到本地的檔案系統，然後再將該檔案區塊傳輸到其他節點。
-作者認為，**RPC** 於傳輸有者效能上的缺失，主要歸咎於 **RPC** 的請求/回復(Request/Response) 本身不但有大量的資料複製，同時也有可能有加解密(Encoding/Decoding)。 
+作者認為，**RPC** 於傳輸有者效能上的缺失，主要歸咎於 **RPC** 的請求/回復(Request/Response) 本身不但有大量的資料複製，同時也有可能有加解密(Encoding/Decoding)。
 這些行為都會嚴重的消耗 **CPU**運算，並且降低點到點的傳輸速度與提高延遲性。
 至於檔案區塊(File Block)通常都會將檔案存到外部的檔案系統，即使是 **RAMFS(Memory Based File System)** 也是會牽扯到很多資料複製的行為。
 
@@ -167,7 +167,7 @@ Tensorflow
 
 ### Target
 1. 作者修改後的 **TensorFlow**
-2. 官方未修改的 **TensorFlow** 
+2. 官方未修改的 **TensorFlow**
     - v1.2.1
 3. Yahoo 自行修改後的 **TensorFlow**
     - 也支援 RDMA，但是機制沒有作者完善，還是有不少的複製行為
@@ -183,3 +183,23 @@ Tensorflow
 # Summary
 作者觀察到在 **dataflow** 中之間的傳輸大小不小，同時這些資料會在系統中有大量的資料複製行為，因此引進了 **DMA**，**RDMA** 以及 **GPU direct RDMA** 等技術來減少整體的資料複製行為，並且也將整體的程式碼完全貢獻回 **TensorFlow** 內，未來任何人想要嘗試這個機制也可以直接使用。
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

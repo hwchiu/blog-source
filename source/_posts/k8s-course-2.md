@@ -25,7 +25,7 @@ description: Kubernetes 線上課程分享, 從底層到應用來解決你對 Ku
 
 為了配合台灣時間，都用我早上六點的時間來跟大家分享事情，基本上是完全靠熱情在支撐，雖然很累，但是也樂在其中
 
-期勉自己能夠繼續支撐下去 
+期勉自己能夠繼續支撐下去
 
 最後不免的還是要工商一下，幫我美股虧錢的荷包填飽一點
 以下是課程相關的購買連結，歡迎有興趣學習的朋友支持支持，或是幫忙分享:)
@@ -44,7 +44,7 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

@@ -208,7 +208,7 @@ dpif_linux_port_add__(struct dpif *dpif_, struct netdev *netdev,
 - 這邊會設定request的cmd為 **OVS_VPORT_CMD_NEW**
 - 使用 **dpif_linux_vport_transact** 把這個request透過netlink的方式送到kernel端，kernel端會再根據這個request的cmd來執行特定的function.
 
-## Gereric netlink 
+## Gereric netlink
 
 ``` c
 static int dp_register_genl(void)
@@ -407,7 +407,7 @@ static struct vport *netdev_create(const struct vport_parms *parms)
 ...
         err = netdev_rx_handler_register(netdev_vport->dev, netdev_frame_hook,
                                          vport);
-...                                        
+...
 ```
 
 - 這邊註冊netdevice的receive handler, handler為 **netdev_frame_hook**
@@ -418,14 +418,14 @@ int netdev_rx_handler_register(struct net_device *dev,
                                 void *rx_handler_data)
 {
          ASSERT_RTNL();
- 
+
          if (dev->rx_handler)
                  return -EBUSY;
- 
+
          /* Note: rx_handler_data must be set before rx_handler */
          rcu_assign_pointer(dev->rx_handler_data, rx_handler_data);
          rcu_assign_pointer(dev->rx_handler, rx_handler);
- 
+
         return 0;
 }
 ```
@@ -433,3 +433,24 @@ int netdev_rx_handler_register(struct net_device *dev,
 - 這邊會把設定該 **net_device**中的兩個pointer
 - **rx_handler_data** 這邊就設定成該vport.
 - **rx_handler** 接收到封包的處理函式，這邊就是netdev_frame_hook。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

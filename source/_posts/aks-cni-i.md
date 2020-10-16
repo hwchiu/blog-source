@@ -223,7 +223,7 @@ docker0         8000.024220b0b010       no
                                                          "ContainerID": "1bd38ad8d840dd1f84597d4343b3bd116188cd1e4a797cc31bdc1aa3dc654a5b",
                                                          "PODName": "addon-http-application-routing-external-dns-74db4f974b-8w4wz",
                                                          "PODNameSpace": "kube-system"
-                                                 },                   
+                                                 },
 ..................................
 ```
 
@@ -349,7 +349,7 @@ azureuser@aks-agentpool-15026905-0:~$ curl "http://169.254.169.254/machine/plugi
                                                         },
                                                         ..............
                                                         }}
-                                                
+
 ```
 
 基本上這些 `IP` 的資訊就跟 `Azure Portal` 裡面 `VNet (Virtual Networks)` 顯示的數量是一致的，因此我們可以透過 `Portal` 的方式就知道每台節點上運行的 `Pod` 的 `IP` 範圍。
@@ -413,3 +413,24 @@ API 問到的 IP 還包括節點本身，所以是 30 + 1 = 31
 - [Connect with SSH to Azure Kubernetes Service (AKS) cluster nodes](https://docs.microsoft.com/en-us/azure/aks/ssh)
 - [Github-Azure-Container-Networking](https://github.com/Azure/azure-container-networking/tree/master/cni)
 - [reserve-compute-resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

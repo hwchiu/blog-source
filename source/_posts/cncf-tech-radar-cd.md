@@ -81,7 +81,7 @@ Helm 大家應該都很熟悉， Kubernetes 應用程式的打包及部署解決
 3. GitLab
 
 |--| Adopt | Trial | Assess | Hold |
-|--| -------- | -------- | -------- | ------| 
+|--| -------- | -------- | -------- | ------|
 |Circle CI | 5     | 0     | 1     | 3 |
 |Kustomize | 5     | 3     | 3     | 1 |
 |GitLab | 4     | 2     | 3     | 0 |
@@ -96,11 +96,11 @@ Helm 大家應該都很熟悉， Kubernetes 應用程式的打包及部署解決
 5. GitHub Actions
 6. Tekton CD
 7. Travis CI
-8. Jenkins 
+8. Jenkins
 9. jsonnet
 
 |--| Adopt | Trial | Assess | Hold |
-|--| -------- | -------- | -------- | ------| 
+|--| -------- | -------- | -------- | ------|
 |ArgoCD | 2     | 3     | 10     | 0 |
 |Jenkins X | 0     | 1     | 3     | 2 |
 |Spinnaker | 0     | 3     | 6     | 4 |
@@ -154,12 +154,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
-
-
 
 
 # Reference

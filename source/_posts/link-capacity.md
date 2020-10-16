@@ -60,7 +60,7 @@ struct ofp_phy_port {
 -	Network environment: **mininet** or **OVS on PC**
 
 #### Expr 1
-- mn --controller=remote,ip=127.0.0.1, --topo tree,1 
+- mn --controller=remote,ip=127.0.0.1, --topo tree,1
 - curl http://127.0.0.1:8080/wm/core/switch/all/features/json
 ```
 {
@@ -254,12 +254,33 @@ struct ofp_phy_port {
 -	在仔細研究mininet的source code後，大致瞭解了整個運作流程
 - 當`mininet`要在兩個switch間創造一條link的時候，是透過下列手段達成的
 	-	`ip link add name s1-eth1 type veth peer name s2-eth1` 這種系統指令創造一個特殊的裝置`veth`，這兩個裝置的封包會彼此互通，因此就達成了`link`的功用
-  
-  -	此時透過`ethtool  s1-eth1`可以觀察到其中` Speed: 10000Mb/s`這樣的設定，他的速度就是設定成10G  
-  
-  -	在`OVS`中會使用` struct ethtool_cmd`這種結構來獲取`port`的相關資訊，這時候他會根據`speed`這個欄位來設定`currentFeautres`的數值   
-  
-  -	因此`mininet`創造出來的link預設都是10G，所以`OVS`那邊都會抓到10G的資訊   
-  
+
+  -	此時透過`ethtool  s1-eth1`可以觀察到其中` Speed: 10000Mb/s`這樣的設定，他的速度就是設定成10G
+
+  -	在`OVS`中會使用` struct ethtool_cmd`這種結構來獲取`port`的相關資訊，這時候他會根據`speed`這個欄位來設定`currentFeautres`的數值
+
+  -	因此`mininet`創造出來的link預設都是10G，所以`OVS`那邊都會抓到10G的資訊
+
 -	`traffic control`的部分則是透過系統的`tc`指令來做到速度限制的功能，所以不會動到每個port的設定
 
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

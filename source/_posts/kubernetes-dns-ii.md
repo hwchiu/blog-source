@@ -43,16 +43,16 @@ description: 本文跟大家分享一個在實際部屬上遇到的問題，在�
 # 環境版本
 - docker:
     - 17.06.2-ce, build cec0b72
-- kubernetes: 
+- kubernetes:
     - v1.10.0
-- os: 
+- os:
     - Ubuntu 16.04, Linux 4.4.0-128-generic
 
 # 問題描述
 
 首先，我觀察到這個問題主要是在不同的`Kubernetes` 集群中，我發現我自己部署的 `Deployment/Pod` 某些情況下卻沒有辦法解析外部的 DNS 名稱，譬如 `google.com`.
 > 這些 `kubernetes` 集群可能是採用不同方式安裝的，如 kubespray, kubeadm
- 
+
 
 這些 `Pod` 都採用預設的 `DNS` 設定，所以都會採用 `ClusterFirst` 的機制讓 `kube-dns` 來處理這些 `DNS` 請求。
 
@@ -139,7 +139,7 @@ root@node-1:~$ kubectl -n kube-system exec  kube-dns-5466774c4f-r9k4w cat /etc/r
 2. 該節點上 dockerd 運行的 dns 參數
 
 
-| node\dockerd | 有設定 DNS | 沒設定 DNS| 
+| node\dockerd | 有設定 DNS | 沒設定 DNS|
 | -------- | -------- | -------- |
 | 有數值     | node     | node     |
 | 沒有數值  | dockerd     | 8.8.8.8     |
@@ -167,5 +167,7 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

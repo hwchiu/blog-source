@@ -6,7 +6,7 @@ comments: true
 tags:
   - Algorithm
 abbrlink: 42732
-description: 本文介紹一個常見也是著名的演算法題目， N-Queue(N皇后),該題目假設在一個 NxN的棋盤上面，想求得總共有多少種的辦法去放置 N 的皇后且這些皇后彼此都不會互相影響，影響的定義則是上下左右直線，以及左下右上斜線總共六條斜線中都不能有其他的皇后。 這個經典問題有非常多種的解決方法，最簡單的就是透過遞迴配上剪枝來加速，然而在N過大的時候，盤面的數量太多，每次的運算都太花時間會導致整體求解速度過慢。因此本文使用基於 Bit 為單位的方式去進行運算，能夠更快速的求出答案。 
+description: 本文介紹一個常見也是著名的演算法題目， N-Queue(N皇后),該題目假設在一個 NxN的棋盤上面，想求得總共有多少種的辦法去放置 N 的皇后且這些皇后彼此都不會互相影響，影響的定義則是上下左右直線，以及左下右上斜線總共六條斜線中都不能有其他的皇后。 這個經典問題有非常多種的解決方法，最簡單的就是透過遞迴配上剪枝來加速，然而在N過大的時候，盤面的數量太多，每次的運算都太花時間會導致整體求解速度過慢。因此本文使用基於 Bit 為單位的方式去進行運算，能夠更快速的求出答案。
 
 ---
 
@@ -38,7 +38,7 @@ N皇后是一個經典的題目，最初是8皇后，後來被推廣至Ｎ皇后
 ## 第一回合
 Position: 10000
 Left: 00000  (因為1的左對角線就超出邊界了，所以此時的Left就是空的）
-Right: 01000 
+Right: 01000
 ## 第二回合
 Position: 10100 (因為第二個row的皇后是放在第三個col，因此就跟上一回合的Position給結合)
 Left: 01000
@@ -55,11 +55,11 @@ Right: 00101
 所以目前已經想好了要如何使用三個整數的bit來表示當前盤面的情況，如果要挑選一個合法的位置，首先將**Position**|**Left**|**Right**給得到一個新的值，這個值中為0的bit就代表是可以用的地方，因此從這些地方來挑選下一個合法位置即可。
 以剛剛的範例來說，過的第一回合後，
 Position: 10000
-Left: 00000 
-Right: 01000 
+Left: 00000
+Right: 01000
 將三個變數取ＯＲ得到新的值（101000），此值代表了第二回合要選取皇后時，第一跟第三個col都不能放皇后，只能放2,4,5,6四個col。
 這些表達方式都釐清後，接下來最困難的就是如何自動的選出合法位置，以剛剛的範例來說(101000)，針對此範例，我們知道皇后只能放在2,4,5,6四個col，我希望能夠找出一種方法來依序取出這四個位置，並且在四個位置都去放下皇后試試看。
-這邊最直覺的方法就是將該值(101000)不停地**/2**與**%2**，如此一來就可以知道每個bit是0還是1，但是這種方法的卻點就是要跑太多次迭代了，我希望能夠找出一個方法，該數值中有多少個0，就迭代多少次，不需要額外的次數來處理。  
+這邊最直覺的方法就是將該值(101000)不停地**/2**與**%2**，如此一來就可以知道每個bit是0還是1，但是這種方法的卻點就是要跑太多次迭代了，我希望能夠找出一個方法，該數值中有多少個0，就迭代多少次，不需要額外的次數來處理。
 原本數值:**101000**
 ## 第一次迭代
 這次選出了第一個0，（000001)
@@ -113,7 +113,7 @@ void DFS(int position,int left, int right,int depth){
         currentPos = currentPos | newPos;
     }
 }
- 
+
 int main(){
     cin >> N;
     counter =0;
@@ -122,3 +122,24 @@ int main(){
     cout << counter<<endl;
 }
 ```
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

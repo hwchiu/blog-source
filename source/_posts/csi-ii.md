@@ -69,21 +69,21 @@ kind: Pod
 metadata:
   name: gluster-pod
   labels:
-    name: gluster-pod  
+    name: gluster-pod
 spec:
   containers:
   - name: gluster-pod
-    image: busybox       
+    image: busybox
     command: ["sleep", "60000"]
     volumeMounts:
     - name: gluster-vol
-      mountPath: /usr/share/busybox 
+      mountPath: /usr/share/busybox
       readOnly: false
   securityContext:
-    supplementalGroups: [590]       
+    supplementalGroups: [590]
     privileged: true
   volumes:
-  - name: gluster-vol   
+  - name: gluster-vol
     persistentVolumeClaim:
       claimName: gluster-pvc
 ```
@@ -133,7 +133,7 @@ spec:
     nodePublishSecretRef
       name: mysecret3
       namespace: mynamespace
-```      
+```
 
 # CSI 標準
 回到 **Container Storage Interface** 的架構，先來看看官方怎麼描述 **CSI** 的[目標](https://github.com/container-storage-interface/spec/blob/master/spec.md#goals-in-mvp)
@@ -147,7 +147,7 @@ spec:
   * Local storage providers (e.g., device mapper, lvm).
   * Creating and deleting a snapshot (source of the snapshot is a volume).
   * Provisioning a new volume from a snapshot (reverting snapshot, where data in the original volume is erased and replaced with data in the snapshot, is out of scope).
- 
+
 
 1. 跟其他標準有一樣的目標，可以讓任何解決方案的提供者(這邊是儲存)，只要撰寫一套解決方案的實作，就可以再所有支持該 **CSI** 標準的容器管理平台使用。這對於開發者來說是個非常好的吸引力，只要這個標準夠大，支援平台夠多，就可以專注的維護本身解決方案的程式碼，而減少去整合各式各樣不同平台的心力
 
@@ -300,7 +300,7 @@ service Identity {
 當透過上述 **Controller** 的相關操作將 **Volume** 給掛載到節點後，接下來可以對 **Node** 進行 **stage** 的動作，將該 **Volume** 給掛到一個暫時的位置，接下來相關的工作資源**Pod** 就可以使用，甚至可以多個 **Pod** 共享。
 此外這個步驟也需要確保該 **Volume** 有被格式化過
 - Publish Volume
-這是最後一個步驟，透過類似 **bind mount** 的方式將欲使用的儲存空間給投入到 **Pod** 裡面去使用 
+這是最後一個步驟，透過類似 **bind mount** 的方式將欲使用的儲存空間給投入到 **Pod** 裡面去使用
 
 上面的敘述沒有非常精準的描述一切行為，因為對於 **Block Device** 以及 **Mountable Volume** 來說，兩者的使用方法不太一樣，因此執行的行為也會有點差異。而上述的行為描述比較偏向將一個 (block device) 提供給多個 **Pod** 去使用。
 
@@ -404,3 +404,24 @@ publishing on the node (`NodePublishVolume`).
 - https://github.com/container-storage-interface/spec
 - https://medium.com/searce/glusterfs-dynamic-provisioning-using-heketi-as-external-storage-with-gke-bd9af17434e5
 - https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

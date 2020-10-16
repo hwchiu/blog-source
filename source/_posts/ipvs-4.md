@@ -108,7 +108,7 @@ static int modprobe_ipvs(void)
 3. 真正處理封包的核心邏輯，這部分分成 **什麼時間處理封包** 以及 **怎麼處理封包**
     - **ipvs.ko** 本身包含了眾多的 **function** 來解決 **怎麼處理封包**，這部分包含查找對應的資料結構，呼叫對應的 **scheduling algorithm** 選擇後端伺服器以及封包轉發
     - **netfilter** 的架構則提供了 **什麼時間處理封包**，這部分與常見的 **IPTABLES** 時間點一樣，譬如 **PREROUTING**, **POSTROUTING**, **INPUT**, **OUTPUT** 等
-    
+
 實際上，(3)處理封包核心邏輯的實作則是將兩個概念結合， **ipvs.ko** 將處理封包的 function 透過 Linux Kernel 的介面去跟 netfilter 註冊，要求當封包經過特定的 **HOOK** 點的時候，呼叫相關的 function 來處理封包
 
 下圖是一個基本的 **IPTABLES/Netfilter** 流程圖，基本上就是**五個**時間點，每個時間點內都會有不同對應的 **TABLE**，而這些 **TABLE** 內也有相對應的 **Rules**
@@ -132,7 +132,7 @@ static int modprobe_ipvs(void)
 2. **ip_vs.ko** 做非常多事情，包含了
     a. 定義封包處理的 function，並且透過 netfilter 框架註冊這些 function. 未來封包在 kernel 內遊走的時候就會被這些 function 處理
     b. 根據參數設立相關的資料結構，包含有哪些 backend server, 採用哪套 scheduling 演算法
-    c. 根據需求動態載入對應 scheduling 的 kernel module. 
+    c. 根據需求動態載入對應 scheduling 的 kernel module.
 
 
 接下來我們就會從原始碼的部分稍微看一下 **ip_vs.ko** 這些事情實際上是怎麼實作的
@@ -527,9 +527,8 @@ static unsigned int iptable_nat_ipv4_local_fn(void *priv,
 
 藉由這四篇文章的學習，讓我對於 IPVS 的概念有更深的理解，同時也更能說出 IPVS 與 IPTABLES 的異同之處，對於相關文章也能夠有更深的背景去探討與思考。
 
-# 課程分享
-最後，我目前於 Hiskio 上面有開設一門 Kubernetes 入門篇的課程，裡面會探討運算/網路/儲存三個最重要的平台資源，此外對於 CRI/CNI/CSI 也都有簡單的介紹，主要會基於 **Kubernetes** 本身的設計原理及各資源的用法與情境去介紹。
-如果本身已經很熟練的使用 Kubernetes 於環境中就不太適合這門課程，主要是給想要踏入到 Kubernetes 世界中的朋友，有興趣的幫忙捧場或推廣
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
 組合包
 https://hiskio.com/packages/D7RZGWrNK
@@ -539,3 +538,12 @@ https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
 
 基礎概念
 https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

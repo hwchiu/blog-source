@@ -30,7 +30,7 @@ description: 在前述中我們已經學過了什麼是 kubernetes service, 一�
 
 
 很多人在學習一個新的系統的時候，最初接觸的都是如何使用，如何操作，然而對其背後的實現原理卻沒有太多的著墨。
-為什麼要學習實現的原理？ 
+為什麼要學習實現的原理？
 很簡單，因為「知己知彼，百戰百勝」
 當我們理解這些功能背後的實現方式後，我們不但可以學習到其背後的設計理念與方式，同時當問題出現時。
 我們可以比一般使用者用更廣的角度去思考問題，同時也可以採用更系統的方式去除錯找出問題的根本，這更能體現出你相對於一般人的價值。
@@ -49,7 +49,7 @@ description: 在前述中我們已經學過了什麼是 kubernetes service, 一�
 1. kube-Proxy (old)
 2. iptables (default)
 3. ipvs (experimental)
- 
+
 簡單敘述一下這三種的差異
 1. kube-Proxy 是指透過`kube-proxy`本身程式內部的邏輯來實現 `service`，由於 `kube-proxy` 是 `user-space` 的應用程式，所以效率非常低落，但是因為是程式化的結果，彈性比較高。
 2. iptables 的話，則是讓 `kube-proxy` 去維護跟 `service`有關的邏輯部分，真正所有封包轉送都交由 `kernel-space` 的 `iptables` 來處理。 效率比(1)來得強，但是在使用上則是會受限於 `iptables` 的規則與框架。
@@ -122,7 +122,7 @@ kubernetes          172.17.8.100:6443                              11d
 
 ## Access By FQDN
 我們都知道 `Service` 本身會提供一組對應的 `FQDN` 供應用程式使用
-實際上這組`FQDN` 只有 `kube-dns` 能夠理解，而且其對應的 `IP` 地址其實就是每個 `Service` 提供的 `ClusterIP` 
+實際上這組`FQDN` 只有 `kube-dns` 能夠理解，而且其對應的 `IP` 地址其實就是每個 `Service` 提供的 `ClusterIP`
 這邊的ClusterIP剛好跟 `Type` 的ClusterIP 名稱一樣，但是這邊要表示的真的是個`IP`地址
 
 ```bash=
@@ -177,7 +177,7 @@ k8s-nginx-cluster   10.244.0.88:80,10.244.0.89:80,10.244.0.90:80   1d
 只有 **封包的來源`IP`地址是來自`叢集內的應用程式/節點`**，符合這種規則的才有資格去進行 `DNAT` 進行轉發
 
 實際上使用的概念是更簡單，這邊透過 `iptables build-in chain` 裡面的 `OUTPUT/PREROUTING` 兩個 `chain` 來達成
-**只有`叢集內`的應用程式/節點** 
+**只有`叢集內`的應用程式/節點**
 這個功能
 
 這邊我直接講明
@@ -195,7 +195,7 @@ $sudo iptables-save | grep k8s-nginx-cluster
 ....
 ```
 上述的規則我們來仔細看一下每個參數的意義
-- -A `KUBE-SERVICES` 
+- -A `KUBE-SERVICES`
     - 這是一個 `Custom Chain`, 所有跟 `Kubernetes Service` 有關的第一到防線規則都在這邊
 - -d 10.98.51.150/32
     - 目標位置是 `ClusterIP` 的話
@@ -242,7 +242,7 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 4. 封包最後會透過`DNAT`的方式轉換成其中一個`endpoints`容器上的真實`IP`地址
 
 
-## Loab Balancing 
+## Loab Balancing
 現在我們要來看看最後一個部分了，到底要怎麼從眾多的 `Endpoints` 中挑選出一個可用的 `Pod` 來使用。
 
 根據前面的分析，當我們的封包符合叢集內使用的規則後，會跳到一個`KUBE-SVC-3FL7SSXCKTCXAYCR` 的 `custom chain`.
@@ -299,3 +299,23 @@ $sudo iptables-save -c | grep KUBE-SERVICES
 
 ![Imgur](https://i.imgur.com/xoPvipq.png)
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

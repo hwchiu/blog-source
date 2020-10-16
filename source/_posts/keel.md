@@ -43,7 +43,7 @@ description: 本文介紹一種基於 Kubernetes 開發的 Continuous Deployment
     - 通常來說可能只需要 `Push Image` 相關的權限.
     - `Push Image` 可能意味 `Write` 配上一些 `Read`. 這部分沒有唯一，看平台而定
 3. `CI` 系統與 `Kubernetes` 平台的權限控管
-    - 這部分應該會基於 `Kubernetes` 的 `Role (RBAC)` 來決定，根據應用程式的使用方式，可能會需要更強大的權限來部署相關的資源，如 `Pod/Deployment/Service/Ingress/Secret/ConfigMap` 
+    - 這部分應該會基於 `Kubernetes` 的 `Role (RBAC)` 來決定，根據應用程式的使用方式，可能會需要更強大的權限來部署相關的資源，如 `Pod/Deployment/Service/Ingress/Secret/ConfigMap`
 
 所以對我來說最困難的反而不是這些如何串聯起來，反而是就授權方面，該如何處理才是合宜的。
 
@@ -109,16 +109,16 @@ kind: StatefulSet
 metadata:
   name: wd
   namespace: default
-  labels: 
+  labels:
       name: "wd"
-      keel.sh/policy: major    
+      keel.sh/policy: major
 spec:
 ...
-    spec:      
-      containers:                    
+    spec:
+      containers:
         - image: karolisr/webhook-demo:0.0.8
-          imagePullPolicy: Always            
-...         
+          imagePullPolicy: Always
+...
 ```
 
 下列範例則是採用 `Polling` 的方式，並且定期每`10分鐘`去檢查一下目標的 `Container Image` 是否有更新.
@@ -127,13 +127,13 @@ spec:
 ```yaml=
 apiVersion: extensions/v1beta1
 kind: Deployment
-metadata: 
+metadata:
   name: wd
   namespace: default
-  labels: 
+  labels:
       name: "wd"
       keel.sh/policy: force
-      keel.sh/trigger: poll      
+      keel.sh/trigger: poll
   annotations:
       keel.sh/pollSchedule: "@every 10m"
 spec:
@@ -169,7 +169,7 @@ keel:
   # images to track and update
   images:
     - repository: image.repository
-      tag: image.tag 
+      tag: image.tag
 ```
 
 
@@ -191,7 +191,7 @@ keel:
 基本上會在 `Kubernetes` 內安裝相對應的 `Deployment` 來提供上述所描述的所有功能。
 
 ```bash=
-helm repo add keel-charts https://charts.keel.sh 
+helm repo add keel-charts https://charts.keel.sh
 helm repo update
 helm upgrade --install keel --namespace=kube-system keel-charts/keel
 ```
@@ -245,7 +245,7 @@ hwchiu:~$
 ## Update Image
 接下來我們透過 `docker tag/docker push` 的方式來更新相關的
  `docker image`.
- 
+
 ```bash=
 hwchiu:~$ sudo docker tag hwchiu/netutils:0.1.0 hwchiu/netutils:0.1.1
 hwchiu:~$ sudo docker push hwchiu/netutils:0.1.1
@@ -296,9 +296,30 @@ hwchiu/netutils:1.1.1
 ```
 
 # Summary
-這次跟大家介紹一款針對 `Kubernetes` 量身打造的 `CD` 工具，不過適不適合各位的環境並不是一個絕對的答案，就讓各位自己去評估是否有這個需求。 畢竟通常越方便使用，有時候其彈性反而愈少，當未來有任何客製化需求的時候可能反而會綁手綁腳。 
+這次跟大家介紹一款針對 `Kubernetes` 量身打造的 `CD` 工具，不過適不適合各位的環境並不是一個絕對的答案，就讓各位自己去評估是否有這個需求。 畢竟通常越方便使用，有時候其彈性反而愈少，當未來有任何客製化需求的時候可能反而會綁手綁腳。
 
 
 # Reference
 - [Keel](https://keel.sh/v1/guide/#What-is-Keel)
 - [Semantic Versioning 2.0.0](https://semver.org/)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

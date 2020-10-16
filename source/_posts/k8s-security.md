@@ -32,7 +32,7 @@ date: 2019-10-14 06:05:42
 4. Cloud/Co-located servers
 
 這四個分別屬於不同的層級，且彼此一層包一層，對於**安全**的議題來說，這中間能夠涉入的點實在太多。
-譬如是程式碼本身是否就有漏洞，本身不夠安全？ 
+譬如是程式碼本身是否就有漏洞，本身不夠安全？
 
 還是說是運行 Container 的方式或是設定不夠安全，譬如之前提過的 **RunC** 安全性漏洞。
 
@@ -46,13 +46,13 @@ date: 2019-10-14 06:05:42
 
 ## Container Security
 
-排除特定基於虛擬機器的 **CRI** 解決方案的話，**Container** 是 **kubernetes** 運作的最基本單元，**container** 本身的安全性牽扯範圍不少，譬如運行環境的權限設定，避免過度提權導致該 **container** 有過大的權力。或是 **container** 內部安裝的軟體是否本身就有安全性漏洞，而這些軟體是產生 **image** 本身的時候就已經安裝好還是運行後動態安裝的？ 
+排除特定基於虛擬機器的 **CRI** 解決方案的話，**Container** 是 **kubernetes** 運作的最基本單元，**container** 本身的安全性牽扯範圍不少，譬如運行環境的權限設定，避免過度提權導致該 **container** 有過大的權力。或是 **container** 內部安裝的軟體是否本身就有安全性漏洞，而這些軟體是產生 **image** 本身的時候就已經安裝好還是運行後動態安裝的？
 這意味者 **container image** 本身也是有相關的安全性問題需要檢查，譬如檢查整個系統內是否有任何軟體有安全性漏洞
 
 基於上述 **container image** 產生的安全性隱憂，目前也有相關的專案再處理這一塊，譬如[CoreOS's Clair](https://github.com/coreos/clair/) 專案
 
 > Clair is an open source project for the static analysis of vulnerabilities in application containers (currently including appc and docker).
-> 
+>
 
 除了 **Image** 內軟體的安全性之外，**image** 本身的數位簽章也是一個需要考慮的部分
 舉例來說，對於 **kubernetes** 這個 **container** 管理平台，是否針對任何 **Pod Yaml**內描述的 **Container** 都需要幫忙創建? 如果該 **Container** 可能本身是來路不明，無法保證其使用安全性，這種情況下是否可以拒絕創建
@@ -142,7 +142,7 @@ per-thread attribute.
 ### AppArmor
 可以參考[Kubernetes Apparmor](https://kubernetes.io/docs/tutorials/clusters/apparmor/) 的介紹
 > AppArmor is a Linux kernel security module that supplements the standard Linux user and group based permissions to confine programs to a limited set of resources. AppArmor can be configured for any application to reduce its potential attack surface and provide greater in-depth defense. It is configured through profiles tuned to whitelist the access needed by a specific program or container, such as Linux capabilities, network access, file permissions, etc. Each profile can be run in either enforcing mode, which blocks access to disallowed resources, or complain mode, which only reports violations.
-> 
+>
 
 基本上是個非常厭煩的功能，以 **profile** 為基本單位去限制相關應用程式能夠存取的所有東西，譬如 **capabilities**, **network**, **file permissions**。
 
@@ -157,7 +157,7 @@ per-thread attribute.
   capability net_raw,
   capability setuid,
   network inet raw,
-  
+
   /bin/ping mixr,
   /etc/modules.conf r,
 }
@@ -182,3 +182,24 @@ per-thread attribute.
 - https://blog.yadutaf.fr/2013/12/28/introduction-to-linux-namespaces-part-2-ipc/
 - https://kubernetes.io/docs/tutorials/clusters/apparmor/
 - https://help.ubuntu.com/lts/serverguide/apparmor.html
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

@@ -113,8 +113,8 @@ void ovs_vport_receive(struct vport *vport, struct sk_buff *skb,
   2. 去查詢該 **datapath**的flow table中否有符合的flow entry
   3. 有找到，就執行對應的action.
   4. 沒有找到，就執行 **ovs_dp_upcall**送到 **user space**
-  
-  
+
+
 ``` c
 void ovs_dp_process_received_packet(struct vport *p, struct sk_buff *skb)
 {
@@ -192,13 +192,13 @@ int ovs_flow_extract(struct sk_buff *skb, u16 in_port, struct sw_flow_key *key)
 
 ```
 
-- OVS_CB是一個marco,會把skbuff中的cb區域拿來使用，並且轉型成 ovs_skb_cb   
+- OVS_CB是一個marco,會把skbuff中的cb區域拿來使用，並且轉型成 ovs_skb_cb
 **#define OVS_CB(skb) ((struct ovs_skb_cb *)(skb)->cb)**
 - 如果該packet有使用 **tunnel_key**的話，就把該 **tun_key**給複製到 **key**。
 - 把收到封包的port number也記錄到key裡面( ingress port)
 - 使用 **skb_reset_mac_header** 得到 mac header (放在 skb->mac_header)
 
-```c 
+```c
         /* Link layer.  We are guaranteed to have at least the 14 byte Ethernet
          * header in the linear data area.
          */
@@ -222,7 +222,7 @@ int ovs_flow_extract(struct sk_buff *skb, u16 in_port, struct sw_flow_key *key)
 
         skb_reset_network_header(skb);
         __skb_push(skb, skb->data - skb_mac_header(skb));
-        
+
         ....
 ```
 
@@ -250,7 +250,7 @@ struct sw_flow *ovs_flow_lookup(struct flow_table *tbl,
 
         return flow;
 }
-``` 
+```
 
 -  從 **datapath**的**flow table**中先取得所有的 **mask_list**
 -  使用 **ovs_masked_flow_lookup**去搜尋進來的封包是否有match
@@ -522,12 +522,12 @@ err:
  - 取得該 datapath的index
  - 根據有使用 **gso**的話，就會特別處理，因為封包的長度比較大，會透過多次的 **queue_userspace_packet**來處理支援 **gso**的封包。
  - 如果發生error，意味者這個封包就不會有人處理了，因此把lost的值增加
-  
- 
+
+
 ### queue_userspace_packet
-  
+
 ``` c
- 
+
  static int queue_userspace_packet(struct net *net, int dp_ifindex,
                                   struct sk_buff *skb,
                                   const struct dp_upcall_info *upcall_info)
@@ -586,8 +586,28 @@ out:
 }
 
 ```
- 
+
 - 這邊產生 **generic netlink** 然後把資料設定完畢後，就送出到 **userspace**
 - **genlmsg_**系列尚未完全瞭解，待補充
 
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

@@ -60,7 +60,7 @@ index 0ef4a5a..ba21d07 100644
 - if (skb->ip_summed == CHECKSUM_NONE &&
 - rcv->features & NETIF_F_RXCSUM)
 - skb->ip_summed = CHECKSUM_UNNECESSARY;
- 
+
  if (likely(dev_forward_skb(rcv, skb) == NET_RX_SUCCESS)) {
  struct pcpu_vstats *stats = this_cpu_ptr(dev->vstats);
 ```
@@ -90,3 +90,24 @@ index 0ef4a5a..ba21d07 100644
 2. **OVS** 的問題使得 TCP 封包出現錯誤
 
 基本上到這邊已經大致上找出問題點了，最後一步驟就是翻進 **OVS** 的程式碼內，找出對應的錯誤，若沒有時間找出來，就發一個 issue 到官方去詢問好了。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

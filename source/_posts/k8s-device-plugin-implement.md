@@ -16,7 +16,7 @@ description: 本篇文章會就 device plugin 本身的架構來探討如何實�
 
 前篇文章已經探討了 **device plugin** 的設計理念以及基本使用流程，而本篇文章會比較以技術性的角度來探討這個框架，與此同時也可以看看這個框架的使用方式與前述的 **CRI/CNI/CSI** 這些標準的介面有何不同。
 
-前述提到過 **device plugin** 會透過 **unix socket** 與 **kubelet** 進行溝通，而實際上這個溝通的部分也是透過 **gRPC + protobuf** 描述的介面來進行溝通，因此官方針對 **device plugin** 的框架有定義了一系列的介面，每個解決方案都要滿足這些介面才可以順利地與 **kubelet** 溝通，最後順利的於 kubernetes 內運作。 
+前述提到過 **device plugin** 會透過 **unix socket** 與 **kubelet** 進行溝通，而實際上這個溝通的部分也是透過 **gRPC + protobuf** 描述的介面來進行溝通，因此官方針對 **device plugin** 的框架有定義了一系列的介面，每個解決方案都要滿足這些介面才可以順利地與 **kubelet** 溝通，最後順利的於 kubernetes 內運作。
 
 再探討 **device plugin** 前，必須要先針對版本有所共識，目前的 **device plugin** 本身的介面有兩個版本，分別是
 1. [v1alpha](https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/apis/deviceplugin/v1alpha/api.proto)
@@ -87,7 +87,7 @@ message DevicePluginOptions {
 
 一但 **kubetlet** 接收到註冊之後，接下來就會開始根據需求進行 **ListWatch** 以及 **Alloacte** 兩個的呼叫，這邊可以特別注意到的是 **ListWatch** 本身是雙向互動的，意味者兩邊都會根據需求互相呼叫對方的函式。而 **Allocate** 就是單一方向的。
 
-本圖片雖然來自官方文件，但是右下方的 **Unload Drivers During Pre-Stop Hook** 
+本圖片雖然來自官方文件，但是右下方的 **Unload Drivers During Pre-Stop Hook**
 只是早期設計時的發想，畢竟是 **Proposal**，實際上這個點反而很難做，譬如 **Container crash** 算不算 **pre-stop**?
 因此不如透過 **pre-start** 的方ㄕ確保每個 **container** 啟動前都可以呼叫的方式去 **reset** 相關資源。
 
@@ -231,7 +231,7 @@ message ContainerAllocateResponse {
 3. read_only/permissions
 
 其中前面兩個資訊是不是與我們前述的 **docekr** 範例非常相似？
-透過用路徑的方式去表達欲掛載到目標容器內的 **volume** 或是 **devices** 
+透過用路徑的方式去表達欲掛載到目標容器內的 **volume** 或是 **devices**
 
 所以回傳的格式可能如下
 ```json=
@@ -303,11 +303,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
-
 
 # 參考
 - https://github.com/kubernetes/community/blob/master/contributors/design-proposals/resource-management/device-plugin.md#device-manager-proposal

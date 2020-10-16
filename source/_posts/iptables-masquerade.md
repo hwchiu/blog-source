@@ -33,7 +33,7 @@ description: 本篇文章透過閱讀原始碼的方式來學習 MASQUERADE 的�
 - [Linux Kernel 4.15.18](https://elixir.bootlin.com/linux/v4.15.18/source
 )
 - [iptables  v.1.6.1](https://git.netfilter.org/iptables/tree/extensions/libip6t_MASQUERADE.c?h=v1.6.1)
-    
+
 # 問題描述
 
 **MASQUERADE** 最初的認知，會針對不同的 **Routing** 規則選出不同的網路介面作為目的地，並且選擇該網路介面本身的 **IP** 地址作為封包最後的來源地址。
@@ -270,7 +270,7 @@ nf_nat_masquerade_ipv4(struct sk_buff *skb, unsigned int hooknum,
 		pr_info("%s ate my IP address\n", out->name);
 		return NF_DROP;
 	}
-    
+
 	nat = nf_ct_nat_ext_add(ct);
 	if (nat)
 		nat->masq_index = out->ifindex;
@@ -390,7 +390,7 @@ vagrant@linux-study:~/linux$ ip addr show dev docker0
 #define for_primary_ifa(in_dev)	{ struct in_ifaddr *ifa; \
   for (ifa = (in_dev)->ifa_list; ifa && !(ifa->ifa_flags&IFA_F_SECONDARY); ifa = ifa->ifa_next)
 #define endfor_ifa(in_dev) }
- .... 
+ ....
         for_primary_ifa(in_dev) {
                 if (ifa->ifa_scope > scope)
                         continue;
@@ -407,8 +407,8 @@ vagrant@linux-study:~/linux$ ip addr show dev docker0
 把上述的 MACRO 給展開後會得到下列的迴圈內容(排版過)
 
 ```c++
-{  
-    struct in_ifaddr *ifa; 
+{
+    struct in_ifaddr *ifa;
     for (ifa = (in_dev)->ifa_list; ifa && !(ifa->ifa_flags&IFA_F_SECONDARY); ifa = ifa->ifa_next) {
         if (ifa->ifa_scope > scope)
             continue;
@@ -501,12 +501,12 @@ nf_nat_setup_info(struct nf_conn *ct,
 {
         struct net *net = nf_ct_net(ct);
         struct nf_conntrack_tuple curr_tuple, new_tuple;
-...        
-   
+...
+
         get_unique_tuple(&new_tuple, &curr_tuple, range, ct, maniptype);
-....        
+....
 }
-```        
+```
 
 對於 **linux kernel** 來說，進行一個有效的 **NAT** 除了尋找到一個合法且唯一的**連接埠/IP 地址** 之外，如何讓這個連線能夠更有效的處理也是一個議題，總不可能每次該連線中的封包都要重新檢查，尋找並且轉換，這部分就會仰賴 **Conntrack (Connection Tracking)** 的整合與運作，能夠提供更快速的運作同時也可以避免 **NAT** 相關的規則每個封包都要執行一次。
 因此上述的原始碼中會有非常大量的部分都跟 **Conntrack** 有關，這邊就不詳細談這概念，主要專注於 **NAT** 連接埠的選擇。
@@ -535,7 +535,7 @@ get_unique_tuple(struct nf_conntrack_tuple *tuple,
         l3proto = __nf_nat_l3proto_find(orig_tuple->src.l3num);
         l4proto = __nf_nat_l4proto_find(orig_tuple->src.l3num,
                                         orig_tuple->dst.protonum);
-...                                        
+...
 
         /* Last change: get protocol to try to obtain unique tuple. */
         l4proto->unique_tuple(l3proto, tuple, range, maniptype, ct);
@@ -567,7 +567,7 @@ const struct nf_nat_l4proto nf_nat_l4proto_tcp = {
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
         .nlattr_to_range        = nf_nat_l4proto_nlattr_to_range,
 #endif
-}; 
+};
 ```
 
 上述只是一個 TCP 結構的表達，實際上會有九種相關的物件都使用 **nf_nat_l4proto** 來註冊。
@@ -623,8 +623,8 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
                 min = ntohs(range->min_proto.all);
                 range_size = ntohs(range->max_proto.all) - min + 1;
         }
-        
-        
+
+
         if (range->flags & NF_NAT_RANGE_PROTO_RANDOM) {
                 off = l3proto->secure_port(tuple, maniptype == NF_NAT_MANIP_SRC
                                                   ? tuple->dst.u.all
@@ -662,7 +662,7 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
         }
 ```
 
-上述的概念用程式碼表示就是，透過 **off** 絕對一個 **起始位置** 的偏移量    
+上述的概念用程式碼表示就是，透過 **off** 絕對一個 **起始位置** 的偏移量
 透過 **min** 以及 **range_size** 決定範圍區間
 最後透過 `++i` 以及 `nf_nat_used_tuple` 來遞加選擇的 **port** 並且確認是否為一。
 
@@ -680,7 +680,7 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
                 min = ntohs(range->min_proto.all);
                 range_size = ntohs(range->max_proto.all) - min + 1;
         }
-...        
+...
 ```
 可以看到如果有設定 **NF_NAT_RANGE_PROTO_SPECIFIED** 這個參數的話，就會透過之前設定的 **min_proto/max_proto** 來決定 **min/range_size** 的大小。
 否則一般情況下就是使用 **min=1024, range_size=65535-1024+1**.
@@ -713,3 +713,24 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
 2. 起始 **port** 的偏移量
 
 下篇文章我們會嘗試透過直接修改 **source code** 的方式來觀察整個問題並驗證上述的觀察結果。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

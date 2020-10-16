@@ -50,7 +50,7 @@ description: 這次要跟大家分享的是一些關於 TravisCI 的使用心得
 
 
 
-## Example 
+## Example
 以下示範一個非常簡單的 `.travis.yml` 設定檔案，在此環境中，我們要求 `TravisCI` 準備一個 `golang 1.8` 版本的環境，同時對於 `install` 以及 `script` 這兩個階段我們都執行非常簡單的指令。
 
 ```yaml=
@@ -64,7 +64,7 @@ before_install:
 
 install:
   - echo "install"
-  - 
+  -
 before_script:
   - echo "before_script"
 
@@ -197,7 +197,7 @@ language: go
 
 go:
   - "1.8"
-  
+
 before_install:
   - echo "before_install"
 install:
@@ -316,7 +316,7 @@ jobs:
 
 
 # Summary
-本文跟大家分享了關於 `TravisCI` 的使用心得，從基本的使用方法到進階的 `Multiple Job` 以及 `Stage` 
+本文跟大家分享了關於 `TravisCI` 的使用心得，從基本的使用方法到進階的 `Multiple Job` 以及 `Stage`
 
 透過這些概念的組合，我們能夠將 `CI/CD` 的流程拆的更細緻，讓整個架構與流程更加清楚，同時透過平行運行的方式加快整體流程的速度 **(這部份不一定，完全是看每個專案的流程)**.
 
@@ -324,3 +324,24 @@ jobs:
 - https://github.com/travis-ci/travis-ci/issues/1392
 - https://docs.travis-ci.com/user/customizing-the-build/
 - https://docs.travis-ci.com/user/build-stages
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

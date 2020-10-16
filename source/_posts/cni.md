@@ -90,7 +90,7 @@ eth0      Link encap:Ethernet  HWaddr 02:42:ac:12:00:02
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:0
           RX bytes:1046 (1.0 KB)  TX bytes:0 (0.0 B)
-...          
+...
 $ c1_id=$(sudo docker ps | grep hwchiu/netutils | awk '{print $1}')
 $ sudo docker run -d --net=container:${c1_id} --name c2 hwchiu/netutils
 $ sudo docker exec c2 ifconfig
@@ -101,7 +101,7 @@ eth0      Link encap:Ethernet  HWaddr 02:42:ac:12:00:02
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:0
           RX bytes:1116 (1.1 KB)  TX bytes:0 (0.0 B)
-...          
+...
 ```
 
 在上述的測試中，我們先創建了 `c1` container，並且讓 `c2` 跟 `c1` 共用同樣一個 `network namespace`. 試想一個情況，這時候如果 `c1` container 終止了，整個情況會變成怎樣?
@@ -115,8 +115,8 @@ eth0      Link encap:Ethernet  HWaddr 02:42:ac:12:00:02
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:0
           RX bytes:1242 (1.2 KB)  TX bytes:0 (0.0 B)
-...          
-$ sudo docker stop c1         
+...
+$ sudo docker stop c1
 $ sudo docker exec  c2 ifconfig
 lo        Link encap:Local Loopback
           inet addr:127.0.0.1  Mask:255.0.0.0
@@ -124,7 +124,7 @@ lo        Link encap:Local Loopback
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)          
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 
 ```
 
@@ -168,7 +168,7 @@ lo        Link encap:Local Loopback
 #### dns
 如果希望該 `CNI` 幫忙設定 DNS 相關資訊的話，可以在這邊去設定 DNS 譬如
   - name servers
-  - search 
+  - search
   - domain
   - options
 這樣要特別注意的是雖然 `CNI` 有這個欄位，但是 `kubernetes` 本身並不希望 `CNI` 去設定 `DNS`，而是透過 `Pod Yaml` 裡面的欄位去處理，因此 `kubernetes` 處理這邊得時候會忽略這個值。
@@ -349,3 +349,24 @@ func getDefaultCNINetwork(confDir string, binDirs []string) (*cniNetwork, error)
 - https://kubernetes.io/blog/2017/11/containerd-container-runtime-options-kubernetes/
 - https://kubernetes.io/docs/concepts/workloads/pods/pod/
 - https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/dockershim/network/cni/cni.go
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

@@ -69,7 +69,7 @@ date: 2020-09-17 21:29:53
 
 上述的結論可以看到 `Auto MTU` 的效能都非常差，原因並不是 `Auto MTU` 沒有效，而是因為這些 CNI 目前根本沒有支持 `Auto MTU` 的做法，而 `Calico` 直到 3.7 版本才正式支持 `Auto MTU` 這個功能，而且根據作者的測試其功能良好。
 
-作者認為對於這種需要設定 Jumbo frames 的環境下，如果沒有 `Auto MTU` 的話，管理員則需要手動去設定這些 MTU，所以非常希望每個 CNI 能夠去實作 `Auto MTU` 的功能來自動偵測並且設定，減少管理員需要人工介入的需求。 
+作者認為對於這種需要設定 Jumbo frames 的環境下，如果沒有 `Auto MTU` 的話，管理員則需要手動去設定這些 MTU，所以非常希望每個 CNI 能夠去實作 `Auto MTU` 的功能來自動偵測並且設定，減少管理員需要人工介入的需求。
 
 
 
@@ -96,7 +96,7 @@ date: 2020-09-17 21:29:53
 
 一開始作者先比較基於閒置狀況下，不同 CNI 所消耗的資源狀況，包含了 CPU 以及 Memory。
 
-原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低` 
+原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低`
 
 | CNI\資源類型 | CPU  | Memory |
 | ------------ | ---- | ------ |
@@ -123,7 +123,7 @@ date: 2020-09-17 21:29:53
 
 > Kube-OVN > Cilium > 剩下全部 > WeaveNet/Flannel
 
-## Pod to Pod 
+## Pod to Pod
 
 接下來看一下 Pod to Pod 的存取，這邊的方式是直接用 Pod 的 IP 來存去，並不是任何用 Service 這種方式來存取。
 
@@ -150,7 +150,7 @@ date: 2020-09-17 21:29:53
 
 
 
-接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低` 
+接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低`
 
 | CNI\資源類型 | CPU  | Memory |
 | ------------ | ---- | ------ |
@@ -192,7 +192,7 @@ date: 2020-09-17 21:29:53
 
 
 
-接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低` 
+接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低`
 
 | CNI\資源類型 | CPU  | Memory |
 | ------------ | ---- | ------ |
@@ -242,7 +242,7 @@ Kube-OVN > Cilium > WeaveNet/Antrea/Kube-Router > Calico/Canal/Flannel > 裸機
 
 
 
-接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低` 
+接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低`
 
 | CNI\資源類型 | CPU  | Memory |
 | ------------ | ---- | ------ |
@@ -291,7 +291,7 @@ Kube-OVN > Cilium > WeaveNet/Antrea > Kube-Router/Calico/Canal/Flannel > 裸機
 
 
 
-接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低` 
+接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低`
 
 | CNI\資源類型 | CPU  | Memory |
 | ------------ | ---- | ------ |
@@ -310,7 +310,7 @@ Kube-OVN > Cilium > WeaveNet/Antrea > Kube-Router/Calico/Canal/Flannel > 裸機
 2. Antrea/WeaveNet/Kube-router 三者消耗的層級差不多
 3. Calico/Canal/Flannel 三者差不多
 
-Kube-OVN/Cilium > WeaveNet/Antrea/Kube-Router > Calico/Canal/Flannel 
+Kube-OVN/Cilium > WeaveNet/Antrea/Kube-Router > Calico/Canal/Flannel
 
 
 
@@ -356,7 +356,7 @@ Kube-OVN/Cilium > WeaveNet/Antrea/Kube-Router > Calico/Canal/Flannel
 
 ### TCP
 
-接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低` 
+接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低`
 
 | CNI\資源類型 | CPU  | Memory |
 | ------------ | ---- | ------ |
@@ -372,7 +372,7 @@ Kube-OVN/Cilium > WeaveNet/Antrea/Kube-Router > Calico/Canal/Flannel
 
 ### UDP
 
-接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低` 
+接下來觀察一下這個實驗中，不同 CNI 的資源消耗量，原文中是用 CPU(%) 以及 Memory (MB) 來畫圖，我則是將這些數字用幾個等級來區分，`數字愈低代表使用量愈低`
 
 | CNI\資源類型 | CPU  | Memory |
 | ------------ | ---- | ------ |
@@ -500,3 +500,23 @@ P2S -> Pod to Service
 
 - https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-updated-august-2020-6e1b757b9e49
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

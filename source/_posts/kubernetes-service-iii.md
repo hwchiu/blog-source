@@ -11,7 +11,7 @@ description: 在前述中我們已經學過了什麼是 kubernetes service 以�
 
 ---
 
-# Preface 
+# Preface
 本文章是屬於 `kubernetes` service 系列文之一，該系列文希望能夠與大家討論下列兩個觀念
 1. 什麼是 `Kubernetes Service`, 為什麼我們需要它？ 它能夠幫忙解決什麼問題
 2. `Kubernetes Service` 是怎麼實現的?， 讓我們用 iptables 來徹徹底底的理解他
@@ -37,7 +37,7 @@ description: 在前述中我們已經學過了什麼是 kubernetes service 以�
 
 既然已經有前面的 `ClusterIP` 提供了一種叢集內存取的方式，什麼情況下我們會需要 `NodePort` 這種透過存取節點的方式?
 
-這邊使用一個下列的範例來解釋可能的情況 
+這邊使用一個下列的範例來解釋可能的情況
 
 以下只是一種範例，但是未必是最佳解
 
@@ -113,7 +113,7 @@ $sudo iptables-save  | grep default/k8s-nginx-node
 
 這邊目前只有 `KUBE-NODEPORTS` 還沒有看過，剩下的都跟 `ClusterIP` 是一樣的功能的。
 
-NodePort 的功能基於 ClusterIP 之上再添加新功能，所以本來 Cluster 該有的規則對於 NodePort 來說都不會少 
+NodePort 的功能基於 ClusterIP 之上再添加新功能，所以本來 Cluster 該有的規則對於 NodePort 來說都不會少
 
 # KUBE-NODEPORTS
 我們仔細觀察 `KUBE-NODEPORTS` 相關的兩條規則
@@ -201,7 +201,7 @@ vortex-dev:01:08:43 [~/go/src/github.com/linkernetworks/vortex/vendor](hwchiu/VX
 $ps axuw  | grep docker-p
 root     21499  0.0  0.0  59068  2852 ?        Sl   01:08   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5566 -container-ip 172.18.0.2 -container-port 80
 ```
- 
+
 # Summary
 本章節我們仔細的討論了 `NodePort` 各種面向的概念，最後發現其實 `NodePort` 的規則非常簡單，建立於 `ClusterIP` 之上。
 只要能夠掌握 `ClusterIP` 是如何運作的，回過頭來看 `NodePort` 就不難理解這整個過程。
@@ -209,3 +209,23 @@ root     21499  0.0  0.0  59068  2852 ?        Sl   01:08   0:00 /usr/bin/docker
 最後繼續使用這張圖作為總結，希望大家這時候都能夠順利的看懂這張圖要表達的一切概念
 ![Imgur](https://i.imgur.com/9amwybH.png)
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

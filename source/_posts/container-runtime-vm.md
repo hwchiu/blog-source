@@ -45,7 +45,7 @@ description: 本文作為 CRI 系列文章的最後一篇文章，要來跟大�
 
 曾經覺得困難的問題，現在如果瞭解了 `CRI` 的架構與運作模式，對這個問題似乎就不會覺得太困難了，可以直接打造一個滿足 `CRI` 介面的程式，背後全部都用 `Virtual Machine` 去實現。
 > 這個情況下可以完全不需要去管 OCI 標準了，因為我們的目標是純 Virtual Machine，不太需要管 Container。
-> 
+>
 
 除了上述的難以容器化的原因外，還有一些原因是打造這種專案的契機
 1. 混合作業系統環境的運行環境，對於一個全部都採用 `Linux` 環境架設的 `Kubernetes`  叢集，要如何在其中運行一些基於 `Windows` 環境的服務?
@@ -59,7 +59,7 @@ description: 本文作為 CRI 系列文章的最後一篇文章，要來跟大�
 ## Introduction
 就跟前述的慣例一下，先看一下 [官方 GitHub](https://github.com/Mirantis/virtlet) 是如何描述自己這個專案的
 > Virtlet is a Kubernetes runtime server which allows you to run VM workloads, based on QCOW2 images.
-> 
+>
 
 這邊值得注意的是其用的詞是 `Kubernetes runtime server`, 這邊所指的就是 `Container Runtime Interface`，該專案本身額外實現了一個全新的應用程式，該應用程式本身支援 `CRI` 的 `gRPC` 介面，但是底下實現這些功能時全部都使用基於 `QCOW2 Images` 格式的 `Virtual Machine`。
 
@@ -104,7 +104,7 @@ metadata:
 
 當 `CRI Proxy` 收到創建 `VM` 的請求後，就會將該 `CRI` 的請求轉發到後端處理，這個處理的角色就是 `Virtlet Container`，也是俗稱的 `virtlet Manager`。
 
-當整個 `kubernetes` 系統起來後，會透過 `daemonset` 的方式去部署 `virtlet Manager` 
+當整個 `kubernetes` 系統起來後，會透過 `daemonset` 的方式去部署 `virtlet Manager`
 ```bash=
 vagrant@k8s-dev:~$ sudo kubectl -n kube-system get daemonset
 NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
@@ -137,7 +137,7 @@ kube-system   virtlet-gghd4   3/3     Running   0          8h
 當 `virtlet Manager` 收到指令後，會透過 `libvirt` API 的方式進行後續的處理，叫起 `vmwrapper` 來產生對應的 `VM` 環境
 
 > vmrapper is run by libvirt and wraps the emulator (QEMU/KVM). It requests tap file descriptor from Virtlet, adds command line arguments needed by the emulator to use the tap device and then execs the emulator.
-> 
+>
 
 其完整架構非常複雜，其中自行設計了不少元件來處理資源的處理，譬如使用 `tapmanager` 來處理整個 `CNI`，這部分幾乎沒有文件，只能依賴閱讀原始碼的方式來理解其實作方法。
 
@@ -206,7 +206,7 @@ kube-system   virtlet-gghd4   3/3     Running   0          8h
                 kubeadm join --token adcb82.4eae29627dc4c5a6 --discovery-token-unsafe-skip-ca-verification k8s-0.k8s:6443
                 echo "Node setup complete." >&2
               fi
-              
+
 ```
 
 # Summary
@@ -220,3 +220,24 @@ kube-system   virtlet-gghd4   3/3     Running   0          8h
 # 參考
 - https://github.com/Mirantis/criproxy
 - https://github.com/Mirantis/virtlet
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

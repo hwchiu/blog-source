@@ -31,7 +31,7 @@ description: 在這個資訊安全意識稍微抬頭的世代，網站配有 HTT
 
 `Issuers` 代表的是一個能夠從會簽署 `x509` 憑證的授權單位所取得憑證的一個資源，最
 目前 `Issuers` 支援的 `DNS Challenge` 有兩種，分別是 `HTTP-01` 以及 `DNS-01`.
-常見的後端代表就是想辦法從 `Let's Encrypt` 取得憑證. 
+常見的後端代表就是想辦法從 `Let's Encrypt` 取得憑證.
 1. Issuers 是透過 `Kubernetes CustomResourceDefinition(CRD)` 所自定義的新資源
     - 這意味你可以透過 `kubectl get issuers` 來檢視相關的設定
 3. 對於每個 `kubernetes` 叢集來說，系統內至少要部屬一個 `Issuers` 來完成憑證的功能
@@ -119,7 +119,7 @@ description: 在這個資訊安全意識稍微抬頭的世代，網站配有 HTT
 
 這邊我就直接使用 `Helm` 的方式來安裝 `Cert-Manager`.
 ```bash=
-hwchiu➜~» helm install \                                            
+hwchiu➜~» helm install \
     --name cert-manager \
     --namespace kube-system \
     stable/cert-manager
@@ -153,7 +153,7 @@ cert-manager   1         1         1            1           5d
 echo -n "12345678910" | base64
 ```
 
-接下來我們要透過 `yaml` 的方式創建 `kubernetes secret`. 
+接下來我們要透過 `yaml` 的方式創建 `kubernetes secret`.
 打開文件 `sercet.yml` 並且貼上下列內容
 ```yaml=
 apiVersion: v1
@@ -193,7 +193,7 @@ spec:
       name: cert-demo
     # ACME DNS-01 provider configurations
     dns01:
-      # Here we define a list of DNS-01 providers that can solve DNS challenges                                                                              
+      # Here we define a list of DNS-01 providers that can solve DNS challenges
       providers:
         - name: cf-dns
           cloudflare:
@@ -212,7 +212,7 @@ Status:
     Uri:  https://acme-staging-v02.api.letsencrypt.org/acme/acct/7037688
   Conditions:
     Last Transition Time:  2018-09-30T16:51:03Z
-    Message:               The ACME account was registered with the ACME server                                                                              
+    Message:               The ACME account was registered with the ACME server
     Reason:                ACMEAccountRegistered
     Status:                True
     Type:                  Ready
@@ -264,9 +264,9 @@ spec:
 Events:
   Type    Reason        Age   From          Message
   ----    ------        ----  ----          -------
-  Normal  CreateOrder   16s   cert-manager  Created new ACME order, attempting validation...                                                                 
+  Normal  CreateOrder   16s   cert-manager  Created new ACME order, attempting validation...
   Normal  IssueCert     15s   cert-manager  Issuing certificate...
-  Normal  CertObtained  13s   cert-manager  Obtained certificate from ACME server                                                                            
+  Normal  CertObtained  13s   cert-manager  Obtained certificate from ACME server
   Normal  CertIssued    13s   cert-manager  Certificate issued successfully
 ```
 
@@ -282,3 +282,23 @@ Events:
 
 最後也希望大家都能夠保持類似的態度與想法來解決每一個問題，藉由這些步驟能夠更深刻的體會每個解決方案背後的原理以及設計思緒，將這些概念融入自己的思想之中以不停的成長學習。
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

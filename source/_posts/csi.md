@@ -27,7 +27,7 @@ description: 本文開始又是嶄新的一篇，開始探討也是非常重要�
 3. LLVM/RAID/RAID2.0 等相關議題的討論，能夠容錯多少硬碟，能夠多快修復?
 4. RWO 讀寫的限制，可否同時多重讀寫或是只能單一處理?
 5. 介面的選擇，是更底層的 Block Device 還是上層已經包裝可以使用的檔案系統路徑?
-6. 異地備援? 本地備援? 
+6. 異地備援? 本地備援?
 7. 儲存服務本身有沒有HA的機制，有沒有SLA的保障?
 9. ...等
 
@@ -61,14 +61,14 @@ description: 本文開始又是嶄新的一篇，開始探討也是非常重要�
 
 這一篇官方部落格的文章 [Container Storage Interface (CSI) for Kubernetes GA](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/) 有特別描述到為什麼需要 **Container Storage Interface**。
 
-> Although prior to CSI Kubernetes provided a powerful volume plugin system, it was challenging to add support for new volume plugins to Kubernetes: volume plugins were “in-tree” meaning their code was part of the core Kubernetes code and shipped with the core Kubernetes binaries—vendors wanting to add support for their storage system to Kubernetes (or even fix a bug in an existing volume plugin) were forced to align with the Kubernetes release process. In addition, third-party storage code caused reliability and security issues in core Kubernetes binaries and the code was often difficult (and in some cases impossible) for Kubernetes 
+> Although prior to CSI Kubernetes provided a powerful volume plugin system, it was challenging to add support for new volume plugins to Kubernetes: volume plugins were “in-tree” meaning their code was part of the core Kubernetes code and shipped with the core Kubernetes binaries—vendors wanting to add support for their storage system to Kubernetes (or even fix a bug in an existing volume plugin) were forced to align with the Kubernetes release process. In addition, third-party storage code caused reliability and security issues in core Kubernetes binaries and the code was often difficult (and in some cases impossible) for Kubernetes
 > maintainers to test and maintain.
 
 長期以來所有儲存的解決方案的整合端都是直接實作於 **Kubernetes** 的程式碼內，也是所謂的 **in-tree** 所描述的概念，這導致對於這些儲存應用服務的提供者很難及時的增加修復任何問題，因為全部的功能都跟 **kubernetes** 本身綁再一起，若 **kubernetes** 本身沒有更新，則使用者也都享受不到修復或是新功能。
 更重要的是這些儲存相關程式碼本身的安全性程度以及穩定性都會變成額外的隱憂，是否會對 **kubernetes** 本身帶來各種負面的都是不能掌握的，同時這些程式碼的維護對於 **kubernetes** 維護者來說也是不好維護及掌握的。
 
 
->CSI was developed as a standard for exposing arbitrary block and file storage storage systems to containerized workloads on Container Orchestration Systems (COs) like Kubernetes. With the adoption of the Container Storage Interface, the Kubernetes volume layer becomes truly extensible. Using CSI, third-party storage providers can write and deploy plugins exposing new storage systems in Kubernetes without ever having to touch the core Kubernetes code. This gives Kubernetes users more options for storage and 
+>CSI was developed as a standard for exposing arbitrary block and file storage storage systems to containerized workloads on Container Orchestration Systems (COs) like Kubernetes. With the adoption of the Container Storage Interface, the Kubernetes volume layer becomes truly extensible. Using CSI, third-party storage providers can write and deploy plugins exposing new storage systems in Kubernetes without ever having to touch the core Kubernetes code. This gives Kubernetes users more options for storage and
 >makes the system more secure and reliable.
 
 為了解決這個問題於是提出了 **Container Storage Interface** 的概念，希望能夠將儲存方面的程式碼都搬出去 **kubernetes** 本身，如同 **CRI/CNI** 一樣，能夠讓 **kubernetes** 專心維護與介面供通的整合，而其餘的儲存解決方案提供商專注於 **CSI** 介面的開發，最後就可以透過參數等方式來間接使用與整合。
@@ -118,7 +118,7 @@ spec:
   csi:
     driver: csi-nfsplugin
     volumeHandle: data-id
-    volumeAttributes: 
+    volumeAttributes:
       server: 127.0.0.1
       share: /export
 ---
@@ -141,7 +141,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx 
+  name: nginx
 spec:
   containers:
   - image: maersk/nginx
@@ -152,23 +152,23 @@ spec:
       protocol: TCP
     volumeMounts:
       - mountPath: /var/www
-        name: data-nfsplugin 
+        name: data-nfsplugin
   volumes:
   - name: data-nfsplugin
     persistentVolumeClaim:
-      claimName: data-nfsplugin 
-``` 
+      claimName: data-nfsplugin
+```
 
 可以看到這個範例中，不再使用 **NFS** 的關鍵字，而是採用了 **CSI** 這個關鍵字，並且於其中描述了幾個資訊
 1. driver:
 類似 **CNI** 設定檔案中的 **type**，描述要用哪個對應的 driver 來處理這個儲存需求
 2. volumeHandle:
 一組重複使用的 ID，之後會再介紹
-3. volumeAttributes: 
+3. volumeAttributes:
     - server: 127.0.0.1
-    - share: /export    
+    - share: /export
     客製化的參數，根據不同的 Driver 傳入不同的參數。
-        
+
 根據目前[官方文件](https://kubernetes.io/docs/concepts/storage/volumes/#csi) 裡面的描述，現在 **CSI** 使用的參數如戲ㄚ
 - driver
 - volumeHandle
@@ -193,3 +193,24 @@ spec:
 - https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/
 - https://github.com/kubernetes-csi/drivers/blob/master/pkg/nfs/examples/kubernetes/nginx.yaml
 - https://docs.docker.com/ee/ucp/kubernetes/storage/use-nfs-volumes/
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

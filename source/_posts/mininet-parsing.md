@@ -161,7 +161,7 @@ root     22105  0.0  0.0  12312  1384 ?        Ss   23:10   0:00 bash -ms minine
 
 ```
 在此程式中會去進行
-1. 設定bridge 
+1. 設定bridge
 2. 設定datapath_type
 3. 設定fail-mode
 4. 設定controller
@@ -310,3 +310,24 @@ def moveIntfNoRetry( intf, dstNode, srcNode=None, printError=False ):
 這三個指令最後都會呼叫到**sendCmd**來處理，此函式會利用先前執行``mnexec``得到的**stdin**,**stout**來與底下的host交換訊息。
 
 以上就是一個`mininet`如何創造一個拓樸的簡單流程，有滿多細節都省略掉的，只挑重要的指令來看，來瞭解是如何透過系統指令來完成這些拓樸的。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

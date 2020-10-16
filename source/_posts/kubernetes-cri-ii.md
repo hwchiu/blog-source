@@ -35,7 +35,7 @@ description: 本文介紹了 `containerd 的概念，並且嘗試建置一個基
 - Python: 2.7+
 - Ansible: 2.4+
     - 有沒有使用 `ansible` 都無所謂，因為我們會拆解裡面的步驟，去看看全部的安裝步驟
-    - 
+    -
 
 ## 環境安裝
 環境的部分只有包括 `containerd` 的相依套件，並不包含 `kubernetes` 叢集本身，但是有包含 `kubeadm`, `kubectl`, `kubelet` 相關套件。
@@ -430,7 +430,7 @@ sudo containerd config default
 
 kubelet -> containerd -> containetrd-shin(k8s.io) -> runc
 
-docker client -> docker enginer -> containerd -> containerd-shim(moby) -> runc 
+docker client -> docker enginer -> containerd -> containerd-shim(moby) -> runc
 
 # 個人資訊
 我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
@@ -448,11 +448,13 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # 參考
 - https://github.com/containerd/cri/tree/master/contrib/ansible
-- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime 
+- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime
 - https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/#the-kubelet-drop-in-file-for-systemd
 - https://gist.github.com/mcastelino/35c221a81c70afc12f8b0929774b60a3

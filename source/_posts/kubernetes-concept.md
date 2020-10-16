@@ -4,7 +4,7 @@ keywords: 'Kubernetes,101, rumor, 誤解'
 abbrlink: 15679
 date: 2019-02-02 07:07:28
 tags:
-  - Kubernetes 
+  - Kubernetes
 description: Kubernetes 的蓬勃發展以及其人氣帶來廣泛地使用，然而就現實中，其實出現了不少關於 kubernetes 不太正確的想像與理解，愈來愈多的人因應 kubernetes 的發展就將 kubernetes 視為一個完美的解藥，能夠解決所有營運部署的所有困難與需求。最後發現現實與理想沒有辦法妥協時就會露出失望與無奈的表情。其實問題就出在一開始沒有理解到底 kubernetes 能夠帶來什麼樣的優勢以及本身有什麼樣的能力與限制。本文針對一些常見的三大資源，儲存/網路/運算 介紹了一下筆者自己觀察以及理解的概念去描述到底 kubernetes 能夠做什麼，不能夠做什麼
 
 ---
@@ -107,7 +107,7 @@ NetApp, Nutanix, 家用/企業 NAS 等眾多廠商專注於儲存解決方案的
 
 
 ## Kubernetes
-對於 `Kubernetes` 來說，我個人的認知下， `Kubernetes` 在網路的部分比`儲存` 的地方做了更多的支援，除了標準介面之外，也有部分是 `Kuberentes` 自行實現的功能。 
+對於 `Kubernetes` 來說，我個人的認知下， `Kubernetes` 在網路的部分比`儲存` 的地方做了更多的支援，除了標準介面之外，也有部分是 `Kuberentes` 自行實現的功能。
 
 如同 `CSI(Container Storage Interface)` 這個針對 `儲存` 所定義的標準介面，在網路部分也有與之對應的 `CNI(Container Network Interface)`.  `kubernetes` 透過 `CNI` 這個介面來與後方的 `網路解決方案` 溝通，而該解決方案(我底下就統稱 `CNI`比較方便) 就我自己的開發經驗與體悟，我認為 `CNI` 最基本的要求就是在`在對應的階段為對應的容器提供網路能力`，就這樣非常簡單。
 
@@ -121,9 +121,9 @@ NetApp, Nutanix, 家用/企業 NAS 等眾多廠商專注於儲存解決方案的
 3. 設定相關的路由條件 (overlay? underlay?)
 
 上面三個步驟，實際上做法百百種
-1. 如何取得 `IPv4`？ 如果要取得不重複的 `IP` 該怎麼做，需要有集中式的管理？ 還是分散式各自管理? 
+1. 如何取得 `IPv4`？ 如果要取得不重複的 `IP` 該怎麼做，需要有集中式的管理？ 還是分散式各自管理?
 2. 如何讓`容器`與`外部節點`有聯繫的通道? 要走 `veth`？ `host-device` ? `直接掛載網卡進去` ?
-3. 如何設定路由條件? 動態路由協議還是靜態路由協議? 要透過集中式資訊傳遞 `gateway` 嗎? 
+3. 如何設定路由條件? 動態路由協議還是靜態路由協議? 要透過集中式資訊傳遞 `gateway` 嗎?
 
 容器間到底怎麼傳輸的，需不需要封裝，透過什麼網卡，要不要透過 NAT 處理? 這一切都是 `CNI` 介面背後的實現，對於 `kubernetes` 來說其實根本沒有想要，也沒有能力去處理這些。
 所以不要再幻想 `kubernetes` 能夠為你建立各式各樣的網路環境了
@@ -182,9 +182,9 @@ kubernetes 在 Service/Ingress 中間自行實現了一個模組，大抵上稱�
 對於 `kubernetes` 來說，其實本身並不在意到底底下的容器化技術實際上是怎麼實現的，你要用 `Docker`, `rkt`, `CRI-O` 都無所謂，甚至背後是一個偽裝成 `Container` 的 `Virtaul Machine` [virtlet](https://github.com/Mirantis/virtlet) 都可以。
 
 ## Container
-就我個人的觀察來說，最多人在這個議題最大的誤解就是 `容器` 是萬能的 
+就我個人的觀察來說，最多人在這個議題最大的誤解就是 `容器` 是萬能的
 
-很多人看到的容器化可帶來的優勢後，一股腦地就要所有東西都容器化，完全沒有去思考到底`為什麼自己本身的服務需要容器化，容器化可以帶來什麼優點`. 
+很多人看到的容器化可帶來的優勢後，一股腦地就要所有東西都容器化，完全沒有去思考到底`為什麼自己本身的服務需要容器化，容器化可以帶來什麼優點`.
 舉個例來說，我想要透過 `SRIOV` 等相關硬體設定分配給我的應用程式使用時候， `Virtual Machine` 方面的發展與支援就遠比 `Container` 來的好多. 當然 `RDMA` 我個人也是抱持者 `Virtual Machine` 支援更好的情況來看待。
 
 很多人踩中了第一點認為 `容器` 是萬能之後，就會開始進行`要命的第二步驟`，就是將原先的應用程式`容器化`. 太多太多的人都認為只要寫一個 `Dockerfile` 將原先的應用程式們全部包裝起來放在一起就是一個很好的`容器` 來使用了。
@@ -253,8 +253,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 # Reference
 - https://github.com/kubernetes/community/blob/master/contributors/design-proposals/storage/container-storage-interface.md

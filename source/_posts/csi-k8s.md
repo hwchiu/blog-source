@@ -127,7 +127,7 @@ Name | CSI Driver Name | Compatible with CSI Version(s) | Description | Persiste
 
 這麼多的儲存方案到底要怎麼選，我認為這個問題非常困難，絕對不是一句**聽說xxxx好像很厲害，我們就導入來使用** 就樣不負責任就可以輕鬆選擇的議題。
 儲存設備如同第一篇所述，牽扯過多的議題要選擇
-1. 有沒有想過自己的使用情境是 **random access** 還是 **sequencial access**? 
+1. 有沒有想過自己的使用情境是 **random access** 還是 **sequencial access**?
 2. 本身公司是否已經有相關的儲存設備，這些設備有提供 CSI 的解決方案嗎?
 3. 需要的會是 BlockDevice 還是 Mountable Volume?
 4. 本身要考慮多重讀寫嗎?
@@ -166,7 +166,7 @@ Name | CSI Driver Name | Compatible with CSI Version(s) | Description | Persiste
 
 ## gRPC
 
-就如同 **CRI,CNI** 一樣， **kubelet** 本身也有實現部分 **CSI** 處理的邏輯，特別是有些跟 **Node** 有關的操作就會直接透過 **kubelet** 去呼叫，譬如 CSI NodeGetInfo, NodeStageVolume, 以及 NodePublishVolume 
+就如同 **CRI,CNI** 一樣， **kubelet** 本身也有實現部分 **CSI** 處理的邏輯，特別是有些跟 **Node** 有關的操作就會直接透過 **kubelet** 去呼叫，譬如 CSI NodeGetInfo, NodeStageVolume, 以及 NodePublishVolume
 
 這種情況下，**kubelet** 會使用 **unix socket** 配上 **gRPC** 與 **Node**服務聯繫來直接觸發相關操作。
 
@@ -183,3 +183,24 @@ Name | CSI Driver Name | Compatible with CSI Version(s) | Description | Persiste
 - https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/
 - https://blogs.vmware.com/cloudnative/2019/04/18/supercharging-kubernetes-storage-with-csi/
 - https://github.com/kubernetes/community/blob/master/contributors/design-proposals/storage/container-storage-interface.md
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

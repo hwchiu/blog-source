@@ -14,7 +14,7 @@ description: 本文是 iptables/ebtables 系列分享文的第一篇，會先著
 
 ## Preface
 
-再之前的 `kubernetes server` 系列文中有稍微介紹過 `iptables` 的一些用法，以及如何透過 `iptables` 來完成 `kubernetes service`. 若有任何不熟悉的概念可以重新閱讀一次該系列文章.  
+再之前的 `kubernetes server` 系列文中有稍微介紹過 `iptables` 的一些用法，以及如何透過 `iptables` 來完成 `kubernetes service`. 若有任何不熟悉的概念可以重新閱讀一次該系列文章.
 - [[Kubernetes] How To Implement Kubernetes Service - ClusterIP](https://www.hwchiu.com/kubernetes-service-ii.html)
 
 
@@ -110,7 +110,7 @@ iptables -t nat -A POSTROUTING ! -s 10.244.0.0/16 -d 10.244.0.0/16 -j MASQUERADE
 
 針對上述的範例, `-t nat` 的意思就是這條規則要放置在 `nat` 這個`Table`之中。
 
- 
+
 ### Chain
 Chain 的概念比較複雜，分為所謂的 `Build-in Chain` 以及使用者自己創立的 `Chain`.
 
@@ -189,7 +189,7 @@ Virtlet, a Kubernetes runtime server](https://github.com/Mirantis/virtlet/blob/m
 
 
 ### Target
-就如同前面所描述的，預設的 `Target` 其實都會跟對應的 `Table` 有關，譬如 `ACCEPT/DROP` 就會在 `filter/brouting` 這些`Table`. 
+就如同前面所描述的，預設的 `Target` 其實都會跟對應的 `Table` 有關，譬如 `ACCEPT/DROP` 就會在 `filter/brouting` 這些`Table`.
 
 雖然都叫做 `ACCEPT/DROP`, 其兩者的意思在 `filter/brouting` 的用途卻是不一樣的，有興趣的人可以直接參考 `man page` 來學習更多的用法與概念。
 
@@ -235,3 +235,24 @@ Virtlet, a Kubernetes runtime server](https://github.com/Mirantis/virtlet/blob/m
 ## Reference
 - [ebtables man page](https://linux.die.net/man/8/ebtables)
 - [ebtables/iptables interaction on a Linux-based bridge](http://ebtables.netfilter.org/br_fw_ia/br_fw_ia.html)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

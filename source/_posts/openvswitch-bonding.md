@@ -28,7 +28,7 @@ Openvswitch 目前 (2.3.1) 總共支援 3種bonding mode，分別是
 這種 mode 的 hash 方式是根據封包的 source MAC + vlan tag來處理，可以參考此篇[文章](http://openvswitch.org/pipermail/dev/2011-July/010028.html)有更詳細的說明
 
 ## Balance-tcp
-這種 mode 的 hash 是根據封包的 L2/L3/L4 header 來處理的，所以每條 connection 可能會走不同的 link 出去，但是相同 connection 則會一直固定以避免發生 out of order 之類的事情。 
+這種 mode 的 hash 是根據封包的 L2/L3/L4 header 來處理的，所以每條 connection 可能會走不同的 link 出去，但是相同 connection 則會一直固定以避免發生 out of order 之類的事情。
 
 註: 如果使用 linux 本身的 round-robin bonding 則可以讓一條 connction 走不同的 link，兩條 1G 的link大概可以衝到 1.5G左右
 
@@ -40,7 +40,7 @@ Openvswitch 目前 (2.3.1) 總共支援 3種bonding mode，分別是
 ## Commands
 ### 創造 bonding
 - ovs-vsctl add-br my_test
-- ovs-vsctl add-bond my_test bond0 eth0 eth1 eth2 
+- ovs-vsctl add-bond my_test bond0 eth0 eth1 eth2
 
 此指令會在 my_test 此 bridge 上面創造一個 bonding interface *bond0*，此 bonding interface 會將 eth0, eth1, eth2 給綁起來
 
@@ -72,7 +72,7 @@ Openvswitch 目前 (2.3.1) 總共支援 3種bonding mode，分別是
 	-	linux PC 跑 iperf client (-P4) 分別打到兩台 windows PC
   - windows PC 分別跑 iperf server
 - RX 測試
-	-	linux PC 跑 iperf server 
+	-	linux PC 跑 iperf server
   - windows PC 分別跑 iperf client，分別用 iperf -P4 去連接 linux PC
 - 實驗數據 (TX、RX是分開跑)
 ![](http://i.imgur.com/nDNFI3L.png)
@@ -82,7 +82,7 @@ Openvswitch 目前 (2.3.1) 總共支援 3種bonding mode，分別是
   - Balance-slb without lacp 因為我們的 source mac 都是 linuxPC 本身，所以也只會用一條 link 來傳輸，本身沒有任何幫助
   - Balance-slb with lacp 因為有打開 LACP 的功能，所以從 switch 回來的封包會分兩個 link 去送，所以 RX 可以看到有明顯的上升，大概1.9G左右
   - Balance-tcp with lacp 因為是根據 L2/L3/L4 來進行 hash，所以同一個 Host 發出的不同 connection 可以分散在不同 link上，所以 TX 的速度也有明顯上升
-                                           
+
 
 
 ### 測試拓樸二
@@ -98,7 +98,7 @@ Openvswitch 目前 (2.3.1) 總共支援 3種bonding mode，分別是
 - RX 測試
 	-	windows PC 分別跑 iperf client (-P4)
   - NS 分別跑 iperf server
-  - 一個 NS 對應一個 Windows PC  
+  - 一個 NS 對應一個 Windows PC
 - 實驗數據 (TX、RX是分開跑)
  - 數據分析方式請看最後面
 ![](http://i.imgur.com/Scvj1Hp.png)
@@ -119,3 +119,24 @@ Openvswitch 目前 (2.3.1) 總共支援 3種bonding mode，分別是
 - 流量的觀察方式是在 linux PC 上面透過 /proc/net/dev 週期性觀察兩張 slave interface 的 TX/RX counter計算得知，週期性為一秒。
 
 
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

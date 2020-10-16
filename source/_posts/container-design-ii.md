@@ -38,7 +38,7 @@ description:  本文延續前篇文章關於 Open Container Initiatives 的討�
 除了 `runC` 這套實現方案之外，官方
 [GitHub](https://github.com/opencontainers/runtime-spec/blob/master/implementations.md) 可以看到目前官方收錄的所有 `Runtime Spec` 的實現方案，這些方案有些由 `OCI` 組織本身維護，有些由其他組織維護。
 
-其中特別有趣的就是這些實現方案目前分為兩大類，分別是 `Runtime (Container)` 以及 `Runtime (Virtual Machine)`. 
+其中特別有趣的就是這些實現方案目前分為兩大類，分別是 `Runtime (Container)` 以及 `Runtime (Virtual Machine)`.
 
 其中 `Container` 就是我們一直在探討的 `Container` 而 `Virtual Machine` 這類型則是透過 `Virtual Machine` 相關的技術去完成虛擬化的環境，但是同時又符合 `OCI` 的標準。 這意味者使用者可以創建 `Contaienr` 來使用，但是其底層是以 `Virtual Machine` 的技術創建出來的。
 
@@ -127,14 +127,14 @@ root      2571  0.6  0.8 558432 35808 ?        Ssl  Sep12   0:39 docker-containe
 
 
 由上面的概念可以知道，每個 `containerd-shim` 都會對應到一個 `container`, 因此當透過 `docker run` 的方式來運行容器後，系統就會產收一個 `container-shim` 相關的應用程式. 可以使用以下範例創建多個容器，然後觀察相關的 `containerd-shim` 的狀態
- 
+
 ```bash=
 sudo docker run -d hwchiu/netutils
 sudo docker run -d hwchiu/netutils
 sudo docker run -d hwchiu/netutils
 sudo docker run -d hwchiu/netutils
 ps auxw | grep docker-containerd-shim | wc -l
-ps auxw | grep docker-containerd-shim 
+ps auxw | grep docker-containerd-shim
 ```
 
 
@@ -158,3 +158,24 @@ root     11732  0.0  0.1   7380  4420 ?        Sl   18:17   0:00 docker-containe
 - https://github.com/crosbymichael/dockercon-2016/blob/master/Creating%20Containerd.pdf
 - https://ops.tips/blog/run-docker-with-forked-runc/#forking-runc
 - https://medium.com/tiffanyfay/docker-1-11-et-plus-engine-is-now-built-on-runc-and-containerd-a6d06d7e80ef
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

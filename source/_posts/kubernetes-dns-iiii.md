@@ -32,7 +32,7 @@ description: 在前篇文章有跟大家分享過實際部屬上遇到的 DNS �
 | node\dockerd | 有設定 DNS | 沒設定 DNS |
 | -------- | -------- | -------- |
 | 有數值     | node     | node     |
-| 沒有數值     | dockerd     | 8.8.8.8     |	
+| 沒有數值     | dockerd     | 8.8.8.8     |
 
 
 這邊直接開門見山的說明結論
@@ -62,7 +62,7 @@ description: 在前篇文章有跟大家分享過實際部屬上遇到的 DNS �
     - 網路相關功能
     - AppArmor 相關
     - ...等各式各樣的功能
- 
+
 ![Imgur](https://i.imgur.com/HBxFvzA.png)
 
 
@@ -141,7 +141,7 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 	daemon.setStateCounter(container)
 
 	daemon.initHealthMonitor(container)
-...    
+...
 }
 ```
 
@@ -208,7 +208,7 @@ func (daemon *Daemon) allocateNetwork(container *container.Container) error {
 所以接下來就很直覺的去呼叫 `connectToNetwork` 來進行下一階段的處理
 
 
-## connectToNetwork 
+## connectToNetwork
 ```go connectToNetwork https://github.com/docker/docker-ce/blob/6e92e5909666b3b9c2aecebf582e8af85f228899/components/engine/daemon/container_operations.go#L690 container_operations.go
 func (daemon *Daemon) connectToNetwork(container *container.Container, idOrName string, endpointConfig *networktypes.EndpointSettings, updateSettings bool) (err error) {
 	start := time.Now()
@@ -280,7 +280,7 @@ func (c *controller) NewSandbox(containerID string, options ...SandboxOption) (S
 		return nil, err
 	}
 
-	
+
 	return sb, nil
 }
 ```
@@ -459,5 +459,7 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

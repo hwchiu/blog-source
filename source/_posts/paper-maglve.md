@@ -93,7 +93,7 @@ Google本身的服務，譬如 Gmail, Google Search本身都含有一組或是�
 這邊要重新計算 **Hash**的原因是因為不想要跟 **Steering** 共用一樣的數值，因為這樣就會有跨**Thread**之間的同步問題，這樣就會導致效率降低。
 3. 當查詢 **Connection Track Table** 時
     - 若 Hash 存在且對應的後端服務器依然正常服務，那就直接使用查詢出來的結果當作當前 **VIP**封包要轉送的對象
-    - 若 Hash 不存在或是後端服務器目前服務有問題，則會透過 **consistent hash**的方式算出對應的後端服務器位置，並且將其加入到該表格之中。  
+    - 若 Hash 不存在或是後端服務器目前服務有問題，則會透過 **consistent hash**的方式算出對應的後端服務器位置，並且將其加入到該表格之中。
 **Consistent Hash** 後面章節會再介紹。
     - 若目前查詢的結果是沒有半個後端服務器可以使用，則就丟棄當前封包。
 4. 當知道當前 **VIP** 所要對應的服務器資訊後，就會透過 **GRE/IP** 的方式重新改寫當前封包內容，並且將封包送到 **TX Queue**
@@ -176,7 +176,7 @@ Google本身的服務，譬如 Gmail, Google Search本身都含有一組或是�
 
 在此實驗中，變數總共有兩個，分別是
 1. Linux Kernel Stack/Kernel Bypass
-2. **Packet Rewrite Thread** 的數量  
+2. **Packet Rewrite Thread** 的數量
 
 希望觀察到的是 **Maglve** 每秒能夠處理的封包數量。
 
@@ -192,3 +192,23 @@ Google本身的服務，譬如 Gmail, Google Search本身都含有一組或是�
 # Reference
 [[論文中文導讀] Maglev : A Fast and Reliable Software Network Load Balancer (using Consistent Hashing)](http://www.evanlin.com/maglev/)
 
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

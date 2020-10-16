@@ -78,7 +78,7 @@ description: 本文作為網路分享的最後一篇，針對各式各樣的 CNI
 [常見 CNI (Container Network Interface) Plugin 介紹](https://www.hwchiu.com/cni-compare.html)
 
 
-## 開發 CNI 
+## 開發 CNI
 
 之前因為一些需求，自己也有嘗試開發 **SDN** 相關的 **CNI** 以及一個跨節點同網段的 **IPAM** 分配，開發的過程中其實遇到很多問題，這些問題仔細思量後發現 **CNI** 是個不歸路，這邊來跟大家分享一些不歸路的經驗。
 
@@ -94,7 +94,7 @@ description: 本文作為網路分享的最後一篇，針對各式各樣的 CNI
 1. 容器要有多張網卡
 2. 容器想要低延遲的傳輸
 3. 容器的網路傳輸可以多快
-4. 容器是否能銜接原先的網路架構 
+4. 容器是否能銜接原先的網路架構
 
 
 上述的這些問題其實目前於 **kubernetes**都有相關的解決方案可以解決，譬如
@@ -178,3 +178,24 @@ description: 本文作為網路分享的最後一篇，針對各式各樣的 CNI
 # 參考
 - https://github.com/containernetworking/cni/blob/master/README.md
 - https://github.com/intel/sriov-cni#using-dpdk-drivers
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

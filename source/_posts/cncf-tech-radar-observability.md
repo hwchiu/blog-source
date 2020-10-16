@@ -89,7 +89,7 @@ Technology Radar 旨在成為特定領域的一個意見參考指南，因此 CN
 > 個人沒有聽過也沒有用過
 1. Jaeger
 > 作為 Uber 所開源的 Opentracing 解決方案，我之前有一個影片詳細介紹 Opentracing 與 Jaeger，有興趣的可以觀看 [SDN x Cloud Native Meetup - Webinar 邱牛上菜 #3 OpenTracing
-](https://www.youtube.com/watch?v=t8OCKZYcVLg) 
+](https://www.youtube.com/watch?v=t8OCKZYcVLg)
 
 ## ASSESS
 這個類別中只有三個選項，分別是 OpenTelementry, Thanos, Kiali ，代表這些專案是有使用過，且認為不錯，但是只有真的需要的時候才特別需要去研究。
@@ -146,13 +146,11 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 https://www.facebook.com/technologynoteniu
 
 如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
-https://www.facebook.com/technologynoteniu
+https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
 
 
-
 # Reference
 1. https://radar.cncf.io/2020-09-observability
-

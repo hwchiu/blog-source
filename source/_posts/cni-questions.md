@@ -57,12 +57,12 @@ description: 本篇文章紀錄了作者這陣子以來與大家討論 CNI 時�
 ## 我要如何知道我的 kubernetes 到底現在是用哪個 CNI
 1. 先確認你的 `kubelet` 是採用 `CNI`，這部分可以透過觀察 `kubelet` 的參數來得知
 ```bash=
-root      1173  3.3  2.6 634128 105920 ?       Ssl  Oct16 164:30 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf 
---kubeconfig=/etc/kubernetes/kubelet.conf 
---config=/var/lib/kubelet/config.yaml 
---cgroup-driver=cgroupfs 
---cni-bin-dir=/opt/cni/bin 
---cni-conf-dir=/etc/cni/net.d 
+root      1173  3.3  2.6 634128 105920 ?       Ssl  Oct16 164:30 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf
+--kubeconfig=/etc/kubernetes/kubelet.conf
+--config=/var/lib/kubelet/config.yaml
+--cgroup-driver=cgroupfs
+--cni-bin-dir=/opt/cni/bin
+--cni-conf-dir=/etc/cni/net.d
 --network-plugin=cni
 ```
 有三個跟 `CNI` 有關的參數，其中兩個分別描述 `執行檔` 以及 `設定檔` 的位置
@@ -103,3 +103,24 @@ drwxr-xr-x 3 root root 4096 Oct  6 13:52 ../
 # Summary
 `Container Network Interface(CNI)` 本身概念不難，困難的其實都是網路本身，封包怎麼傳輸，不同節點之間怎麼路由，Overlay Network怎麼做，`Network Policy` 怎麼實現等諸多的網路問題實際上才是最令人頭疼的地方。
 目前沒有看到任何一套 `CNI` 可以滿足所有的需求，所以在選擇 `CNI` 的部分還是要謹記自己的需求，從自己的需求出發，看看有沒有現成的解決方案可以採用，如果都沒有則需要評估是否需要自己開發一套 `CNI` 來實現所缺的功能。
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

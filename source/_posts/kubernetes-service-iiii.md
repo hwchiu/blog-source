@@ -131,7 +131,7 @@ $sudo iptables-save | grep k8s-nginx-affinity
 ```
 
 在我們開始研究這些規則之前，我們還是要先來問自己一句話
-**如果是我們自己來實作這個功能，我們會怎麼實作?** 
+**如果是我們自己來實作這個功能，我們會怎麼實作?**
 
 假設需求就是 `ClientIP` ，相同來源`IP`地址所建立的新連線都要分配到相同的 `EndPoints` 來使用
 直覺下，我們可以用類似 `Cache` 的概念來完成這個功能，其流程如下
@@ -140,8 +140,8 @@ $sudo iptables-save | grep k8s-nginx-affinity
 3. 若不存在，則嘗試從 `EndPoints` 內挑選出一個目標，並且將結果記錄到 `Cache` 之中.
 
 所以可以將該 `cache` 分成 `Read/Wrtie` 兩個功能面向來看待，以下圖來表示
-    
-    
+
+
 ![Imgur](https://i.imgur.com/r6Yr1eI.png)
 
 
@@ -180,7 +180,7 @@ $sudo iptables-save | grep k8s-nginx-affinity
 
 這邊就針對這參數進行一個簡單的介紹
 1. -m recent: 使用擴充模組 `recent`
-2. --set: 這次的行為想要進行儲存的動作，將某些 `key/value` 寫進到 `recent cache` 內 
+2. --set: 這次的行為想要進行儲存的動作，將某些 `key/value` 寫進到 `recent cache` 內
 3. --name KUBE-SEP-XXXXXXXX: 這邊對應的就是存到 `cache` 內的 `Value`.
 5. --mask 255.255.255.255: 這個搭配下一個參數使用
 6. --rsource: 這邊代表是的我要用什麼當做 `key`, 這邊使用的是 `souruce` 就是所謂的封包來源`IP`地址,既然有`IP`地址，就可以搭配前面的`mask`來調整`IP`位址的範圍，這個範例中就是**/32**的設定，意味`IP`要完全一樣才行。
@@ -240,3 +240,24 @@ $sudo iptables-save | grep k8s-nginx-affinity
 之後再真正執行 `DNAT` 的 `KUBE-SEP-XXXX` 時會不停的更新 `Recent/Cache` 內的資料以及時間，避免該筆資料過期。
 
 ![Imgur](https://i.imgur.com/NP5xsGg.png)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

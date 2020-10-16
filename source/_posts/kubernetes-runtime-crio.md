@@ -31,7 +31,7 @@ description: 本文要特別介紹基於 Kubernetes 所開發的 CRI 解決方�
 從上而下分別是之前介紹過 `kubernetes` 內與 `docker` 以及 `contained` 的架構演進圖。
 1. `kubelet` 透過 `Dockershim` 與 `docker engine` 連接，最後一路串接到 `containerd` 來創建 `container`。
 2. 繞過 `Docker` 直接與後端的 `Containerd` 溝通，為了滿足這個需求也需要一個額外的應用程式 `CRI-Containerd` 來作為中間溝通的橋樑
-3. 隨者 `containerd` 1.1 版本的發行， `CRI-Containerd` 本身的功能已經可以透過 `plugin` 的方式實現於 `containerd` 中，可以再少掉一層溝通的耗損，這也是上一篇所介紹的安裝環境。 
+3. 隨者 `containerd` 1.1 版本的發行， `CRI-Containerd` 本身的功能已經可以透過 `plugin` 的方式實現於 `containerd` 中，可以再少掉一層溝通的耗損，這也是上一篇所介紹的安裝環境。
 4. 則是本篇所要介紹的重點 `cri-o`, 一個完全針對 `kubernetes` 需求的解決方案，讓整體的溝通變得更快速與簡單。
 
 看完上述比較後會對 `cri-o` 有個初步的理解，知道其被設計出來的目的就是要提供更好地整合，減少多餘的 `IPC` 溝通，並且作為一個針對 `kubernetes` 設計的解決方案。
@@ -40,7 +40,7 @@ description: 本文要特別介紹基於 Kubernetes 所開發的 CRI 解決方�
 
 `CRI-O` 的標題開宗明義直接闡明
 > CRI-O - OCI-based implementation of Kubernetes Container Runtime Interface
-> 
+>
 
 作為一個滿足 `CRI` 標準且能夠產生出相容於 `OCI`  標準 `container` 的解決方案，從整個設計到特色全部都是針對 `kubernetes` 來打造
 
@@ -68,7 +68,7 @@ description: 本文要特別介紹基於 Kubernetes 所開發的 CRI 解決方�
 整個 `OCI` 的概念相對於 `docker, containerd` 來得簡單，因為其目標就是支援 `kubernetes`，不相干的功能不實作，專心提供更好的相容性與穩定性。
 
 此外近來可以陸陸續續看到相關新聞在講述 `CRI-O` 的導入，譬如 OpenSuse/RedHat 都幫自家的產品導入 `cri-o` 並且作為預設的運行環境，就是希望能夠讓 `kubernetes` 的效能更好更穩定。
-[kubic.opensuse: CRI-O is now our default container runtime interface](https://kubic.opensuse.org/blog/2018-09-17-crio-default/) 
+[kubic.opensuse: CRI-O is now our default container runtime interface](https://kubic.opensuse.org/blog/2018-09-17-crio-default/)
 [Red Hat OpenShift Container Platform 4 now defaults to CRI-O as underlying container engine](https://www.redhat.com/en/blog/red-hat-openshift-container-platform-4-now-defaults-cri-o-underlying-container-engine)
 
 看完了 `cri-o` 的概念介紹後，接下來我們仿造上篇 `containerd` 的概念一樣打造一樣的環境試試看，並且觀察相關的 `process` 運作。
@@ -82,9 +82,9 @@ description: 本文要特別介紹基於 Kubernetes 所開發的 CRI 解決方�
 ```bash=
 modprobe overlay
 modprobe br_netfilter
-echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables  
-echo 1 > /proc/sys/net/ipv4/ip_forward                 
-echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables 
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables
 ```
 
 
@@ -205,8 +205,8 @@ a48e40de9a05b       b305571ca60a5a7818bda47da122683d75e8a1907475681ee8b1efbd06bf
 
 這時候透過 `ps` 等指令觀察一下系統中運行的指令
 ```bash
-vagrant@k8s-dev:~$ sudo ps -x -awo command | grep cri             
-/usr/bin/crio                                                      
+vagrant@k8s-dev:~$ sudo ps -x -awo command | grep cri
+/usr/bin/crio
 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock --feature-gates=AllAlpha=false,RunAsGroup=true --container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint=unix:///var/run/crio/crio.sock --runtime-request-timeout=5m
 /usr/libexec/crio/conmon -s -c 014ba57340bf8afd3b2ce6982b760ffac82ce1bc2861a2b02f8069c8becde304 -n k8s_POD_kube-apiserver-k8s-dev_kube-system_b00230a3af5f91e5d10118aee4d054c4_0 -u 014ba57340bf8afd3b2ce6982b760ffac82ce1bc2861a2b02f8069c8becde304 -r /usr/lib/cri-o-runc/sbin/runc -b /var/run/containers/s
 torage/overlay-containers/014ba57340bf8afd3b2ce6982b760ffac82ce1bc2861a2b02f8069c8becde304/userdata -p /var/run/containers/storage/overlay-containers/014ba57340bf8afd3b2ce6982b760ffac82ce1bc2861a2b02f8069c8becde304/userdata/pidfile -l /var/log/pods/kube-system_kube-apiserver-k8s-dev_b00230a3af5f91e5d10118aee4d054c4/014ba57340bf8afd3b2ce6982b760ffac82ce1bc2861a2b02f8069c8becde304.log --exit-dir /var/run/crio/exits --socket-dir-path /var/run/crio --log-level error --runtime-arg --root=/run/runc
@@ -231,3 +231,24 @@ torage/overlay-containers/014ba57340bf8afd3b2ce6982b760ffac82ce1bc2861a2b02f8069
 - https://www.opencontainers.org/blog/2018/06/20/cri-o-how-standards-power-a-container-runtime
 - https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-master-node
 - https://kubernetes.io/docs/setup/production-environment/container-runtimes/
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

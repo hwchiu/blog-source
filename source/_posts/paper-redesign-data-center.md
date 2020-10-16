@@ -15,7 +15,7 @@ description: 本文屬於論文導讀系列，這次針對的是SIGCOMM 2017所�
 
 ---
 
-# Preface 
+# Preface
 
 本次的論文發表於 **SIGCOMM 2017**, 可以在[這邊](http://dl.acm.org/citation.cfm?id=3098825)找到網路上的文章。於 **SIGCOMM 2017**中，其所屬於的 section 是 **Programmable Devices**，所以可以料想到本文內容會跟 **Programmable Devices** 有些關係。果不其然的內容中有提到 **P4**, **NetFPGA**，處此之外，本篇內容也提到了 **DPDK**, **Clos Network**, **MPTCP**, **DCTCP**, **incast** 等，必須說本篇文章包含了內容實在廣泛，所以要花不少時間去釐清每個元件，才可以了解到本篇論文的內容。
 
@@ -136,7 +136,7 @@ NDP 不同於 **TCP**，不需要先透過三方交握來進行連線才可以�
 
 
 在看完了以上這麼多段落後，大概可以歸納出作者心目中的完美協定，簡單複習一下
-1. 對於短暫流量能夠提供低延遲，低延遲，低延遲 
+1. 對於短暫流量能夠提供低延遲，低延遲，低延遲
 2. 對於長時間流量盡量能夠提供高流量輸出
 2. per-packet ECMP
 3. 遇到 incast 等情況也能夠繼續保持低延遲
@@ -189,7 +189,7 @@ Y 軸代表的是在當前網路下，應用程式真正收到的 **goodput** �
 3. 為了打亂網路中平衡狀態(強者恆強，弱者恆弱)，每當低優先度的佇列滿載且遇到新封包時，這時候 **Switch** 有兩個行為會採用(機率分別是 50%)。
     - 將新到的封包截斷，送到高優先度佇列
     - 將低優先度最後面的封包截斷，送到高優先度佇立，而剛進來的封包就送到低優先度佇列
-   
+
 4. 藉由上述兩種行為，作者說可以打亂網路的平衡，這點可以由圖2的虛線看到，在 NDP 的環境中，即使是效能最差 10% 應用程式的 **goodput** 跟平均也是差不多的。
 
 ### Routing
@@ -350,7 +350,7 @@ NDP 的設計下，每個連線一開始都樂觀地採用全速發送，同時�
 在非對證的網路架構中，例如 **BCube**、 **Jellyfish**， **NDP** 的表現會稍微差一點，主要是當前網路壅塞時，**送端**會將封包透過不同距離的路徑來傳輸封包(就不是ECMP了)。於這種情況下，若採用 **sender-based per-path** 的多重路由就會有良好的效果。
 
 >有一篇**paper**在講述上述的問題
-> C. Raiciu, S. Barre, C. Pluntke, A. Greenhalgh, D. Wischik, and M. Handley. Improving datacenter performance and robustness with Multipath TCP. In Proc. ACM SIGCOMM, Aug. 2011. 
+> C. Raiciu, S. Barre, C. Pluntke, A. Greenhalgh, D. Wischik, and M. Handley. Improving datacenter performance and robustness with Multipath TCP. In Proc. ACM SIGCOMM, Aug. 2011.
 
 對於一個超級高度負載的網路中心來說，當封包數量過多的時候，會發生**送端**發生的封包一直處於被截斷的情況，然而雖然表現不好，但是跟目前已知的協定，譬如 **DCTCP** 比起來， **NDP** 的效能還是勝出。
 
@@ -360,3 +360,24 @@ NDP 的設計下，每個連線一開始都樂觀地採用全速發送，同時�
 到這邊為止，已經可以大概知道 **NDP** 的設計思維，接下來就要探討其如何實作以及其實驗效能。
 不過必須說，只有**Paper**而缺少投影片或是影片的情況下，很多敘述都要靠想像力去思考到底怎實作，花了不少時間在思考，甚至有些情境還想不出來到底是什麼，只能憑感覺去想像。當然，這個會有這些問題其實是因為自己知道的東西還不夠多，所以變成很多作者認為是基本概念的東西，對我來說都要重新思考學習，才會導致自己思考不夠完善。
 只好繼續多念書多加強自己了
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

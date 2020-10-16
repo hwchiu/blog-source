@@ -13,7 +13,7 @@ description: In this post, I try to study the soruce code of openvswitch to lear
 
 ---
 
-# Preface 
+# Preface
 Openvswitch support two modes for user to config, user mode and kernel mode.
 we will discuss the kernel mode in this article.
 
@@ -39,13 +39,13 @@ The kernel will call its init function `dp_init` after the kernel module has bee
 
 The following is the work flow of the `dp_init`.
 
-- ovs_workqueues_init()  
+- ovs_workqueues_init()
 - ovs_flow_init()
 - ovs_vport_init
 - register_pernet_device(&ovs_net_ops);
 - register_netdevice_notifier(&ovs_dp_device_notifier);
 - dp_register_genl();
-- schedule_delayed_work(&rehash_flow_wq, REHASH_FLOW_INTERVAL);  
+- schedule_delayed_work(&rehash_flow_wq, REHASH_FLOW_INTERVAL);
 
 ### ovs_workqueues_init
 **workqueue.c**
@@ -66,7 +66,7 @@ wake_up_process(workq_thread);
 - Initail the worker queue.
 -	Create a kernel thread and the handler is **worker_thread**
 - start the kernel thread by calling **wake_up_process**
-  
+
 ``` c
 static int worker_thread(void *dummy)
 {
@@ -88,7 +88,7 @@ static int worker_thread(void *dummy)
 - The thread will wake up until the condition "kthread_should_stop() || !list_empty(&workq))" is true.
 - It will call the `run_workqueue` after it wake up.
 
-``` c  
+``` c
 static void run_workqueue(void)
 {
         spin_lock_irq(&wq_lock);
@@ -177,8 +177,8 @@ int ovs_vport_init(void)
 }
 ```
 - Use `kzalloc` malloc the memory from kernel.
- 
- 
+
+
 ### register_pernet_device(&ovs_net_ops)
 ``` c
 	register_pernet_device(&ovs_net_ops);
@@ -222,7 +222,7 @@ struct ovs_net {
 
 - need to study later.
 
-``` c 
+``` c
 void ovs_dp_notify_wq(struct work_struct *work)
 {
         struct ovs_net *ovs_net = container_of(work, struct ovs_net, dp_notify_work);
@@ -319,7 +319,7 @@ static int dp_register_genl(void)
 
                 err = genl_register_family_with_ops(f->family, f->ops,
                                                     f->n_ops);
-                if (err) 
+                if (err)
                         goto error;
                 n_registered++;
 
@@ -420,4 +420,25 @@ static struct genl_ops dp_datapath_genl_ops[] = {
 
 ### other
 
-- pr_info is printk(KERN_INFO,pr_fmt(fmt), ##__VA_ARGS__)  
+- pr_info is printk(KERN_INFO,pr_fmt(fmt), ##__VA_ARGS__)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>

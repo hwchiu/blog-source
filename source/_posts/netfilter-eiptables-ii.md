@@ -37,7 +37,7 @@ description: 透過瞭解 iptables 規則的四大組成 Table/Chian/Match/Targe
 
 這邊再次做個快速的複習
 - Table: 相同用途的 `rules` 會放在相同的 `Table` 中，常見的有用來當防火牆的 `filter`，或是修改封包內容的 `nat`.
-- Chain: 封包比對的時間點，不同時間點下能夠進行不同的動作。這意味每個`Chain` 下能夠搭配的 `Table` 是有限制的。 
+- Chain: 封包比對的時間點，不同時間點下能夠進行不同的動作。這意味每個`Chain` 下能夠搭配的 `Table` 是有限制的。
 - Match: 每個規則都要描述當前規則希望匹配的封包內容，除了基本的比對欄位外，還可以用各式各樣擴充模組來匹配不同的封包內容。
 - Target: 當封包比對成功後，要執行什麼樣的動作，不同於 `Match` 可比對多個內容，每個規則都只能採用一個 `Target` 來採取動作。
 
@@ -66,8 +66,8 @@ description: 透過瞭解 iptables 規則的四大組成 Table/Chian/Match/Targe
 譬如再 `FORWRAD Chain` 我想要知道這個封包是不是之前有再 `PREROUUTING`  被處理過，就可以用該 `mark` 來處理。
 6. `security`: 這個 `table` 更少出現，必須伴隨者 `SELinux` 的使用來提供更多安全相關的功能，主要牽扯到 **Mandatory Access Control (MAC)** 規則以及 **Discretionary Access Control (DAC)** 這兩者的管理，有興趣的可以看看最初的 [commit](https://lwn.net/Articles/267140/)。
 
-上述裡面，基本上 `raw/mangle/security` 這三個 `table` 比較少使用，所以後續會比較著重在 `filter/nat` 這兩個 `table` 為主。 
- 
+上述裡面，基本上 `raw/mangle/security` 這三個 `table` 比較少使用，所以後續會比較著重在 `filter/nat` 這兩個 `table` 為主。
+
 ### Chain
 `Chain` 的話，再 `ibtables` 中總共有五條 `chain`.
 
@@ -83,7 +83,7 @@ description: 透過瞭解 iptables 規則的四大組成 Table/Chian/Match/Targe
 
 - `INPUT`: 如果該封包根據 `Routing Decision` 後封包是要進入到本機系統，譬如系統上的應用程式，譬如 `www server`。 則`INPUT`就是查詢完畢到封包被應用程式接收的中間階段。
 
-如果今天機器上架設了一個 `nginx server`, 並且聽再 `0.0.0.0:80`. 則任何送到該機器網卡上面且連接埠是`80` 的封包最後都會經過 `INPUT chain` 來處理。 所以也可以在這邊透過其他的選項丟棄掉不想要連接到 `nginx server` 的封包。 
+如果今天機器上架設了一個 `nginx server`, 並且聽再 `0.0.0.0:80`. 則任何送到該機器網卡上面且連接埠是`80` 的封包最後都會經過 `INPUT chain` 來處理。 所以也可以在這邊透過其他的選項丟棄掉不想要連接到 `nginx server` 的封包。
 
 
 - `FORWARD`: 如果該封包根據 `Routing Decision` 後封包是要幫忙轉發。則`FORWARD`就是查詢完畢到封包要從網卡送出去的中間階段。
@@ -116,7 +116,7 @@ tcp, udp, udplite, icmp, esp, ah, sctp。
 
 
 ### Target
-就如同前面所描述的，預設的 `Target` 其實都會跟對應的 `Table` 有關，譬如 `ACCEPT/DROP` 就會在 `filter` 這些`Table`. 
+就如同前面所描述的，預設的 `Target` 其實都會跟對應的 `Table` 有關，譬如 `ACCEPT/DROP` 就會在 `filter` 這些`Table`.
 
 再 `iptagles` 裡面有四個預設的 `Target`
 1. ACCEPT: 該封包判定通過，直接離開這個 Chain.
@@ -190,7 +190,7 @@ tcp, udp, udplite, icmp, esp, ah, sctp。
 
 ### Layer3
 如果今天封包走到了 `Layer3` 這邊來處理，那處理的流程基本上就跟本文前半部分描述的雷同，唯一不同點只有當進行完畢 `Routing Decision` 後，在選擇 `FORWARDd` 的階段，若轉送目的地網卡對應到的是屬於本機上面的 `Linux Bridge` 網卡，則封包最後又會走到 `Layer2` 那層，在這情況下就會在經過 `iptables` 後又會馬上轉接 `ebtables`，最後就會送到網卡出去。
-        
+
 ### Layer2
 
 如果封包一開始進入點就是 `Linux Bridge` 的網卡，這時候可以在 `brouting chain` 進行一次檢查，如果這時候有透過 `ebtables`特別將封包送到 `Layer3` 處理的話，那流程就會如同上述一樣，從 `conntrack` 一路走到 `Routing Decision`.
@@ -217,3 +217,24 @@ tcp, udp, udplite, icmp, esp, ah, sctp。
 ## Reference
 - [ebtables man page](https://linux.die.net/man/8/ebtables)
 - [ebtables/iptables interaction on a Linux-based bridge](http://ebtables.netfilter.org/br_fw_ia/br_fw_ia.html)
+
+# 個人資訊
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+組合包
+https://hiskio.com/packages/D7RZGWrNK
+
+單堂(CI/CD)
+https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
+
+基礎概念
+https://hiskio.com/courses/349?promo_code=13LY5RE
+
+另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
+https://www.facebook.com/technologynoteniu
+
+如果有使用 Telegram 的也可以訂閱下列頻道來，裡面我會定期推播通知各類文章
+https://t.me/technologynote
+
+你的捐款將給予我文章成長的動力
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
