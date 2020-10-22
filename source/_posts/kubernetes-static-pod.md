@@ -391,7 +391,10 @@ ts". This can take up to 4m0s
 最後，我目前於 Hiskio 上面有開設一門 Kubernetes 入門篇的課程，裡面會探討運算/網路/儲存三個最重要的平台資源，此外對於 CRI/CNI/CSI 也都有簡單的介紹，主要會基於 **Kubernetes** 本身的設計原理及各資源的用法與情境去介紹。
 如果本身已經很熟練的使用 Kubernetes 於環境中就不太適合這門課程，主要是給想要踏入到 Kubernetes 世界中的朋友，有興趣的幫忙捧場或推廣
 組合包
-https://hiskio.com/packages/D7RZGWrNK
+https://hiskio.com/packages/mLwKb3zrx
+
+疑難雜症除錯篇
+https://hiskio.com/courses/440/about?promo_code=VEQ4XNG
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
@@ -408,7 +411,10 @@ https://hiskio.com/courses/349?promo_code=13LY5RE
 我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
 組合包
-https://hiskio.com/packages/D7RZGWrNK
+https://hiskio.com/packages/mLwKb3zrx
+
+疑難雜症除錯篇
+https://hiskio.com/courses/440/about?promo_code=VEQ4XNG
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1

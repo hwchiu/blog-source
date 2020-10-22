@@ -32,7 +32,10 @@ description: Kubernetes 線上課程分享, 從底層到應用來解決你對 Ku
 
 
 組合包
-https://hiskio.com/packages/D7RZGWrNK
+https://hiskio.com/packages/mLwKb3zrx
+
+疑難雜症除錯篇
+https://hiskio.com/courses/440/about?promo_code=VEQ4XNG
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
