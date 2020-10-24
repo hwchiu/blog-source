@@ -191,20 +191,20 @@ social_icons:
   transition: false
 
 # Blog rolls
-links_settings:
-  icon: fa fa-link
-  title: Friends
-  # Available values: block | inline
-  layout: block
+#links_settings:
+#  icon: fa fa-link
+#  title: Friends
+#  # Available values: block | inline
+#  layout: block
 
-links:
-  KKDAI: http://www.evanlin.com/
-  Kairen: https://kairen.github.io/
-  小飛機: https://blog.pichuang.com.tw/
-  Jack: https://medium.com/@yayajacky
-  David: https://chechia.net
-  CNTUG: https://www.facebook.com/groups/cloudnative.tw/
-  SDNDS-TW: https://www.facebook.com/groups/sdnds.tw/
+  #links:
+  #  KKDAI: http://www.evanlin.com/
+  #  Kairen: https://kairen.github.io/
+  #  小飛機: https://blog.pichuang.com.tw/
+  #  Jack: https://medium.com/@yayajacky
+  #  David: https://chechia.net
+  #  CNTUG: https://www.facebook.com/groups/cloudnative.tw/
+  #  SDNDS-TW: https://www.facebook.com/groups/sdnds.tw/
 
 
 # Table of Contents in the Sidebar
@@ -279,7 +279,7 @@ reward:
 # Usage: `Key: permalink || icon` (Font Awesome)
 follow_me:
   Twitter: https://twitter.com/hw_chiu || fab fa-twitter
-  #Telegram: https://t.me/channel_name || fab fa-telegram
+  Telegram: https://t.me/technologynote || fab fa-telegram
   #WeChat: /images/wechat_channel.jpg || fab fa-weixin
   RSS: /atom.xml || fa fa-rss
 

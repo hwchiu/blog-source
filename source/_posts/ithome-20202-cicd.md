@@ -1,12 +1,13 @@
 ---
-title: [ITHOME - 2020] - DevOps 與 Kubernetes 的愛恨情仇
-keywords: 'Kubernetes,Network,Linux,Ubuntu'
-date: 2020-10-21 19:19:06
+title: '[ITHOME - 2020] - DevOps 與 Kubernetes 的愛恨情仇'
+keywords: 'Kubernetes,DevOps,Linux,K8s'
 tags:
   - ITHOME
   - DevOps
   - Kubernetes
 description: ITHOME-2020 系列文章
+abbrlink: 58377
+date: 2020-10-21 19:19:06
 ---
 
 這次的鐵人賽的題目則著重於 Kubernetes 與 DevOps 之間的關係， DevOps 這詞發展多年以來，似乎成為一個顯學
