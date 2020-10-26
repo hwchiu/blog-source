@@ -1,12 +1,13 @@
 ---
-title: 'Day 2 - Kubernetes 物件管理'
+title: '鐵人賽系列文章- Day 2 - Kubernetes 物件管理'
 keywords: 'Kubernetes,DevOps,Linux,K8s'
-date: 2020-10-23 17:00:14
 tags:
   - ITHOME
   - DevOps
   - Kubernetes
 description: ITHOME-2020 系列文章
+abbrlink: 56091
+date: 2020-10-23 17:00:14
 ---
 
 本文將於賽後同步刊登於筆者[部落格](https://hwchiu.com/)

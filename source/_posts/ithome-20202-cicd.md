@@ -1,5 +1,5 @@
 ---
-title: '[ITHOME - 2020] - DevOps 與 Kubernetes 的愛恨情仇'
+title: '鐵人賽系列文章 - DevOps 與 Kubernetes 的愛恨情仇'
 keywords: 'Kubernetes,DevOps,Linux,K8s'
 tags:
   - ITHOME
