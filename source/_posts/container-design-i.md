@@ -161,10 +161,10 @@ description:  本文針對 Container 的概念進行探討，特別是其相關�
 我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
 組合包
-https://hiskio.com/packages/mLwKb3zrx
+https://hiskio.com/packages/JPwq4znr1
 
 疑難雜症除錯篇
-https://hiskio.com/courses/440/about?promo_code=VEQ4XNG
+https://hiskio.com/courses/440/about?promo_code=7EP1KY3
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
