@@ -1,13 +1,13 @@
 ---
-title: 'Docker 網路入門篇(二)'
+title: 'Docker 網路入門篇(二) - Bridge 網路模型'
 keywords: 'Docker,Network,CNI,Kubernetes,101,Bridge'
-date: 2020-10-31 21:20:22
 tags:
   - Docker
   - Network
   - Kubernetes
-description:
-  本篇文章探討 Docker Bridge 網路模型的運作過程，透過一次次的步驟手動搭建出一個 Linux Bridge，並且成功讓多個容器可以彼此互通
+description: 本篇文章探討 Docker Bridge 網路模型的運作過程，透過一次次的步驟手動搭建出一個 Linux Bridge，並且成功讓多個容器可以彼此互通
+abbrlink: 48820
+date: 2020-10-31 21:20:22
 ---
 
 # 前言
@@ -33,7 +33,7 @@ description:
 
 # 步驟
 
-接下來的步驟會伴隨者跟上次一樣的圖例，從不同角度來慢慢觀察每個步驟對系統產生的變化，同時每個步驟也會附上相關的程式碼，有興趣的人也可以於自己環境中測試。
+接下來的步驟會伴隨著跟上次一樣的圖例，從不同角度來慢慢觀察每個步驟對系統產生的變化，同時每個步驟也會附上相關的程式碼，有興趣的人也可以於自己環境中測試。
 
 下述環境基於
 
