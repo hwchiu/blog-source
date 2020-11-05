@@ -11,12 +11,6 @@ date: 2020-11-01 22:34:55
 ---
 
 
-# 前言
-本文將於賽後同步刊登於筆者[部落格](https://hwchiu.com/)
-有興趣學習更多 Kubernetes/DevOps/Linux 相關的資源的讀者，歡迎前往閱讀
-更多相關科技的技術分享，歡迎追蹤 [矽谷牛的耕田筆記](https://www.facebook.com/technologynoteniu)https://www.facebook.com/technologynoteniu)
-
-
 # 本文
 
 上篇文章中我們介紹了 Helm 的概念，包含了 Helm Chart, Config 以及 Released，而要瞭解這些概念最好的方式就是直接參考一個實際的範例，
