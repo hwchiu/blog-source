@@ -30,6 +30,7 @@ date: 2020-10-31 21:20:22
 
 最後，我們會根據上述步驟，打造兩個容器並且都採用 **Bridge** 網路模型，讓這兩個容器可以互通，但是還沒有辦法擁有對外上網的能力。
 
+相關程式碼都可以於這邊找到 [technologynoteniu/bloglab-source code](https://github.com/technologynoteniu/bloglab/tree/main/docker_network_basic_2)
 
 # 步驟
 
@@ -126,7 +127,7 @@ $ sudo brctl addbr hwchiu0
 $ sudo brctl show
 bridge name     bridge id               STP enabled     interfaces
 hwchiu0         8000.000000000000       no
-$ sudo ifconfig hwchiu0 
+$ sudo ifconfig hwchiu0 up
 ```
 
 ### 網路模型
