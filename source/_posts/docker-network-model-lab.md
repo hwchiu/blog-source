@@ -1,6 +1,6 @@
 ---
 title: 'Docker 網路入門篇(二) - Bridge 網路模型'
-keywords: 'Docker,Network,CNI,Kubernetes,101,Bridge'
+keywords: 'Docker,Network,CNI,Kubernetes,Bridge'
 tags:
   - Docker
   - Network
