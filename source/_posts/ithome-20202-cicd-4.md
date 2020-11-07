@@ -1,5 +1,5 @@
 ---
-title: '鐵人賽系列文章-Day 4 - Helm 操作範例'
+title: '鐵人賽系列文章- Day 4 - Helm 操作範例'
 keywords: 'Kubernetes,DevOps,Linux,K8s'
 tags:
   - ITHOME

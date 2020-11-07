@@ -1,5 +1,5 @@
 ---
-title: '鐵人賽系列文章-Day 3 - Helm 介紹'
+title: '鐵人賽系列文章- Day 3 - Helm 介紹'
 keywords: 'Kubernetes,DevOps,Linux,K8s'
 tags:
   - ITHOME

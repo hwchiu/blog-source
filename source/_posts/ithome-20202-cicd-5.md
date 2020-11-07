@@ -1,5 +1,5 @@
 ---
-title: Day 5 - 淺談本地部署 Kubernetes 的各類選擇
+title: '鐵人賽系列文章- Day 5 淺談本地部署 Kubernetes 的各類選擇'
 keywords: 'Kubernetes,DevOps,Linux,K8s'
 tags:
   - ITHOME
