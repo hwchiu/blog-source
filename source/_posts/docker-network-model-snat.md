@@ -37,7 +37,7 @@ date: 2020-11-07 13:25:21
 
 用技術層面來講上面三個概念的話，大概是下列這些內容，不過本文不會太細究每個元件的內容
 1. routing table + forwrding table
-2. kenrle + iptables + conntrack
+2. kernel + iptables + conntrack
 3. iptables
 
 # 環境
@@ -159,11 +159,11 @@ $ echo "1" | sudo tee /proc/sys/net/bridge/bridge-nf-call-iptables
 1
 ```
 
-當 **iptables** 被告知要干涉 **Linux Bridge** 的封包管理後，所有經過的封包都會讓 **iptalbes** 來進行檢查
+當 **iptables** 被告知要干涉 **Linux Bridge** 的封包管理後，所有經過的封包都會讓 **iptables** 來進行檢查
 
 Docker 的環境之中，採取的是白名單機制，若沒有告知要通過，則將該封包給丟棄，所以這也是為什麼我們的封包不會通過。
 這邊有兩種解決方法
-1. 修改成黑白單的概念，預設通過封包
+1. 修改成黑名單的概念，預設通過封包
 2. 加入相關規則，讓我們的封包可以通過
 
 前一篇文章的實驗就是針對 (1) 進行操作,這邊透過 **iptables -P FORWARD ACCEPT** 去說明，對於 **FORAWRD** 封包的處理，預設就是 **ACCEPT** 去接納他們
