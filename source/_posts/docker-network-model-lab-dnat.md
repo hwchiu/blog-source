@@ -1,12 +1,13 @@
 ---
-title: 'Docker 網路入門篇(四) - 外界主動存取'
+title: Docker 網路入門篇(四) - 外界主動存取
 keywords: 'Kubernetes,Network,Linux,Ubuntu'
-date: 2020-11-21 21:40:39
 tags:
   - Docker
   - Network
   - Kubernetes
 description: 本篇文章探討 Docker Bridge 網路模型的運作過程，透過步驟去分析到底 docker -p 的背後運作原理
+abbrlink: 46765
+date: 2020-11-21 21:40:39
 ---
 
 # 前言
@@ -34,8 +35,8 @@ description: 本篇文章探討 Docker Bridge 網路模型的運作過程，透�
 
 因此接下來就來看看，這過程應該要怎麼實現，有哪些部分需要注意
 
-
 # 環境
+```
 $ lsb_release -a
 No LSB modules are available.
 Distributor ID: Ubuntu
@@ -48,8 +49,7 @@ Linux k8s-dev 4.15.0-72-generic #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019 x86_
 
 $ docker --version
 Docker version 19.03.13, build 4484c46d9d
-
-
+```
 實驗所有步驟都可以於 [GitHub Repo](https://github.com/technologynoteniu/bloglab/tree/main/docker_network_basic_4) 中找到
 
 # 外界網路主動存取
@@ -283,14 +283,14 @@ iptables -t nat -A PREROUTING -p tcp -m tcp --dport 2345 -j DNAT --to-destinatio
 2. -host-port <----> -m tcp --dport
 3. --container-ip, --contianer-port <-----> -j DNAT --to-destination
 
-所以其實這是一個，針對 **loclahost** 流量而設計的 Proxt 程式，幫忙處理 DNAT，將封包轉送到內部去。
+所以其實這是一個，針對 **loclahost** 流量而設計的 Proxy 程式，幫忙處理 DNAT，將封包轉送到內部去。
 
 此外，這個應用程式本身也會去聽 **12345** 這個 port，因此未來如果有任何應用程式想要註冊 **12345** 的話，就會沒有辦法註冊，因為已經被搶走
 
 
 # 總結
 
-1. **docker -p** 做法非常簡單，就是整合了 iptables DNAT 以及 kube-proxy
+1. **docker -p** 做法非常簡單，就是整合了 iptables DNAT 以及 docker-proxy
 2. 透過 iptables DNAT 的功能，我們可以讓外部網路透過宿主機來存取內部容器，然而這種情況下，你是沒有辦法於宿主機內透過一樣的方式去存取容器的，這部分的原因是 **iptables** 的執行點跟 **localhost** 這種直接存取是有落差的
 3. docker透過 docker-proxy 的方式來彌補上述的缺陷，專門用來處理本地封包
 4. 同時， docker-proxy 也會佔據本地的 port，避免未來有其他的程式想要使用相同的 port 而造成混淆與服務不如預期。
