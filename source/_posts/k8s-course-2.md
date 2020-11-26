@@ -38,13 +38,13 @@ Kubernetes 與 Docker 非常不一樣，其複雜程度不是一個量級可以�
 https://hiskio.com/courses/349?promo_code=13LY5RE
 
 疑難雜症除錯篇
-https://hiskio.com/courses/440/about?promo_code=7EP1KY3
+https://hiskio.com/courses/440/about?promo_code=VEQ4N7G
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
 
 組合包(三堂課程一起購買，目前特價中)
-https://hiskio.com/packages/JPwq4znr1
+https://hiskio.com/packages/7ey2vdnyN
 
 另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
 https://www.facebook.com/technologynoteniu

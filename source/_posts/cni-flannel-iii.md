@@ -271,10 +271,10 @@ ee:8a:1f:f7:96:c7 dev flannel.1 dst 172.17.8.103 self permanent
 我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
 
 組合包
-https://hiskio.com/packages/JPwq4znr1
+https://hiskio.com/packages/7ey2vdnyN
 
 疑難雜症除錯篇
-https://hiskio.com/courses/440/about?promo_code=7EP1KY3
+https://hiskio.com/courses/440/about?promo_code=VEQ4N7G
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
