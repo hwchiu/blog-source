@@ -181,7 +181,7 @@ Helm 目前流通的版本有 Helm v2 以及 Helm v3，使用起來差別不會�
 https://hiskio.com/packages/7ey2vdnyN
 
 疑難雜症除錯篇
-https://hiskio.com/courses/440/about?promo_code=VEQ4N7G
+https://hiskio.com/courses/440/about?promo_code=LG28Q5G
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1

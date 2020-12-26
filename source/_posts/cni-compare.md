@@ -382,7 +382,7 @@ SR-IOV 最早期的 Plugin 並不是 Intel 所開發的，但是 Intel 將其 Fo
 https://hiskio.com/packages/7ey2vdnyN
 
 疑難雜症除錯篇
-https://hiskio.com/courses/440/about?promo_code=VEQ4N7G
+https://hiskio.com/courses/440/about?promo_code=LG28Q5G
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1

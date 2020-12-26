@@ -145,7 +145,7 @@ Jenkins 以及其相關生態系的相關工具 (Jenkins X, Jenkins Blue Ocean) 
 https://hiskio.com/packages/7ey2vdnyN
 
 疑難雜症除錯篇
-https://hiskio.com/courses/440/about?promo_code=VEQ4N7G
+https://hiskio.com/courses/440/about?promo_code=LG28Q5G
 
 單堂(CI/CD)
 https://hiskio.com/courses/385?promo_code=13K49YE&p=blog1
