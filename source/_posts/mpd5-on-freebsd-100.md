@@ -18,7 +18,7 @@ Install a VPN server on FreeBSD 10.0-Release on Amazon EC2.
 
 # Install
 ## Pkg
-- pkg install mpd5  
+- pkg install mpd5
 
 ## Ports
 - portmaster net/mpd5
@@ -32,12 +32,12 @@ Install a VPN server on FreeBSD 10.0-Release on Amazon EC2.
 ```bash=
 startup:
         # configure mpd users
-        set user hwchiu 123456  
+        set user hwchiu 123456
         # configure the console
         set console self 127.0.0.1 5005
         set console open
         # configure the web server
-        set web self 0.0.0.0 5006  
+        set web self 0.0.0.0 5006
         set web open
 ```
 
@@ -97,7 +97,7 @@ default:
 
 ## Use configuration
 - **cp /usr/local/etc/mpd5/mpd.secret.sample  /usr/local/etc/mpd5/mpd.secret**
-The format of mpd.secret is `username password ip_address` per line.  
+The format of mpd.secret is `username password ip_address` per line.
 - **Example**
 
 ``` sh
@@ -119,9 +119,9 @@ joe             "foobar"        192.168.1.1
 my_int = "xn0"
 internal_net = "192.168.0.0/16"
 external_addr = "172.31.18.110"
-nat on $my_int from $internal_net to any -> $external_addr 
-set skip on lo    
-block in log all  
+nat on $my_int from $internal_net to any -> $external_addr
+set skip on lo
+block in log all
 pass in on $my_int proto tcp from any to any port 1723 keep state
 pass in on $my_int proto tcp from any to any port 443 keep state
 pass in quick on $my_int proto icmp all keep state

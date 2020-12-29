@@ -11,11 +11,11 @@ abbrlink: 28275
 
 Msn的log採用的格式是XML，隨便打開一個LOG後仔細檢視，可以發現msn log的訊息格式大概是採這樣
 
-	<Message Date="2012/3/23" Time="下午 11:33:12" DateTime="2012-03-23T15:33:12.790Z" SessionID="1">  
-		<From><User FriendlyName="邱 渣"/></From>  
-		<To><User FriendlyName="XXX"/></To>  
-		<Text>明天會到否</Text>  
-	</Message>  
+	<Message Date="2012/3/23" Time="下午 11:33:12" DateTime="2012-03-23T15:33:12.790Z" SessionID="1">
+		<From><User FriendlyName="邱 渣"/></From>
+		<To><User FriendlyName="XXX"/></To>
+		<Text>明天會到否</Text>
+	</Message>
 
 <!--more-->
 
@@ -48,10 +48,10 @@ Msn的log採用的格式是XML，隨便打開一個LOG後仔細檢視，可以�
 
 
 	<From>"邱渣"</From>
-	
-	
+
+
 	<From><User FriendlyName="邱渣"/></From>
-	
+
 
 
 以Type1來說，邱渣是From這個結點的值，可以利用childList[0].value 取得發送者的名稱
@@ -70,17 +70,17 @@ childList[2].GetAttribute("Style")
 
 範例code如下
 
-``` 
-	xml = new XmlDocument();  
-	xml.Load(filename);  
+```
+	xml = new XmlDocument();
+	xml.Load(filename);
 	XmlNodeList nodeList = xml.GetElementsByTagName("Message");
 	foreach (XmlNode parentNode in nodeList)
 	{
-		
-		XmlElement element = (XmlElement)parentNode;  
-		string Date = element.GetAttribute("Date");  
-		string Time = element.GetAttribute("Time");  
-		XmlNodeList childList = element.ChildNodes;  
-		data += childList[0].FirstChild.Attributes[0].Value + " 說 (" + Time + ")\r\n";  
+
+		XmlElement element = (XmlElement)parentNode;
+		string Date = element.GetAttribute("Date");
+		string Time = element.GetAttribute("Time");
+		XmlNodeList childList = element.ChildNodes;
+		data += childList[0].FirstChild.Attributes[0].Value + " 說 (" + Time + ")\r\n";
 	}
 ```

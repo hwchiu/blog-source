@@ -13,7 +13,7 @@ abbrlink: 3965
 **Binomial Tree(BT)**含有下列特性
 
 - 高度為k的 BT共有2^k個node
-- 高度為k的 BT可以看成 BT0~BTk-1的組合 再加上一個root組成  
+- 高度為k的 BT可以看成 BT0~BTk-1的組合 再加上一個root組成
 ![](http://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Binomial_Trees.svg/700px-Binomial_Trees.svg.png)
 
 <!--more-->
@@ -25,7 +25,7 @@ abbrlink: 3965
 - 以二進位來看待的話，第K位就代表是否存在高度為K的BT
 	* 以下圖為例，就是11001 (右邊最小)
   * 因此任何數量的結點都可以用不同的BT給組合出來
-  
+
 ![](http://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Binomial-heap-13.svg/498px-Binomial-heap-13.svg.png)
 
 ##Implement##
@@ -68,7 +68,7 @@ class Node{
 ``` c
 int getMin(){
   Node* x = head;
-  int min = INT_MAX; 
+  int min = INT_MAX;
   while(x!=NULL){
     if(x->value < min)
     min = x->value;
@@ -116,7 +116,7 @@ void _postorder(Node* node){
 		_postorder(node->sibling);
 	printf("%d ",node->value);
 }
-```    
+```
 ##MergeHeap##
 要合併兩個 **Binomial Heap**
 - 先把兩個 **Binomail Heap**的 BT list給重新串接起來，以degree為key做sorting.
@@ -126,7 +126,7 @@ void _postorder(Node* node){
 
 ``` c
 void MergeHeap(BinomialHeap &bh){
-				
+
 	mergeHeap(bh);  //先把BT list給重新串接起來
 	Node* prev = NULL;
 	Node* x = head;
@@ -137,20 +137,20 @@ void MergeHeap(BinomialHeap &bh){
 			x = next;  //那就把指標往前移動，下次再合併
 		}
 		else if( x->value <= next->value){  //前面BT的值比較小，所以後面的合併進來
-			x->sibling = next->sibling; 
-			mergeTree(next,x);			 
+			x->sibling = next->sibling;
+			mergeTree(next,x);
 		}
 		else{ //前面那棵BT的值比較大，要往後合併，視情況也要更新 head指標
-			if(!prev){					
+			if(!prev){
 				head = next;				//更新head 指標
 			}
 			else{
-				prev->sibling = next;       
+				prev->sibling = next;
 			}
 			mergeTree(x,next);			 //合併
-			x = next;					 
+			x = next;
 		}
-		next = next->sibling;			 
+		next = next->sibling;
 	}
 }
 ```
@@ -164,7 +164,7 @@ void MergeHeap(BinomialHeap &bh){
 void mergeHeap(BinomialHeap &bh){
 	Node* head2 = bh.head;
 	Node* head1 = head;
-	
+
 	Node* newHead, *newCurr;
 
 	if(!head1){            //如果本身是空的，就不需要合併，直接指向對方即可
@@ -208,7 +208,7 @@ void mergeHeap(BinomialHeap &bh){
 		newCurr = head2;
 		head2 = head2->sibling;
 	}
-	
+
 	head = newHead;
 }
 ```
@@ -232,7 +232,7 @@ void mergeTree(Node* y,Node* z){
 	z->child = y;
 	z->degree++;
 }
-```    
+```
 
 
 
@@ -278,9 +278,9 @@ void deleteMin(){
 		head = minCurr->sibling;
 	else if(minPre && minCurr)
 		minPre->sibling = minCurr->sibling;
-	
+
   //H' Make-BINOMIAL-HEAP()
-	
+
 	Node *pre,*curr;
 	//用三個指標反轉一個 single link list
 	pre = tmp = NULL;
@@ -301,6 +301,6 @@ void deleteMin(){
 }
 ```
 
-圖片來自 
+圖片來自
 1. [Binomial Wiki](http://en.wikipedia.org/wiki/Binomial_heap)
 2. Introduction To Algorithms，Chapter 19 Binomial Heaps

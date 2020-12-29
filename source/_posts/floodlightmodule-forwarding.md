@@ -14,7 +14,7 @@ description: 本文基於 SDN Controller Floodlight 的原始碼進行了一次�
 
 ---
 
-# Preface 
+# Preface
 Floodlight中，最基本用來轉送封包的module就是Forwarding Module,這邊稍為介紹一下心得:
 
 
@@ -55,10 +55,10 @@ ForwardingBase本身並沒有實作該function，把這判斷的部分交給其�
 fm.setCookie(cookie)
   .setHardTimeout((short) 0)
   .setIdleTimeout((short) 5)
-  .setBufferId(OFPacketOut.BUFFER_ID_NONE) 
+  .setBufferId(OFPacketOut.BUFFER_ID_NONE)
   .setMatch(match)
   .setActions(actions)
-  .setLengthU(OFFlowMod.MINIMUM_LENGTH); 
+  .setLengthU(OFFlowMod.MINIMUM_LENGTH);
 ```
 
 **把訊息藉由messageDamper送給switch**
@@ -132,7 +132,7 @@ for (SwitchPort dstDap : dstDevice.getAttachmentPoints()) {
     Long dstSwDpid = dstDap.getSwitchDPID();
     Long dstIsland = topology.getL2DomainId(dstSwDpid);`
 
-if ((dstIsland != null) && dstIsland.equals(srcIsland)) 
+if ((dstIsland != null) && dstIsland.equals(srcIsland))
 on_same_island = true;
 ```
 

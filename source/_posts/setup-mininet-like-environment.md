@@ -80,11 +80,11 @@ ip netns exec ns1 bash
 接下來直接執行 **ifconfig -a** 查看系統上面的網路資訊，你會發現什麼都不見了，只剩下一個最簡單的 **loopback** 介面。
 ```bash
 > ifconfig -a
-lo        Link encap:Local Loopback  
+lo        Link encap:Local Loopback
           LOOPBACK  MTU:65536  Metric:1
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000 
+          collisions:0 txqueuelen:1000
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 ```
 這就是 **network isolation** 的功用，將網路完全隔絕開來，不過我們暫時還沒有任何連線可以使用，所以先執行 **exit** 離開該 **network namespace** 回到我們的 **Ubuntu**吧。

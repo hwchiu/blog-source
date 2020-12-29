@@ -61,7 +61,7 @@ GitOps 本身圍繞者三個主要核心概念
 直到現在，有愈來愈多的組織與廠商開始嘗試 GitOps 這樣的操作，雖然其工具與產品都還在處於非常早期階段，我們還是可以未來期待會有愈來愈多的選擇。
 
 接下來我們則是可以期待去看看 GitOps 是否可以在這個市場上存活，畢竟 GitOps 嘗試解決許多過去的部署問題，譬如
-1. Control: 
+1. Control:
 Zero-touch 的系統讓你能夠去限制誰能夠對你的系統做什麼
 2. Audit:
 版本控制加上宣告式的格式可以讓你知道是誰做的，做了什麼，什麼時候做的
@@ -91,6 +91,3 @@ https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
-
-
-

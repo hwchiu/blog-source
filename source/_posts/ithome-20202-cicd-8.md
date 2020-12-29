@@ -83,7 +83,7 @@ Remote 的話則是以 Google 為主，由於本章節探討的都是本地的�
 3. Go Tempate with Environment Variable Support
 4. Date & Time
 
-四者詳細的差異可以觀看[官方頁面](https://skaffold.dev/docs/pipeline-stages/taggers/) 來瞭解更多，基本上就是讓你選擇不同的 image tag 
+四者詳細的差異可以觀看[官方頁面](https://skaffold.dev/docs/pipeline-stages/taggers/) 來瞭解更多，基本上就是讓你選擇不同的 image tag
 
 ## Pushing Artifac
 
@@ -311,7 +311,7 @@ Watching for changes...
     - skaffold-example:4dec7885d19bcf6a6fef2bc62c609390787a73be61501ad0bdaffd3b229fd9a5 -> Loaded
    ```
 
-   
+
 
 2. Deploy 的部分則是用 Kubectl 的方式將 Yaml 送進去，然後自動輸出相關的 Log.
 

@@ -109,7 +109,7 @@ aaa0cd077a51        rancher/k3s:v1.18.6-k3s1   "/bin/k3s server --t…"   42 min
 
 
 
-## 存取 Kubernetes 
+## 存取 Kubernetes
 
 為了存取 Kubernetes，我們都會需要準備一份 `KUBECONFIG` 裡面描述 API Server 的位置，以及使用到的 Username 等資訊，這部分 `k3d` 也有提供相關的指令來處理 KUBECONFIG
 

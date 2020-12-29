@@ -28,12 +28,12 @@ API
 - **/wm/topology/links/json**  : 回傳所有Links，盡可能回傳**BIDRECTONAL**
   1. Method: **GET**
   2. Parameter: 無，
-	3. Code:  
-	    + TopologyWebRoutable.java  
+	3. Code:
+	    + TopologyWebRoutable.java
       + LinksResource.java
-	4. Example:    
+	4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/links/json | python -mjson.tool
-      
+
 ```json
 [
     {
@@ -71,16 +71,16 @@ API
 ]
 ```
 
- 
+
 - **/wm/topology/directed-links/json** : 回傳所有Type是 **DIRECT_LINK**或是**TUNNEL**的Link，都以**UNIDIRECTIONAL**的方式呈現
 	1. Method: **GET**
 	2. Parameter: 沒有參數，就回傳所有符合條件的Links
-	3. Code:   
-	    + TopologyWebRoutable.java  
+	3. Code:
+	    + TopologyWebRoutable.java
       + DirectedLinksResource.java
   4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/directed-links/json | python -mjson.tool
-      
+
 ```json
 [
     {
@@ -153,9 +153,9 @@ API
 - **/wm/topology/external-links/json** :  回傳透過BDDP所發現的Links。External-Links可以用來找出在網路環境中，不受controoler控制的switch的links。使用情境請參考[這篇](http://rascov.logdown.com/posts/183374-detect-legacy-switches-in-sdn-environment-using-floodlight)
 	1. Method: **GET**
 	2. Parameter: 沒有參數，就回傳所有符合條件的Links
-	3. Code:   
-      + TopologyWebRoutable.java  
-	    + ExternalLinksResource.java 
+	3. Code:
+      + TopologyWebRoutable.java
+	    + ExternalLinksResource.java
   4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/external-links/json | python -mjson.tool
 
@@ -174,20 +174,20 @@ API
 - **/wm/topology/tunnellinks/json** :    回傳所有的tunnelLink,我還沒有嘗試過有tunnel的網路拓墣，所以此API也不是很了解，只能從code去看。
 	1. Method: **GET**
 	2. Parameter: 沒有參數，就回傳所有tunnelLinks，每條link都會以**NodePortTuple**的形式呈現，該型態包含了switch的DPID以及對應的Port
-	3. Code:   
-	    + TopologyWebRoutable.java  
+	3. Code:
+	    + TopologyWebRoutable.java
       + TunnelLinksResource.java
   4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/tunnellinks-links/json | python -mjson.tool
 - **/wm/topology/switchclusters/json** :  回傳Controller底下的所有**cluster**，每個**cluster**是由一群switches所組成的SCC。
 	1. Method: **GET**
 	2. Parameter: 沒有參數，就回傳所有的cluster
-	3. Code:   
+	3. Code:
       + SwitchClustersResource.java
-	    + TopologyWebRoutable.java  
+	    + TopologyWebRoutable.java
   4. Example:
-  		+ curl -s http://127.0.0.1:8080/wm/topology/switchclusters/json | python -mjson.tool 
-      
+  		+ curl -s http://127.0.0.1:8080/wm/topology/switchclusters/json | python -mjson.tool
+
 ```json
 {
     "00:00:00:00:00:00:00:01": [
@@ -204,8 +204,8 @@ API
 - **/wm/topology/broadcastdomainports/json** : 回傳所有的broadcast domain ports，此port跟externel link有關係。返回值代表某switch上的某port所連接到的是一個不受controller所控制的switch。所以未來若是有收到廣播封包的話，這邊的要收起來。
 	1. Method: **GET**
 	2. Parameter: 沒有參數，就回傳所有符合條件的**NodePortTuple**
-	3. Code:   
-	    + TopologyWebRoutable.java  
+	3. Code:
+	    + TopologyWebRoutable.java
       + BroadcastDomainPortsResource.java
   4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/broadcastdomainports/json | python -mjson.tool
@@ -233,12 +233,12 @@ API
 - **/wm/topology/enabledports/json** :  回傳所有Switch上面的所有Ports。
 	1. Method: **GET**
 	2. Parameter: 沒有參數
-	3. Code:   
+	3. Code:
       + EnabledPortsResource.java
-	    + TopologyWebRoutable.java  
+	    + TopologyWebRoutable.java
   4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/enabledports/json | python -mjson.tool
-      
+
 ```json
 [
     {
@@ -294,20 +294,20 @@ API
 - **/wm/topology/blockedports/json** : 此API我還沒有測試成功，看CODE也沒有發現情況的port會被加入到blockedports，會再寄信詢問。
 	1. Method: **GET**
 	2. Parameter: 沒有參數，就回傳所有符合條件的Links
-	3. Code:   
-	    + TopologyWebRoutable.java  
+	3. Code:
+	    + TopologyWebRoutable.java
       + BlockedPortsResource.java
   4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/blockedports/json | python -mjson.tool
 - **/mw/topology/route/{src-dpid}/{src-port}/{dst-dpid}/{dst-port/json** : 一個用來找出最短路徑的REST API
 	1. Method: **GET**
-	2. Parameter: 
+	2. Parameter:
   		+ src-dpid: source switch dpid
       + src-port: source port of the source switch
       + dst-dpid: destination switch dpid
       + dst-port: destination port of the destination switch
-	3. Code:   
-	    + TopologyWebRoutable.java  
+	3. Code:
+	    + TopologyWebRoutable.java
       + RouteResource.java
   4. Example:
   		+ curl -s http://127.0.0.1:8080/wm/topology/route/00:00:00:00:00:00:00:04/2/00:00:00:00:00:00:00:07/2/json | python -mjson.tool

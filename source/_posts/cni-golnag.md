@@ -243,7 +243,7 @@ import (
     - 另外一端的 netns 物件，由於我們是在目標的 netns 內創造，所以這個變數則是要給 **host** 本身的 netns
 3. 創建完畢後透過 **veth** 的回傳變數取得創建於 **host** 上的 interface 名稱，通常是 **vethxxxxxxx** 這種格式
 4. 根據上述的名稱再次透過 **netlink** 去取得該網路介面的物件
-5. 最後透過 **netlink** 的方式把該介面接上已經創建好的 **Linux Bridfge** 
+5. 最後透過 **netlink** 的方式把該介面接上已經創建好的 **Linux Bridfge**
 
 接下來一個步驟一個步驟試試看
 
@@ -282,7 +282,7 @@ import (
 
 
 接下來就是透過 **netlink** 將該 interface name 轉換成相關的物件，以利後面的  **LinkSetMaster**操作
-```golang=    
+```golang=
 
 	hostVeth, err := netlink.LinkByName(hostIface.Name)
 	if err != nil {
@@ -346,7 +346,7 @@ lo        Link encap:Local Loopback
 		if err != nil {
 			return err
 		}
-        
+
 		hostIface.Name = hostVeth.Name
 ```
 
@@ -389,7 +389,7 @@ IPNet{
 		if err = netlink.AddrAdd(link, addr); err != nil {
 			return err
 		}
-        
+
 ```
 
 

@@ -287,10 +287,10 @@ spec:
   restartPolicy: Never
   securityContext:
     runAsNonRoot: true
-    
+
 $ conftest test pod.yaml  -p policy/
 
-2 tests, 2 passed, 0 warnings, 0 failures, 0 exceptions    
+2 tests, 2 passed, 0 warnings, 0 failures, 0 exceptions
 ```
 
 

@@ -55,7 +55,7 @@ Anki 使用感想 (後)
 
 則時候滑鼠點選進去到 **hwchiu**裡面，又會看到如下圖
 ![](http://i.imgur.com/b6YnnjN.png)
-這時候該資料夾的路徑是 
+這時候該資料夾的路徑是
 **C:/Users/hwchiu/AppData/Roaming/Anki2/hwchiu/collection.anki2**
 這個路徑必須要記錄下來，之後我們的程式會需要這個路徑來對底下的 **collection.anki2** 這個 **collection** 來處理。
 

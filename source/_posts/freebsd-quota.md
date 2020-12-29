@@ -31,44 +31,44 @@ options QUOTA
 ### Edit /etc/fstab
 修改/etc/fstab,對想要進行quota控制的FS進行參數調整
 
-	Device  MountPoint FSType Options Dump Pass  
+	Device  MountPoint FSType Options Dump Pass
 	/dev/da0p2     /  UFS rw,userquota,groupquota 1 1
 
 接者重新開機，或是remount FS，使其重新讀取設定
 ### 對使用者或是群組 調整其上限
 這邊使用**edquota**這個指令來調整
- 
 
--u: 加上要調整的使用者  
--g: 加上要調整的群組  
--t: 調整grace period  
 
-執行後會看到已EDITOR對應的文字編輯器開啟編輯，會出現類似下面  
->Quotas for user hwchiu:  
+-u: 加上要調整的使用者
+-g: 加上要調整的群組
+-t: 調整grace period
+
+執行後會看到已EDITOR對應的文字編輯器開啟編輯，會出現類似下面
+>Quotas for user hwchiu:
 >/usr : in use: 11216k, limits (soft = 0k, hard = 0k)
->	inodes in use : 903, limits (soft, hard=0)  
+>	inodes in use : 903, limits (soft, hard=0)
 
 這邊就可以去調整軟硬限制，根據FILE SIZE或是INODES的數量
 
 #### **啟動quotacheck**
-使用quotacheck來掃描使用者的使用狀況  
--a : 掃描/ect/fstab底下所有FS中檔案的使用情況  
--v : 詳細過程  
--u : 掃描使用者的檔案情況  
--g : 掃描群組的檔案情況  
- 
+使用quotacheck來掃描使用者的使用狀況
+-a : 掃描/ect/fstab底下所有FS中檔案的使用情況
+-v : 詳細過程
+-u : 掃描使用者的檔案情況
+-g : 掃描群組的檔案情況
+
 就給他執行 **quotacheck -avug**
 
 #### **啟動quota**
 執行quotaon -a，執行quota限制的功能，沒有開啟的話，一切的設定就只是擺好看的
 
 #### **觀看**
-使用**quota**這個指令來觀看  
+使用**quota**這個指令來觀看
 quota:
--u:使用者名稱  
--g:群組名稱  
--v:詳細  
--h:以容易辨識的格式表達大小，如M、  
+-u:使用者名稱
+-g:群組名稱
+-v:詳細
+-h:以容易辨識的格式表達大小，如M、
 
 >Filesystem        usage    quota   limit   grace  files   quota  limit   grace
 >/amd/gcs           305M     390M    410M           6414   40000  42000

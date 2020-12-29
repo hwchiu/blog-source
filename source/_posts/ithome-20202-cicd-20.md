@@ -48,7 +48,7 @@ $ docker run -d -p 5000:5000 --restart always --name registry registry:2
 
  權限認證方面我認為功能比較少，滿多的認證方式都需要自行透過額外的伺服器幫忙處理，可以參考  [restricting-access](https://docs.docker.com/registry/deploying/#restricting-access) 或是 [reverse proxy + SSL + LDAP for Docker Registry](https://medium.com/@two.oes/reverse-proxy-ssl-ldap-for-docker-registry-805539daaa94)
 
-# Harbor 
+# Harbor
 
 Harbor 是由 VMWare 所開源的 Container Registry 專案，我認為 Harbor 一個很值得推薦的原因是該專案是 [CNCF 畢業專案](https://www.cncf.io/projects/)，要成為 CNCF 畢業專案必須要滿足一些條件，雖然沒有一個專案可以完美的適合所有情形，但是就社群使用程度與社群貢獻程度來看， Harbor 算是滿優良的，這部分至少可以證明其本身是不少使用者在使用，而不是一個乏人問津的專案。
 

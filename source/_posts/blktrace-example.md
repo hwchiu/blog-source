@@ -36,7 +36,7 @@ apt-get install -y blktrace
 # Experiment
 ## Step1
 In order to make the output of **blkparse** more easily to read, we set the **numjobs** to **1**.
-Following is my fio config 
+Following is my fio config
 ```
 [global]
 iodepth=256
@@ -134,14 +134,14 @@ OUTPUT DESCRIPTION AND FORMATTING
        s   Sequence numbers
 
        S   Sector number
-	   
+
        t   Time stamp (nanoseconds)
 
        T   Time stamp (seconds)
 
        u   Elapsed value in microseconds (-t command line option)
 
-       U   Payload unsigned integer	   
+       U   Payload unsigned integer
 ```
 
 For our observation, we use **%5T.%9t, %p, %C, %a, %S\n** to format our result containing timestamp, command, process ID, action and sequence number.
@@ -202,7 +202,7 @@ open the file, the result looks like
     0.000227655, 22892, fio, Q, 1817856
     0.000228457, 22892, fio, G, 1817856
     0.000231936, 22892, fio, I, 1817856
-....    
+....
 ```
 Since the fio will fork to two process to handle the process, we use the **grep** to focus on one specific process (pid=22892).
 

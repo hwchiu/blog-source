@@ -150,5 +150,3 @@ After the kernel-space receive those **two** netlink message which sending from 
 **MISC**
 1. You can use the **ovs-dpctl dump-flows** to dump the flow table of kernel-space
 2. This article is based on the OVS v1.9 and the architecture has some change after v1.11
-
-

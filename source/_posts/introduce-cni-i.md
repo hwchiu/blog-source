@@ -68,7 +68,7 @@ Besides, we will operates the network namespace and linux bridge to simulate wha
 
 ## Linux Bridge
 In the default behavior, the docker will create a linux bridge `docker0` when you install the docker.io/docker.ce into your system.
-and it will handle the network connectivity for every docker container (use the --net=bridge and it is docker default option) 
+and it will handle the network connectivity for every docker container (use the --net=bridge and it is docker default option)
 You can use the following command to see the linux bridge after you install the docker package.
 
 We can create our own linux bridge via the `brctl command` and you can get it by installing the `bridge-utils` package.
@@ -128,7 +128,7 @@ The `veth` is represent to a `virtual link` and it can connect to two different 
 For example, type the following command to create a `veth` pair.
 ```
 $ sudo ip link add ve_A type veth peer name ve_B
-$ ip link 
+$ ip link
 15: ve_B@ve_A: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
     link/ether be:8f:26:d9:22:50 brd ff:ff:ff:ff:ff:ff
 16: ve_A@ve_B: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
@@ -210,4 +210,4 @@ What will happen when we run a `docker container`?
 5. find a unique IP address and assign to the taget network namespace.
 6. setup the iptables rules if you want to access it from outside.
 
-In the next posts, I will talk about what is CNI and why we need CNI and how CNI works. 
+In the next posts, I will talk about what is CNI and why we need CNI and how CNI works.

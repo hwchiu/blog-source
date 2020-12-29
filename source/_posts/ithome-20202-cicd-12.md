@@ -32,11 +32,11 @@ date: 2020-12-03 09:23:37
 
 
 
-Yaml 測試方面前一天的文章有探討一些工具的使用與介紹，這些工具的用法與面向都不相同，甚至裡面要測試的檔案也不一定只有 
+Yaml 測試方面前一天的文章有探討一些工具的使用與介紹，這些工具的用法與面向都不相同，甚至裡面要測試的檔案也不一定只有
 
 Kubernetes 可以使用，所以多方測試總是會有幫助的
 
-一切通過之後可以開始建置相關的 Container Image，並且準備將其送到測試用的 Kubernetes 叢集中，這邊要特別注意的環節就是 
+一切通過之後可以開始建置相關的 Container Image，並且準備將其送到測試用的 Kubernetes 叢集中，這邊要特別注意的環節就是
 
 Image Tag 的處理。假設前述過程中產生的 Image Tag 是 `5b1f94025b2`，那後續測試的過程要有能力把這個 `5b1f94025b2` 給傳遞到
 
@@ -62,7 +62,7 @@ Image Tag 的處理。假設前述過程中產生的 Image Tag 是 `5b1f94025b2`
 
 於 Skaffold 的設定檔案中我們可以設定測試用的指令，將我們運行整合測試的指令整合進去，就可以把 Build Image 到測試這過程全部
 
-讓 Skaffold 來搞定，同時藉由 Skaffold 的幫忙，我們就不需要自己去處理修改 Image Tag 的這個過程，一切讓 Skaffold 去修改對應的 
+讓 Skaffold 來搞定，同時藉由 Skaffold 的幫忙，我們就不需要自己去處理修改 Image Tag 的這個過程，一切讓 Skaffold 去修改對應的
 
 image tag, 不論是 Helm, Kustomize 或是原生 Yaml 都能搞定。
 

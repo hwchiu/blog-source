@@ -25,4 +25,3 @@ abbrlink: 29799
 - 那我想到的時候，中間兩個switch使用`傳統的learning switch`把這個`LLDP`給一路廣播下去，使得LLDP繞了回來，我覺得可能是後面兩個switch還沒有連上controller的時候會把自己運作成傳統的switch，因此我就詢問對方的網路環境.
 - 在確認對方網路並非是mininet的後，就請對方先把`ovs`給設定成`secure mode`，在這種mode下，若是沒有跟controller連線，ovs就不會有任何的行為.
 - 最後對方表示一切都正常了，所以發生原因應該就是中間的switch尚未變成openflow swtich前會把LLDP給透過傳統的方式給轉發下去，導致LLDP繞了回去.
-

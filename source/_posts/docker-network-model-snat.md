@@ -14,7 +14,7 @@ date: 2020-11-07 13:25:21
 本篇文章是 Docker 網路入門篇系列文第三篇，閱讀本文前要先有前面兩篇文章的基本概念，因此還不夠熟悉的讀者可以再次閱讀前面兩篇文章
 
 [Docker Network - 網路模型](https://www.hwchiu.com/docker-network-model.html)
-[Docker 網路入門篇(二) - Bridge 網路模型](https://www.hwchiu.com/docker-network-model-lab.html) 
+[Docker 網路入門篇(二) - Bridge 網路模型](https://www.hwchiu.com/docker-network-model-lab.html)
 
 > 這系列的文章都會用比較使用者的角度來探討網路概念，比較不會去深度探討底層實作細節
 

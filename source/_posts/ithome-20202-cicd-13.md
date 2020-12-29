@@ -102,7 +102,7 @@ date: 2020-12-06 18:21:06
 6. Shadow
    這個版本的部署也是新部署版本的全部實體，接下來針對所有流向舊版本的流量都複製一份，將其送到新版本去跑，當一切都沒有問題後才會移除舊版本。
 
-   
+
 
 更多詳細的介紹可以參閱這篇文章 [Six Strategies for Applications Deployment](https://thenewstack.io/deployment-strategies/)
 

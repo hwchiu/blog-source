@@ -41,8 +41,8 @@ Refet to [MongoDB Installation](http://docs.mongodb.org/manual/installation/)
 	* db.test.insert( { "key1":"value1", "key2":"value2"}) : 增加一個新的 **document**,如果沒有該 **collections**,就會順便產生新的
   * db.test.drop() : 刪除該 collection
   * db.test.remove( { "key1":"value1", "key2":"value2"}): 刪除特定的 **document**
-  
-More refer to [MongoDB Shell](http://docs.mongodb.org/manual/reference/method/)  	
+
+More refer to [MongoDB Shell](http://docs.mongodb.org/manual/reference/method/)
 
 #### Use python
 

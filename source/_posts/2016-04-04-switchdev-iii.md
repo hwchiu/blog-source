@@ -15,7 +15,7 @@ description:
 
 ## Introduction
 本篇文章主要會專注於 switchdev 本身的實作上，包含了其結構以及提供的 API 等。
-  
+
 
 <!--more-->
 
@@ -213,7 +213,7 @@ if (ops && ops->switchdev_port_attr_get)
 
 if (attr->flags & SWITCHDEV_F_NO_RECURSE)
 	return err;
-  
+
 netdev_for_each_lower_dev(dev, lower_dev, iter) {
 	/* do something */
 }
@@ -239,7 +239,7 @@ dev->switchdev_ops = &rocker_port_switchdev_ops;
 ### SwitchDev Port Object operation
 ```c=
 int switchdev_port_obj_add(struct net_device *dev,
-                           const struct switchdev_obj *obj);                    
+                           const struct switchdev_obj *obj);
 int switchdev_port_obj_del(struct net_device *dev,
                            const struct switchdev_obj *obj);
 int switchdev_port_obj_dump(struct net_device *dev, struct switchdev_obj *obj,
@@ -288,12 +288,12 @@ int switchdev_port_fdb_del(struct ndmsg *ndm, struct nlattr *tb[],
 int switchdev_port_fdb_dump(struct sk_buff *skb, struct netlink_callback *cb,
                             struct net_device *dev,
                             struct net_device *filter_dev, int idx);
-```                           
+```
 這三個 function 是用來操作 fdb 的，當上層走 **rtnetlink** 中的 **ndo_fdb_xxx** type 時，就會觸發對應的 function handler，這些 function 最後都會呼叫到對應的 **switchdev_port_obj_xxx**。
 
 關於整個 FDB 的操作，可以用下列這張圖來總結
 ![](https://lh3.googleusercontent.com/-sk760sgtc28/VwO9Wle0NKI/AAAAAAAAFOo/QrHADU1hDps5c5SmGBwU-nd54ZSJ7UjpQCCo/s720-Ic42/FDB.png)
-- 藍線代表的是 Notifer，當 Rocket 在 FDB 有任何變更時，會一路通知到 Linux Kernel 去，以確保 FDB 資料一致。  
+- 藍線代表的是 Notifer，當 Rocket 在 FDB 有任何變更時，會一路通知到 Linux Kernel 去，以確保 FDB 資料一致。
 - 圖中紅線代表的是走 ndo 系列的 netlink event，會直接跟 Rocker 溝通，因此透過 `br` 此指令去修改 FDB entry時，會先走紅線到 Rocker 去，接者走藍線去通知 Kernel 同步 FDB。
 - 當透過`brctl`指令去操作時，這邊目前能做的只有部分 attribute/obj 的修改，如 STP 的狀態，此時則會一路從 switchdev 的核心傳到 Rocker 去處理。
 - 基本上 MDB 的操作則簡單很多，與 FIB 比較類似。
@@ -323,15 +323,15 @@ if (err) {
 ```
 - 當執行失敗的時候，會呼叫 abort 將 rules 給全部清空，並且將 IPv4 offload 給關閉
 	- 這部分還有待加強，由註解也可以看出來
-  
-```c= 
+
+```c=
  /* There was a problem installing this route to the offload
  * device.  For now, until we come up with more refined
  * policy handling, abruptly end IPv4 fib offloading for
  * for entire net by flushing offload device(s) of all
  * IPv4 routes, and mark IPv4 fib offloading broken from
  * this point forward.
- */  
+ */
 ```
 
 - 而目前在加入 rules 的部分，也有針對條件去篩選，並非所有的 FIB 都會被加入

@@ -62,16 +62,16 @@ Steps
 1102     for_each_resource(res, resources) {
 1103         struct d_host_info *host;
 1104         struct mesh *mesh;
-1105 
+1105
 1106         if (!(flags & DRBDSETUP_SHOW)) {
 1107             for_each_connection(con, &res->connections)
 1108                 must_have_two_hosts(res, con);
 1109         }
-1110 
+1110
 1111         /* Other steps make no sense. */
 1112         if (!config_valid)
 1113             continue;
-1114 
+1114
 1115         STAILQ_FOREACH(mesh, &res->meshes, link)
 1116             create_connections_from_mesh(res, mesh);
 1117         create_implicit_connections(res);
@@ -104,7 +104,7 @@ Steps
 0733     struct hname_address *ha;
 0734     struct d_host_info *host_info;
 0735     int hosts = 0;
-0736 
+0736
 0737     if (!STAILQ_EMPTY(&res->connections))
 0738         return;
 ```
@@ -140,7 +140,7 @@ Steps
 0765             STAILQ_INSERT_TAIL(&path->hname_address_pairs, ha, link);
 0766         }
 0767     }
-0768 
+0768
 0769     if (hosts == 2)
 0770         STAILQ_INSERT_TAIL(&res->connections, conn, link);
 0771     else
@@ -158,7 +158,7 @@ Steps
 0255 static void set_host_info_in_host_address_pairs(struct d_resource *res, struct connection *conn)
 0256 {
 0257     struct path *path;
-0258 
+0258
 0259     for_each_path(path, &conn->paths)
 0260         _set_host_info_in_host_address_pairs(res, conn, path);
 0261 }
@@ -178,7 +178,7 @@ Steps
 0146     struct d_host_info *host_info;
 0147     int addr_hash[2], i = 0;
 0148     struct d_host_info *host_info_array[2];
-0149 
+0149
 0150     STAILQ_FOREACH(ha, &path->hname_address_pairs, link) {
 0151         if (ha->host_info) { /* Implicit connection have that already set. */
 0152             host_info = ha->host_info;
@@ -205,9 +205,9 @@ Steps
 0224     if (conn->implicit && i == 2 && !host_info_array[0]->node_id && !host_info_array[1]->node_id) {
 0225         /* This is drbd-8.3 / drbd-8.4 compatibility, auto created node-id */
 0226         bool have_node_ids;
-0227 
+0227
 0228         have_node_ids = generate_implicit_node_id(addr_hash, host_info_array);
-0229 
+0229
 0230         if (!have_node_ids) {
 0231             /* That might be a config with equal node addresses, since it is
 0232               127.0.0.1:xxx with a proxy... */
@@ -216,10 +216,10 @@ Steps
 0235             STAILQ_FOREACH(ha, &path->hname_address_pairs, link) {
 0236                 if (!ha->host_info)
 0237                     continue;
-0238 
+0238
 0239                 if (!ha->proxy)
 0240                     break;
-0241 
+0241
 0242                 addr_hash[i++] = crc32c(0x1a656f21,
 0243                             (void *)ha->proxy->outside.addr,
 0244                             strlen(ha->proxy->outside.addr));
@@ -272,11 +272,11 @@ Steps
 0474 {
 0475     struct connection *conn;
 0476     int peers_addrs_set = 1;
-0477 
+0477
 0478     for_each_connection(conn, &res->connections) {
 0479         struct path *path;
 0480         set_peer_in_connection(res, conn, peer_required);
-0481 
+0481
 0482         for_each_path(path, &conn->paths) {
 0483             if (!path->peer_address)
 0484                 peers_addrs_set = 0;
@@ -284,34 +284,34 @@ Steps
 0486         create_implicit_net_options(conn);
 0487     }
 0488     res->peers_addrs_set = peers_addrs_set;
-0489 
+0489
 0490     if (!(peer_required & DRBDSETUP_SHOW))
 0491         add_no_bitmap_opt(res);
 0492 }
 ```
-在設定完畢 **peer** 後，透過 `create_implicit_net_options` 去設定 network options 中的 **_name** 這個欄位而已。 
+在設定完畢 **peer** 後，透過 `create_implicit_net_options` 去設定 network options 中的 **_name** 這個欄位而已。
 最後用一個變數**peer_addr_set**來記住當前 resource 是否已經有設定過 peer 的 address了，因為有些 command 本身不需要 peer 的參與，所以會使用這個變數來作為一些邏輯的判斷。
 
 最後來到了整個 `adm_up` 函式的重頭戲, 在一切資訊都準備完畢後，接下來要開始在兩端 host *h1*, *h2* 建立起連線，這邊透過 **schedule_deferred_cmd** 的方式去執行三個指令，分別是 `new-peer`, `new-path` 以及 `connect`，稍後這些指令都會透過 netlink 的方式送到 kernel space 去進行真正的連線操作。
 ``` c
 1989     for_each_connection(conn, &ctx->res->connections) {
 1990         struct peer_device *peer_device;
-1991 
+1991
 1992         if (conn->ignore)
 1993             continue;
-1994 
+1994
 1995         tmp_ctx.conn = conn;
-1996 
+1996
 1997         schedule_deferred_cmd(&new_peer_cmd, &tmp_ctx, CFG_NET_PREP_UP);
 1998         schedule_deferred_cmd(&new_path_cmd, &tmp_ctx, CFG_NET_PATH);
 1999         schedule_deferred_cmd(&connect_cmd, &tmp_ctx, CFG_NET_CONNECT);
-2000 
+2000
 2001         STAILQ_FOREACH(peer_device, &conn->peer_devices, connection_link) {
 2002             struct cfg_ctx tmp2_ctx;
-2003 
+2003
 2004             if (STAILQ_EMPTY(&peer_device->pd_options))
 2005                 continue;
-2006 
+2006
 2007             tmp2_ctx = tmp_ctx;
 2008             tmp2_ctx.vol = peer_device->volume;
 2009             schedule_deferred_cmd(&peer_device_options_cmd, &tmp2_ctx, CFG_PEER_DEVICE);
@@ -329,10 +329,10 @@ Steps
 0549                enum drbd_cfg_stage stage)
 0550 {
 0551     struct deferred_cmd *d;
-0552 
+0552
 0553     if (stage & SCHEDULE_ONCE) {
 0554         stage &= ~SCHEDULE_ONCE;
-0555 
+0555
 0556         STAILQ_FOREACH(d, &deferred_cmds[stage], link) {
 0557             if (d->ctx.cmd == cmd &&
 0558                 d->ctx.res == ctx->res &&
@@ -341,16 +341,16 @@ Steps
 0561                 return;
 0562         }
 0563     }
-0564 
+0564
 0565     d = calloc(1, sizeof(struct deferred_cmd));
 0566     if (d == NULL) {
 0567         perror("calloc");
 0568         exit(E_EXEC_ERROR);
 0569     }
-0570 
+0570
 0571     d->ctx = *ctx;
 0572     d->ctx.cmd = cmd;
-0573 
+0573
 0574     STAILQ_INSERT_TAIL(&deferred_cmds[stage], d, link);
 0575 }
 ```
@@ -365,12 +365,12 @@ Steps
 0702     struct deferred_cmd *t;
 0703     int r;
 0704     int rv = 0;
-0705 
+0705
 0706     if (d && adjust_with_progress) {
 0707         printf("\n%15s:", drbd_cfg_stage_string[stage]);
 0708         fflush(stdout);
 0709     }
-0710 
+0710
 0711     while (d) {
 0712         if (d->ctx.res->skip_further_deferred_command) {
 0713             if (adjust_with_progress) {
@@ -398,9 +398,9 @@ Steps
 0580     struct d_volume *vol = ctx->vol;
 0581     bool iterate_paths;
 0582     int rv = 0;
-0583 
+0583
 0584     iterate_paths = ctx->path ? 0 : ctx->cmd->iterate_paths;
-0585 
+0585
 0586     if (ctx->cmd->disk_required &&
 0587         (!vol->disk || !vol->meta_disk || !vol->meta_index)) {
 0588         rv = 10;
@@ -410,11 +410,11 @@ Steps
 0592             exit(rv);
 0593         return rv;
 0594     }
-0595 
+0595
 0596     if (iterate_paths) {
 0597         struct cfg_ctx tmp_ctx = *ctx;
 0598         struct path *path;
-0599 
+0599
 0600         for_each_path(path, &tmp_ctx.conn->paths) {
 0601             tmp_ctx.path = path;
 0602             rv = tmp_ctx.cmd->function(&tmp_ctx);
@@ -422,7 +422,7 @@ Steps
 0604                 if (on_error == EXIT_ON_FAIL)
 0605                     exit(rv);
 0606             }
-0607 
+0607
 0608         }
 0609     } else {
 0610         rv = ctx->cmd->function(ctx);
@@ -442,67 +442,67 @@ Steps
 1708     struct connection *conn = ctx->conn;
 1709     char *argv[MAX_ARGS];
 1710     int argc = 0;
-1711 
+1711
 1712     argv[NA(argc)] = drbdsetup;
 1713     argv[NA(argc)] = (char *)ctx->cmd->name; /* "connect" */
 1714     argv[NA(argc)] = ssprintf("%s", res->name);
 1715     argv[NA(argc)] = ssprintf("%s", conn->peer->node_id);
-1716 
+1716
 1717     add_setup_options(argv, &argc, ctx->cmd->drbdsetup_ctx);
 1718     argv[NA(argc)] = 0;
-1719 
+1719
 1720     return m_system_ex(argv, SLEEPS_SHORT, res->name);
 1721 }
-1722 
+1722
 1723 static int adm_new_peer(const struct cfg_ctx *ctx)
 1724 {
 1725     struct d_resource *res = ctx->res;
 1726     struct connection *conn = ctx->conn;
-1727 
+1727
 1728     char *argv[MAX_ARGS];
 1729     int argc = 0;
-1730 
+1730
 1731     bool reset = (ctx->cmd == &net_options_defaults_cmd);
-1732 
+1732
 1733     argv[NA(argc)] = drbdsetup;
 1734     argv[NA(argc)] = (char *)ctx->cmd->name; /* "new-peer", "net-options" */
 1735     argv[NA(argc)] = ssprintf("%s", res->name);
 1736     argv[NA(argc)] = ssprintf("%s", conn->peer->node_id);
-1737 
+1737
 1738     if (reset)
 1739         argv[NA(argc)] = "--set-defaults";
-1740 
+1740
 1741     if (!strncmp(ctx->cmd->name, "net-options", 11))
 1742         del_opt(&conn->net_options, "transport");
-1743 
+1743
 1744     make_options(argv[NA(argc)], &conn->net_options);
-1745 
+1745
 1746     add_setup_options(argv, &argc, ctx->cmd->drbdsetup_ctx);
 1747     argv[NA(argc)] = 0;
-1748 
+1748
 1749     return m_system_ex(argv, SLEEPS_SHORT, res->name);
 1750 }
-1751 
+1751
 1752 static int adm_path(const struct cfg_ctx *ctx)
 1753 {
 1754     struct d_resource *res = ctx->res;
 1755     struct connection *conn = ctx->conn;
 1756     struct path *path = ctx->path;
-1757 
+1757
 1758     char *argv[MAX_ARGS];
 1759     int argc = 0;
-1760 
+1760
 1761     argv[NA(argc)] = drbdsetup;
 1762     argv[NA(argc)] = (char *)ctx->cmd->name; /* add-path, del-path */
 1763     argv[NA(argc)] = ssprintf("%s", res->name);
 1764     argv[NA(argc)] = ssprintf("%s", conn->peer->node_id);
-1765 
+1765
 1766     argv[NA(argc)] = ssprintf_addr(path->my_address);
 1767     argv[NA(argc)] = ssprintf_addr(path->connect_to);
-1768 
+1768
 1769     add_setup_options(argv, &argc, ctx->cmd->drbdsetup_ctx);
 1770     argv[NA(argc)] = 0;
-1771 
+1771
 1772     return m_system_ex(argv, SLEEPS_SHORT, res->name);
 1773 }
 ```
@@ -566,7 +566,7 @@ Steps
 1141     int c, i;
 1142     int rv;
 1143     char *desc = NULL; /* error description from kernel reply message */
-1144 
+1144
 1145     struct drbd_genlmsghdr *dhdr;
 1146     struct msg_buff *smsg;
 1147     struct iovec iov;

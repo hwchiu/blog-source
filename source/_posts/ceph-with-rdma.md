@@ -79,7 +79,7 @@ Enable RDMA
 	- **ms_async_rdma_send_buffers** and **ms_async_rdma_receive_buffers** are how many work requestes for RDMA send/receive queue respectively.
   - ms_async_rdma_buffer_size is the size os a single registered buffer.
   - the total memory we allocate for each application is ms_async_rdma_buffer_size * (ms_async_rdma_send_buffers + ms_async_rdma_receive_buffers) and you can refer to [here](https://github.com/ceph/ceph/pull/13510) to know more about it.
-  
+
 Example ceph.conf
 ```
 [global]
@@ -95,7 +95,7 @@ Update the ceph.conf for each node and restart all daemons, after that, the ceph
 If you want ot make sure the RDMA works, you can use the following method to dump the RDMA packet and use the wireshark to open it.
 ```
 1. echo "options mlx4_core log_num_mgm_entry_size=-1" || sudo -a tee /etc/modprobe.d/mlx4.conf
-2. sudo  /etc/init.d/openibd restart 
+2. sudo  /etc/init.d/openibd restart
 3. ibdump
 ```
 

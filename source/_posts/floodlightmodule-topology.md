@@ -60,50 +60,50 @@ void topologyChanged(List<LDUpdate> linkUpdates);
 ## ITopologyService
 Topology提供的主動API,主要可以讓其他的module來獲取topology上的相關資訊
 
-- **isAttachmentPointPort**  
+- **isAttachmentPointPort**
   根據switch's dpid、switch port 判斷是否有device連結到該swtich的port上面。
   若存在就是回傳false,否則回傳true,不清楚為什麼要反轉。
-- **getOpenflowDomainId**  
+- **getOpenflowDomainId**
 	根據switch dpid，取得該swtich所屬cluster。
-- **getL2DomainId**  
+- **getL2DomainId**
   目前的版本中，做的事情同等於 `getOpenflowDomainId`
-- **inSameOpenflowDomain** 
+- **inSameOpenflowDomain**
   判斷兩個switch是否屬於同一個cluster。
-- **getSwitchesInOpenflowDomain**  
+- **getSwitchesInOpenflowDomain**
   取得該swtich所屬cluster中的所有switch。
-- **inSameL2Domain**  
+- **inSameL2Domain**
   目前的版本中，做的事情同等於 `inSameOpenflowDomain`
-- **isBroadcastDomainPort**  
+- **isBroadcastDomainPort**
   判斷該switch的某個port是否屬於broadcast tree的一部分。
-- **isAllowed**  
+- **isAllowed**
   不明，總是回傳true。
-- **isConsistent**  
-  不是很清楚，感覺是判斷一個device的新後位置是否相同。待確認  
+- **isConsistent**
+  不是很清楚，感覺是判斷一個device的新後位置是否相同。待確認
   deviceManager.java && Device.java 都有使用到，看起來跟位置有相關。
-- **isInSameBroadcastDomain**  
+- **isInSameBroadcastDomain**
   兩個swtich的port是否屬於同一個broadcast tree。
-- **getPortsWithLinks**  
+- **getPortsWithLinks**
   取得一個switch上的所有ports。
-- **getBroadcastPorts**  
+- **getBroadcastPorts**
   取得一個switch上所有屬於broadcast tree port的port
-- **isIncomingBroadcastAllowed**  
+- **isIncomingBroadcastAllowed**
   判斷該switch的某個port是否能夠接受broadcast的封包，若該port不屬於broadcast tree就會丟棄該封包。
-- **getOutgoingSwitchPort**  
+- **getOutgoingSwitchPort**
 	意義不明
-- **getIncomingSwitchPort**  
+- **getIncomingSwitchPort**
 	意義不明
-- **getAllowedOutgoingBroadcastPort**  
+- **getAllowedOutgoingBroadcastPort**
 	尚未實作，意義不明
-- **getAllowedIncomingBroadcastPort**  
+- **getAllowedIncomingBroadcastPort**
 	尚未實作，意義不明
-- **getBroadcastDomainPorts**  
+- **getBroadcastDomainPorts**
   取得broadcast tree的所有成員set<dpid,port>
-- **getTunnelPorts**   
-	取得目前的TopologyInstance中是否是tunnelPorts  
+- **getTunnelPorts**
+	取得目前的TopologyInstance中是否是tunnelPorts
   意義不明
-- **getBlockedPorts**   
+- **getBlockedPorts**
 	尚未實做完成，估計是取得所有被封住的ports。
-- **getPorts**    
+- **getPorts**
   取得該switch上所有未被隔離且可以使用的port。
 
 ## NodePair
@@ -137,7 +137,7 @@ Cluster的運算則透過compute來完成，其中又有四大項目分別去跑
 	- identifyOpenflowDomains
 	- addLinksToOpenflowDomains
 	- calculateShortestPathTreeInClusters
-	- calculateBroadcastNodePortsInClusters  
+	- calculateBroadcastNodePortsInClusters
 
 **identifyOpenflowDomains**
 

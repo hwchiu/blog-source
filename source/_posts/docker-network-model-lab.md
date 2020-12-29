@@ -139,7 +139,7 @@ $ sudo ifconfig hwchiu0 up
 ![](https://i.imgur.com/KhXGcX4.jpg)
 
 
-## 創建 Veth Pair 
+## 創建 Veth Pair
 
 目前我們擁有
 1. 兩個空蕩蕩的容器，包含其本身的 netns
@@ -274,10 +274,10 @@ lo        Link encap:Local Loopback
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)          
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 $ ip link | grep veth
 23: veth0@if24: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
-25: veth1@if26: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000          
+25: veth1@if26: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
 ```
 
 最後我們可以再次透過 **ip link** 指令觀察，可以發現宿主機上面的四張虛擬網卡只剩下兩張了，因為有兩張都被搬移到容器內。
@@ -323,7 +323,7 @@ hwchiu0         8000.266248dc8ca1       no              veth0
 
 這個步驟主要針對的是 veth 於宿主機內的搬移，將其綁到對應的 Linux Bridge 上。
 
-左圖/右圖: 差異就是 veth 的兩個端頭現在都不流浪，而是歸屬於 Linux Bridge 底下 
+左圖/右圖: 差異就是 veth 的兩個端頭現在都不流浪，而是歸屬於 Linux Bridge 底下
 
 ![](https://i.imgur.com/gpSQTcw.jpg)
 
@@ -370,7 +370,7 @@ lo        Link encap:Local Loopback
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
-          
+
 $ sudo docker exec c2 ifconfig
 eth0      Link encap:Ethernet  HWaddr ea:51:1c:2c:a4:15
           inet addr:10.55.66.3  Bcast:10.55.66.255  Mask:255.255.255.0
@@ -386,7 +386,7 @@ lo        Link encap:Local Loopback
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)          
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 ```
 
 最後透過 ifconfig 等指令再次觀察，可以看到相關的網卡都起來了，同時 IP 等資訊也都有了，可以準備邁入最後階段
@@ -396,7 +396,7 @@ lo        Link encap:Local Loopback
 
 這個階段，我們要來透過 **PING** 的指令來打測試我們的連線，整個封包流程會是
 
-c1 容器內的 ping -> c1 容器內的網卡 eth0 -> 宿主機內的 veth0 
+c1 容器內的 ping -> c1 容器內的網卡 eth0 -> 宿主機內的 veth0
 -> 宿主機內的 Linux Bridge -> 宿主機內 Bridge 上的 veth1
 -> c2 容器內的網卡 eth0
 

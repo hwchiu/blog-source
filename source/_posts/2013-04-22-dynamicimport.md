@@ -19,18 +19,18 @@ abbrlink: 39552
 		|
 		|
 		|-------server.py
-		|	
+		|
 		|
 		|-------modules
 			|
 			|-----googleSearch
 			|   |
 			|   |---googleSearch.py
-			|   
+			|
 			|-----wikiSearch
 			|   |
 			|	|---wikiSearch.py
-			|   
+			|
 			|-----echoServer
 				|
 			    |---echoServer.py
@@ -45,8 +45,8 @@ server.py是主要的server程式，可以透過指令重新去載入config.json
 
 叫server重新載入就可以獲得新功能，而不需要整個server重開。
 
-參考[Telling __import__ where to look - am I stuck with sys.path?](http://stackoverflow.com/questions/7218673/telling-import-where-to-look-am-i-stuck-with-sys-path)  
-以及[python3.0中重载模块](http://eriol.iteye.com/blog/1113588)後  
+參考[Telling __import__ where to look - am I stuck with sys.path?](http://stackoverflow.com/questions/7218673/telling-import-where-to-look-am-i-stuck-with-sys-path)
+以及[python3.0中重载模块](http://eriol.iteye.com/blog/1113588)後
 
 整理如下
 
@@ -72,7 +72,7 @@ bytecode、轉成執行碼，因此這個行為必須要透過reload強制重做
 
 範例如下
 
-``` 
+```
 
     def dynamicLoadModules(self):
         sys.modules['plugins'] = self.plugins = type(sys)('plugins')
@@ -80,7 +80,7 @@ bytecode、轉成執行碼，因此這個行為必須要透過reload強制重做
         for path in self.config['MODULES']:
             path = os.path.join(sys.path[0],'modules',path)
             self.plugins.__path__.append(path)
-       
+
  		##dynamic load modules
         self.modules = []
         self.modules = [ importlib.import_module('plugins.'+module) for module in self.config['MODULES']]

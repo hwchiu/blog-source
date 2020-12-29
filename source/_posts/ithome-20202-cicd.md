@@ -27,8 +27,8 @@ date: 2020-10-21 19:19:06
 
 上次的流程中有非常多的環節可以探討，每個環節中都有不同的解決方案與取捨，這些歡節包含
 
-1. Kubernetes 內的應用程式該如何包裝? 原生 Yaml 還是 Helm? 
-2. 本地開發者需要 Kubernetes 來測試 Kubernetes 嗎? 
+1. Kubernetes 內的應用程式該如何包裝? 原生 Yaml 還是 Helm?
+2. 本地開發者需要 Kubernetes 來測試 Kubernetes 嗎?
 3. CI 流水線系統要選擇哪一套? 流水線工作要如何被觸發？
 4. CI 流水線過程中，需要 Kubernetes 來測試應用程式嗎 ?
 5. Container Registry 要使用雲端服務還是要自架，自架的話該怎麼使用以及如何與 Kubernetes 整合

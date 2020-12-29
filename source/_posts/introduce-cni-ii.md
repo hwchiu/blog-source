@@ -66,7 +66,7 @@ According to the official website's report. those `container runtimes` solutions
 
 
 ## How CNI works
-`Container Network Interface` is a specifiction which defined what kind of the interface you should implement. 
+`Container Network Interface` is a specifiction which defined what kind of the interface you should implement.
 
 In order to make it easy for developers to deveploe its own CNI plugin. the `Container Network Interface` project also provides many library for developing and all of it is based on the `golang` language.
 
@@ -124,7 +124,7 @@ You can see the arguments `--cni-bin-dir=/opt/cni/bin --cni-conf-dir=/etc/cni/ne
 
 Now, Let we see the files under `cni-bin-dir` and `cni-conf-dir`.
 
-The `cni-bin-dir` contains all the CNI binary file and those files can be programmed by any language, just follow the CNI interface. 
+The `cni-bin-dir` contains all the CNI binary file and those files can be programmed by any language, just follow the CNI interface.
 ```shell=
 vortex-dev:04:21:29 [~]vagrant
 $ls /opt/cni/bin/
@@ -179,7 +179,7 @@ By those procedure, we can maks sure all containers share the same network stack
 Combine the pause container and user containers, it's called `Pod`.
 And you can try to use the `docker ps` in your `kubernetes` node to see how many pause container in there.
 
-```shell=    
+```shell=
 vortex-dev:05:19:30 [~]vagrant
 $sudo docker ps -a | grep pause
 8838b9614a30        k8s.gcr.io/pause:3.1                              "/pause"                 7 hours ago         Up 7 hours

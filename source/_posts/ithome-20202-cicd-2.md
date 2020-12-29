@@ -61,9 +61,9 @@ Kubernetes 內的眾多資源，譬如 Deployment/Pod/ConfigMap/Ingress/Service.
 
 ### 客製化
 
-客製化的議題也是單純，對於 Kubernetes 的物件資源來說，針對不同的使用環境，會需要不同的設定檔案，譬如同樣一個 Kubernetes 
+客製化的議題也是單純，對於 Kubernetes 的物件資源來說，針對不同的使用環境，會需要不同的設定檔案，譬如同樣一個 Kubernetes
 
-Service, 有些環境覺得使用 ClusterIP 就可以，有些環境會需要使用 NodePort 來存取，甚至有些會使用 LoadBalancer 
+Service, 有些環境覺得使用 ClusterIP 就可以，有些環境會需要使用 NodePort 來存取，甚至有些會使用 LoadBalancer
 
 所以今天應用程式是否有辦法讓使用者很方便的去進行客製化的設定，最簡單的做法也許就是一個環境一大包設定檔案，但是這樣建置起
 
@@ -81,7 +81,7 @@ Service, 有些環境覺得使用 ClusterIP 就可以，有些環境會需要使
 
 事實上也滿多服務都透過 Yaml 配上 Git 的方式來散步其應用程式，使用者根據不同的 URL 來安裝不同的 Yaml 檔案，同時如果有需求就
 
-自己直接修改該 Yaml 來滿足，譬如一個知名的 CNI Flannel 就是透過這種方式，將 Yaml 的內容全部寫到一個檔案中，然後透過 Github 
+自己直接修改該 Yaml 來滿足，譬如一個知名的 CNI Flannel 就是透過這種方式，將 Yaml 的內容全部寫到一個檔案中，然後透過 Github
 
 來維護不同版本，使用者根據不同的 URL 來安裝不同版本的 Flannel。
 

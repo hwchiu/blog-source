@@ -55,14 +55,14 @@ Software Defined WAN`. 這是一篇 Google 於 `2013 SIGCOMM` 所發表關於 `S
 | SC0     | Bulk transfer   | N/A     |
 
 2. Scale Requirement
-根據 `Google` 自己提供的數據，整體網路所需的頻寬每九個月就會成長一倍，根本是另類的摩爾定律(X). 因此這五年來整體的頻寬需求大致上成長了 100 倍. 
+根據 `Google` 自己提供的數據，整體網路所需的頻寬每九個月就會成長一倍，根本是另類的摩爾定律(X). 因此這五年來整體的頻寬需求大致上成長了 100 倍.
 
 由於流量的巨量提升，因此下列的所有設施也都必須要因應這些衝擊
   - 提升 Network capacity
   - 資料中心的數量
   -  TE 的路徑數量
 
-3. 此外，在滿足上述條件的改造中，還要確保現有的任何服務不能夠有任何 `downtime`.  
+3. 此外，在滿足上述條件的改造中，還要確保現有的任何服務不能夠有任何 `downtime`.
 
 因此，`2018` 的這篇論文主軸就是探討這些問題的本質，並且闡述 `B4` 是如何改造來解決上述的問題並且提供相對應的服務品質與需求。
 
@@ -73,7 +73,7 @@ Software Defined WAN`. 這是一篇 Google 於 `2013 SIGCOMM` 所發表關於 `S
 請搭配  [Slides](https://pdfs.semanticscholar.org/63f9/0f7482c186b778ef32b70c877c6d7ec82440.pdf?fbclid=IwAR06jKF1W8bXwga9aRzeVYMEMMXn63vzc6dm1V7OSrJfyquoAUbwNgYmKEE) 的 p.16 - 18 一併觀看
 
 ### Saturn
-在原先的 `B4` 架構中(p.17)，每個 `site topology` 都成為 `Saturn`, 每個 `Saturn` 中都分成上下兩個部分，下半部分總共有四個 `Saturn chassis`, 而上半部分則是 兩個 或是 四個 的 `Saturn chassis`，其中上下 `Saturn Chassis` 中間溝通的頻寬是 `2.56/5.12 Tbps`. 
+在原先的 `B4` 架構中(p.17)，每個 `site topology` 都成為 `Saturn`, 每個 `Saturn` 中都分成上下兩個部分，下半部分總共有四個 `Saturn chassis`, 而上半部分則是 兩個 或是 四個 的 `Saturn chassis`，其中上下 `Saturn Chassis` 中間溝通的頻寬是 `2.56/5.12 Tbps`.
 
 為了解決 `Scale` 的問題，`Google` 只能繼續打造更多的 `Datacenter Site` 並且緊鄰原先欲解決 `Scale` 問題的 `Site`. 如圖 `18`.
 
@@ -98,7 +98,7 @@ Software Defined WAN`. 這是一篇 Google 於 `2013 SIGCOMM` 所發表關於 `S
 
 ## Solving capacity asymmetry problem in hierarchical topology
 雖然採用了 `階層式架構` 帶來了不少好處，但是經過 `Google` 觀察到 `階層式架構` 對 `TE` 的計算實際上也帶來了不少的問題。
-最簡單的範例就是當整個網路實體架構中有任何因為 `設備維護`,`操作` 等導致了當前有任何 `data plane` 裝置不穩定，這些會影響整體連結的頻寬，連帶影響最終的 `Capacity` 的計算，最後會影響整體網路流量的分配。 
+最簡單的範例就是當整個網路實體架構中有任何因為 `設備維護`,`操作` 等導致了當前有任何 `data plane` 裝置不穩定，這些會影響整體連結的頻寬，連帶影響最終的 `Capacity` 的計算，最後會影響整體網路流量的分配。
 這個情形就稱為 `Capacity Asymmetry`, 流量的不對等。
 接下來透過 `(p22-24)` 來解釋這個問題到底實際上會產生什麼樣的影響。
 
@@ -191,7 +191,7 @@ Size(ACL) ≥ (#Sites ✕ #PrefixesPerSite ✕ #ServiceClasses)
 
 如同上述所說，一旦將 `flow table(ACL)`拆成兩個部分，分別是 `VFP` 以及 `Per-VRF LPM` 兩個規則進行處理，最後達到的效果就是可以提升將近 60倍 數量的規則數.(意味者在IP跟服務種類不變的情況下，可以擴充到1900多個節點左右)
 概念如下
-1. 將 `cluster prefix` 符合相關的規則全部移動到 `LPM (Longest Prefex Match)` 表格中。 
+1. 將 `cluster prefix` 符合相關的規則全部移動到 `LPM (Longest Prefex Match)` 表格中。
 在交換機中，不同表格的大小不一定，根據論文顯示， `LPM` 表格的數量上限遠遠比 `ACL` 還要來得高。
 2. 由於 `LPM` 表格中沒有辦法針對 `DSCP` 的比對(DSCP用來代表不同的服務), 但是 `LPM` 可以比對 `VRF (Virtual Routing Forwarding)` 的標籤，因此決定透過 `VRF` 與 `DSCP` 進行一個比對的關係。
 3. 一開始則使用 `VFP(Virtual Forwarding Plane)` 表格來進行比對，在這個表格中則會透過 `DSCP` 的比對並且設定特定的 `VRF` 標籤，供後續的 `LPM` 表格識別其為特定的應用服務
@@ -213,14 +213,13 @@ Size(ACL) ≥ (#Sites ✕ #PrefixesPerSite ✕ #ServiceClasses)
 
 | Before |  After|
 | -------- | -------- |
-| Copy network with 99% availability     | High-available network with 99.99% availability     | 
-| Inter-DC WAN with moderate number of sites   | 100x more traffic, 60x more tunnels     | 
-| Saturn: flat site topology & per-site domain TE controller  | Jumpgate: hierarchical topology & granular TE control domain    | 
-| Site-level tunneling  | Site-level tunneling in conjunction with supernode-level TE (“Tunnel Split Group”)     | 
-| Tunnel splits implemented at ingress switches   | Multi-stage hashing across switches in Clos supernode     | 
+| Copy network with 99% availability     | High-available network with 99.99% availability     |
+| Inter-DC WAN with moderate number of sites   | 100x more traffic, 60x more tunnels     |
+| Saturn: flat site topology & per-site domain TE controller  | Jumpgate: hierarchical topology & granular TE control domain    |
+| Site-level tunneling  | Site-level tunneling in conjunction with supernode-level TE (“Tunnel Split Group”)     |
+| Tunnel splits implemented at ingress switches   | Multi-stage hashing across switches in Clos supernode     |
 
 
 # Reference
 1. [B4 and after: managing hierarchy, partitioning, and asymmetry for availability and scale in google's software-defined WAN](https://dl.acm.org/citation.cfm?id=3230545&fbclid=IwAR3JnZf8yk2Ku8JXutQZSsAwm8Koca2ZSlInGI7JOJb9P3rAu91EWHai2c0)
 2. [Slides](https://pdfs.semanticscholar.org/63f9/0f7482c186b778ef32b70c877c6d7ec82440.pdf?fbclid=IwAR06jKF1W8bXwga9aRzeVYMEMMXn63vzc6dm1V7OSrJfyquoAUbwNgYmKEE)
-

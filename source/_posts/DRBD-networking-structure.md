@@ -26,7 +26,7 @@ date: 2017-05-16 17:16:15
 - struct drbd_tcp_transport
 - struct dtt_listener
 - struct dtt_socket_container
-- struct dtt_path 
+- struct dtt_path
 
 ### Environment
 - Drbd 9.0
@@ -61,7 +61,7 @@ date: 2017-05-16 17:16:15
 這個結構用來定義所有跟網路相關的操作，如 **connect**, **send** 等。
 每個要實作Networking Module的 **kernel module**都必須要實做這些功能，並且設定好對應的 **function pointer**。
 在 **drbd.ko**中，就會透過 **drbd_transport** 的方式去存取到這些對應的操作來使用，譬如
-```c 
+```c
 0686     err = transport->ops->connect(transport);
 ```
 
@@ -69,12 +69,12 @@ date: 2017-05-16 17:16:15
 0130 struct drbd_transport_ops {
 0131     void (*free)(struct drbd_transport *, enum drbd_tr_free_op free_op);
 0132     int (*connect)(struct drbd_transport *);
-0133 
+0133
 .........
 0165     int (*recv)(struct drbd_transport *, enum drbd_stream, void **buf, size_t size, int flags);
 ........
 0179     int (*recv_pages)(struct drbd_transport *, struct drbd_page_chain_head *, size_t size);
-0180 
+0180
 0181     void (*stats)(struct drbd_transport *, struct drbd_transport_stats *stats);
 0182     void (*set_rcvtimeo)(struct drbd_transport *, enum drbd_stream, long timeout);
 0183     long (*get_rcvtimeo)(struct drbd_transport *, enum drbd_stream);
@@ -91,16 +91,16 @@ date: 2017-05-16 17:16:15
 
 ##### drbd_transport
 真正用來抽象整個 networking module 的結構，將上面提到的 **drbd_transport_ops** 以及 **drbd_transport_class** 收錄到此結構中，最外層的 drbd 透過此物件可以呼叫到當前 networking 的實作方法。
-``` c 
+``` c
 0103 struct drbd_transport {
 0104     struct drbd_transport_ops *ops;
 0105     struct drbd_transport_class *class;
-0106 
+0106
 0107     struct list_head paths;
-0108 
+0108
 0109     const char *log_prefix;     /* resource name */
 0110     struct net_conf *net_conf;  /* content protected by rcu */
-0111 
+0111
 0112     /* These members are intended to be updated by the transport: */
 0113     unsigned int ko_count;
 0114     unsigned long flags;
@@ -116,7 +116,7 @@ date: 2017-05-16 17:16:15
 0060     struct drbd_listener listener;
 0061     void (*original_sk_state_change)(struct sock *sk);
 0062     struct socket *s_listen;
-0063 
+0063
 0064     wait_queue_head_t wait; /* woken if a connection came in */
 0065 };
 ```
@@ -144,13 +144,13 @@ date: 2017-05-16 17:16:15
 0085 struct drbd_path {
 0086     struct sockaddr_storage my_addr;
 0087     struct sockaddr_storage peer_addr;
-0088 
+0088
 0089     struct kref kref;
-0090 
+0090
 0091     int my_addr_len;
 0092     int peer_addr_len;
 0093     bool established; /* updated by the transport */
-0094 
+0094
 0095     struct list_head list; /* paths of a connection */
 0096     struct list_head listener_link; /* paths waiting for an incomming connection,
 0097                        head is in a drbd_listener */
@@ -168,7 +168,7 @@ date: 2017-05-16 17:16:15
 0904 struct drbd_connection {
 0905     struct list_head connections;
 ..................
-1047 
+1047
 1048     unsigned int peer_node_id;
 1049     struct list_head twopc_parent_list;
 1050     struct drbd_transport transport; /* The transport needs to be the last member. The acutal
@@ -177,12 +177,12 @@ date: 2017-05-16 17:16:15
 1053 };
 ```
 
-##### struct dtt_path 
+##### struct dtt_path
 這邊除了將本來的 **drbd_path** 包起來外，還多了一個list來處理上述 **dtt_socket_container** 的物件，這邊目前沒有辦法理解為什麼需要用list來保存，我以為只需要用一個 socket 的物件就可以了。
 ``` c
 0076 struct dtt_path {
 0077     struct drbd_path path;
-0078 
+0078
 0079     struct list_head sockets; /* sockets passed to me by other receiver threads */
 0080 };
 ```
@@ -203,7 +203,7 @@ date: 2017-05-16 17:16:15
 0060     struct drbd_listener listener;
 0061     void (*original_sk_state_change)(struct sock *sk);
 0062     struct socket *s_listen;
-0063 
+0063
 0064     wait_queue_head_t wait; /* woken if a connection came in */
 0065 };
 ```
@@ -248,7 +248,7 @@ connection(**drbd_connection**) 代表的就是每一對 host 的 connection，�
 如下圖
 ![](http://i.imgur.com/CZuF7on.jpg)
 
-##### Resource and Conection/Listener 
+##### Resource and Conection/Listener
 Resource是最上層的物件，掌管所有的 connection，因此也會使用 **double link list**去掌管所有的 connections。
 此外，為了在某些步驟能夠更快速的查找所有的 listener， resource 本身也用了一個 **double link list** 串起所有的 resource。
 將上述這些所有結果都繪成圖片，並且將所有的 **double link** 都簡化成 **single link** 且透過不同的箭頭符號表現不同的 **link type**。則結果會如下圖。

@@ -40,9 +40,9 @@ Cscope 是一個用來trace code還滿方便的工具
 - .y
 
 想要讓他讀取java或是cpp的專案，就必須要先自己建置該資料庫
-- find ./  -name  *.cpp > cscope.files 
+- find ./  -name  *.cpp > cscope.files
 - fine ./  -name  *.java >> cscope.files
-- cscope -bkq  
+- cscope -bkq
 
 前面兩行會把所有的檔案路徑都寫入倒cscope.files裡面
 - b:建立索引文件
@@ -52,6 +52,6 @@ Cscope 是一個用來trace code還滿方便的工具
   - function calls
   - macros
   - variables
-  - preprocessor symbols 
+  - preprocessor symbols
 
 接下來只要使用cscope就可以了

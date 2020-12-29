@@ -41,7 +41,7 @@ GitOps 有三個核心價值，等下我們會針對這三個核心價值詳細�
     c. 宣告性的作法，而不是透過程式化去產生
 3. 稽核性以及當責性
     a. 透過來源控制工具來檢視完整的修改紀錄
-    
+
 
 除了這兩個特性外，還可以帶來這些優勢
 1. 提高生產性以及降低管理所需要的工作成本
@@ -59,7 +59,7 @@ GitOps 有三個核心價值，等下我們會針對這三個核心價值詳細�
 
 為了達到這些功能，這工具必須要可以提供
 1. 對於程式碼能夠簡單的達到分支與複製的功能
-2. 透過 hashing 的方式來確保歷史修改紀錄的唯一性 
+2. 透過 hashing 的方式來確保歷史修改紀錄的唯一性
 3. 支持 Pull Request 類似的功能
 4. 跟一些身份認證系統的整合，譬如 LDAP
 
@@ -139,6 +139,3 @@ https://t.me/technologynote
 
 你的捐款將給予我文章成長的動力
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="hwchiu" data-color="#000000" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#fff" data-font-color="#fff" data-coffee-color="#fd0" ></script>
-
-
-

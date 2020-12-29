@@ -71,7 +71,7 @@ ps auxww | grep username
 	}
 
 
->執行結果:  
+>執行結果:
 >8 has been created In Child Process
 
 >5 has been created In Parent Process
@@ -86,7 +86,7 @@ ps auxww | grep username
 
 >Parent Process calulate sum is :6
 
- 
+
 
 實際上，如果想要對同個端口去進行寫跟讀的動作，是行不通的，乍看之下會覺得PIPE只是一個
 
@@ -97,4 +97,3 @@ buffer，放置資料而已，實際上在kernel中，pipe被視為是一個file
 O_RDONLY;O_WRONLY的標籤，這樣的設定使得pipe的端口就真的一邊只能讀，一邊只能寫。
 
 有空在來講述一下file_descriptor file file_operation三者的關係，以及到底 file,socket,pipe...等這些device到底在kernel中如何運作。
- 

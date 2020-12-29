@@ -34,13 +34,13 @@ format-characters:
 詳細的格式資訊請參考官網
 [Python struct](http://docs.python.org/2/library/struct.html "Python struct")
 
-這邊來個簡單範例  
-假設今天我們撰寫屬於自己的網路遊戲  
-然後我們玩家每次上線時，SERVER都會傳送一份玩家的資料給Client  
+這邊來個簡單範例
+假設今天我們撰寫屬於自己的網路遊戲
+然後我們玩家每次上線時，SERVER都會傳送一份玩家的資料給Client
 
 這份資料包含了
 - 遊戲版本
-- 玩家ID 
+- 玩家ID
 - 玩家的座標(XY)
 - 玩家當前的財產
 - 玩家的職業
@@ -65,14 +65,14 @@ Myheader(){
 所以傳送資料過來的時候，我們必須要謹慎的按照這個規格去放置我們的資料。
 ### Example ###
 假設
-- version = 1  
-- playerID = 56 
-- x = 123  
-- y = 2341   
-- momey = 5566217   
-- profession = "warrior"  
-- level = 128   
-- experience = 2147383611  
+- version = 1
+- playerID = 56
+- x = 123
+- y = 2341
+- momey = 5566217
+- profession = "warrior"
+- level = 128
+- experience = 2147383611
 
 ```python
 data = pack('2B2HI10sBI',version,playerID,x,y,momey,profession,level,experience)

@@ -10,18 +10,18 @@ abbrlink: 65511
 description:  這邊整理一下安裝 news servre on FreeBSD 9.1 時遇到的一些問題，並且筆記一些操作
 ---
 
-## 文章轉移 
+## 文章轉移
 
 - rsync cycbuff
 - rsync db/history
 - 重新建立overview
 	- ctlinnd pause 'make overview'
-	- makehistory -x -O -b   
-  	 x: won't write out history file entries.  
-     O: Create the overview database  
-     b: Delete any messages found in the spool that do not have valid Message-ID: headers in them. 
-   - makedbz -i  
-     i:To ignore the old database  
+	- makehistory -x -O -b
+  	 x: won't write out history file entries.
+     O: Create the overview database
+     b: Delete any messages found in the spool that do not have valid Message-ID: headers in them.
+   - makedbz -i
+     i:To ignore the old database
   - ctlinnd go 'over'
 
 ## 設定檔檢查

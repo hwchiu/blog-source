@@ -181,7 +181,7 @@ ipython nbconvert --to script notebook.ipynb
 ```python
 class NbConvertApp(JupyterApp):
     """Application used to convert from notebook file type (``*.ipynb``)"""
-    
+
     version = __version__
     name = 'jupyter-nbconvert'
     aliases = nbconvert_aliases
@@ -211,7 +211,7 @@ class NbConvertApp(JupyterApp):
                 """
             )
             self.exit(1)
-        
+
         # initialize the exporter
         cls = get_exporter(self.export_format)
         self.exporter = cls(config=self.config)
@@ -257,7 +257,7 @@ self.convert_single_notebook(notebook_filename)
             self.log.info("Converting notebook %s to %s", notebook_filename, self.export_format)
         else:
             self.log.info("Converting notebook into %s", self.export_format)
-        
+
         resources = self.init_single_notebook_resources(notebook_filename)
         output, resources = self.export_single_notebook(notebook_filename, resources, input_buffer=input_buffer)
         write_results = self.write_single_notebook(output, resources)
@@ -308,7 +308,7 @@ self.convert_single_notebook(notebook_filename)
         resources['output_files_dir'] = output_files_dir
 
         return resources
-``` 
+```
 # Export the notebook to a particular format
 接下來就是要把來源的檔案給放到 **Exporter** 去處理格式轉換的問題，但是這邊如果我們直接傳入的是一個本來的 **.ipynb** 的檔案的話，我們會沒有辦法能夠針對 **IPython** 部份去進行修改。
 
@@ -345,7 +345,7 @@ self.convert_single_notebook(notebook_filename)
 
         return output, resources
 ```
-# Write the exported notebook to file        
+# Write the exported notebook to file
 在上述已經將內容轉換完畢後，就可以透過最後的 **writer** 將該內容(放在 **output**)內給寫入到特定的地方。
 
 ```python
@@ -374,7 +374,7 @@ self.convert_single_notebook(notebook_filename)
         write_results = self.writer.write(
             output, resources, notebook_name=notebook_name)
         return write_results
-```        
+```
 
 所以看完上述的整理流程後，我們可以整理一下整體的 **psuedo code** 以及相關的安裝環境。
 ```shell=
@@ -400,5 +400,3 @@ write_single_notebook(...)
 由於這部分不會太麻煩，所以這邊就列了一個大概的 **pseudo code**，經過實際測試也是真的可以運作的。
 
 整篇文章到這邊也就要結束了，主要是練習直接透過程式碼的方式進行 **Jupyter Notebook** 的轉換，同時也能夠有中間資料過濾的能力。
-
-

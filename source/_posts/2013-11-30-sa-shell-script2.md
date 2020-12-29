@@ -43,7 +43,7 @@ print_usage()
 
 
 print_help()
-{	
+{
 	echo "-o set the output file name. (default: out.png)"
 	echo "-t set the graph type. (one of ‘filledcurve’, ‘lines’. default: ‘filledcurve’)"
 	echo "set graph color. (in hexadecimal form, default: #1E90FF)"
@@ -59,19 +59,19 @@ print_help()
 while getopts "ho:t:c:n:" opt
 do
 	case "$opt" in
-		h)  print_help; 
-		    exit 1 
+		h)  print_help;
+		    exit 1
 		    ;;
-		o) 
+		o)
 			outName=$OPTARG
 			;;
-		t) 
+		t)
 			graphType=$OPTARG
 			;;
-		c) 
+		c)
 			graphColor=$OPTARG
 			;;
-		n) 
+		n)
 			pointNumber=$OPTARG
 			;;
 		*)
@@ -85,10 +85,10 @@ done
 if [ "$graphType" ] ; then
 	if [ "$graphType" != "filledcurve" ] && [ "$graphType" != "lines" ] ; then
 		echo "type should be one of 'filledcurve' and 'lines'."
-	fi	
+	fi
 	if [ "$graphType" == "filledcurve" ] ; then
 		graphType="filledcurve y1=0"
-	fi	
+	fi
 fi
 
 
@@ -117,7 +117,7 @@ tempInput="input2"
 `tail -r -n $pointNumber ${inputFile:="/tmp/sysmonitor"} | awk '{ print -NR" "$1}' > $tempInput`
 
 
-#generate a temp plt file 
+#generate a temp plt file
 tempFile="temp.plt"
 `touch $tempFile`
 

@@ -52,13 +52,13 @@ Introduction
 0351     GENL_tla_expected(DRBD_NLA_CFG_CONTEXT, DRBD_F_REQUIRED)
 0352     GENL_tla_expected(DRBD_NLA_NET_CONF, DRBD_GENLA_F_MANDATORY)
 0353 )
-0354 
+0354
 0355 GENL_op(DRBD_ADM_NEW_PATH, 45, GENL_doit(drbd_adm_new_path),
 0356     GENL_tla_expected(DRBD_NLA_CFG_CONTEXT, DRBD_F_REQUIRED)
 0357     GENL_tla_expected(DRBD_NLA_PATH_PARMS, DRBD_F_REQUIRED)
 0358 )
-0359 
-0369 
+0359
+0369
 0370 GENL_op(DRBD_ADM_CONNECT, 10, GENL_doit(drbd_adm_connect),
 0371     GENL_tla_expected(DRBD_NLA_CFG_CONTEXT, DRBD_F_REQUIRED)
 0372     GENL_tla_expected(DRBD_NLA_CONNECT_PARMS, DRBD_GENLA_F_MANDATORY)
@@ -78,20 +78,20 @@ drbd_adm_new_peer
 3658     struct drbd_config_context adm_ctx;
 3659     struct drbd_connection *connection;
 3660     enum drbd_ret_code retcode;
-3661 
+3661
 3662     retcode = drbd_adm_prepare(&adm_ctx, skb, info, DRBD_ADM_NEED_PEER_NODE);
 3663     if (!adm_ctx.reply_skb)
 3664         return retcode;
-3665 
+3665
 3666     mutex_lock(&adm_ctx.resource->adm_mutex);
-3667 
+3667
 3668     if (adm_ctx.connection) {
 3669         retcode = ERR_INVALID_REQUEST;
 3670         drbd_msg_put_info(adm_ctx.reply_skb, "peer connection already exists");
 3671     } else {
 3672         retcode = adm_new_connection(&connection, &adm_ctx, info);
 3673     }
-3674 
+3674
 3675     mutex_unlock(&adm_ctx.resource->adm_mutex);
 3676     drbd_adm_finish(&adm_ctx, info, retcode);
 3677     return 0;
@@ -106,14 +106,14 @@ drbd_adm_new_peer
 3329              adm_ctx->peer_node_id);
 3330         return ERR_INVALID_REQUEST;
 3331     }
-3332 
+3332
 3333     /* allocation not in the IO path, drbdsetup / netlink process context */
 3334     new_net_conf = kzalloc(sizeof(*new_net_conf), GFP_KERNEL);
 3335     if (!new_net_conf)
 3336         return ERR_NOMEM;
-3337 
+3337
 3338     set_net_conf_defaults(new_net_conf);
-3339 
+3339
 3340     err = net_conf_from_attrs(new_net_conf, info);
 3341     if (err) {
 3342         retcode = ERR_MANDATORY_TAG;
@@ -160,7 +160,7 @@ drbd_adm_new_peer
 3304 {
 3305     struct drbd_connection *connection;
 3306     int size;
-3307 
+3307
 3308     size = sizeof(*connection) - sizeof(connection->transport) + tc->instance_size;
 3309     connection = kzalloc(size, GFP_KERNEL);
 
@@ -196,16 +196,16 @@ drbd_adm_new_path
 3681 {
 3682     struct drbd_config_context adm_ctx;
 3683     enum drbd_ret_code retcode;
-3684 
+3684
 3685     retcode = drbd_adm_prepare(&adm_ctx, skb, info, DRBD_ADM_NEED_CONNECTION);
 3686     if (!adm_ctx.reply_skb)
 3687         return retcode;
-3688 
+3688
 3689     /* remote transport endpoints need to be globaly unique */
 3690     mutex_lock(&adm_ctx.resource->adm_mutex);
-3691 
+3691
 3692     retcode = adm_add_path(&adm_ctx, info);
-3693 
+3693
 3694     mutex_unlock(&adm_ctx.resource->adm_mutex);
 3695     drbd_adm_finish(&adm_ctx, info, retcode);
 3696     return 0;
@@ -241,14 +241,14 @@ drbd_adm_new_path
 3562     path = kzalloc(transport->class->path_instance_size, GFP_KERNEL);
 3563     if (!path)
 3564         return ERR_NOMEM;
-3565 
+3565
 3566     path->my_addr_len = nla_len(my_addr);
 3567     memcpy(&path->my_addr, nla_data(my_addr), path->my_addr_len);
 3568     path->peer_addr_len = nla_len(peer_addr);
 3569     memcpy(&path->peer_addr, nla_data(peer_addr), path->peer_addr_len);
-3570 
+3570
 3571     kref_init(&path->kref);
-3572 
+3572
 3573     err = transport->ops->add_path(transport, path);
 3574     if (err) {
 3575         kref_put(&path->kref, drbd_destroy_path);
@@ -271,11 +271,11 @@ drbd_adm_connect
 3590     enum drbd_ret_code retcode;
 3591     enum drbd_conn_state cstate;
 3592     int i, err;
-3593 
+3593
 3594     retcode = drbd_adm_prepare(&adm_ctx, skb, info, DRBD_ADM_NEED_CONNECTION);
 3595     if (!adm_ctx.reply_skb)
 3596         return retcode;
-3597 
+3597
 3598     connection = adm_ctx.connection;
 3599     cstate = connection->cstate[NOW];
 3600     if (cstate != C_STANDALONE) {
@@ -303,7 +303,7 @@ drbd_adm_connect
 1904     /* Caller holds req_lock */
 1905     struct after_state_change_work *work;
 1906     gfp_t gfp = GFP_ATOMIC;
-1907 
+1907
 1908     work = kmalloc(sizeof(*work), gfp);
 1909     if (work)
 1910         work->state_change = remember_state_change(resource, gfp);
@@ -330,11 +330,11 @@ drbd_adm_connect
 2748     LIST_HEAD(work_list);
 2749     struct drbd_resource *resource = thi->resource;
 2750     struct drbd_work *w;
-2751 
+2751
 2752     while (get_t_state(thi) == RUNNING) {
 2753         drbd_thread_current_set_cpu(thi);
 .................
-2793 
+2793
 2794         while (!list_empty(&work_list)) {
 2795             w = list_first_entry(&work_list, struct drbd_work, list);
 2796             list_del_init(&w->list);
@@ -357,7 +357,7 @@ drbd_adm_connect
 3254         /* Upon network configuration, we need to start the receiver */
 3255         if (cstate[OLD] == C_STANDALONE && cstate[NEW] == C_UNCONNECTED)
 3256             drbd_thread_start(&connection->receiver);
-3257 
+3257
 ............
 3266     }
 ......
@@ -382,17 +382,17 @@ drbd_adm_connect
 7657     return 0;
 7658 }
 ```
-```c 
+```c
 7081 static void drbdd(struct drbd_connection *connection)
 7082 {
 7087     while (get_t_state(&connection->receiver) == RUNNING) {
 7088         struct data_cmd const *cmd;
-7089 
+7089
 7090         drbd_thread_current_set_cpu(&connection->receiver);
 7091         update_receiver_timing_details(connection, drbd_recv_header_maybe_unplug);
 7092         if (drbd_recv_header_maybe_unplug(connection, &pi))
 7093             goto err_out;
-7094 
+7094
 7095         cmd = &drbd_cmd_handler[pi.cmd];
 7096         if (unlikely(pi.cmd >= ARRAY_SIZE(drbd_cmd_handler) || !cmd->fn)) {
 7097             drbd_err(connection, "Unexpected data packet %s (0x%04x)",
@@ -419,10 +419,10 @@ drbd_adm_connect
 0679         /* We do not have a network config. */
 0680         return false;
 0681     }
-0682 
+0682
 0683     /* Assume that the peer only understands protocol 80 until we know better.  */
 0684     connection->agreed_pro_version = 80;
-0685 
+0685
 0686     err = transport->ops->connect(transport);
 0687     if (err == -EAGAIN) {
 0688         if (connection->cstate[NOW] == C_DISCONNECTING)
@@ -438,18 +438,18 @@ drbd_adm_connect
 
 ``` c
 0696     connection->last_received = jiffies;
-0697 
+0697
 0698     rcu_read_lock();
 0699     nc = rcu_dereference(connection->transport.net_conf);
 0700     ping_timeo = nc->ping_timeo;
 0701     ping_int = nc->ping_int;
 0702     rcu_read_unlock();
-0703 
+0703
 0704     /* Make sure we are "uncorked", otherwise we risk timeouts,
 0705      * in case this is a reconnect and we had been corked before. */
 0706     drbd_uncork(connection, CONTROL_STREAM);
 0707     drbd_uncork(connection, DATA_STREAM);
-0708 
+0708
 0709     /* Make sure the handshake happens without interference from other threads,
 0710      * or the challenge respons authentication could be garbled. */
 0711     mutex_lock(&connection->mutex[DATA_STREAM]);
@@ -465,7 +465,7 @@ drbd_adm_connect
 7332 static int drbd_send_features(struct drbd_connection *connection)
 7333 {
 7334     struct p_connection_features *p;
-7335 
+7335
 7336     p = __conn_prepare_command(connection, sizeof(*p), DATA_STREAM);
 7337     if (!p)
 7338         return -EIO;
@@ -488,11 +488,11 @@ drbd_adm_connect
 中間又重新設定了一下 receive 的 timeout，而且只有針對 **DATA_STREAM**，意義不明。
 最後呼叫 `__drbd_send_protocol` 將一些 **net_conf** 內的資料送過去。
 ``` c
-0732 
+0732
 0733     transport->ops->set_rcvtimeo(transport, DATA_STREAM, MAX_SCHEDULE_TIMEOUT);
-0734 
+0734
 0735     discard_my_data = test_bit(CONN_DISCARD_MY_DATA, &connection->flags);
-0736 
+0736
 0737     if (__drbd_send_protocol(connection, P_PROTOCOL) == -EOPNOTSUPP)
 0738         goto abort;
 ```
@@ -519,4 +519,3 @@ Summary
 - Kernel 這邊有非常多的 thread 在運行，同時還有很複雜的 state 狀態跑來跑去，要完整瞭解整個架構以及運作邏輯需要不少時間去測試。
 - 目前網路上幾乎沒有這方面的文件，就連官方網站也沒有文章說明底層的架構，這部分都只能依靠上層的應用說法與程式碼自己拼湊出這一切。
 - 整個 Coonection 內還包含了 **DATA_STREAM**與 **DATA_STREAM**，這部分的用途差異，實際上怎運過還必須要在更仔細地觀看相關函式以及 **transport class TCP** 底層的實作才有機會瞭解。
-

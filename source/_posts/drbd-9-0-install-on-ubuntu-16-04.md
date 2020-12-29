@@ -97,7 +97,7 @@ drbd 使用 **drbd.conf** 來設定相關資訊，預設的存放位置是 **/us
 
 首先由於 **drbd** 設定 host的時候，會使用 `hostname` 去尋找對應的 host 欄位，所以建議先修改 **/etc/hosts** 將所有用到的 hostname 與其 ip 對應關係都寫上去。
 加入下列資訊魚 **/etc/hosts**
-``` 
+```
 10.0.0.15 node-1
 10.0.0.16 node-2
 ```

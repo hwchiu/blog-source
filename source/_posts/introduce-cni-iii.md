@@ -195,10 +195,10 @@ In the following example, we will do three things.
 	if err != nil && err != syscall.EEXIST {
 		return err
 	}
-    
+
 	if err := netlink.LinkSetUp(br); err != nil {
 		return err
-	}    
+	}
 ```
 
 Now. The `CmdAdd` function should look like below.
@@ -229,7 +229,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 
     if err := netlink.LinkSetUp(br); err != nil {
         return err
-    }  
+    }
 ```
 Use the aforementioned command to call the binary again and you should see the linux bridge `test` has been created.
 
@@ -284,7 +284,7 @@ See the following example to learn more about `do` function.
 
 ```go=
 var handler = func(hostNS ns.NetNS) error {
-    hostVeth, containerVeth, err := ip.SetupVeth(args.IfName, 1500, hostNS)   
+    hostVeth, containerVeth, err := ip.SetupVeth(args.IfName, 1500, hostNS)
 }
 
 if err := netns.Do(handler); err != nil {
@@ -312,11 +312,11 @@ and then create a variable represent to host side network interface in the funct
 ```go=
 hostIface := &current.Interface{}
 var handler = func(hostNs ns.Netns) error {
-    hostVeth, _, err := ip.SetupVeth(args.IfName, 1500, hostNS) 
+    hostVeth, _, err := ip.SetupVeth(args.IfName, 1500, hostNS)
     if err != nil {
         return err
     }
-    
+
     hostIface.Name = hostVeth.Name
     return nil
 }
@@ -393,7 +393,7 @@ type SimpleBridge struct {
 ```
 
 The function we used to assign the IP address is `netlink.AddrAdd`
-So the workflow is 
+So the workflow is
 1. Generate a IP object from the config.
 2. Call the `nelink.AddrAdd` in the target network namespace.
 
@@ -417,7 +417,7 @@ we use the `net.ParseCIDR` to parse the string and return a pointer of `net.IPNe
 
 So, modify the previous handler to assign the IP address when we create a veth.
 
-Since the `net.IPNet` object get from the `net.ParseCIDR` is the `subnet`  not a `real IP` addrees, we should reassign the `IP` address to its IP field again. 
+Since the `net.IPNet` object get from the `net.ParseCIDR` is the `subnet`  not a `real IP` addrees, we should reassign the `IP` address to its IP field again.
 
 ```go=
 var handler = func(hostNS ns.NetNS) error {
@@ -492,4 +492,3 @@ Besides, we also fethc the information we want from the pre-defined config file 
 
 To make the problem simple, we don't use any complicated method to acquire a unique address from the config but you can desing you own algorithm to do that.
 If you want to learn more about the IP related operations, you can go to the [host-local](https://github.com/containernetworking/plugins/tree/master/plugins/ipam/host-local) to learn more.
-

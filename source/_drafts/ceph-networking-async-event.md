@@ -24,7 +24,7 @@ date: 2017-05-17 10:18:54
 
 <!--more-->
 
-在程式碼內，習慣以**driver**的字眼來稱呼這些方法，如 **SelectDriver**。 
+在程式碼內，習慣以**driver**的字眼來稱呼這些方法，如 **SelectDriver**。
 ```c++
 0110   if (t == "dpdk") {
 0111 #ifdef HAVE_DPDK
@@ -57,13 +57,13 @@ date: 2017-05-17 10:18:54
 - 該 fd 到底是 read 還是 write 被呼叫，這個 **EventCallBack** 本身不處理，此邏輯交給 EventCenter 去處理，所以若你的 CallBack 要依據 read/write 有不同處理，請註冊兩種不同的 callBack 來使用
 ```c++
 0054 class EventCallback {
-0055 
+0055
 0056  public:
 0057   virtual void do_request(int fd_or_id) = 0;
 0058   virtual ~EventCallback() {}       // we want a virtual destructor!!!
 0059 };
 ```
-    
+
 #### EventDriver
 - 此物件是底層每個方法都需要實現的介面，基本上跟**Event**有關的操作都在這邊完成，譬如哪些**fd**要監聽，哪些不用，然後監聽結果為何等。
 
@@ -137,14 +137,14 @@ FiredFileEvent 包含兩個成員，一個是發生事件的 fd，以及其對�
 0105     EventCallbackRef write_cb;
 0106     FileEvent(): mask(0), read_cb(NULL), write_cb(NULL) {}
 0107   };
-0108 
+0108
 0109   struct TimeEvent {
 0110     uint64_t id;
 0111     EventCallbackRef time_cb;
-0112 
+0112
 0113     TimeEvent(): id(0), time_cb(NULL) {}
 0114   };
-0115 
+0115
 .....
 0178   int process_time_events();
 .....
@@ -166,7 +166,7 @@ FiredFileEvent 包含兩個成員，一個是發生事件的 fd，以及其對�
 0038 class C_handle_notify : public EventCallback {
 0039   EventCenter *center;
 0040   CephContext *cct;
-0041 
+0041
 0042  public:
 0043   C_handle_notify(EventCenter *c, CephContext *cc): center(c), cct(cc) {}
 0044   void do_request(int fd_or_id) override {
@@ -188,7 +188,7 @@ FiredFileEvent 包含兩個成員，一個是發生事件的 fd，以及其對�
 0317   // No need to wake up since we never sleep
 0318   if (!pollers.empty() || !driver->need_wakeup())
 0319     return ;
-0320 
+0320
 0321   ldout(cct, 2) << __func__ << dendl;
 0322   char buf = 'c';
 0323   // wake up "event_wait"
@@ -209,7 +209,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
 如果該 dirver 需要 wakeup (目前是除了DPDK以外)
 - 透過 pipe 創建一對 local fd並且設定為 non-blocking
 - 之後的 read/write notifier 會透過這對 fd 來傳輸。
-    
+
 ##### destructor
 - 執行所有的 external events  並且從 queue 中移除。
 - 若之前有透過 pipe 創立 local fd，將其關閉
@@ -278,7 +278,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
 0272   if (mask & EVENT_WRITABLE && event->write_cb) {
 0273     event->write_cb = nullptr;
 0274   }
-0275 
+0275
 0276   event->mask = event->mask & (~mask);
 ```
 
@@ -289,7 +289,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
     - `std::multimap<clock_type::time_point, TimeEvent> time_events`
 - 最後用一個 map  記住當前 id　對應上述 multimap 紀錄
     - id 則是用一個 global 的 time_event_next 來記住
-    - 
+    -
 ``` c++
 0288   clock_type::time_point expire = clock_type::now() + std::chrono::microseconds(microseconds);
 0289   event.id = id;
@@ -307,7 +307,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
 0307     ldout(cct, 10) << __func__ << " id=" << id << " not found" << dendl;
 0308     return ;
 0309   }
-0310 
+0310
 0311   time_events.erase(it->second);
 0312   event_map.erase(it);
 ```
@@ -325,7 +325,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
     - 將該 event 從結構中移除
     - 呼叫該 event 的 call back function
     - 這邊傳入的是 ID，跟 FD 無關
-    - 
+    -
 - 回傳這次總共處理了多少個 event
 
 
@@ -352,7 +352,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
 0407       cb = event->read_cb;
 0408       cb->do_request(fired_events[j].fd);
 0409     }
-0410 
+0410
 0411     if (event->mask & fired_events[j].mask & EVENT_WRITABLE) {
 0412       if (!rfired || event->read_cb != event->write_cb) {
 0413         cb = event->write_cb;
@@ -367,7 +367,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
 ``` c++
 0421   if (trigger_time)
 0422     numevents += process_time_events();
-0423 
+0423
 0424   if (external_num_events.load()) {
 0425     external_lock.lock();
 0426     deque<EventCallbackRef> cur_process;
@@ -382,12 +382,12 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
 0435       numevents++;
 0436     }
 0437   }
-0438 
+0438
 0439   if (!numevents && !blocking) {
 0440     for (uint32_t i = 0; i < pollers.size(); i++)
 0441       numevents += pollers[i]->poll();
 0442   }
-0443 
+0443
 0444   return numevents;
 ```
 
@@ -399,7 +399,7 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
     - 用此變數來控管當前是否正在清除 external_queue 內的 event
 - 若符合下列條件，則呼叫 `wake` 將 event 叫起來
     - caller 的 thread 跟真正擁有此 eventCenter 的 thread 是相同
-    - 前述的 `external_num_events` 決定當前需要 
+    - 前述的 `external_num_events` 決定當前需要
 ``` c++
 0450   external_events.push_back(e);
 0451   bool wake = !external_num_events.load();
@@ -446,4 +446,3 @@ FreeBSD則是**Kqueue**,兩種都不符合的話就走**select**。
 - 接下來根據變數中的 **no_wait**來決定要不要等待該 function 執行完畢
 - 假如是 no_wait，則丟到 external_queue 後就直接離開
 - 假如是 wait,則丟到 external_queue 後，**馬上呼叫 wait()**，等待 **do_request()**執行完畢後，會使得 **wait** 結束，然後離開此 function。
-

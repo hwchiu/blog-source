@@ -42,27 +42,27 @@ You can use the following command to check the latest docker version in the remo
 
 ```bash=
 ahwchiu➜~» sudo dnf list docker\*                                                                                                                   [14:00:16]
-Last metadata expiration check: 13:41:45 ago on Sun 23 Sep 2018 12:18:32 AM CST.                                                                             
+Last metadata expiration check: 13:41:45 ago on Sun 23 Sep 2018 12:18:32 AM CST.
 Installed Packages
 docker.x86_64                                                                  2:1.13.1-61.git9cb56fd.fc28                                            @updates
 docker-common.x86_64                                                           2:1.13.1-61.git9cb56fd.fc28                                            @updates
 docker-rhel-push-plugin.x86_64                                                 2:1.13.1-61.git9cb56fd.fc28                                            @updates
 Available Packages
-docker-anaconda-addon.x86_64                                                   0.4-7.fc28                                                             fedora 
-docker-client-java.noarch                                                      6.2.5-7.fc28                                                           fedora 
-docker-compose.noarch                                                          1.20.1-1.fc28                                                          fedora 
+docker-anaconda-addon.x86_64                                                   0.4-7.fc28                                                             fedora
+docker-client-java.noarch                                                      6.2.5-7.fc28                                                           fedora
+docker-compose.noarch                                                          1.20.1-1.fc28                                                          fedora
 docker-devel.noarch                                                            2:1.13.1-61.git9cb56fd.fc28                                            updates
-docker-distribution.x86_64                                                     2.6.2-7.git48294d9.fc28                                                fedora 
+docker-distribution.x86_64                                                     2.6.2-7.git48294d9.fc28                                                fedora
 docker-fish-completion.x86_64                                                  2:1.13.1-61.git9cb56fd.fc28                                            updates
-docker-latest.x86_64                                                           2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-devel.noarch                                                     2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-fish-completion.x86_64                                           2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-logrotate.x86_64                                                 2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-rhsubscription.x86_64                                            2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-unit-test.x86_64                                                 2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-v1.10-migrator.x86_64                                            2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-vim.x86_64                                                       2:1.13-36.git27e468e.fc28                                              fedora 
-docker-latest-zsh-completion.x86_64                                            2:1.13-36.git27e468e.fc28                                              fedora 
+docker-latest.x86_64                                                           2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-devel.noarch                                                     2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-fish-completion.x86_64                                           2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-logrotate.x86_64                                                 2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-rhsubscription.x86_64                                            2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-unit-test.x86_64                                                 2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-v1.10-migrator.x86_64                                            2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-vim.x86_64                                                       2:1.13-36.git27e468e.fc28                                              fedora
+docker-latest-zsh-completion.x86_64                                            2:1.13-36.git27e468e.fc28                                              fedora
 docker-logrotate.x86_64                                                        2:1.13.1-61.git9cb56fd.fc28                                            updates
 docker-lvm-plugin.x86_64                                                       2:1.13.1-61.git9cb56fd.fc28                                            updates
 docker-novolume-plugin.x86_64                                                  2:1.13.1-61.git9cb56fd.fc28                                            updates
@@ -148,8 +148,8 @@ sudo kubeadm version
 sudo kubelet --version
 sudo systemctl enable kubelet
 ```
-      
-   
+
+
 # kubernetes
 Now, I will ues the `kubeadm` to install the kubernetes environment now.
 The important thing is that you need to take care the parameter of your `kubeadm` process, if you choose the `flannel` as your CNI(Containre Network Interface). You use pass the `--pod-network-cidr=10.244.0.0/16` and the `flannel` can use that to choose the IP address range of each node.
@@ -165,9 +165,9 @@ I0923 23:45:54.958582   16222 kernel_validator.go:96] Validating kernel config
         [WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 18.06.1-ce. Max validated version: 1
 7.03
 [preflight/images] Pulling images required for setting up a Kubernetes cluster
-[preflight/images] This might take a minute or two, depending on the speed of your internet connection                                                       
-[preflight/images] You can also perform this action in beforehand using 'kubeadm config images pull'                                                         
-[kubelet] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"                                                           
+[preflight/images] This might take a minute or two, depending on the speed of your internet connection
+[preflight/images] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
 [kubelet] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
 [preflight] Activating the kubelet service
 [certificates] Generated ca certificate and key.
@@ -180,34 +180,34 @@ vc.cluster.local] and IPs [10.96.0.1 10.0.4.63]
 [certificates] Generated front-proxy-client certificate and key.
 [certificates] Generated etcd/ca certificate and key.
 [certificates] Generated etcd/server certificate and key.
-[certificates] etcd/server serving cert is signed for DNS names [localhost.localdomain localhost] and IPs [127.0.0.1 ::1]                                    
+[certificates] etcd/server serving cert is signed for DNS names [localhost.localdomain localhost] and IPs [127.0.0.1 ::1]
 [certificates] Generated etcd/peer certificate and key.
-[certificates] etcd/peer serving cert is signed for DNS names [localhost.localdomain localhost] and IPs [10.0.4.63 127.0.0.1 ::1]                            
+[certificates] etcd/peer serving cert is signed for DNS names [localhost.localdomain localhost] and IPs [10.0.4.63 127.0.0.1 ::1]
 [certificates] Generated etcd/healthcheck-client certificate and key.
 [certificates] Generated apiserver-etcd-client certificate and key.
 [certificates] valid certificates and keys now exist in "/etc/kubernetes/pki"
-[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/admin.conf"                                                                                     
-[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"                                                                                   
-[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/controller-manager.conf"                                                                        
-[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/scheduler.conf"                                                                                 
-[controlplane] wrote Static Pod manifest for component kube-apiserver to "/etc/kubernetes/manifests/kube-apiserver.yaml"                                     
-[controlplane] wrote Static Pod manifest for component kube-controller-manager to "/etc/kubernetes/manifests/kube-controller-manager.yaml"                   
-[controlplane] wrote Static Pod manifest for component kube-scheduler to "/etc/kubernetes/manifests/kube-scheduler.yaml"                                     
-[etcd] Wrote Static Pod manifest for a local etcd instance to "/etc/kubernetes/manifests/etcd.yaml"                                                          
-[init] waiting for the kubelet to boot up the control plane as Static Pods from directory "/etc/kubernetes/manifests"                                        
-[init] this might take a minute or longer if the control plane images have to be pulled                                                                                                                            
-[apiclient] All control plane components are healthy after 38.003505 seconds                                                                                 
-[uploadconfig] storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace                                                   
-[kubelet] Creating a ConfigMap "kubelet-config-1.11" in namespace kube-system with the configuration for the kubelets in the cluster                         
-[markmaster] Marking the node localhost.localdomain as master by adding the label "node-role.kubernetes.io/master=''"                                        
-[markmaster] Marking the node localhost.localdomain as master by adding the taints [node-role.kubernetes.io/master:NoSchedule]                               
-[patchnode] Uploading the CRI Socket information "/var/run/dockershim.sock" to the Node API object "localhost.localdomain" as an annotation                  
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/admin.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/controller-manager.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/scheduler.conf"
+[controlplane] wrote Static Pod manifest for component kube-apiserver to "/etc/kubernetes/manifests/kube-apiserver.yaml"
+[controlplane] wrote Static Pod manifest for component kube-controller-manager to "/etc/kubernetes/manifests/kube-controller-manager.yaml"
+[controlplane] wrote Static Pod manifest for component kube-scheduler to "/etc/kubernetes/manifests/kube-scheduler.yaml"
+[etcd] Wrote Static Pod manifest for a local etcd instance to "/etc/kubernetes/manifests/etcd.yaml"
+[init] waiting for the kubelet to boot up the control plane as Static Pods from directory "/etc/kubernetes/manifests"
+[init] this might take a minute or longer if the control plane images have to be pulled
+[apiclient] All control plane components are healthy after 38.003505 seconds
+[uploadconfig] storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config-1.11" in namespace kube-system with the configuration for the kubelets in the cluster
+[markmaster] Marking the node localhost.localdomain as master by adding the label "node-role.kubernetes.io/master=''"
+[markmaster] Marking the node localhost.localdomain as master by adding the taints [node-role.kubernetes.io/master:NoSchedule]
+[patchnode] Uploading the CRI Socket information "/var/run/dockershim.sock" to the Node API object "localhost.localdomain" as an annotation
 [bootstraptoken] using token: 9s11hf.6ooyk6587vqeirn7
 
-[bootstraptoken] configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials               
-[bootstraptoken] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token                            
-[bootstraptoken] configured RBAC rules to allow certificate rotation for all node client certificates in the cluster                                         
-[bootstraptoken] creating the "cluster-info" ConfigMap in the "kube-public" namespace                                                                        
+[bootstraptoken] configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstraptoken] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstraptoken] configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstraptoken] creating the "cluster-info" ConfigMap in the "kube-public" namespace
 [addons] Applied essential addon: CoreDNS
 [addons] Applied essential addon: kube-proxy
 
@@ -306,11 +306,10 @@ helm init --service-account tiller
 Now, using the following command to install the nginx ingress package by `helm`.
 
 ```bash=
-helm install --name my-release stable/nginx-ingress 
+helm install --name my-release stable/nginx-ingress
 ```
 
 Use the `kubectl` to see all the kubernetes resource we installed by the helm
 ```bash=
 kubectl get all | grep my-release
 ```
-

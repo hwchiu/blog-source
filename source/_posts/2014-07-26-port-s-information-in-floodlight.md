@@ -123,6 +123,6 @@ Collection<ImmutablePort> swPorts = sw.getPorts();
 Iterator<ImmutablePort> it = swPorts.iterator();
 while(it.hasNext()){
     ImmutablePort port = it.next();
-    //do something 
+    //do something
 }
 ```

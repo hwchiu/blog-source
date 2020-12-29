@@ -172,4 +172,3 @@ docker run --name gg -it hwchiu:test
 - docker stop `docker ps -q -l`
 - docker rm `docker ps -q -l`
 - docker run -it -name xxx xxx:xxx
-

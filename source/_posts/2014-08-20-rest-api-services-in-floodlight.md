@@ -34,20 +34,20 @@ API
       + dpid : 這個device所連接到的switch的dpid
       + port : 這個device是連接到該switch的哪個port
       + mac_startwith : 以下的參數都如同上面的概念，只不過上面的是要完整符合，這邊的是開頭符合就好
-      + vlan_startwith : 
+      + vlan_startwith :
       + ipv4_startwith :
       + dpid_startwith :
       + port_startwith :
-	3. Code:  
-      + DeviceRoutable.java  
-      + AbstractDeviceResource.java  
-      + DeviceResource.java  
+	3. Code:
+      + DeviceRoutable.java
+      + AbstractDeviceResource.java
+      + DeviceResource.java
       + DeviceSerializer.java
-	4. Example:    
+	4. Example:
   		+ curl -s http://localhost:8080/wm/device/?ipv4_startwith=10 | python -mjson.tool
       + curl -s http://localhost:8080/wm/device/| python -mjson.tool
       + curl -s http://localhost:8080/wm/device/?ipv4=10.0.0.2  | python -mjson.tool
-      
+
 ```python
 [
     {
@@ -68,18 +68,18 @@ API
         ],
         "vlan": []
     }
-]     
-```      
+]
+```
 - **/wm/device/debug** : 回傳Entities
 	1. Method: **GET**
 	2. Parameter: 沒有參數，就回傳所有的Entity。
-	3. Code:   
-		+ DeviceRoutable.java  
-		+ AbstractDeviceResource.jave  
-		+ DeviceEntityResource.java    
+	3. Code:
+		+ DeviceRoutable.java
+		+ AbstractDeviceResource.jave
+		+ DeviceEntityResource.java
   4. Example:
   		+ curl -s http://localhost:8080/wm/device/debug | python -mjson.tool
-      
+
 ```python
 [
 		[
@@ -115,4 +115,3 @@ API
       ]
 ]
 ```
-

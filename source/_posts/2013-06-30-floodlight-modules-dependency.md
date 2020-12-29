@@ -26,7 +26,7 @@ abbrlink: 9256
 ## FIFO ##
 今天完全不考慮每個module之間的dependency，依照module被載入的順序來決定處理封包的順序
 那我們就把所有進來的封包依照 LLDP->DEVICE->Forwarding->VirtualNetwork 這樣的順序去處理。
-這邊要注意的是 
+這邊要注意的是
 
 - Forwarding會把封包用最短路徑的方式傳送到destination
 - VirtualNetwork會根據mac address建立一個layer 2的virtual network
@@ -56,7 +56,7 @@ abbrlink: 9256
 isCallbackOrderingPrereq(String type, String name)
 isCallbackOrderingPostreq(String type, String name)
 ```
-第一個function代表 哪些module的哪些event要在我之前執行  
+第一個function代表 哪些module的哪些event要在我之前執行
 第二個function代表 哪些module的哪些event要在我之後執行
 
 每個module之間就依靠這些function來決定 誰先誰後，因此假設今天四個module彼此的宣告如下
@@ -87,10 +87,10 @@ isCallbackOrderingPostreq(String type, String name)
 ### Algorithm (pseudo)
 ```
 for(int i=0;i<modules.size;i++)
-{	
+{
   isTerminal = true;
   for(int j=0;j<modules.size;j++)
-  {	 
+  {
     if( modules[j] go after modules[i])
     {
       isTerminal = false;
@@ -99,7 +99,7 @@ for(int i=0;i<modules.size;i++)
   }
   if(isTerminal)
     terminalQueue.add(modules[i]);
-}       
+}
 ```
 
 每個modules都去問其他的module，根據每個module先前定義的優先權function，如果所有的modules都沒有要求要在我之後那我就是terminal modules，反之只要有一個modules必須要在我之後執行，則就跳開。
@@ -120,7 +120,7 @@ function visit(listener)
     {
     	if( modules[i] go before listener)
       	visit(modules[i])
-    } 
+    }
     orderingQueue.add(listener);
   }
 }
@@ -145,41 +145,41 @@ function visit(listener)
   visted:forwarding,Device
   ordering:empty
   action:choose LLDP (因為DEVICE 有宣示 LLDP要在我之前)
-  
---- 
+
+---
 
 >  listener:LLDP
   visted:forwarding,Device,LLDP
   ordering:LLDP
   action:找不到符合條件的modules,所以把自己加入到ordering。
-  
+
 ---
 
 >  listener:Device
   visted:forwarding,Device,LLDP
   ordering:LLDP,Device
   action:找不到符合條件的modules,所以把自己加入到ordering。
-  
+
 ---
 
 >  listener:forwarding
   visted:forwarding,Device,LLDP
   ordering:LLDP,Device
   action:choose VirtualNetwork (因為 VirtualNetwork 有宣示 forwarding 要在我之後)
-  
+
 ---
 
 >  listener:VirtualNetwork
   visted:forwarding,Device,LLDP,VirtualNetwork
   ordering:LLDP,Device,VirtualNetwork
-  action:找不到符合條件的modules,所以把自己加入到ordering。 (因為DEVICE跟LLDP已經visted了，所以不會繼續跑)  
-  
+  action:找不到符合條件的modules,所以把自己加入到ordering。 (因為DEVICE跟LLDP已經visted了，所以不會繼續跑)
+
 ----
 >  listener:forwarding
   visted:forwarding,Device,LLDP,VirtualNetwork
   ordering:LLDP,Device,VirtualNetwork,forwarding
-  action:找不到符合條件的modules,所以把自己加入到ordering。 (因為其他都已經visted了，所以不會繼續跑)  
-  
+  action:找不到符合條件的modules,所以把自己加入到ordering。 (因為其他都已經visted了，所以不會繼續跑)
+
 按照這個流程跑完，可以發現執行順序就是
 LLDP,Device,VirtualNetwork,forwarding
 符合我們的預期，同時這種設計可以讓module針對多個modules去進行相依性的處理。

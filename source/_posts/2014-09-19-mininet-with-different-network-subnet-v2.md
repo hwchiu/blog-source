@@ -11,15 +11,15 @@ tags:
 keywords: 'SDN,Mininet,Network'
 abbrlink: 61927
 ---
-上一篇[mininet-and-network-subnet](http://logdown.com/account/posts/203260-mininet-and-network-subnet/edit)中提到如何在mininet中創造不同subnet的網路，並且透過手動下flow的方式讓不同subnet的hosts可以互相溝通。  
+上一篇[mininet-and-network-subnet](http://logdown.com/account/posts/203260-mininet-and-network-subnet/edit)中提到如何在mininet中創造不同subnet的網路，並且透過手動下flow的方式讓不同subnet的hosts可以互相溝通。
 而本篇的重點在於提供另外一種方式來創造不同subnet的網路，讓研究者不需要再手動一直輸入**ifconfig**,**route add ...**等指令，能夠更簡潔的去創造不同subtnet的網路。
 
 <!--more-->
 
 Solution
 --------
-在本篇中，我們直接撰寫**mininet**的python script來模擬網路，基本的撰寫教學請參考mininet官方文件就有了。本篇主要是針對不同subnet的host要如何創建。  
-首先，在我們創造hosts的時候，可以透過**ip**這個參數來控制此host的預設ip位置，這時候我們就可以設定**10.0.0.0/24**或是**20.0.0.0/24**等ip給予欲創建的host，這樣就可以省掉之前的**ifconfig**的步驟。  
+在本篇中，我們直接撰寫**mininet**的python script來模擬網路，基本的撰寫教學請參考mininet官方文件就有了。本篇主要是針對不同subnet的host要如何創建。
+首先，在我們創造hosts的時候，可以透過**ip**這個參數來控制此host的預設ip位置，這時候我們就可以設定**10.0.0.0/24**或是**20.0.0.0/24**等ip給予欲創建的host，這樣就可以省掉之前的**ifconfig**的步驟。
 接下來，我們要處理Default gateway的問題，這邊也有**defaultRoute**的參數可以使用，這邊我們就可以輸入**defaultRoute='h1-eth0'**來處理，這樣就可以省掉之前所輸入的**route add default gw**的步驟。
 這兩個參數都正確填寫完畢後，我們就創立好了不同subnet的網路，並且基本的設定已經完成了，接下來就按照上一篇的說明來將flow entry給寫入switch即可。
 

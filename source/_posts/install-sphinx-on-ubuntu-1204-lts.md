@@ -32,7 +32,7 @@ description: Sphinx是一套建置說明文建的軟體，本身是用python寫�
 	-  外掛管理
   -  資料夾結構管理
   -  一些通用參數，如作者名稱，版本...等
-  
+
 - 主要的檔案: index.rst
 	-. 檔案的結構
   -. toctree
@@ -65,7 +65,7 @@ Lab Meetgins
   - 20131001.rst
 - 國科會 meetings
 	- 20130925.rst
-  
+
 總共兩個分類，每個分類底下的文章都是一個額外的rst檔案
 
 在toctree底下的都是一些設定參數
@@ -86,14 +86,12 @@ Sphinx採用的`reStructuredText`
 如果想要轉成html網頁，有兩種方法可以執行
 
 1. sphinx-build -b html .  NSLMeeting
- 	 意思是建置html的網頁， 然後以當前目錄為source 來源，然後把檔案build到NSLMetting去。  
-   
+ 	 意思是建置html的網頁， 然後以當前目錄為source 來源，然後把檔案build到NSLMetting去。
+
 2. make html
    在Makefile中定義了相關得動作，當執行`make html`的時候，其實就是執行
-   `sphinx-build -b html . _build/html` 
+   `sphinx-build -b html . _build/html`
 
 這邊因為我想要直接弄到別的資料夾，所以我直接設定aliase去執行方法1
 
 目前對於這套軟體還在學習階段，有任何學習會繼續紀錄。
-
-

@@ -11,7 +11,7 @@ description: 本文來介紹 Facade Pateern, Facade Pattern這個模式是用來
 ---
 
 
-# Preface 
+# Preface
 Facade Pattern這個模式是用來為一個已經存在的介面定義一個新的介面，
 這個新的介面可能有下列特性
 * 更高層
@@ -41,7 +41,7 @@ Facade Pattern這個模式是用來為一個已經存在的介面定義一個新
 
 #original system
 
-public class MapManager{  
+public class MapManager{
 	public Point getLocation(String name){....}
  	public Point setLocation(String name, Point point) {....}
     ...
@@ -67,7 +67,7 @@ public class PersonManager{
 	 private MapManger mapManager;
  	 private ItemManager itemManager;
  	 private SkillManager skillManager;
- 
+
 	 public  PersonManager (){
       mapManager = MapManager::GetSingleTon();
 	  itemManager = ItemManager::GetSingleTon();
@@ -81,8 +81,8 @@ public class PersonManager{
 	 }
 }
 
-# Client 
- 
+# Client
+
 public class Client {
 	public Point point;
     public ArrayList<Item> itemList;

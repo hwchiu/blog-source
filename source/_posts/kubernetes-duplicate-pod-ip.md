@@ -53,7 +53,7 @@ kind-worker          Ready    <none>   17m   v1.18.8
 kind-worker2         Ready    <none>   17m   v1.18.8
 kind-worker3         Ready    <none>   17m   v1.18.8
 
-```  
+```
 
 我們會透過一個 deployment 來模擬大量的 pod，該內容如下
 ```bash=
@@ -132,7 +132,7 @@ sudo docker exec kind-worker3 rm -rf /run/cni-ipam-state
 
 ```bash=
 
-○ → sudo docker exec kind-worker3 systemctl start kubelet                                                                         
+○ → sudo docker exec kind-worker3 systemctl start kubelet
 ○ → sudo docker exec kind-worker3 systemctl status kubelet
 ● kubelet.service - kubelet: The Kubernetes Node Agent
      Loaded: loaded (/etc/systemd/system/kubelet.service; enabled; vendor preset: enabled)
@@ -208,7 +208,7 @@ debug-pod-7f9c756577-wx4s6   1/1     Running   0          54s   10.244.2.9    ki
 一開始， **kubelet** 會創造一個 Pod 的沙盒，這時候該 Pod 還沒有任何 IP 地址
 ![](https://i.imgur.com/sBiUu0E.jpg)
 
-CNI 本身會要負責給予 Pod 對應的網路能力，這邊也包含 IP 的分配，預設情況下 CNI 的設定檔案會放在 /etc/cni/net.d。 
+CNI 本身會要負責給予 Pod 對應的網路能力，這邊也包含 IP 的分配，預設情況下 CNI 的設定檔案會放在 /etc/cni/net.d。
 
 **kubelet** 會去讀取 **/etc/cni/net.d** 來判斷當前系統使用的 CNI 是誰
 ![](https://i.imgur.com/Sgc0odM.jpg)
@@ -333,7 +333,7 @@ const (
 	ToCleanCNIBin           = "/opt/cni/"
 	ToCleanCNILib           = "/var/lib/cni/"
 	ToCleanCalicoRun        = "/var/run/calico/"
-...    
+...
 )
 
 

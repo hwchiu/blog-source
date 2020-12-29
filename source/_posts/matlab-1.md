@@ -48,11 +48,11 @@ end
 
 接者使用dir這個指令，就可以得到我想要的所有檔案，dir回傳的是一個struct，內容包含了檔案的
 
->name    -- 檔案名稱  
->date    -- 修改日期  
->bytes   -- 檔案大小  
->isdir   -- 是否為資料夾  
->datenum -- Matlab特定的修改日期  
+>name    -- 檔案名稱
+>date    -- 修改日期
+>bytes   -- 檔案大小
+>isdir   -- 是否為資料夾
+>datenum -- Matlab特定的修改日期
 
 這邊我只需要它的名稱，於是透過一個迴圈，把所有的路徑檔案都以圖片的方式(imread)給讀取近來
 在與事先讀取好的背景圖片(back)使用imsubtract做相減，得到新的圖片，再透過imwrite給寫出檔案

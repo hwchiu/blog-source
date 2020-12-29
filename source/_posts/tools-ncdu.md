@@ -40,7 +40,7 @@ After the collection has done, it will display the size of each file and directo
 # Format
 The output forwat is clear.
 - First colume:
-    - The file size and it will automatically transfer to humand readble size. 
+    - The file size and it will automatically transfer to humand readble size.
 - Second colume
     - the percentage of specified file/directory to the whole root directory, it use the numder of sharp symbol to show the ratio by default and you can toggle the shortcut `g` to display by numbrer.
 - Third colume
@@ -67,7 +67,7 @@ You can see the instruction help by the key `?`.
 
 # Summary
 I used to use the command du to inspect the current file/directory size and also use the command `sort` to sort the result by the du command.
-There're some problem about that usage and bothered me for a long time. 
+There're some problem about that usage and bothered me for a long time.
 If command du shows the output with human-readble foramt, it's hard for sorting, but if it shows the size as numeric format, it's good for sorting but not for reading.
 In the `ncdu`, that problem doesn't exsit and the `ncdu` also support the delete operation and the way to change the current root directory.
 That's why I switch to use the ncdu once I had found this powerful tool.

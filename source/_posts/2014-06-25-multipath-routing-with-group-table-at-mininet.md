@@ -26,7 +26,7 @@ Step
 ----
 - 使用mininet搭配其script來創造網路拓墣，該script可以在此找到 [group.py](https://gist.github.com/hwchiu/52b606032c9512dd1e83)
 ``` sh
-mn --custom group.py  --topo group	
+mn --custom group.py  --topo group
 ```
 - 讓所有的創造的openvswitch都支持openflow 1.3
 ``` sh
@@ -63,21 +63,21 @@ ovs-ofctl -O OpenFlow13 add-flow s4 in_port=2,actions=output:1
 - 在S5上根據destination ip來把封包導向不同的host
 ``` sh
 #IP
-ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.2,actions=output:4	
+ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.2,actions=output:4
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.3,actions=output:5
-ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.4,actions=output:6	
+ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.4,actions=output:6
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.5,actions=output:7
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.6,actions=output:8
-ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.7,actions=output:9	
+ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.7,actions=output:9
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.8,actions=output:10
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0800,ip_dst=10.0.0.9,actions=output:11
 #ARP
-ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.2,actions=output:4	
+ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.2,actions=output:4
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.3,actions=output:5
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.4,actions=output:6
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.5,actions=output:7
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.6,actions=output:8
-ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.7,actions=output:9	
+ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.7,actions=output:9
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.8,actions=output:10
 ovs-ofctl -O OpenFlow13 add-flow s5 eth_type=0x0806,ip_dst=10.0.0.9,actions=output:11
 ```
@@ -106,4 +106,3 @@ mininet>  sh ovs-ofctl dump-flows s4 -O OpenFlow13
 ```
 ![picture.png](http://user-image.logdown.io/user/415/blog/415/post/207387/8z6XUIASRbq93DoI7hFS_picture.png)
 - 在圖中可以觀察到，S2、S3、S4上面都有流量經過，證實了S1使用了group table會將不同的flow給隨機執行不同的buckets，在此範例中則是會導向不同的port。
-

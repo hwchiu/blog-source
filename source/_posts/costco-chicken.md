@@ -58,9 +58,9 @@ https://www.costco.com.tw/medias/sys_master/products/hca/h5c/8839260799006.jpg)
 我們使用`肉類`->`雞類` ->`清腿` 這個[分類](https://consumer.fda.gov.tw/Food/detail/TFNDD.aspx?f=1&pid=103)來估算營養成分
 
 將常見的營養素基於 `100` 以及 `170` 公克列舉出來
- 	 		
 
-|  | 100公克 | 170公克 | 
+
+|  | 100公克 | 170公克 |
 | -------- | -------- | -------- |
 | 熱量      | 157     |    267     |
 | 粗蛋白      | 18.5     |    31.4     |
@@ -75,5 +75,5 @@ https://www.costco.com.tw/medias/sys_master/products/hca/h5c/8839260799006.jpg)
 
 
 #參考來源
-- [食品藥物消費者知識服務網](https://consumer.fda.gov.tw/Food/TFND.aspx?nodeID=178) 
+- [食品藥物消費者知識服務網](https://consumer.fda.gov.tw/Food/TFND.aspx?nodeID=178)
 - [Costco 線上官網](https://www.costco.com.tw/Food/Prepared-Canned-Food/Frozen-Food/CP-Frozen-Boneless-Chicken-Thigh-25KG-X-6Packs/p/146146)

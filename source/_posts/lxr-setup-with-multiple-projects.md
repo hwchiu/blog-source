@@ -189,9 +189,9 @@ where:
               or a domain name like localhost or lxr.url.example,
   - port may be omitted if standard for the scheme.
 --- Host name or IP? [//localhost] > //127.0.0.1
---- Alias name or IP? > 
+--- Alias name or IP? >
 URL section name for LXR in your server? [/lxr] > /lxr
-Will it be shared by all trees? [YES/no] > 
+Will it be shared by all trees? [YES/no] >
 
 *** LXR database configuration ***
 
@@ -210,19 +210,19 @@ but resource consumption is also an important factor.
     (such as kernel cross-referencing) where it is fastest at the cost
     of bigger databases.
   * Take also in consideration the number of connected users.
-Database engine? [MYSQL/oracle/postgres/sqlite] > 
+Database engine? [MYSQL/oracle/postgres/sqlite] >
 The safest option is to create one database per tree.
 You can however create a single database for all your trees with a specific set of
 tables for each tree (though this is not recommended).
-How do you setup the databases? [PER TREE/global] > 
+How do you setup the databases? [PER TREE/global] >
 All databases can be accessed with the same username and
 can also be described under the same names.
-Will you share database characteristics? [YES/no] > 
-Will you use the same username and password for all DBs? [YES/no] > 
+Will you share database characteristics? [YES/no] >
+Will you use the same username and password for all DBs? [YES/no] >
 --- DB user name? [lxr] > lxr
 --- DB password ? [lxrpw] > lxrpw
-Will you give the same prefix to all tables? [YES/no] > 
---- Common table prefix? [lxr_] > 
+Will you give the same prefix to all tables? [YES/no] >
+--- Common table prefix? [lxr_] >
 --- Directory for glimpse databases? > /opt/lxr/glimpse_db
 
 file .htaccess written into LXR root directory
@@ -241,7 +241,7 @@ Mercurial support files written into configuration directory
 *** Configuring HTML parameters
 *** 'Buttons-and-menus' interface is recommended for the kernel
 *** to avoid screen cluttering.
---- Use 'buttons-and-menus' instead of 'link' interface? [YES/no] > 
+--- Use 'buttons-and-menus' instead of 'link' interface? [YES/no] >
 *** Configuring file subsection
 *** Configuring "common factors"
 *** Marking tree section
@@ -254,75 +254,75 @@ Mercurial support files written into configuration directory
 *** The virtual root is the fixed URL part after the hostname.
 *** You previously defined the virtual root as /lxr
 --- Caption in page header? (e.g. Project XYZZY displayed by LXR) > drbd
-Do you want a speed switch button for this tree ? [YES/no] > 
+Do you want a speed switch button for this tree ? [YES/no] >
 --- Short title for button? (e.g. XYZZY) > drbd
 --- Tree identification in URL? (e.g. the-tree) > drbd
-Do you need a specific encoding for this tree ? [yes/NO] > 
+Do you need a specific encoding for this tree ? [yes/NO] >
 *** Describing tree location
-How is your tree stored? [FILES/cvs/git/svn/hg/bk] > 
+How is your tree stored? [FILES/cvs/git/svn/hg/bk] >
 *** A source directory contains one sub-directory for every version.
 --- Source directory? (e.g. /home/myself/project-tree) > /opt/lxr/source_code/drbd
-Name to display for the path root? (e.g. Project or $v for version) [$v] > 
+Name to display for the path root? (e.g. Project or $v for version) [$v] >
 *** Enumerating versions
-Label for version selection menu?  [Version] > 
+Label for version selection menu?  [Version] >
 *** Versions can be explicitly enumerated, be read from a file or computed
 *** by a function. The latter case is recommended for VCS-stored trees.
-Version enumeration method? [LIST/file/function] > 
---- Version name?  > 
+Version enumeration method? [LIST/file/function] >
+--- Version name?  >
 No default choice, try again...
---- Version name?  > 0.9 
---- Version name? (hit return to stop) > 
+--- Version name?  > 0.9
+--- Version name? (hit return to stop) >
 *** By default, first version in list is displayed. You may also indicate
 *** a prefered version.
---- Default displayed version is first in 'range'? [YES/no] > 
+--- Default displayed version is first in 'range'? [YES/no] >
 *** Setting directory lists
 *** Some directories may contain non-public project data (binaries,
 *** compilers caches, SCM control data, ...). They can be hidden from LXR.
---- Directory to ignore, e.g. CVSROOT or CVS? (hit return to stop) > 
+--- Directory to ignore, e.g. CVSROOT or CVS? (hit return to stop) >
 *** If your source code uses "include" statements (#include, require, ...)
 *** LXR needs hints to resolve the destination file.
---- Include directory, e.g. /include? (hit return to stop) > 
+--- Include directory, e.g. /include? (hit return to stop) >
 *** Configuring data storage
 --- Database name? > drbd
-Do you want to override the global 'lxr' user name? [yes/NO] > 
-Do you want to override the global 'lxr_' table prefix? [yes/NO] > 
+Do you want to override the global 'lxr' user name? [yes/NO] >
+Do you want to override the global 'lxr_' table prefix? [yes/NO] >
 
-*** Configure another tree? [YES/no] > 
+*** Configure another tree? [YES/no] >
         , 'shortcaption' => 'drbd'
 *** Configuring LXR server parameters
 *** The virtual root is the fixed URL part after the hostname.
 *** You previously defined the virtual root as /lxr
 --- Caption in page header? (e.g. Project XYZZY displayed by LXR) > Ceph
-Do you want a speed switch button for this tree ? [YES/no] >   
+Do you want a speed switch button for this tree ? [YES/no] >
 --- Short title for button? (e.g. XYZZY) > Ceph
 --- Tree identification in URL? (e.g. the-tree) > Ceph
-Do you need a specific encoding for this tree ? [yes/NO] > 
+Do you need a specific encoding for this tree ? [yes/NO] >
 *** Describing tree location
-How is your tree stored? [FILES/cvs/git/svn/hg/bk] > 
+How is your tree stored? [FILES/cvs/git/svn/hg/bk] >
 *** A source directory contains one sub-directory for every version.
 --- Source directory? (e.g. /home/myself/project-tree) > /opt/lxr/source_code/ceph/
-Name to display for the path root? (e.g. Project or $v for version) [$v] > 
+Name to display for the path root? (e.g. Project or $v for version) [$v] >
 *** Enumerating versions
-Label for version selection menu?  [Version] > 
+Label for version selection menu?  [Version] >
 *** Versions can be explicitly enumerated, be read from a file or computed
 *** by a function. The latter case is recommended for VCS-stored trees.
-Version enumeration method? [LIST/file/function] > 
+Version enumeration method? [LIST/file/function] >
 --- Version name?  > master
---- Version name? (hit return to stop) > 
+--- Version name? (hit return to stop) >
 *** By default, first version in list is displayed. You may also indicate
 *** a prefered version.
---- Default displayed version is first in 'range'? [YES/no] > 
+--- Default displayed version is first in 'range'? [YES/no] >
 *** Setting directory lists
 *** Some directories may contain non-public project data (binaries,
 *** compilers caches, SCM control data, ...). They can be hidden from LXR.
---- Directory to ignore, e.g. CVSROOT or CVS? (hit return to stop) > 
+--- Directory to ignore, e.g. CVSROOT or CVS? (hit return to stop) >
 *** If your source code uses "include" statements (#include, require, ...)
 *** LXR needs hints to resolve the destination file.
---- Include directory, e.g. /include? (hit return to stop) > 
+--- Include directory, e.g. /include? (hit return to stop) >
 *** Configuring data storage
 --- Database name? > ceph
-Do you want to override the global 'lxr' user name? [yes/NO] > 
-Do you want to override the global 'lxr_' table prefix? [yes/NO] > 
+Do you want to override the global 'lxr' user name? [yes/NO] >
+Do you want to override the global 'lxr_' table prefix? [yes/NO] >
 
 *** Configure another tree? [YES/no] > no
 ```

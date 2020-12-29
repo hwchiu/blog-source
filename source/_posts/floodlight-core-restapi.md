@@ -20,13 +20,13 @@ Floodlight Openflow Controller 預設就有Rest Server 並且提供對應的Rest
 
 再core module這邊，目前提供了8種restAPI使用
 
-- /wm/core/switch/all/$statType/json 
+- /wm/core/switch/all/$statType/json
 - /wm/core/swtich/$switchi>/$statType$/json
 - /wm/core/controller/switches/json
 - /wm/core/role/json
 - /wm/core/counter/$counterTitle/json
 - /wm/core/counter/$switchId/$counterName$/json
-- /wm/core/memory/json 
+- /wm/core/memory/json
 - /wm/core/module/{all}/json
 
 第一篇主要講前面兩個，關於switch information方面。
@@ -54,11 +54,11 @@ Floodlight Openflow Controller 預設就有Rest Server 並且提供對應的Rest
 
 1. `core/web/CoreWebRoutable.java` 裡面可以發現core像IRestApiService註冊了下列事件
 ```
-router.attach("/switch/all/{statType}/json", AllSwitchStatisticsResource.class);  
-router.attach("/switch/{switchId}/{statType}/json", SwitchStatisticsResource.class);  
+router.attach("/switch/all/{statType}/json", AllSwitchStatisticsResource.class);
+router.attach("/switch/{switchId}/{statType}/json", SwitchStatisticsResource.class);
 ```
 這邊可以看到，
-當使用者透過  `/wm/core/switch/all/{statType}/json`時最後會透過`AllSwitchStatisticsResource`去處理  
+當使用者透過  `/wm/core/switch/all/{statType}/json`時最後會透過`AllSwitchStatisticsResource`去處理
 如果透過的指定swtich id的方式，則會透過 `SwitchStatisticsResource`這個物件來處理。
 
 ## 特定switch id
@@ -157,10 +157,10 @@ router.attach("/switch/{switchId}/{statType}/json", SwitchStatisticsResource.cla
                 // pass - nothing todo besides set the type above
             }
             req.setLengthU(requestLength);
-``` 
+```
  - 這邊就是針對type的請求，使用不同格式的封包。
  - 以flow為例子， flow request 會使用`OFMatch`去尋找所有match的flow,有mathc的flow才會回傳狀態資訊
- 
+
  	* `setWildcards(0xffffffff)`: 這樣就能夠match 所有的flow
 	* `specificReq.setOutPort(OFPort.OFPP_NONE.getValue())`: 這邊使用OFPP_NONE就是代表在match flow的時候，不會去看該flow entry的output port.
   * `specificReq.setTableId((byte) 0xff)`: 把tableId設定成0xff就是代表對所有的table都去詢問。

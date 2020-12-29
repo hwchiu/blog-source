@@ -22,7 +22,7 @@ abbrlink: 12492
 	}
 ```
 然而對程式設計師來說，最麻煩的過於一旦new出空間後，一定要執行delete把空間回收，以免發生memory leak的行為
- 
+
 <!--more-->
 
 
@@ -60,7 +60,7 @@ void Test3(){
    //process something
 }
 ```
- 
+
 #擁有權的轉移
 auto_ptr 所界定的是嚴格的擁有權概念，由於一個auto_ptr會刪除所擁有的物件，不應該發生同時間有多個auto_ptr共同擁有一個物件
 
@@ -86,7 +86,7 @@ auto_ptr 所界定的是嚴格的擁有權概念，由於一個auto_ptr會刪除
 執行第二行的時候，ptr1會把所有權轉移給ptr2,所以此行一旦結束，ptr1就會是個null。
 
 同樣的問題也會發生在assign的情況下
- 
+
 ``` c++
 	auto_ptr<int> ptr1(new int[100]);
 	auto_ptr<int> ptr2;
@@ -111,12 +111,12 @@ auto_ptr 所界定的是嚴格的擁有權概念，由於一個auto_ptr會刪除
 	    private:
 	      int _index;
 	};
-	
+
 	int main()
 	{
 	 auto_ptr<Student> ptr1(new Student(1));
 	 auto_ptr<Student> ptr2(new Student(2));
-	
+
 	 ptr2 = ptr1 ;  //ptr2's object will release
 	 cout<<"over"<<endl;
 	 return 0;
@@ -161,7 +161,7 @@ auto_ptr 所界定的是嚴格的擁有權概念，由於一個auto_ptr會刪除
 ```
 因為在參數中，使用了auto_ptr，所以當呼叫此function的時候，便會把所有權轉移到function中的臨時變數，然後當function結束後，
 
-這個區域的臨時變數又會銷毀，而在main中的ptr,因為呼叫function後擁有權轉移，所以第二次執行賦值的動作，就會出現runtime error了，  
+這個區域的臨時變數又會銷毀，而在main中的ptr,因為呼叫function後擁有權轉移，所以第二次執行賦值的動作，就會出現runtime error了，
 
 因為此時ptr並沒有任何指向任何物件，所以導致此崩壞行為。
 
@@ -176,7 +176,7 @@ auto_ptr 所界定的是嚴格的擁有權概念，由於一個auto_ptr會刪除
 auto_ptr的擁有權，更像是T* const ptr;
 ``` c++
 	#include<iostream>
-	
+
 	using namespace std;
 	void bad_print(const auto_ptr<int> p)
 	{
@@ -188,8 +188,8 @@ auto_ptr的擁有權，更像是T* const ptr;
 	}
 	int main()
 	{
-	   const auto_ptr<int> p(new int); 
-	   *p = 123;  
+	   const auto_ptr<int> p(new int);
+	   *p = 123;
 	   bad_print(p); //COMPILE TIME ERROR
 	   *p = 456;
 	   return 0;
@@ -202,12 +202,11 @@ auto_ptr間沒辦法同時擁有一個物件，因此當把兩個auto_ptr指向�
 
 並不存在針對array設計的auto_ptr。
 
-auto_ptr的內部設計是delete,而非delete[],所以不可以指向array。 
+auto_ptr的內部設計是delete,而非delete[],所以不可以指向array。
 auto_ptr並非萬能指標。
 
-由於auto_ptr並非一個計數型指標(或者是上限為一的計數型指標)，因此在使用上有非常多的限制，如果設計師沒有完全瞭解其特性，很容易就會讓程式出錯。 
+由於auto_ptr並非一個計數型指標(或者是上限為一的計數型指標)，因此在使用上有非常多的限制，如果設計師沒有完全瞭解其特性，很容易就會讓程式出錯。
 
 千萬別在STL 容器中使用auto_ptr。
 
 因為STL標準規定，C++標準容器容易必須要符合"copy-constructible" 跟 "assignable." ，亦即容器中的元素必須都要能夠被複製跟賦值，然而auto_ptr的特性並不相容上述行為，所以切忌使用，否則容易出錯。
-

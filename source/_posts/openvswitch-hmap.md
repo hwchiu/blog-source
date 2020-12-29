@@ -24,7 +24,7 @@ description: hmap 是一種hash bucket的資料結構，在 OpenvSwitch 中到�
 **hmap**擁有多個指標，指向每個hash的開頭，也就是所謂的bucket，所有的操作都要透過此結構
 
 
-**hmap_node** 
+**hmap_node**
 ``` c
 struct hmap_node {
     size_t hash;                /* Hash value. */
@@ -99,5 +99,3 @@ hmap_next_with_hash(const struct hmap_node *node)
     return hmap_next_with_hash__(node->next, node->hash);
 }
 ```
-
-

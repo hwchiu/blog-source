@@ -31,8 +31,8 @@ EventSelect.cc
 EventSelect.h
 PosixStack.cc
 PosixStack.h
-Stack.cc	
-Stack.h	
+Stack.cc
+Stack.h
 net_handler.cc
 net_handler.h
 ```

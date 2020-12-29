@@ -49,4 +49,3 @@ if (HttpURLConnection.HTTP_OK == responseCode) {
     //Handle InputStream
 }
 ```
-

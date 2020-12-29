@@ -44,4 +44,3 @@ Usage
   - connect ##
 - 播放音樂方面，由於bluez 5.x沒有辦法支援alsa，因此沒有辦法透過mplay來播放，必須要透過pulseaudio來播放音樂
 	- pacmd --help
-

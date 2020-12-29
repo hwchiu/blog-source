@@ -167,7 +167,7 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}  
+affinity: {}
 ```
 
 
@@ -201,7 +201,7 @@ NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/ithome   1/1     1            1           36s
 
 NAME                                DESIRED   CURRENT   READY   AGE
-replicaset.apps/ithome-5cc87ff5f4   1         1         1       36s  
+replicaset.apps/ithome-5cc87ff5f4   1         1         1       36s
 ```
 
 
@@ -333,7 +333,7 @@ null
 因此接下來我們嘗試升級該 Release，並且修改裡面的設定值
 
 ```bash
-$ helm -n ithome upgrade ithome --set service.type=NodePort .                                                                                                          
+$ helm -n ithome upgrade ithome --set service.type=NodePort .
 Release "ithome" has been upgraded. Happy Helming!
 NAME: ithome
 LAST DEPLOYED: Tue Sep  8 22:02:49 2020
@@ -358,7 +358,7 @@ $ helm -n ithome get values ithome
 USER-SUPPLIED VALUES:
 service:
   type: NodePort
-$ kubectl -n ithome get svc                                                                                                                                          
+$ kubectl -n ithome get svc
 NAME     TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 ithome   NodePort   10.43.95.165   <none>        80:30232/TCP   9m20s
 ```

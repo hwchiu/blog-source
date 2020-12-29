@@ -44,17 +44,17 @@ XmlDeclaration 是XML文件類別的開頭宣告，可以利用此函式為XML�
 XmlElement 是XML文件中重要的一個物件，代表每一個節點，所有資料的搬移讀寫都靠操作節點完成
 可以透過XmlElement::SetAttribute其屬性與其值，再將該XmlElement透過相關function來根據情況插入node
 
-+ AppendChild 
-+ PrependChild  
-+ ReplaceChild 
-+ InsertAfter 
++ AppendChild
++ PrependChild
++ ReplaceChild
++ InsertAfter
 + InsertBefore
 
 
 在進行一系列操作後，要執行XmlDocument::Save，這樣就完成寫入一個XML格式的檔案。
 以下就來一個簡單範例
 
- 
+
 
         public CreateXML()
         {
@@ -77,7 +77,7 @@ XmlElement 是XML文件中重要的一個物件，代表每一個節點，所有
             addTextElement(doc, elemEmployee, "name", name);
             addTextElement(doc, elemEmployee, "age", age.ToString());
             addTextElement(doc, elemEmployee, "email", email);
-            
+
         }
         private void AddTextElement(XmlDocument doc, XmlElement nodeParent, string Tag, String Value)
         {
@@ -102,7 +102,7 @@ XmlElement 是XML文件中重要的一個物件，代表每一個節點，所有
 	  </Student>
 	</Students>
 # Read the XML
-## XMLReader  
+## XMLReader
 使用XmlReader來逐步讀取XML，對於過大的XML檔案時，不會一口氣全部讀進memory
 由於有實作IDisposable,所以使用using來自動釋放資源
 reader會逐步讀取，每個tag分成 Element,Text,EndElement，以上述為例
@@ -118,7 +118,7 @@ MoveToNextAttribute()來遍尋，範例如下
 	    while (reader.Read())
 	    {
 	        switch (reader.NodeType)
-	        { 
+	        {
                 case XmlNodeType.Element:
                     Console.Write("<"+reader.Name);
                     while (reader.MoveToNextAttribute())
@@ -182,7 +182,7 @@ XMLDocument載入xml檔案時，會一次讀完，所以可以直接使用其方
 	        XmlElement element = (XmlElement)parentNode;
 	        String id = element.GetAttribute("StudentID");
 	        XmlNodeList childList = element.ChildNodes;
-	
+
 	        Console.WriteLine("StudentID="+id);
 	        foreach (XmlNode childNode in childList)
 	        {
@@ -193,7 +193,7 @@ XMLDocument載入xml檔案時，會一次讀完，所以可以直接使用其方
 	}
 ```
 ***
-Output  
+Output
 
 	StudentID=156521
 	<name> hwchiu
@@ -204,8 +204,8 @@ Output
 	<age> 18
 	<email> sppsorrg11.cs97@nctu.edu.tw
 # LINQ
-這邊使用LINQ來搜尋XML文件，所以必須要先使用  
-**using system.xml.Linq** 
+這邊使用LINQ來搜尋XML文件，所以必須要先使用
+**using system.xml.Linq**
 
 為了讓Linq能夠順利運行，這邊使用的物件是XElement以及XNode
 首先以XElement的方式來讀取檔案，接者使用linq的語法從中獲取我們想要的資訊
@@ -214,7 +214,7 @@ StudentID，來得到特定的資訊。
 
 最後回傳的資訊是個`IEnumerable<XElement>`的型態，使用foreach來拜訪
 這邊的XElement本身的值就是
-	
+
 	<Student StudentID="156521">
 	  <name>hwchiu</name>
 	  <age>22</age>
@@ -223,10 +223,10 @@ StudentID，來得到特定的資訊。
 
 所以為了獲得其中的資訊，就必須要繼續拆解該節點，繼續以foreach的方式取得
 每個XNode都代表者一行資訊如
-> `<name>hwchiu</name>`  
+> `<name>hwchiu</name>`
 
 此時可以將XNode給轉型為XElement，就可以利用`<Name/Value>`的方式分別取得
-`<name>跟hwchiu`  
+`<name>跟hwchiu`
 
 若只是想要取得特別的資訊，可以直接透過Linq的語法來查詢，寫起來會更加簡潔及可讀。
 ```c#
@@ -245,7 +245,7 @@ StudentID，來得到特定的資訊。
 ```
 
 ***
-Output  
+Output
 
 	<name>hwchiu</name>
 	<age>22</age>

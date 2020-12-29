@@ -29,7 +29,7 @@ Container Registry 顧名思義就是用來保存 Container Image 的一個倉�
 
 Docker Hub 使用起來，我認為算是非常方便，特別是跟 GitHub/Bitbucket 的連動非常輕鬆設定，通常只要在專案內準備一個 Dockerfile 的檔案，就可以讓 Docker Hub 自動地幫你部署相關的 Image 並且存放到 Docker Hub 上。
 
-這種情況下對於一些要準備自己 Image 的開發者來說非常便利，都不需要額外的 CI Pipeline 系統來處理，只要將程式碼合併，等待一段時間後相關的 Image 就出現了。 
+這種情況下對於一些要準備自己 Image 的開發者來說非常便利，都不需要額外的 CI Pipeline 系統來處理，只要將程式碼合併，等待一段時間後相關的 Image 就出現了。
 
 然而隨者專案的擴大，使用環境的改變， Docker Hub 並不一定可以適合所有情境
 

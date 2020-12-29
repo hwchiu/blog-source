@@ -79,7 +79,7 @@ RDMA代表的是遠方記憶體存取，是一種擁有**low latency**, **low cp
 
 ### Architecture
 整個網路最基礎的架構程式碼都放在 **/src/msg/** 裡面，排除三種類型的資料夾外，大致上就是下列四種類型
-- Message 
+- Message
 - Connection
 - Messenger
 - Dispatcher
@@ -156,4 +156,3 @@ a若要註冊該 **dispatcher**，可參考 **OSD** 實際程式碼如下
 至於底層是如何連線，封包如何收送，訊息如何解析、封裝，都些都是 Networking 本身的事情，就是本文開頭提到的那幾種方式去實作。
 
 因此接下來的文章，將探討 **Async** 這類型的傳輸方式是如何將上述的概念給實作的。
-

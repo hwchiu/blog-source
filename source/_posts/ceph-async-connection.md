@@ -30,7 +30,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1867 {
 1868   ldout(async_msgr->cct, 10) << __func__ << " sd=" << socket.fd() << dendl;
 1869   assert(socket.fd() >= 0);
-1870 
+1870
 1871   std::lock_guard<std::mutex> l(lock);
 1872   cs = std::move(socket);
 1873   socket_addr = addr;
@@ -68,11 +68,11 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0842         }
 0843     }
 0844   } while (prev_state != state);
-0845 
+0845
 0846   if (need_dispatch_writer && is_connected())
 0847     center->dispatch_event_external(write_handler);
 0848   return;
-0849 
+0849
 0850  fail:
 0851   fault();
 0852 }
@@ -95,14 +95,14 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1216       {
 1217         bufferlist bl;
 1218         center->create_file_event(cs.fd(), EVENT_READABLE, read_handler);
-1219 
+1219
 1220         bl.append(CEPH_BANNER, strlen(CEPH_BANNER));
-1221 
+1221
 1222         ::encode(async_msgr->get_myaddr(), bl, 0); // legacy
 1223         port = async_msgr->get_myaddr().get_port();
 1224         ::encode(socket_addr, bl, 0); // legacy
 1225         ldout(async_msgr->cct, 1) << __func__ << " sd=" << cs.fd() << " " << socket_addr << dendl;
-1226 
+1226
 1227         r = try_send(bl);
 1228         if (r == 0) {
 1229           state = STATE_ACCEPTING_WAIT_BANNER_ADDR;
@@ -116,7 +116,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1237         } else {
 1238           goto fail;
 1239         }
-1240 
+1240
 1241         break;
 1242       }
 ```
@@ -134,7 +134,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1244       {
 1245         bufferlist addr_bl;
 1246         entity_addr_t peer_addr;
-1247 
+1247
 1248         r = read_until(strlen(CEPH_BANNER) + sizeof(ceph_entity_addr), state_buffer);
 1249         if (r < 0) {
 1250           ldout(async_msgr->cct, 1) << __func__ << " read peer banner and addr failed" << dendl;
@@ -142,19 +142,19 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1252         } else if (r > 0) {
 1253           break;
 1254         }
-1255 
+1255
 1256         if (memcmp(state_buffer, CEPH_BANNER, strlen(CEPH_BANNER))) {
 1257           ldout(async_msgr->cct, 1) << __func__ << " accept peer sent bad banner '" << state_buffer
 1258                                     << "' (should be '" << CEPH_BANNER << "')" << dendl;
 1259           goto fail;
 1260         }
-1261 
+1261
 1262         addr_bl.append(state_buffer+strlen(CEPH_BANNER), sizeof(ceph_entity_addr));
 1263         {
 1264           bufferlist::iterator ti = addr_bl.begin();
 1265           ::decode(peer_addr, ti);
 1266         }
-1267 
+1267
 1268         ldout(async_msgr->cct, 10) << __func__ << " accept peer addr is " << peer_addr << dendl;
 1269         if (peer_addr.is_blank_ip()) {
 1270           // peer apparently doesn't know what ip they have; figure it out for them.
@@ -186,7 +186,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0107     __u8  flags;         /* CEPH_MSG_CONNECT_* */
 0108 } __attribute__ ((packed));
 ```
- 
+
 ``` c++
 1282     case STATE_ACCEPTING_WAIT_CONNECT_MSG:
 1283       {
@@ -197,7 +197,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1288         } else if (r > 0) {
 1289           break;
 1290         }
-1291 
+1291
 1292         connect_msg = *((ceph_msg_connect*)state_buffer);
 1293         state = STATE_ACCEPTING_WAIT_CONNECT_MSG_AUTH;
 1294         break;
@@ -217,11 +217,11 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1297     case STATE_ACCEPTING_WAIT_CONNECT_MSG_AUTH:
 1298       {
 1299         bufferlist authorizer_reply;
-1300 
+1300
 1301         if (connect_msg.authorizer_len) {
 1302           if (!authorizer_buf.length())
 1303             authorizer_buf.push_back(buffer::create(connect_msg.authorizer_len));
-1304 
+1304
 1305           r = read_until(connect_msg.authorizer_len, authorizer_buf.c_str());
 1306           if (r < 0) {
 1307             ldout(async_msgr->cct, 1) << __func__ << " read connect authorizer failed" << dendl;
@@ -230,7 +230,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1310             break;
 1311           }
 1312         }
-1313 
+1313
 1314         ldout(async_msgr->cct, 20) << __func__ << " accept got peer connect_seq "
 1315                              << connect_msg.connect_seq << " global_seq "
 1316                              << connect_msg.global_seq << dendl;
@@ -240,11 +240,11 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1320                                    << ", policy.lossy=" << policy.lossy << " policy.server="
 1321                                    << policy.server << " policy.standby=" << policy.standby
 1322                                    << " policy.resetcheck=" << policy.resetcheck << dendl;
-1323 
+1323
 1324         r = handle_connect_msg(connect_msg, authorizer_buf, authorizer_reply);
 1325         if (r < 0)
 1326           goto fail;
-1327 
+1327
 1328         // state is changed by "handle_connect_msg"
 1329         assert(state != STATE_ACCEPTING_WAIT_CONNECT_MSG_AUTH);
 1330         break;
@@ -257,7 +257,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 - 呼叫 discard_requeued_up_to 來處理，根據當前收到的 seq 來做條件
     - 將 **out_q** 一些不符合條件的成員都移除
 - 狀態改成 **STATE_ACCEPTING_READY**
-- 
+-
 ```c++
 1333     case STATE_ACCEPTING_WAIT_SEQ:
 1334       {
@@ -269,7 +269,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1340         } else if (r > 0) {
 1341           break;
 1342         }
-1343 
+1343
 1344         newly_acked_seq = *((uint64_t*)state_buffer);
 1345         ldout(async_msgr->cct, 2) << __func__ << " accept get newly_acked_seq " << newly_acked_seq << dendl;
 1346         discard_requeued_up_to(newly_acked_seq);
@@ -289,14 +289,14 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1353         ldout(async_msgr->cct, 20) << __func__ << " accept done" << dendl;
 1354         state = STATE_OPEN;
 1355         memset(&connect_msg, 0, sizeof(connect_msg));
-1356 
+1356
 1357         if (delay_state)
 1358           assert(delay_state->ready());
 1359         // make sure no pending tick timer
 1360         if (last_tick_id)
 1361           center->delete_time_event(last_tick_id);
 1362         last_tick_id = center->create_time_event(inactive_timeout_us, tick_handler);
-1363 
+1363
 1364         write_lock.lock();
 1365         can_write = WriteStatus::CANWRITE;
 1366         if (is_queued())
@@ -321,7 +321,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0350           } else if (r > 0) {
 0351             break;
 0352           }
-0353 
+0353
 0354           if (tag == CEPH_MSGR_TAG_KEEPALIVE) {
 0355             ldout(async_msgr->cct, 20) << __func__ << " got KEEPALIVE" << dendl;
 0356             set_last_keepalive(ceph_clock_now());
@@ -339,7 +339,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0368             ldout(async_msgr->cct, 0) << __func__ << " bad tag " << (int)tag << dendl;
 0369             goto fail;
 0370           }
-0371 
+0371
 0372           break;
 0373         }
 ```
@@ -371,7 +371,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0446             len = sizeof(header);
 0447           else
 0448             len = sizeof(oldheader);
-0449 
+0449
 0450           r = read_until(len, state_buffer);
 0451           if (r < 0) {
 0452             ldout(async_msgr->cct, 1) << __func__ << " read message header failed" << dendl;
@@ -379,9 +379,9 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0454           } else if (r > 0) {
 0455             break;
 0456           }
-0457 
+0457
 0458           ldout(async_msgr->cct, 20) << __func__ << " got MSG header" << dendl;
-0459 
+0459
 0460           if (has_feature(CEPH_FEATURE_NOSRCADDR)) {
 0461             header = *((ceph_msg_header*)state_buffer);
 0462             if (msgr->crcflags & MSG_CRC_HEADER)
@@ -398,20 +398,20 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0473               header_crc = ceph_crc32c(0, (unsigned char *)&oldheader, sizeof(oldheader) - sizeof(oldheader.crc));
 0474             }
 0475           }
-0476 
+0476
 0477           ldout(async_msgr->cct, 20) << __func__ << " got envelope type=" << header.type
 0478                               << " src " << entity_name_t(header.src)
 0479                               << " front=" << header.front_len
 0480                               << " data=" << header.data_len
 0481                               << " off " << header.data_off << dendl;
-0482 
+0482
 0483           // verify header crc
 0484           if (msgr->crcflags & MSG_CRC_HEADER && header_crc != header.crc) {
 0485             ldout(async_msgr->cct,0) << __func__ << " got bad header crc "
 0486                                      << header_crc << " != " << header.crc << dendl;
 0487             goto fail;
 0488           }
-0489 
+0489
 0490           // Reset state
 0491           data_buf.clear();
 0492           front.clear();
@@ -457,7 +457,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0515               break;
 0516             }
 0517           }
-0518 
+0518
 0519           state = STATE_OPEN_MESSAGE_THROTTLE_BYTES;
 0520           break;
 0521         }
@@ -492,7 +492,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0540               }
 0541             }
 0542           }
-0543 
+0543
 0544           state = STATE_OPEN_MESSAGE_THROTTLE_DISPATCH_QUEUE;
 0545           break;
 0546         }
@@ -518,7 +518,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0559               break;
 0560             }
 0561           }
-0562 
+0562
 0563           throttle_stamp = ceph_clock_now();
 0564           state = STATE_OPEN_MESSAGE_READ_FRONT;
 0565           break;
@@ -541,7 +541,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0572           if (front_len) {
 0573             if (!front.length())
 0574               front.push_back(buffer::create(front_len));
-0575 
+0575
 0576             r = read_until(front_len, front.c_str());
 0577             if (r < 0) {
 0578               ldout(async_msgr->cct, 1) << __func__ << " read message front failed" << dendl;
@@ -549,7 +549,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0580             } else if (r > 0) {
 0581               break;
 0582             }
-0583 
+0583
 0584             ldout(async_msgr->cct, 20) << __func__ << " got front " << front.length() << dendl;
 0585           }
 0586           state = STATE_OPEN_MESSAGE_READ_MIDDLE;
@@ -568,7 +568,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0593           if (middle_len) {
 0594             if (!middle.length())
 0595               middle.push_back(buffer::create(middle_len));
-0596 
+0596
 0597             r = read_until(middle_len, middle.c_str());
 0598             if (r < 0) {
 0599               ldout(async_msgr->cct, 1) << __func__ << " read message middle failed" << dendl;
@@ -578,7 +578,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0603             }
 0604             ldout(async_msgr->cct, 20) << __func__ << " got middle " << middle.length() << dendl;
 0605           }
-0606 
+0606
 0607           state = STATE_OPEN_MESSAGE_READ_DATA_PREPARE;
 0608         }
 ```
@@ -612,7 +612,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0630               data_blp = data_buf.begin();
 0631             }
 0632           }
-0633 
+0633
 0634           msg_left = data_len;
 0635           state = STATE_OPEN_MESSAGE_READ_DATA;
 0636         }
@@ -635,18 +635,18 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0647             } else if (r > 0) {
 0648               break;
 0649             }
-0650 
+0650
 0651             data_blp.advance(read);
 0652             data.append(bp, 0, read);
 0653             msg_left -= read;
 0654           }
-0655 
+0655
 0656           if (msg_left > 0)
 0657             break;
-0658 
+0658
 0659           state = STATE_OPEN_MESSAGE_READ_FOOTER_AND_DISPATCH;
 0660         }
-0661 
+0661
 ```
 
 ## STATE_OPEN_MESSAGE_READ_FOOTER_AND_DISPATCH
@@ -665,16 +665,16 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0316   Message *m = 0;
 0317   int type = header.type;
 0318   switch (type) {
-0319 
+0319
 0320     // -- with payload --
-0321 
+0321
 0322   case MSG_PGSTATS:
 0323     m = new MPGStats;
 0324     break;
 0325   case MSG_PGSTATSACK:
 0326     m = new MPGStatsAck;
 0327     break;
-0328 
+0328
 0329   case CEPH_MSG_STATFS:
 0330     m = new MStatfs;
 0331     break;
@@ -718,7 +718,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0669             len = sizeof(footer);
 0670           else
 0671             len = sizeof(old_footer);
-0672 
+0672
 0673           r = read_until(len, state_buffer);
 0674           if (r < 0) {
 0675             ldout(async_msgr->cct, 1) << __func__ << " read footer data error " << dendl;
@@ -726,7 +726,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0677           } else if (r > 0) {
 0678             break;
 0679           }
-0680 
+0680
 0681           if (has_feature(CEPH_FEATURE_MSG_AUTH)) {
 0682             footer = *((ceph_msg_footer*)state_buffer);
 0683           } else {
@@ -744,7 +744,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0695                                 << " byte message.. ABORTED" << dendl;
 0696             goto fail;
 0697           }
-0698 
+0698
 0699           ldout(async_msgr->cct, 20) << __func__ << " got " << front.length() << " + " << middle.length()
 0700                               << " + " << data.length() << " byte message" << dendl;
 0701           Message *message = decode_message(async_msgr->cct, async_msgr->crcflags, current_header, footer,
@@ -753,11 +753,11 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0704             ldout(async_msgr->cct, 1) << __func__ << " decode message failed " << dendl;
 0705             goto fail;
 0706           }
-0707 
+0707
 0708           //
 0709           //  Check the signature if one should be present.  A zero return indicates success. PLR
 0710           //
-0711 
+0711
 0712           if (session_security.get() == NULL) {
 0713             ldout(async_msgr->cct, 10) << __func__ << " no session security set" << dendl;
 0714           } else {
@@ -769,16 +769,16 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0720           }
 0721           message->set_byte_throttler(policy.throttler_bytes);
 0722           message->set_message_throttler(policy.throttler_messages);
-0723 
+0723
 0724           // store reservation size in message, so we don't get confused
 0725           // by messages entering the dispatch queue through other paths.
 0726           message->set_dispatch_throttle_size(cur_msg_size);
-0727 
+0727
 0728           message->set_recv_stamp(recv_stamp);
 0729           message->set_throttle_stamp(throttle_stamp);
 0730           message->set_recv_complete_stamp(ceph_clock_now());
-0731 
-0732           // check received seq#.  if it is old, drop the message.  
+0731
+0732           // check received seq#.  if it is old, drop the message.
 0733           // note that incoming messages may skip ahead.  this is convenient for the client
 0734           // side queueing because messages can't be renumbered, but the (kernel) client will
 0735           // occasionally pull a message out of the sent queue to send elsewhere.  in that case
@@ -799,9 +799,9 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0750             if (async_msgr->cct->_conf->ms_die_on_skipped_message)
 0751               assert(0 == "skipped incoming seq");
 0752           }
-0753 
+0753
 0754           message->set_connection(this);
-0755 
+0755
 0756 #if defined(WITH_LTTNG) && defined(WITH_EVENTTRACE)
 0757           if (message->get_type() == CEPH_MSG_OSD_OP || message->get_type() == CEPH_MSG_OSD_OPREPLY) {
 0758             utime_t ltt_processed_stamp = ceph_clock_now();
@@ -813,22 +813,22 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0764               OID_ELAPSED_WITH_MSG(message, usecs_elapsed, "TIME_TO_DECODE_OSD_OPREPLY", false);
 0765           }
 0766 #endif
-0767 
+0767
 0768           // note last received message.
 0769           in_seq.set(message->get_seq());
 0770           ldout(async_msgr->cct, 5) << " rx " << message->get_source() << " seq "
 0771                                     << message->get_seq() << " " << message
 0772                                     << " " << *message << dendl;
-0773 
+0773
 0774           if (!policy.lossy) {
 0775             ack_left.inc();
 0776             need_dispatch_writer = true;
 0777           }
 0778           state = STATE_OPEN;
-0779 
+0779
 0780           logger->inc(l_msgr_recv_messages);
 0781           logger->inc(l_msgr_recv_bytes, cur_msg_size + sizeof(ceph_msg_header) + sizeof(ceph_msg_footer));
-0782 
+0782
 0783           async_msgr->ms_fast_preprocess(message);
 0784           if (delay_state) {
 0785             utime_t release = message->get_recv_stamp();
@@ -847,10 +847,10 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0798           } else {
 0799             dispatch_queue->enqueue(message, message->get_priority(), conn_id);
 0800           }
-0801 
+0801
 0802           break;
 0803         }
-0804 
+0804
 ```
 
 上述已經大概跑完了整個 **Accept** 的流程，當然此流程中是確保沒有任何錯誤，一切都是順利往下進行的。
@@ -877,7 +877,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1856 void AsyncConnection::_connect()
 1857 {
 1858   ldout(async_msgr->cct, 10) << __func__ << " csq=" << connect_seq << dendl;
-1859 
+1859
 1860   state = STATE_CONNECTING;
 1861   // rescheduler connection in order to avoid lock dep
 1862   // may called by external thread(send_message)
@@ -897,7 +897,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0870     case STATE_CONNECTING:
 0871       {
 0872         assert(!policy.server);
-0873 
+0873
 0874         // reset connect state variables
 0875         got_bad_auth = false;
 0876         delete authorizer;
@@ -905,21 +905,21 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0878         authorizer_buf.clear();
 0879         memset(&connect_msg, 0, sizeof(connect_msg));
 0880         memset(&connect_reply, 0, sizeof(connect_reply));
-0881 
+0881
 0882         global_seq = async_msgr->get_global_seq();
 0883         // close old socket.  this is safe because we stopped the reader thread above.
 0884         if (cs) {
 0885           center->delete_file_event(cs.fd(), EVENT_READABLE|EVENT_WRITABLE);
 0886           cs.close();
 0887         }
-0888 
+0888
 0889         SocketOptions opts;
 0890         opts.priority = async_msgr->get_socket_priority();
 0891         opts.connect_bind_addr = msgr->get_myaddr();
 0892         r = worker->connect(get_peer_addr(), opts, &cs);
 0893         if (r < 0)
 0894           goto fail;
-0895 
+0895
 0896         center->create_file_event(cs.fd(), EVENT_READABLE, read_handler);
 0897         state = STATE_CONNECTING_RE;
 0898         break;
@@ -935,12 +935,12 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 - 嘗試送出 CEPH_BANNER
 - 若成功，狀態切換成 **STATE_CONNECTING_WAIT_BANNER_AND_IDENTIFY**
 - 若失敗，狀態切換成 **STATE_WAIT_SEND**，待之後重送後再處理。
-  
+
 ```c++
 0055   int is_connected() override {
 0056     if (connected)
 0057       return 1;
-0058 
+0058
 0059     int r = handler.reconnect(sa, _fd);
 0060     if (r == 0) {
 0061       connected = true;
@@ -969,10 +969,10 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0914             center->create_file_event(cs.fd(), EVENT_WRITABLE, read_handler);
 0915           break;
 0916         }
-0917 
+0917
 0918         center->delete_file_event(cs.fd(), EVENT_WRITABLE);
 0919         ldout(async_msgr->cct, 10) << __func__ << " connect successfully, ready to send banner" << dendl;
-0920 
+0920
 0921         bufferlist bl;
 0922         bl.append(CEPH_BANNER, strlen(CEPH_BANNER));
 0923         r = try_send(bl);
@@ -988,7 +988,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0933         } else {
 0934           goto fail;
 0935         }
-0936 
+0936
 0937         break;
 0938       }
 0223 }
@@ -1021,13 +1021,13 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0950         } else if (r > 0) {
 0951           break;
 0952         }
-0953 
+0953
 0954         if (memcmp(state_buffer, CEPH_BANNER, banner_len)) {
 0955           ldout(async_msgr->cct, 0) << __func__ << " connect protocol error (bad banner) on peer "
 0956                                     << get_peer_addr() << dendl;
 0957           goto fail;
 0958         }
-0959 
+0959
 0960         bufferlist bl;
 0961         bl.append(state_buffer+banner_len, sizeof(ceph_entity_addr)*2);
 0962         bufferlist::iterator p = bl.begin();
@@ -1052,7 +1052,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0981             goto fail;
 0982           }
 0983         }
-0984 
+0984
 0985         ldout(async_msgr->cct, 20) << __func__ << " connect peer addr for me is " << peer_addr_for_me << dendl;
 0986         lock.unlock();
 0987         async_msgr->learned_addr(peer_addr_for_me);
@@ -1065,14 +1065,14 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0994             t.sleep();
 0995           }
 0996         }
-0997 
+0997
 0998         lock.lock();
 0999         if (state != STATE_CONNECTING_WAIT_BANNER_AND_IDENTIFY) {
 1000           ldout(async_msgr->cct, 1) << __func__ << " state changed while learned_addr, mark_down or "
 1001                                     << " replacing must be happened just now" << dendl;
 1002           return 0;
 1003         }
-1004 
+1004
 1005         ::encode(async_msgr->get_myaddr(), myaddrbl, 0); // legacy
 1006         r = try_send(myaddrbl);
 1007         if (r == 0) {
@@ -1089,7 +1089,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1018               << cpp_strerror(r) << dendl;
 1019           goto fail;
 1020         }
-1021 
+1021
 1022         break;
 1023       }
 ```
@@ -1109,7 +1109,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1029           authorizer = async_msgr->get_authorizer(peer_type, false);
 1030         }
 1031         bufferlist bl;
-1032 
+1032
 1033         connect_msg.features = policy.features_supported;
 1034         connect_msg.host_type = async_msgr->get_myinst().name.type();
 1035         connect_msg.global_seq = global_seq;
@@ -1130,7 +1130,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1050         }
 1051         ldout(async_msgr->cct, 10) << __func__ << " connect sending gseq=" << global_seq << " cseq="
 1052             << connect_seq << " proto=" << connect_msg.protocol_version << dendl;
-1053 
+1053
 1054         r = try_send(bl);
 1055         if (r == 0) {
 1056           state = STATE_CONNECTING_WAIT_CONNECT_REPLY;
@@ -1144,7 +1144,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1064               << cpp_strerror(r) << dendl;
 1065           goto fail;
 1066         }
-1067 
+1067
 1068         break;
 1069       }
 ```
@@ -1174,16 +1174,16 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1077         } else if (r > 0) {
 1078           break;
 1079         }
-1080 
+1080
 1081         connect_reply = *((ceph_msg_connect_reply*)state_buffer);
-1082 
+1082
 1083         ldout(async_msgr->cct, 20) << __func__ << " connect got reply tag " << (int)connect_reply.tag
 1084                              << " connect_seq " << connect_reply.connect_seq << " global_seq "
 1085                              << connect_reply.global_seq << " proto " << connect_reply.protocol_version
 1086                              << " flags " << (int)connect_reply.flags << " features "
 1087                              << connect_reply.features << dendl;
 1088         state = STATE_CONNECTING_WAIT_CONNECT_REPLY_AUTH;
-1089 
+1089
 1090         break;
 1091       }
 ```
@@ -1209,7 +1209,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1103           } else if (r > 0) {
 1104             break;
 1105           }
-1106 
+1106
 1107           authorizer_reply.append(state_buffer, connect_reply.authorizer_len);
 1108           bufferlist::iterator iter = authorizer_reply.begin();
 1109           if (authorizer && !authorizer->verify_reply(iter)) {
@@ -1220,7 +1220,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 1114         r = handle_connect_reply(connect_msg, connect_reply);
 1115         if (r < 0)
 1116           goto fail;
-1117 
+1117
 1118         // state must be changed!
 1119         assert(state != STATE_CONNECTING_WAIT_CONNECT_REPLY_AUTH);
 1120         break;
@@ -1253,7 +1253,7 @@ AsyncConnection 此物件代表整個 connection，裡面提供了收送(Write/R
 0157       if (!qitem.is_code())
 0158         remove_arrival(qitem.get_message());
 0159       lock.Unlock();
-0160 
+0160
 0161       if (qitem.is_code()) {
 0162         if (cct->_conf->ms_inject_internal_delays &&
 0163             cct->_conf->ms_inject_delay_probability &&
@@ -1365,5 +1365,3 @@ handle_connect_msg
 # Summary
 此 **AsyncConnection** 內容眾多，目前先主要觀察到整個建立連線的步驟，包含了 **Accept** 以及 **connect** 。
 有機會再來把 **read/write** 相關的介面也都看一次，到時候可以更瞭解整體收送的行為。
-
-

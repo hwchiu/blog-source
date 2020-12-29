@@ -33,7 +33,7 @@ date: 2020-06-22 06:34:39
 
 從上述的範例中可以看到，如果沒有嚴厲的去限制 **直接對 Kubernetes 進行更新** 這個行為，就有兩個不同的觸發點可以對 Kubernetes 進行更新，這種情況可能會造成的問題是
 **沒有辦法控管**
-**Kubernetes 正在運行的資源狀態 (Living Status)** 與 
+**Kubernetes 正在運行的資源狀態 (Living Status)** 與
 **Kubernetes 被期望的資源狀態 (Desired Yaml)** 一致
 特別是當有人員會直接透過 **kubectl edit**, **kubectl patch** 等方式直接修改運行狀態卻又沒有要更新描述資源 (Yaml) 時更容易發生。
 
@@ -92,7 +92,7 @@ ArgoCD 的架構引用其[官網](https://argoproj.github.io/argo-cd/)
     - Webhook 主動告知 ArgoCD
     - **ArgoCD** 本身定期去觀察 **Git Repo** 的狀態，並且一旦有更新就會讓 **Controller** 來更新相關的應用程式
 
-3. 左方的開發人員/維護人員，這些人員可以透過 **UI/CLI/gRPC/REST** 等方式來操作 **ArgoCD** 的服務。 
+3. 左方的開發人員/維護人員，這些人員可以透過 **UI/CLI/gRPC/REST** 等方式來操作 **ArgoCD** 的服務。
     - 開發人員可以透過對 **Git Repo** 的修改與合併來觸發 ArgoCD
     - 部署人員可以透過 **UI/CLI** 等方式來觀察與設定當前應用程式的狀態
 

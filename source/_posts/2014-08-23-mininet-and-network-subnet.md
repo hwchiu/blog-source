@@ -80,7 +80,7 @@ tcpdump: listening on s1-eth1, link-type EN10MB (Ethernet), capture size 65535 b
 - **sh ovs-ofctl add-flow s1 "table=0,priority=1,arp,nw_dst=30.0.0.1,actions=output:3"**
 
 這些完畢後，**arp**封包就能夠正常處理了，接下來為了處理**ICMP**，我們要再做一些設定，在此實驗中，我們同時測試**multiple table**的功用，因此我們決定把**ICMP routing**的部分放到第二個table去處理。
-首先，我們先在**table 0**加入一個**flow entry**，把剛剛沒有被**arp**處理掉的封包都送到**table 1**去處理。 
+首先，我們先在**table 0**加入一個**flow entry**，把剛剛沒有被**arp**處理掉的封包都送到**table 1**去處理。
 - **sh ovs-ofctl add-flow s1 "table=0,priority=0,actions=resubmit(,1)"**
 
 接者，在**table 1**，因為switch的身份很類似**router**，因此我們要修改所有封包的**destination MAC Address**。
@@ -104,10 +104,3 @@ table=1,icmp,nw_dst=10.0.0.1,actions=mod_dl_dst=00:00:00:00:00:01,output:1
 table=1,icmp,nw_dst=20.0.0.1,actions=mod_dl_dst=00:00:00:00:00:02,output:2
 table=1,icmp,nw_dst=30.0.0.1,actions=mod_dl_dst=00:00:00:00:00:03,output:3
 ```
-
-
-
-
-
-
-

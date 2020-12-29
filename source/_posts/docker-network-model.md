@@ -182,7 +182,7 @@ docker0         8000.024271984c2a       no              veth980af09
 **圖左**: 這個架構比較複雜，分成幾個角度來看：
 
 1. 容器創造後，會於自己的網路空間（黃色區塊）內額外創造一張新的網卡 **eth0**，因此，網路空間內就會有兩張網卡，分別是 **lo** 以及 **eth0**
-2. 外部主機的預設網路空間（水藍色區塊）中，會創建一個全新的 **Linux Bridge**：**docker0**，並且透過 **veth** 的機制與 Container 內的 eth0 串接起來 
+2. 外部主機的預設網路空間（水藍色區塊）中，會創建一個全新的 **Linux Bridge**：**docker0**，並且透過 **veth** 的機制與 Container 內的 eth0 串接起來
 
 > veth 概念複雜，在此暫時不探討太多，只要知道是一個特殊的方式來串連不同網路空間。
 
@@ -231,7 +231,7 @@ lo        Link encap:Local Loopback
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
-          
+
 $ docker exec bridge ifconfig
 eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02
           inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
@@ -247,7 +247,7 @@ lo        Link encap:Local Loopback
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)          
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 ```
 
 可以看到創建後，這兩個容器內所看到的網卡內容都會一模一樣。
