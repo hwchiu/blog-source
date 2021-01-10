@@ -1,13 +1,13 @@
 ---
 title: 鐵人賽系列文章- Day 20 - Container Registry 的方案介紹
-date: 2020-12-29 10:46:46
 keywords: 'Kubernetes,DevOps,Linux,K8s'
 tags:
   - ITHOME
   - DevOps
   - Kubernetes
 description: ITHOME-2020 系列文章
-a
+abbrlink: 21347
+date: 2020-12-29 10:46:46
 ---
 
 
