@@ -1,12 +1,12 @@
 ---
-title: 鐵人賽系列文章- Day 25 - Secret 使用範例: sealed-secrets
+title: '鐵人賽系列文章- Day 25 - Secret 使用範例: sealed-secrets'
 keywords: 'Kubernetes,DevOps,Linux,K8s'
 tags:
   - ITHOME
   - DevOps
   - Kubernetes
 description: ITHOME-2020 系列文章
-keywords: 'Kubernetes,Network,Linux,Ubuntu'
+abbrlink: 25573
 date: 2021-02-02 11:07:09
 ---
 
