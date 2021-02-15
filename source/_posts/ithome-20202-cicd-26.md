@@ -6,6 +6,7 @@ tags:
   - DevOps
   - Kubernetes
 description: ITHOME-2020 系列文章
+abbrlink: 12621
 date: 2021-02-03 14:11:10
 ---
 
