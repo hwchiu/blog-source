@@ -50,7 +50,9 @@ date: 2017-05-05 12:02:08
 
 # 個人資訊
 
-線上課程平台: https://course.hwchiu.com/
+我目前於 Hiskio 平台上面有開設 Kubernetes 相關課程，歡迎有興趣的人參考並分享，裡面有我從底層到實戰中對於 Kubernetes 的各種想法
+
+線上課程詳細資訊: https://course.hwchiu.com/
 
 另外，歡迎按讚加入我個人的粉絲專頁，裡面會定期分享各式各樣的文章，有的是翻譯文章，也有部分是原創文章，主要會聚焦於 CNCF 領域
 https://www.facebook.com/technologynoteniu
