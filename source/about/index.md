@@ -46,7 +46,8 @@ date: 2017-05-05 12:02:08
 | 2020.09.26 | CRI&OCI 介紹| 線上會議 | SDN x Cloud Native Webinar 海外篇 #6  | [link](https://youtu.be/5JhQOjSSnzQ)     |
 | 2020.12.18 | When Cloud Native Meets 5G/LTE Private Cloud Edge| NCTU | Open Source Networking Day 2020 Taiwan| [link]()     |
 | 2020.12.19 | Jenkins & Infrastructure as Code | 線上會議 | SDN x Cloud Native Webinar 海外篇 #7 | [link](https://youtu.be/M-c_Pn18aZY)     |
-| 2021.01.09 | Jenkins & Infrastructure as Code Monospace 共同工作空間 | 台中自由軟體愛好者社群 - TFC | [link](https://youtu.be/M-c_Pn18aZY)     |
+| 2021.01.09 | Jenkins & Infrastructure as Code | Monospace 共同工作空間 | 台中自由軟體愛好者社群 - TFC | [link](https://youtu.be/M-c_Pn18aZY)     |
+| 2021.06.17 | AWS VPC CNI 的實作來學習網路架構的設計 | 線上會議 | AWS User Group Taiwan Meetup 2021-06 線上小聚 | [link](https://www.slideshare.net/hongweiqiu/learning-how-aws-implement-aws-vpc-cni)     |
 
 # 個人資訊
 
